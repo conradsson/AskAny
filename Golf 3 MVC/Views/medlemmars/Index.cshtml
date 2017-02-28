@@ -1,51 +1,54 @@
-﻿@model IEnumerable<Golf_3_MVC.Models.medlemmar>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Golf_3_MVC.Models.medlemmar>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Medlemmar";
 }
 
-<h2>Index</h2>
+<h2>Medlemmar</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Skapa ny medlem", "Create")
 </p>
 <table class="table">
-    <tr>
+    <tr class="success">
         <th>
-            @Html.DisplayNameFor(model => model.fornamn)
+            @Html.DisplayNameFor(model => model.First().fornamn)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.efternamn)
+            @Html.DisplayNameFor(model => model.First().efternamn)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.adress)
+            @Html.DisplayNameFor(model => model.First().adress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.postnummer)
+            @Html.DisplayNameFor(model => model.First().postnummer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ort)
+            @Html.DisplayNameFor(model => model.First().ort)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().epost)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().kon)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.epost)
+            @Html.DisplayNameFor(model => model.First().hcp)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.kon)
+            @Html.DisplayNameFor(model => model.First().golf_id)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().telefonnr)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.hcp)
-        </th>
+            @Html.DisplayNameFor(model => model.First().betalstatus)
+        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.golf_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefonnr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.betalstatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.medlemskategori.namn)
+            @Html.DisplayNameFor(model => model.First().medlemskategori.namn)
         </th>
         <th></th>
     </tr>
@@ -67,9 +70,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.ort)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.epost)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.kon)
         </td>
@@ -79,21 +82,24 @@
         <td>
             @Html.DisplayFor(modelItem => item.golf_id)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.telefonnr)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.betalstatus)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.medlemskategori.namn)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Ändra", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Detaljer", "Details", new { id=item.id }) |
+            @Html.ActionLink("Ta bort", "Delete", new { id=item.id })
         </td>
     </tr>
+
 }
 
 </table>
+
+<div align="center">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
