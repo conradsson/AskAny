@@ -1,0 +1,34 @@
+﻿@model Golf_3_MVC.Models.medlemskategori
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>medlemskategori</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.avgift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.avgift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kategori_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kategori_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.namn }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

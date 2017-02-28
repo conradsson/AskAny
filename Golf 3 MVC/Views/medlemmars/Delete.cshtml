@@ -1,0 +1,120 @@
+﻿@model Golf_3_MVC.Models.medlemmar
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>medlemmar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fornamn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fornamn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.efternamn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.efternamn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postnummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postnummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.epost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.epost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hcp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hcp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.golf_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.golf_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefonnr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefonnr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.betalstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.betalstatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.medlemskategori.namn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.medlemskategori.namn)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

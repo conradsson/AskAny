@@ -175,9 +175,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\bokningsController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\medlemmarsController.cs" />
+    <Compile Include="Controllers\medlemskategorisController.cs" />
+    <Compile Include="Controllers\starttidsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -477,6 +481,26 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\boknings\Create.cshtml" />
+    <Content Include="Views\boknings\Delete.cshtml" />
+    <Content Include="Views\boknings\Details.cshtml" />
+    <Content Include="Views\boknings\Edit.cshtml" />
+    <Content Include="Views\boknings\Index.cshtml" />
+    <Content Include="Views\medlemmars\Create.cshtml" />
+    <Content Include="Views\medlemmars\Delete.cshtml" />
+    <Content Include="Views\medlemmars\Details.cshtml" />
+    <Content Include="Views\medlemmars\Edit.cshtml" />
+    <Content Include="Views\medlemmars\Index.cshtml" />
+    <Content Include="Views\medlemskategoris\Create.cshtml" />
+    <Content Include="Views\medlemskategoris\Delete.cshtml" />
+    <Content Include="Views\medlemskategoris\Details.cshtml" />
+    <Content Include="Views\medlemskategoris\Edit.cshtml" />
+    <Content Include="Views\medlemskategoris\Index.cshtml" />
+    <Content Include="Views\starttids\Create.cshtml" />
+    <Content Include="Views\starttids\Delete.cshtml" />
+    <Content Include="Views\starttids\Details.cshtml" />
+    <Content Include="Views\starttids\Edit.cshtml" />
+    <Content Include="Views\starttids\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
