@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dsu3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bokning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="medlems_id" Type="int" Nullable="false" />
+          <Property Name="end_date" Type="datetime" />
+          <Property Name="text" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="medlemmar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="fornamn" Type="varchar" MaxLength="255" />
+          <Property Name="efternamn" Type="varchar" MaxLength="255" />
+          <Property Name="adress" Type="varchar" MaxLength="255" />
+          <Property Name="postnummer" Type="varchar" MaxLength="255" />
+          <Property Name="ort" Type="varchar" MaxLength="255" />
+          <Property Name="epost" Type="varchar" MaxLength="255" />
+          <Property Name="kon" Type="varchar" MaxLength="255" />
+          <Property Name="hcp" Type="float" />
+          <Property Name="golf_id" Type="varchar" MaxLength="255" />
+          <Property Name="kategori" Type="varchar" MaxLength="255" />
+          <Property Name="telefonnr" Type="varchar" MaxLength="255" />
+          <Property Name="betalstatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="medlemskategori">
+          <Key>
+            <PropertyRef Name="namn" />
+          </Key>
+          <Property Name="avgift" Type="int" />
+          <Property Name="namn" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="kategori_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="starttid">
+          <Key>
+            <PropertyRef Name="starttid" />
+          </Key>
+          <Property Name="starttid" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_bokning_medlemsid">
+          <End Role="medlemmar" Type="Self.medlemmar" Multiplicity="1" />
+          <End Role="bokning" Type="Self.bokning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medlemmar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bokning">
+              <PropertyRef Name="medlems_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_medlemmar_kategori">
+          <End Role="medlemskategori" Type="Self.medlemskategori" Multiplicity="0..1" />
+          <End Role="medlemmar" Type="Self.medlemmar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medlemskategori">
+              <PropertyRef Name="namn" />
+            </Principal>
+            <Dependent Role="medlemmar">
+              <PropertyRef Name="kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dsu3ModelStoreContainer">
+          <EntitySet Name="bokning" EntityType="Self.bokning" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medlemmar" EntityType="Self.medlemmar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medlemskategori" EntityType="Self.medlemskategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="starttid" EntityType="Self.starttid" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_bokning_medlemsid" Association="Self.FK_bokning_medlemsid">
+            <End Role="medlemmar" EntitySet="medlemmar" />
+            <End Role="bokning" EntitySet="bokning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
+            <End Role="medlemskategori" EntitySet="medlemskategori" />
+            <End Role="medlemmar" EntitySet="medlemmar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dsu3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bokning">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="medlems_id" Type="Int32" Nullable="false" />
+          <Property Name="end_date" Type="DateTime" Precision="3" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="medlemmar" Relationship="Self.FK_bokning_medlemsid" FromRole="bokning" ToRole="medlemmar" />
+        </EntityType>
+        <EntityType Name="medlemmar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="fornamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="efternamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="adress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="postnummer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ort" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="epost" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="hcp" Type="Double" />
+          <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kategori" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="telefonnr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="betalstatus" Type="Boolean" />
+          <NavigationProperty Name="boknings" Relationship="Self.FK_bokning_medlemsid" FromRole="medlemmar" ToRole="bokning" />
+          <NavigationProperty Name="medlemskategori" Relationship="Self.FK_medlemmar_kategori" FromRole="medlemmar" ToRole="medlemskategori" />
+        </EntityType>
+        <EntityType Name="medlemskategori">
+          <Key>
+            <PropertyRef Name="namn" />
+          </Key>
+          <Property Name="avgift" Type="Int32" />
+          <Property Name="namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kategori_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="medlemmars" Relationship="Self.FK_medlemmar_kategori" FromRole="medlemskategori" ToRole="medlemmar" />
+        </EntityType>
+        <EntityType Name="starttid">
+          <Key>
+            <PropertyRef Name="starttid1" />
+          </Key>
+          <Property Name="starttid1" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_bokning_medlemsid">
+          <End Role="medlemmar" Type="Self.medlemmar" Multiplicity="1" />
+          <End Role="bokning" Type="Self.bokning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medlemmar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bokning">
+              <PropertyRef Name="medlems_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_medlemmar_kategori">
+          <End Role="medlemskategori" Type="Self.medlemskategori" Multiplicity="0..1" />
+          <End Role="medlemmar" Type="Self.medlemmar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medlemskategori">
+              <PropertyRef Name="namn" />
+            </Principal>
+            <Dependent Role="medlemmar">
+              <PropertyRef Name="kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dsu3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="boknings" EntityType="Self.bokning" />
+          <EntitySet Name="medlemmars" EntityType="Self.medlemmar" />
+          <EntitySet Name="medlemskategoris" EntityType="Self.medlemskategori" />
+          <EntitySet Name="starttids" EntityType="Self.starttid" />
+          <AssociationSet Name="FK_bokning_medlemsid" Association="Self.FK_bokning_medlemsid">
+            <End Role="medlemmar" EntitySet="medlemmars" />
+            <End Role="bokning" EntitySet="boknings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
+            <End Role="medlemskategori" EntitySet="medlemskategoris" />
+            <End Role="medlemmar" EntitySet="medlemmars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dsu3ModelStoreContainer" CdmEntityContainer="dsu3Entities">
+          <EntitySetMapping Name="boknings">
+            <EntityTypeMapping TypeName="dsu3Model.bokning">
+              <MappingFragment StoreEntitySet="bokning">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="medlems_id" ColumnName="medlems_id" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="text" ColumnName="text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medlemmars">
+            <EntityTypeMapping TypeName="dsu3Model.medlemmar">
+              <MappingFragment StoreEntitySet="medlemmar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fornamn" ColumnName="fornamn" />
+                <ScalarProperty Name="efternamn" ColumnName="efternamn" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="postnummer" ColumnName="postnummer" />
+                <ScalarProperty Name="ort" ColumnName="ort" />
+                <ScalarProperty Name="epost" ColumnName="epost" />
+                <ScalarProperty Name="kon" ColumnName="kon" />
+                <ScalarProperty Name="hcp" ColumnName="hcp" />
+                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
+                <ScalarProperty Name="kategori" ColumnName="kategori" />
+                <ScalarProperty Name="telefonnr" ColumnName="telefonnr" />
+                <ScalarProperty Name="betalstatus" ColumnName="betalstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medlemskategoris">
+            <EntityTypeMapping TypeName="dsu3Model.medlemskategori">
+              <MappingFragment StoreEntitySet="medlemskategori">
+                <ScalarProperty Name="avgift" ColumnName="avgift" />
+                <ScalarProperty Name="namn" ColumnName="namn" />
+                <ScalarProperty Name="kategori_id" ColumnName="kategori_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="starttids">
+            <EntityTypeMapping TypeName="dsu3Model.starttid">
+              <MappingFragment StoreEntitySet="starttid">
+                <ScalarProperty Name="starttid1" ColumnName="starttid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

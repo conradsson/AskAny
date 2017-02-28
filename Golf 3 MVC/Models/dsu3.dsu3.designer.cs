@@ -84,7 +84,7 @@ namespace Golf_3_MVC.Models
 		
 		private System.DateTime _start_date;
 		
-		private int _medlems_id;
+		private string _golf_id;
 		
 		private System.Nullable<System.DateTime> _end_date;
 		
@@ -98,8 +98,8 @@ namespace Golf_3_MVC.Models
     partial void OnidChanged();
     partial void Onstart_dateChanging(System.DateTime value);
     partial void Onstart_dateChanged();
-    partial void Onmedlems_idChanging(int value);
-    partial void Onmedlems_idChanged();
+    partial void Ongolf_idChanging(string value);
+    partial void Ongolf_idChanged();
     partial void Onend_dateChanging(System.Nullable<System.DateTime> value);
     partial void Onend_dateChanged();
     partial void OntextChanging(string value);
@@ -151,22 +151,22 @@ namespace Golf_3_MVC.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medlems_id", DbType="Int NOT NULL")]
-		public int medlems_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_golf_id", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string golf_id
 		{
 			get
 			{
-				return this._medlems_id;
+				return this._golf_id;
 			}
 			set
 			{
-				if ((this._medlems_id != value))
+				if ((this._golf_id != value))
 				{
-					this.Onmedlems_idChanging(value);
+					this.Ongolf_idChanging(value);
 					this.SendPropertyChanging();
-					this._medlems_id = value;
-					this.SendPropertyChanged("medlems_id");
-					this.Onmedlems_idChanged();
+					this._golf_id = value;
+					this.SendPropertyChanged("golf_id");
+					this.Ongolf_idChanged();
 				}
 			}
 		}

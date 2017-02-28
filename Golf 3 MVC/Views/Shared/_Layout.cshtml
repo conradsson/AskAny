@@ -21,8 +21,8 @@
                     <a></a>
                 </div>
                 <div class="navbar-brand">
-                    @Html.ActionLink("Hålslaget GK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
+                @Html.ActionLink("Hålslaget GK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
                 
             </div>
             <div class="navbar-collapse collapse">
@@ -38,8 +38,12 @@
         </div>
     </div>
     <div class="container body-content">
+
+        
+
         @RenderBody()
         <hr />
+
         <footer>
             <p>&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
         </footer>
