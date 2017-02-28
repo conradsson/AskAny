@@ -46,7 +46,7 @@ namespace Golf_3_MVC.Controllers
 
         public ContentResult Data()
         {
-            var data = new SchedulerAjaxData(new dsu3_dsu3DataContext().boknings);
+            var data = new SchedulerAjaxData(new dsu3Entities().boknings);
 
             return (ContentResult)data;
         }
@@ -58,14 +58,15 @@ namespace Golf_3_MVC.Controllers
             try
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-                var data = new dsu3_dsu3DataContext();
+                var data = new dsu3Entities();
 
 
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
                         //do insert
-                        data.boknings.InsertOnSubmit(changedEvent);
+                        //data.boknings.InsertOnSubmit(changedEvent);
+                        data.SaveChanges();
                         break;
                     case DataActionTypes.Delete:
                         changedEvent = data.boknings.SingleOrDefault(EventArgs => EventArgs.id == action.SourceId);
@@ -75,7 +76,8 @@ namespace Golf_3_MVC.Controllers
                         DHXEventsHelper.Update(eventToUpdate, changedEvent, new List<string>() { "id" });
                         break;
                 }
-                data.SubmitChanges();
+                //data.SubmitChanges();
+                data.SaveChanges();
                 action.TargetId = changedEvent.id;
             }
             catch

@@ -57,6 +57,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -180,14 +182,36 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\dsu3.dsu3.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsu3.dsu3.dbml</DependentUpon>
+    <Compile Include="Models\bokning.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\medlemmar.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\medlemsdata.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medlemsdata.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\medlemsdata.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\medlemsdata.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>medlemsdata.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\medlemskategori.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
+    <Compile Include="Models\starttid.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -199,12 +223,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\medlemsdata.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>medlemsdata.edmx</DependentUpon>
+      <LastGenOutput>medlemsdata.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\medlemsdata.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>medlemsdata.edmx</DependentUpon>
+      <LastGenOutput>medlemsdata.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Models\dsu3.dsu3.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>dsu3.dsu3.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    <EntityDeploy Include="Models\medlemsdata.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>medlemsdata.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\medlemsdata.edmx.diagram">
+      <DependentUpon>medlemsdata.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\DSU3 - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %283%29.pubxml" />
@@ -455,11 +491,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Models\dsu3.dsu3.dbml.layout">
-      <DependentUpon>dsu3.dsu3.dbml</DependentUpon>
-    </None>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
