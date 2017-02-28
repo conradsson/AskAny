@@ -18,7 +18,7 @@ namespace Golf_3_MVC.Controllers
         public ActionResult Index()
         {
             var sched = new DHXScheduler(this);
-            sched.Skin = DHXScheduler.Skins.Terrace;
+            sched.Skin = DHXScheduler.Skins.Glossy;
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
             sched.InitialDate = new DateTime(2013, 5, 5);
@@ -33,9 +33,6 @@ namespace Golf_3_MVC.Controllers
                 )
             );
         }
-
-
-
         public ContentResult Save(int? id, FormCollection actionValues)
         {
             var action = new DataAction(actionValues);
