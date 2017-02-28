@@ -4,8 +4,8 @@
 }
 
 .logo{
-    position: relative;
-    margin-top: 0px;
+    position: absolute;
+    margin-top: 10px;
     margin-left: 0%;
     margin-right: 0%;
 }
@@ -23,11 +23,23 @@
 }
 
 .navbar-brand{
-    margin-left:10%;
+    
 }
 
 .navbar-nav{
 
+}
+
+.list-group{
+    display:inline-block;
+    width:20%;
+    margin-left:2%;
+}
+
+.panel-default{
+    display:inline-block;
+    width: 75%;
+    margin-left: 23.5%;
 }
 
 /* Set padding to keep content from hitting the edges */
