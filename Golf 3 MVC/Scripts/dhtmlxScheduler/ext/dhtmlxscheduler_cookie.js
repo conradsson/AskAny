@@ -1,6 +1,13 @@
 /*
-Copyright DHTMLX LTD. http://www.dhtmlx.com
-To use this component please contact sales@dhtmlx.com to obtain license
+@license
+dhtmlxScheduler.Net v.3.3.23 Professional Evaluation
+
+This software is covered by DHTMLX Evaluation License. Contact sales@dhtmlx.com to get Commercial or Enterprise license. Usage without proper license is prohibited.
+
+(c) Dinamenta, UAB.
 */
-Scheduler.plugin(function(f){(function(){function h(e,b,a){var c=e+"="+a+(b?"; "+b:"");document.cookie=c}function i(e){var b=e+"=";if(document.cookie.length>0){var a=document.cookie.indexOf(b);if(a!=-1){a+=b.length;var c=document.cookie.indexOf(";",a);if(c==-1)c=document.cookie.length;return document.cookie.substring(a,c)}}return""}var g=!0;f.attachEvent("onBeforeViewChange",function(e,b,a,c){if(g){g=!1;var d=i("scheduler_settings");if(d)return d=unescape(d).split("@"),d[0]=this.templates.xml_date(d[0]),
-window.setTimeout(function(){f.setCurrentView(d[0],d[1])},1),!1}var j=escape(this.templates.xml_format(c||b)+"@"+(a||e));h("scheduler_settings","expires=Sun, 31 Jan 9999 22:00:00 GMT",j);return!0})})()});
+Scheduler.plugin(function(e){!function(){function t(e,t,a){var i=e+"="+a+(t?"; "+t:"");document.cookie=i}function a(e){var t=e+"=";if(document.cookie.length>0){var a=document.cookie.indexOf(t);if(-1!=a){a+=t.length;var i=document.cookie.indexOf(";",a);return-1==i&&(i=document.cookie.length),document.cookie.substring(a,i)}}return""}var i=!0;e.attachEvent("onBeforeViewChange",function(n,l,r,o){if(i&&e._get_url_nav){var d=e._get_url_nav();(d.date||d.mode||d.event)&&(i=!1)}var s=(e._obj.id||"scheduler")+"_settings";
+
+if(i){i=!1;var _=a(s);if(_){e._min_date||(e._min_date=o),_=unescape(_).split("@"),_[0]=this.templates.xml_date(_[0]);var c=this.isViewExists(_[1])?_[1]:r,u=isNaN(+_[0])?o:_[0];return window.setTimeout(function(){e.setCurrentView(u,c)},1),!1}}var h=escape(this.templates.xml_format(o||l)+"@"+(r||n));return t(s,"expires=Sun, 31 Jan 9999 22:00:00 GMT",h),!0});var n=e._load;e._load=function(){var t=arguments;if(!e._date&&e._load_mode){var a=this;window.setTimeout(function(){n.apply(a,t)},1)}else n.apply(this,t);
+
+}}()});
