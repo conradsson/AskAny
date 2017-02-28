@@ -5,8 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 using System.Web.Mvc;
 using Golf_3_MVC.Models;
+
 
 namespace Golf_3_MVC.Controllers
 {
@@ -14,12 +17,19 @@ namespace Golf_3_MVC.Controllers
     {
         private dsu3Entities db = new dsu3Entities();
 
-        // GET: medlemmars
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var medlemmars = db.medlemmars.Include(m => m.medlemskategori);
-            return View(medlemmars.ToList());
+            return View(medlemmars.ToList().ToPagedList(page ?? 1, 16));
         }
+
+        // GET: medlemmars
+        //public ActionResult Index()
+        //{
+        //    var medlemmars = db.medlemmars.Include(m => m.medlemskategori);
+        //    return View(medlemmars.ToList());
+        //}
+
 
         // GET: medlemmars/Details/5
         public ActionResult Details(int? id)
