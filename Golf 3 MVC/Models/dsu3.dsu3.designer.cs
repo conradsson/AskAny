@@ -82,13 +82,13 @@ namespace Golf_3_MVC.Models
 		
 		private int _id;
 		
-		private System.DateTime _start_date;
+		private string _text;
 		
-		private string _golf_id;
+		private System.DateTime _start_date;
 		
 		private System.Nullable<System.DateTime> _end_date;
 		
-		private string _text;
+		private string _golf_id;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -96,14 +96,14 @@ namespace Golf_3_MVC.Models
     partial void OnCreated();
     partial void OnidChanging(int value);
     partial void OnidChanged();
-    partial void Onstart_dateChanging(System.DateTime value);
-    partial void Onstart_dateChanged();
-    partial void Ongolf_idChanging(string value);
-    partial void Ongolf_idChanged();
-    partial void Onend_dateChanging(System.Nullable<System.DateTime> value);
-    partial void Onend_dateChanged();
     partial void OntextChanging(string value);
     partial void OntextChanged();
+    partial void Onstart_dateChanging(System.DateTime value);
+    partial void Onstart_dateChanged();
+    partial void Onend_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onend_dateChanged();
+    partial void Ongolf_idChanging(string value);
+    partial void Ongolf_idChanged();
     #endregion
 		
 		public bokning()
@@ -131,6 +131,26 @@ namespace Golf_3_MVC.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NVarChar(MAX)")]
+		public string text
+		{
+			get
+			{
+				return this._text;
+			}
+			set
+			{
+				if ((this._text != value))
+				{
+					this.OntextChanging(value);
+					this.SendPropertyChanging();
+					this._text = value;
+					this.SendPropertyChanged("text");
+					this.OntextChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_date", DbType="DateTime NOT NULL")]
 		public System.DateTime start_date
 		{
@@ -147,26 +167,6 @@ namespace Golf_3_MVC.Models
 					this._start_date = value;
 					this.SendPropertyChanged("start_date");
 					this.Onstart_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_golf_id", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string golf_id
-		{
-			get
-			{
-				return this._golf_id;
-			}
-			set
-			{
-				if ((this._golf_id != value))
-				{
-					this.Ongolf_idChanging(value);
-					this.SendPropertyChanging();
-					this._golf_id = value;
-					this.SendPropertyChanged("golf_id");
-					this.Ongolf_idChanged();
 				}
 			}
 		}
@@ -191,22 +191,22 @@ namespace Golf_3_MVC.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NVarChar(MAX)")]
-		public string text
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_golf_id", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string golf_id
 		{
 			get
 			{
-				return this._text;
+				return this._golf_id;
 			}
 			set
 			{
-				if ((this._text != value))
+				if ((this._golf_id != value))
 				{
-					this.OntextChanging(value);
+					this.Ongolf_idChanging(value);
 					this.SendPropertyChanging();
-					this._text = value;
-					this.SendPropertyChanged("text");
-					this.OntextChanged();
+					this._golf_id = value;
+					this.SendPropertyChanged("golf_id");
+					this.Ongolf_idChanged();
 				}
 			}
 		}
