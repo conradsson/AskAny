@@ -3,6 +3,33 @@
     padding-bottom: 20px;
 }
 
+.logo{
+    position: relative;
+    margin-top: 0px;
+    margin-left: 0%;
+    margin-right: 0%;
+}
+
+.logo a{ 
+    position: absolute;
+    background: url('../Content/img/logotyp1-1.png');
+    background-size:100%;
+    top: 0%;
+    left: 0%;
+    display: block;
+    height: 3em;
+    width: 3em;
+    margin: 0;
+}
+
+.navbar-brand{
+    margin-left:10%;
+}
+
+.navbar-nav{
+
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

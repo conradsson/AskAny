@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Hålslaget GK Start</title>
+    <title>@ViewBag.Title - Hålslaget GK</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,6 +17,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <div class="logo" @*onClick="window.location = 'Views/Home/Index.cshtml'"*@>
+                    <a></a>
+                </div>
                 @Html.ActionLink("Hålslaget GK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
@@ -33,7 +36,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Hålslaget GK - Grupp</p>
+            <p>&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
         </footer>
     </div>
 
