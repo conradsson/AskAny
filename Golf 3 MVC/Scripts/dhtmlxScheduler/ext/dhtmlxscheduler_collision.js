@@ -1,13 +1,7 @@
 /*
-@license
-dhtmlxScheduler.Net v.3.3.23 Professional Evaluation
-
-This software is covered by DHTMLX Evaluation License. Contact sales@dhtmlx.com to get Commercial or Enterprise license. Usage without proper license is prohibited.
-
-(c) Dinamenta, UAB.
+Copyright DHTMLX LTD. http://www.dhtmlx.com
+To use this component please contact sales@dhtmlx.com to obtain license
 */
-Scheduler.plugin(function(e){!function(){function t(t){var i=e._get_section_view();i&&t&&(a=e.getEvent(t)[e._get_section_property()])}var a,i;e.config.collision_limit=1,e.attachEvent("onBeforeDrag",function(e){return t(e),!0}),e.attachEvent("onBeforeLightbox",function(a){var n=e.getEvent(a);return i=[n.start_date,n.end_date],t(a),!0}),e.attachEvent("onEventChanged",function(t){if(!t||!e.getEvent(t))return!0;var a=e.getEvent(t);if(!e.checkCollision(a)){if(!i)return!1;a.start_date=i[0],a.end_date=i[1],
-a._timed=this.isOneDayEvent(a)}return!0}),e.attachEvent("onBeforeEventChanged",function(t,a,i){return e.checkCollision(t)}),e.attachEvent("onEventAdded",function(t,a){var i=e.checkCollision(a);i||e.deleteEvent(t)}),e.attachEvent("onEventSave",function(t,a,i){if(a=e._lame_clone(a),a.id=t,!a.start_date||!a.end_date){var n=e.getEvent(t);a.start_date=new Date(n.start_date),a.end_date=new Date(n.end_date)}return a.rec_type&&e._roll_back_dates(a),e.checkCollision(a)}),e._check_sections_collision=function(t,a){
-var i=e._get_section_property();return t[i]==a[i]&&t.id!=a.id?!0:!1},e.checkCollision=function(t){var i=[],n=e.config.collision_limit;if(t.rec_type)for(var l=e.getRecDates(t),r=0;r<l.length;r++)for(var o=e.getEvents(l[r].start_date,l[r].end_date),d=0;d<o.length;d++)(o[d].event_pid||o[d].id)!=t.id&&i.push(o[d]);else{i=e.getEvents(t.start_date,t.end_date);for(var s=0;s<i.length;s++)if(i[s].id==t.id){i.splice(s,1);break}}var _=e._get_section_view(),c=e._get_section_property(),u=!0;if(_){for(var h=0,s=0;s<i.length;s++)i[s].id!=t.id&&this._check_sections_collision(i[s],t)&&h++;
-
-h>=n&&(u=!1)}else i.length>=n&&(u=!1);if(!u){var p=!e.callEvent("onEventCollision",[t,i]);return p||(t[c]=a||t[c]),p}return u}}()});
+Scheduler.plugin(function(a){(function(){function i(c){var b=a._props?a._props[a._mode]:null,j=a.matrix?a.matrix[a._mode]:null,f=b||j;if(b)var g=f.map_to;if(j)g=f.y_property;f&&c&&(o=a.getEvent(c)[g])}function h(c){var b=[],j=a.config.collision_limit;if(c.rec_type)for(var f=a.getRecDates(c),g=0;g<f.length;g++)for(var e=a.getEvents(f[g].start_date,f[g].end_date),k=0;k<e.length;k++)(e[k].event_pid||e[k].id)!=c.id&&b.push(e[k]);else for(var b=a.getEvents(c.start_date,c.end_date),d=0;d<b.length;d++)if(b[d].id==
+c.id){b.splice(d,1);break}var h=a._props?a._props[a._mode]:null,i=a.matrix?a.matrix[a._mode]:null,n=h||i;if(h)var l=n.map_to;if(i)l=n.y_property;var m=!0;if(n){for(var p=0,d=0;d<b.length;d++)b[d][l]==c[l]&&b[d].id!=c.id&&p++;p>=j&&(m=!1)}else b.length>=j&&(m=!1);if(!m){var q=!a.callEvent("onEventCollision",[c,b]);q||(c[l]=o||c[l]);return q}return m}var o,e;a.config.collision_limit=1;a.attachEvent("onBeforeDrag",function(a){i(a);return!0});a.attachEvent("onBeforeLightbox",function(c){var b=a.getEvent(c);
+e=[b.start_date,b.end_date];i(c);return!0});a.attachEvent("onEventChanged",function(c){if(!c)return!0;var b=a.getEvent(c);if(!h(b)){if(!e)return!1;b.start_date=e[0];b.end_date=e[1];b._timed=this.is_one_day_event(b)}return!0});a.attachEvent("onBeforeEventChanged",function(a){return h(a)});a.attachEvent("onEventSave",function(c,b){b=a._lame_clone(b);b.id=c;b.rec_type&&a._roll_back_dates(data_copy);return h(b)})})()});
