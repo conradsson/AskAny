@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Golf_3_MVC.Models.medlemmar>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fornamn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.efternamn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postnummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.epost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hcp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.golf_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefonnr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.betalstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.medlemskategori.namn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fornamn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.efternamn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postnummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.epost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hcp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.golf_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefonnr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.betalstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.medlemskategori.namn)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

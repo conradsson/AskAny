@@ -22,19 +22,25 @@
                 </div>
                 @Html.ActionLink("Hålslaget GK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <li class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Start", "Index", "Home")</li>
                     <li>@Html.ActionLink("Klubben", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Medlemmar", "Index", "medlemmars")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
+
+        
+
         @RenderBody()
         <hr />
+
         <footer>
             <p>&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
         </footer>

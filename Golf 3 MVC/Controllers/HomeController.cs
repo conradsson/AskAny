@@ -22,7 +22,7 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your contact page HEJ.";
 
             return View();
         }
