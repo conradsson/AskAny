@@ -13,18 +13,29 @@ namespace Golf_3_MVC.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Medlem()
         {
-            ViewBag.Message = "Your application description page.";
+            return View();
+        }
+
+        public ActionResult Banorna()
+        {
+            return View();
+        }
+
+        public ActionResult Klubben()
+        {
+            ViewBag.Message = "Klubben";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Kontakt()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Kontakt";
 
             return View();
         }
+
     }
 }
