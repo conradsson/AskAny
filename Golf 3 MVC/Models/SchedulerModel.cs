@@ -10,7 +10,8 @@ namespace Golf_3_MVC.Models
         public DateTime start_date { get; set; }
         public DateTime end_date { get; set; }
 
-        public string golf_id = "123919_182";
+        public string golf_id { get; set; }
 
     }
+ 
 }
