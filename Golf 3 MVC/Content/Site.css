@@ -1,29 +1,29 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 .logo{
-    position: relative;
-    margin-top: 0px;
-    margin-left: 0%;
-    margin-right: 0%;
+	position: relative;
+	margin-top: 0px;
+	margin-left: 0%;
+	margin-right: 0%;
 }
 
 .logo a{ 
-    position: absolute;
-    background: url('../Content/img/logotyp1-1.png');
-    background-size:100%;
-    top: 0%;
-    left: 0%;
-    display: block;
-    height: 3em;
-    width: 3em;
-    margin: 0;
+	position: absolute;
+	background: url('../Content/img/logotyp1-1.png');
+	background-size:100%;
+	top: 0%;
+	left: 0%;
+	display: block;
+	height: 3em;
+	width: 3em;
+	margin: 0;
 }
 
 .navbar-brand{
-    margin-left:10%;
+	margin-left:10%;
 }
 
 .navbar-nav{
@@ -31,23 +31,23 @@
 }
 
 
-            /* CAROUSEL */
+			/* CAROUSEL */
 
 /********************************/
 /*       Fade Bs-carousel       */
 /********************************/
 .fade-carousel {
-    position: relative;
-    height: 415px;
+	position: relative;
+	height: 415px;
 }
 .fade-carousel .carousel-inner .item {
-    height: 400px;
+	height: 400px;
 }
 .fade-carousel .carousel-indicators > li {
-    margin: 0 2px;
-    background-color: #f39c12;
-    border-color: #f39c12;
-    opacity: .7;
+	margin: 0 2px;
+	background-color: #f39c12;
+	border-color: #f39c12;
+	opacity: .7;
 }
 .fade-carousel .carousel-indicators > li.active {
   width: 10px;
@@ -59,35 +59,35 @@
 /*          Hero Headers        */
 /********************************/
 .hero {
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    z-index: 3;
-    color: #fff;
-    text-align: left;
-    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
-      -webkit-transform: translate3d(-50%,-50%,0);
-         -moz-transform: translate3d(-50%,-50%,0);
-          -ms-transform: translate3d(-50%,-50%,0);
-           -o-transform: translate3d(-50%,-50%,0);
-              transform: translate3d(-50%,-50%,0);
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	z-index: 3;
+	color: #fff;
+	text-align: left;
+	text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+	  -webkit-transform: translate3d(-50%,-50%,0);
+		 -moz-transform: translate3d(-50%,-50%,0);
+		  -ms-transform: translate3d(-50%,-50%,0);
+		   -o-transform: translate3d(-50%,-50%,0);
+			  transform: translate3d(-50%,-50%,0);
 }
 
 .fade-carousel .carousel-inner .item .hero {
-    opacity: 0;
-    -webkit-transition: 1s all ease-in-out .1s;
-       -moz-transition: 1s all ease-in-out .1s; 
-        -ms-transition: 1s all ease-in-out .1s; 
-         -o-transition: 1s all ease-in-out .1s; 
-            transition: 1s all ease-in-out .1s; 
+	opacity: 0;
+	-webkit-transition: 1s all ease-in-out .1s;
+	   -moz-transition: 1s all ease-in-out .1s; 
+		-ms-transition: 1s all ease-in-out .1s; 
+		 -o-transition: 1s all ease-in-out .1s; 
+			transition: 1s all ease-in-out .1s; 
 }
 .fade-carousel .carousel-inner .item.active .hero {
-    opacity: 1;
-    -webkit-transition: 1s all ease-in-out .1s;
-       -moz-transition: 1s all ease-in-out .1s; 
-        -ms-transition: 1s all ease-in-out .1s; 
-         -o-transition: 1s all ease-in-out .1s; 
-            transition: 1s all ease-in-out .1s;    
+	opacity: 1;
+	-webkit-transition: 1s all ease-in-out .1s;
+	   -moz-transition: 1s all ease-in-out .1s; 
+		-ms-transition: 1s all ease-in-out .1s; 
+		 -o-transition: 1s all ease-in-out .1s; 
+			transition: 1s all ease-in-out .1s;    
 }
 
 /********************************/
@@ -108,9 +108,9 @@
   background-repeat: no-repeat;
 }
 
-    /* BILDER */
+	/* BILDER */
 
-                 /* START */
+				 /* START */
 .fade-carousel .slides .startslide1 {
   background-image: url(img/start/start1-1280.jpg); 
 }
@@ -121,7 +121,7 @@
   background-image: url(img/start/start3-1280.jpg);
 }
 
-                 /* BANORNA */
+				 /* BANORNA */
 .fade-carousel .slides .banornaslide1 {
   background-image: url(img/banorna/bana1-1280.jpg); 
 }
@@ -132,61 +132,141 @@
   background-image: url(img/banorna/bana3-1280.jpg);
 }
 
-                 /* KLUBBEN */
+				 /* KLUBBEN */
 .fade-carousel .slides .klubbenslide1 {
   background-image: url(img/klubben/logotyp1.png);
 }
 
-                 /* MEDLEM */
+				 /* MEDLEM */
 .fade-carousel .slides .medlemslide1 {
   background-image: url(img/medlem/medlem1-1280.jpg);
 }
 
-                 /* KONTAKT */
+				 /* KONTAKT */
 .fade-carousel .slides .kontaktslide1 {
   background-image: url(img/kontakt/kontakt1-1920.jpg);
 }
 
-                 /* ERROR */
+				 /* ERROR */
 .fade-carousel .slides .errorslide1 {
   background-image: url(img/error1-1280.jpg);
 }
 
-            /*/ CAROUSEL */
+			/*/ CAROUSEL */
 
 
 .nav-pills{
-    float:left;
-    width: 20%;
+	float:left;
+	width: 20%;
 
-    margin-left: 1.5%;
+	margin-left: 1.5%;
 }
 
 .panel{
-    float:left;
-    margin-left: 2%;
-    width: 75%;
-    height: 400px;
+	float:left;
+	margin-left: 2%;
+	width: 75%;
+	height: 400px;
 }
+
+
+
+/* SOCIAL BUTTONS */
+
+/* footer social icons */
+
+ul.social-network {
+	list-style: none;
+	display: inline;
+	margin-left: 0 !important;
+	padding: 0;
+}
+ul.social-network li {
+	display: inline;
+	margin: 0 5px;
+}
+
+
+/* footer social icons */
+.social-network a.icoMail:hover {
+	background-color: rgba(29, 143, 101, 0.83);
+}
+.social-network a.icoFacebook:hover {
+	background-color:#3B5998;
+}
+.social-network a.icoTwitter:hover {
+	background-color:#33ccff;
+}
+.social-network a.icoInstagram:hover {
+	background-color:#BD3518;
+}
+
+
+.social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+	color:#fff;
+}
+
+
+.social-circle li a {
+	display:inline-block;
+	position:relative;
+	margin:0 auto 0 auto;
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	text-align:center;
+    background-color: #f8f5f0;
+    border: 1px solid #dfd7ca;
+	width: 50px;
+	height: 50px;
+	font-size:20px;
+}
+.social-circle li i {
+	margin:0;
+	line-height:50px;
+	text-align: center;
+}
+
+.social-circle li a:hover i, .triggeredHover {
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms--transform: rotate(360deg);
+	transform: rotate(360deg);
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;
+}
+.social-circle i {
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+	-ms-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
-    white-space: normal;
+	white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
+	max-width: 280px;
 }
 
 /********************************/
@@ -194,9 +274,9 @@ textarea {
 /********************************/
 
 @media screen and (min-width: 980px){
-    .hero { width: 980px; }    
+	.hero { width: 980px; }    
 }
 
 @media screen and (max-width: 640px){
-    .hero h1 { font-size: 4em; }    
+	.hero h1 { font-size: 4em; }    
 }
