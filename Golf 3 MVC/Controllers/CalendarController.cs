@@ -19,11 +19,15 @@ namespace Golf_3_MVC.Controllers
         {
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Glossy;
+
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
+
+            sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
+
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
-            sched.InitialDate = new DateTime(2013, 5, 5);
+            
             return View(sched);
         }
 
