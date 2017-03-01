@@ -33,7 +33,7 @@ namespace Golf_3_MVC.Controllers
         public ContentResult Data()
         {
             return (new SchedulerAjaxData(
-                new  dsu3Entities().boknings
+                new dsu3Entities().boknings
                     .Select(e => new { e.id, e.text, e.start_date, e.end_date, e.golf_id })
                 )
             );

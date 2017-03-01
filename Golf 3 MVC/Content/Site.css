@@ -60,12 +60,11 @@
 /********************************/
 .hero {
     position: absolute;
-    top: 50%;
+    top: 90%;
     left: 50%;
     z-index: 3;
     color: #fff;
-    text-align: center;
-    text-transform: uppercase;
+    text-align: left;
     text-shadow: 1px 1px 0 rgba(0,0,0,.75);
       -webkit-transform: translate3d(-50%,-50%,0);
          -moz-transform: translate3d(-50%,-50%,0);
@@ -76,19 +75,19 @@
 
 .fade-carousel .carousel-inner .item .hero {
     opacity: 0;
-    -webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s; 
+    -webkit-transition: 1s all ease-in-out .1s;
+       -moz-transition: 1s all ease-in-out .1s; 
+        -ms-transition: 1s all ease-in-out .1s; 
+         -o-transition: 1s all ease-in-out .1s; 
+            transition: 1s all ease-in-out .1s; 
 }
 .fade-carousel .carousel-inner .item.active .hero {
     opacity: 1;
-    -webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s;    
+    -webkit-transition: 1s all ease-in-out .1s;
+       -moz-transition: 1s all ease-in-out .1s; 
+        -ms-transition: 1s all ease-in-out .1s; 
+         -o-transition: 1s all ease-in-out .1s; 
+            transition: 1s all ease-in-out .1s;    
 }
 
 /********************************/
@@ -103,7 +102,15 @@
   background-repeat: no-repeat;
 }
 
+.fade-carousel .slides .klubbenslide1 {
+  background-size: 30%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
     /* BILDER */
+
+                 /* START */
 .fade-carousel .slides .startslide1 {
   background-image: url(img/start/start1-1280.jpg); 
 }
@@ -113,6 +120,33 @@
 .fade-carousel .slides .startslide3 {
   background-image: url(img/start/start3-1280.jpg);
 }
+
+                 /* BANORNA */
+.fade-carousel .slides .banornaslide1 {
+  background-image: url(img/banorna/bana1-1280.jpg); 
+}
+.fade-carousel .slides .banornaslide2 {
+  background-image: url(img/banorna/bana2-1280.jpg);
+}
+.fade-carousel .slides .banornaslide3 {
+  background-image: url(img/banorna/bana3-1280.jpg);
+}
+
+                 /* KLUBBEN */
+.fade-carousel .slides .klubbenslide1 {
+  background-image: url(img/klubben/logotyp1.png);
+}
+
+                 /* MEDLEM */
+.fade-carousel .slides .medlemslide1 {
+  background-image: url(img/medlem/medlem1-1280.jpg);
+}
+
+                 /* KONTAKT */
+.fade-carousel .slides .kontaktslide1 {
+  background-image: url(img/kontakt/kontakt1-1920.jpg);
+}
+
             /*/ CAROUSEL */
 
 
