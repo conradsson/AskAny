@@ -147,6 +147,11 @@
   background-image: url(img/kontakt/kontakt1-1920.jpg);
 }
 
+                 /* ERROR */
+.fade-carousel .slides .errorslide1 {
+  background-image: url(img/error1-1280.jpg);
+}
+
             /*/ CAROUSEL */
 
 
