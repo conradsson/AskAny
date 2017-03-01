@@ -318,6 +318,7 @@
     <None Include="Properties\PublishProfiles\DSU3 - FTP %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DSU3 - FTP %288%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %283%29.pubxml" />
@@ -325,6 +326,7 @@
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %288%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
@@ -582,6 +584,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
+    <Content Include="Views\Account\NewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
