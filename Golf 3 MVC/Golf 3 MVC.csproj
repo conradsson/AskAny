@@ -249,6 +249,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\logotyp1-1.png" />
+    <Content Include="Content\img\start\start3-1280.jpg" />
+    <Content Include="Content\img\start\start2-1280.jpg" />
+    <Content Include="Content\img\start\start1-1280.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
     <Content Include="favicon.ico" />
