@@ -308,12 +308,14 @@
     <None Include="Properties\PublishProfiles\DSU3 - FTP %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DSU3 - FTP %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />
