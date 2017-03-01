@@ -1,17 +1,59 @@
 ﻿@{
     ViewBag.Title = "Kontakt";
 }
-<h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<!-- CAROUSEL -->
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+        @*<li data-target="#bs-carousel" data-slide-to="1"></li>
+        <li data-target="#bs-carousel" data-slide-to="2"></li>*@
+    </ol>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item slides active">
+            <div class="slide-1 kontaktslide1"></div>
+            <div class="hero">
+
+            </div>
+        </div>
+        @*<div class="item slides">
+            <div class="slide-2 startslide2"></div>
+            <div class="hero">
+
+            </div>
+        </div>
+        <div class="item slides">
+            <div class="slide-3 kontaktslide3"></div>
+            <div class="hero">
+
+            </div>
+        </div>*@
+    </div>
+</div>
+<!-- ../CAROUSEL -->
+
+<div class="row">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="pill-kontaktuppgifter active"><a href="">Kontaktuppgifter</a></li>
+        @*<li class="pill-banstatus"><a href="">Banstatus</a></li>*@
+        @*<li class=""><a href="#">Disabled</a></li>
+            <li class=""><a href="#">Disabled</a></li>*@
+    </ul>
+
+    <div class="panel panel-default panel-kontaktuppgifter">
+        <div class="panel-heading">Kontaktuppgifter</div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+
+    @*<div class="panel panel-default panel-banstatus">
+        <div class="panel-heading">Banstatus</div>
+        <div class="panel-body">
+
+        </div>
+    </div>*@
+</div>
