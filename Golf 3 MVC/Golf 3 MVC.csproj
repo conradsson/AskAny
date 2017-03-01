@@ -249,6 +249,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\logotyp1-1.png" />
+    <Content Include="Content\img\start\footermap.jpg" />
     <Content Include="Content\img\start\start3-1280.jpg" />
     <Content Include="Content\img\start\start2-1280.jpg" />
     <Content Include="Content\img\start\start1-1280.jpg" />
@@ -509,6 +510,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -572,6 +574,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\banorna\" />
+    <Folder Include="Content\img\klubben\" />
+    <Folder Include="Content\img\kontakt\" />
+    <Folder Include="Content\img\medlem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

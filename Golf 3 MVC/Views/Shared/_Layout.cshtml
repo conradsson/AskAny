@@ -21,12 +21,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Start", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Medlem", "Medlem", "medlemmars/index")</li>
-                    <li>@Html.ActionLink("Banorna", "Banorna", "Home")</li>
-                    <li>@Html.ActionLink("Klubben", "Klubben", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
-                    <li>@Html.ActionLink("KalenderTEST", "Index", "Calendar")</li>
+                    <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
+                    <li class="medlembtn">@Html.ActionLink("Medlem", "Medlem", "medlemmars/index")</li>
+                    <li class="banornabtn">@Html.ActionLink("Banorna", "Banorna", "Home")</li>
+                    <li class="klubbenbtn">@Html.ActionLink("Klubben", "Klubben", "Home")</li>
+                    <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
+                    <li class="kalenderbtn">@Html.ActionLink("KalenderTEST", "Index", "Calendar")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -41,53 +41,31 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="col-md-3">
-                            @*<ul class="list-unstyled">
-                                <li>GitHub
-                                <li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact & support</a></li>
-                                <li><a href="#">Enterprise</a></li>
-                                <li><a href="#">Site status</a></li>
-                            </ul>*@
+                            <h4>Hålslaget GK</h4>
+                            <p>
+                                Golfgatan 3
+                                <br />100 03 Golfstad
+                            </p>
                         </div>
                         <div class="col-md-3">
-                            @*<ul class="list-unstyled">
-                                <li>Applications
-                                <li>
-                                <li><a href="#">Product for Mac</a></li>
-                                <li><a href="#">Product for Windows</a></li>
-                                <li><a href="#">Product for Eclipse</a></li>
-                                <li><a href="#">Product mobile apps</a></li>
-                            </ul>*@
+                            <img class="img-responsive" src="~/Content/img/start/footermap.jpg" alt="Google Maps">
                         </div>
                         <div class="col-md-3">
-                            @*<ul class="list-unstyled">
-                                <li>Services
-                                <li>
-                                <li><a href="#">Web analytics</a></li>
-                                <li><a href="#">Presentations</a></li>
-                                <li><a href="#">Code snippets</a></li>
-                                <li><a href="#">Job board</a></li>
-                            </ul>*@
+                            <ul class="list-unstyled">
+                                <li>070-00 00 000
+                                <li><a href="mailto:index@halslagetgk.se" target="_blank">index@halslagetgk.se</a></li>
+                            </ul>
                         </div>
                         <div class="col-md-3">
-                            @*<ul class="list-unstyled">
-                                <li>Documentation
-                                <li>
-                                <li><a href="#">Product Help</a></li>
-                                <li><a href="#">Developer API</a></li>
-                                <li><a href="#">Product Markdown</a></li>
-                                <li><a href="#">Product Pages</a></li>
-                            </ul>*@
+                            
                         </div>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                        <div class="col-md-4">
-                            <p class="muted pull-right">&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
-                        </div>
+                    <div class="col-md-4">
+                        <p class="muted pull-right">&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
+                    </div>
                 </div>
             </div>
         </footer>
