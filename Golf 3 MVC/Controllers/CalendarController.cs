@@ -14,6 +14,16 @@ namespace Golf_3_MVC.Controllers
 {
     public class CalendarController : Controller
     {
+        //bokning bok = new bokning()
+        //{
+        //    id = 33,
+        //    text = "Nu fungerar det",
+        //    start_date = DateTime.Now.AddHours(+1),
+        //    end_date = DateTime.Now.AddHours(+2),
+        //    golf_id = "12319_182"
+        //};
+
+
         public ActionResult Index()
         {
             var sched = new DHXScheduler(this);
@@ -33,10 +43,12 @@ namespace Golf_3_MVC.Controllers
         public ContentResult Data()
         {
             return (new SchedulerAjaxData(
-                new dsu3Entities().boknings
+                new  dsu3Entities().boknings
                     .Select(e => new { e.id, e.text, e.start_date, e.end_date, e.golf_id })
                 )
             );
+
+            
         }
         public ContentResult Save(int? id, FormCollection actionValues)
         {
@@ -49,7 +61,7 @@ namespace Golf_3_MVC.Controllers
                 {
                     case DataActionTypes.Insert:
                         entities.boknings.Add(changedEvent);
-                        entities.SaveChanges();
+                        //entities.boknings.Add(bok);
                         break;
                     case DataActionTypes.Delete:
                         changedEvent = entities.boknings.FirstOrDefault(ev => ev.id == action.SourceId);
@@ -60,6 +72,7 @@ namespace Golf_3_MVC.Controllers
                         DHXEventsHelper.Update(target, changedEvent, new List<string> { "id" });
                         break;
                 }
+
                 entities.SaveChanges();
                 action.TargetId = changedEvent.id;
             }
