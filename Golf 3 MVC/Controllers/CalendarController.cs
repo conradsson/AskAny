@@ -44,11 +44,12 @@ namespace Golf_3_MVC.Controllers
             var action = new DataAction(actionValues);
             var changedEvent = DHXEventsHelper.Bind<bokning>(actionValues);
             var entities = new dsu3Entities();
+
             try
             {
                 switch (action.Type)
                 {
-                    case DataActionTypes.Insert:
+                    case DataActionTypes.Insert:     
                         entities.boknings.Add(changedEvent);
                         break;
                     case DataActionTypes.Delete:
