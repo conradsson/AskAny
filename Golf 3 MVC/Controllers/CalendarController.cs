@@ -4,13 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Golf_3_MVC.Controllers;
-
 using DHTMLX.Scheduler;
 using DHTMLX.Common;
 using DHTMLX.Scheduler.Data;
 using DHTMLX.Scheduler.Controls;
-
 using Golf_3_MVC.Models;
+
 namespace Golf_3_MVC.Controllers
 {
     public class CalendarController : Controller
@@ -27,7 +26,7 @@ namespace Golf_3_MVC.Controllers
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
-            
+
             return View(sched);
         }
 
@@ -51,6 +50,7 @@ namespace Golf_3_MVC.Controllers
                 {
                     case DataActionTypes.Insert:     
                         entities.boknings.Add(changedEvent);
+                        entities.SaveChanges();
                         break;
                     case DataActionTypes.Delete:
                         changedEvent = entities.boknings.FirstOrDefault(ev => ev.id == action.SourceId);
