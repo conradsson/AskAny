@@ -250,6 +250,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\banorna\bana2-1280.jpg" />
     <Content Include="Content\img\banorna\bana3-1280.jpg" />
+    <Content Include="Content\img\error1-1280.jpg" />
     <Content Include="Content\img\klubben\logotyp1.png" />
     <Content Include="Content\img\kontakt\kontakt1-1920.jpg" />
     <Content Include="Content\img\logotyp1-1.png" />
