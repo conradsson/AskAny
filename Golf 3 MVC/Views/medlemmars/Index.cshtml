@@ -15,7 +15,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by name: @Html.TextBox("SearchString")
+        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
         <input type="submit" value="Search" />
     </p>
 }
@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.First().fornamn)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().efternamn)
+            @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().adress)
