@@ -16,7 +16,7 @@ namespace Golf_3_MVC.Controllers
     public class medlemmarsController : Controller
     {
         private dsu3Entities db = new dsu3Entities();
-
+     
         public ActionResult Index(int? page)
         {
             var medlemmars = db.medlemmars.Include(m => m.medlemskategori);
