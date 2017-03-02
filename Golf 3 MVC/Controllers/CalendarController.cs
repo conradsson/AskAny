@@ -42,6 +42,7 @@ namespace Golf_3_MVC.Controllers
             return View(sched);
         }
 
+
         //public ContentResult Data()
         //{
         //    return (new SchedulerAjaxData(
