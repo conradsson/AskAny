@@ -31,6 +31,7 @@ namespace Golf_3_MVC.Controllers
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
+            sched.InitialView = "day";
 
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
 
@@ -58,10 +59,13 @@ namespace Golf_3_MVC.Controllers
 
             try
             {
+                //var changedEvent = DHXEventsHelper.Bind<bokning>(actionValues);
+                //var entities = new dsu3Entities();
+
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:     
-                        entities.boknings.Add(changedEvent);
+                        entities.boknings.Add(changedEvent);                      
                         //entities.boknings.Add(bok);
                         break;
                     case DataActionTypes.Delete:
@@ -73,7 +77,7 @@ namespace Golf_3_MVC.Controllers
                         DHXEventsHelper.Update(target, changedEvent, new List<string> { "id" });
                         break;
                 }
-
+                
                 entities.SaveChanges();
                 action.TargetId = changedEvent.id;
             }
