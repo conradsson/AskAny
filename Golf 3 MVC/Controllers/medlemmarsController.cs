@@ -19,7 +19,10 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Index(int? page, string sortOrder, string searchString)
         {
-            ViewBag.EfternamnSortParm = String.IsNullOrEmpty(sortOrder) ? "efternamn_desc" : "";
+
+            ViewBag.FörnamnSortParm = sortOrder == "fornamn" ? "fornamn_desc" : "fornamn";
+            ViewBag.EfternamnSortParm = sortOrder == "efternamn_desc" ? "efternamn" : "efternamn_desc";
+
 
             var medlemmars = db.medlemmars.Include(m => m.medlemskategori);
 
@@ -30,14 +33,24 @@ namespace Golf_3_MVC.Controllers
             }
             switch (sortOrder)
             {
+                case "fornamn":
+                    medlemmars = medlemmars.OrderBy(m => m.fornamn + m.efternamn);
+                    break;
+                case "fornamn_desc":
+                    medlemmars = medlemmars.OrderByDescending(m => m.fornamn + m.efternamn);
+                    break;
+                case "efternamn":
+                    medlemmars = medlemmars.OrderBy(m => m.efternamn + m.fornamn);
+                    break;
                 case "efternamn_desc":
-                    medlemmars = medlemmars.OrderByDescending(m => m.efternamn);
+                    medlemmars = medlemmars.OrderByDescending(m => m.efternamn + m.fornamn);
                     break;
                 default:
-                    medlemmars = medlemmars.OrderBy(m => m.efternamn);
+                    medlemmars = medlemmars.OrderBy(m => m.efternamn + m.fornamn);
+
                     break;
             }
-                        
+
             return View(medlemmars.ToList().ToPagedList(page ?? 1, 16));
         }
 
