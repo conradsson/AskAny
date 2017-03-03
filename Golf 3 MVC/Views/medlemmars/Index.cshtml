@@ -10,20 +10,41 @@
 <h2>Medlemmar</h2>
 
 <p>
-    @Html.ActionLink("Skapa ny medlem", "Create")
+    
 </p>
-@using (Html.BeginForm())
-{
-    <p>
-        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
-}
+
+
+<div class="row">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="pill-skapamedlem">@Html.ActionLink("Skapa ny medlem", "Create")</li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                Sök medlem <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
+                                        <input type="submit" value="Sök" />
+                    </p>
+                }
+            </ul>
+        </li>
+        @*
+        <li class="pill-banstatus"><a href="">Banstatus</a></li>
+        <li class=""><a href="#">Disabled</a></li>*@
+
+    </ul>
+
+    <div class="panel panel-default panel-medlemmar">
+        <div class="panel-heading">Medlemmar</div>
+        <div class="panel-body">
 
 <table class="table">
     <tr class="success">
         <th>
-            @Html.DisplayNameFor("förnamn" => model.First().fornamn)
+            @Html.ActionLink("Förnamn", "Index", new { sortOrder = ViewBag.FörnamnSortParm })
         </th>
         <th>
             @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
@@ -46,9 +67,9 @@
         <th>
             @Html.DisplayNameFor(model => model.First().hcp)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.First().golf_id)
-        </th>
+        </th>*@
         @*<th>
             @Html.DisplayNameFor(model => model.First().telefonnr)
         </th>
@@ -61,7 +82,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+                @foreach (var item in Model)
+                {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.fornamn)
@@ -87,9 +109,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.hcp)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.golf_id)
-        </td>
+        </td>*@
         @*<td>
             @Html.DisplayFor(modelItem => item.telefonnr)
         </td>
@@ -100,14 +122,21 @@
             @Html.DisplayFor(modelItem => item.medlemskategori.namn)
         </td>
         <td>
-            @Html.ActionLink("Ändra", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detaljer", "Details", new { id=item.id }) |
-            @Html.ActionLink("Ta bort", "Delete", new { id=item.id })
+                            @Html.ActionLink("Ändra", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Detaljer", "Details", new { id = item.id }) |
+                            @Html.ActionLink("Ta bort", "Delete", new { id = item.id })
         </td>
     </tr>
 
 }
 
 </table>
+
+        </div>
+    </div>
+
+</div>
+
+
 
 <div align="center">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>

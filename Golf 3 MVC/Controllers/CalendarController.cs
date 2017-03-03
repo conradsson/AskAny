@@ -40,19 +40,16 @@ namespace Golf_3_MVC.Controllers
             {
                 var details = ds.boknings.ToList();
                 return new SchedulerAjaxData(details);
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         public ContentResult Save(int? id, FormCollection actionValues)
         {
             var action = new DataAction(actionValues);
-
             try
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
@@ -75,7 +72,7 @@ namespace Golf_3_MVC.Controllers
                         ds.boknings.Remove(details);
                         ds.SaveChanges();
                         break;
-                    default:// "update"    
+                    default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                         data.start_date = changedEvent.start_date;
                         data.end_date = changedEvent.end_date;
