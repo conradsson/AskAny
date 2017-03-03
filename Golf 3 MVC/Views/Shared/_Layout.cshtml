@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,23 +23,43 @@
                 @Html.ActionLink("Hålslaget GK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
-                    <li class="medlembtn">@Html.ActionLink("Medlem", "Medlem", "medlemmars/index")</li>
-                    <li class="banornabtn">@Html.ActionLink("Banorna", "Banorna", "Home")</li>
-                    <li class="klubbenbtn">@Html.ActionLink("Klubben", "Klubben", "Home")</li>
-                    <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
-                    <li class="kalenderbtn">@Html.ActionLink("KalenderTEST", "Index", "Calendar")</li>
-                    @*<li class="loggainbtn dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logga in<span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-            <li><a href="@Url.Action("Login", "Account")">Logga in</a></li>
-            <li class="divider"></li>
-            <li><a href="@Url.Action("Register", "Account")">Bli medlem</a></li>
-        </ul>
-    </li>*@
-                </ul>
-                @Html.Partial("_LoginPartial")
+
+                @if (Request.IsAuthenticated)
+                {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
+                {
+                        @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav">
+                        <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
+                        <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
+                        @*<li class="medlembtn">@Html.ActionLink("Banstatus", "Medlem", "medlemmars/index")</li>*@
+                        <li class="banornabtn">@Html.ActionLink("Tävling", "Tavling", "Home")</li>
+                        <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Golf-ID: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a></li>
+                    </ul>
+                    }
+                }
+                else
+                {
+                    <ul class="nav navbar-nav">
+                        <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
+                        <li class="medlembtn">@Html.ActionLink("Medlem", "Medlem", "medlemmars/index")</li>
+                        <li class="banornabtn">@Html.ActionLink("Banorna", "Banorna", "Home")</li>
+                        <li class="klubbenbtn">@Html.ActionLink("Klubben", "Klubben", "Home")</li>
+                        <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
+                        @*<li class="kalenderbtn">@Html.ActionLink("KalenderTEST", "Index", "Calendar")</li>*@
+                    </ul>
+
+                    @Html.Partial("_LoginPartial")
+                }
+
             </div>
         </div>
     </div>
