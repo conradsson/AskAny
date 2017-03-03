@@ -62,8 +62,8 @@ namespace Golf_3_MVC.Controllers
                         EV.start_date = changedEvent.start_date;
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;
-                        EV.golf_id = "12319_182";
-                        // EV.golf_id = User.Identity.GetUserName();
+                        //EV.golf_id = "12319_182";
+                        EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
                         ds.SaveChanges();
                         break;
