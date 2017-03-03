@@ -37,5 +37,12 @@ namespace Golf_3_MVC.Controllers
             return View();
         }
 
+        public ActionResult Tavling()
+        {
+            ViewBag.Message = "Tävling";
+
+            return View();
+        }
+
     }
 }
