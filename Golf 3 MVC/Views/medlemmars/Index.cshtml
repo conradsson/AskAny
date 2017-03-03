@@ -44,7 +44,7 @@
 <table class="table">
     <tr class="success">
         <th>
-            @Html.DisplayNameFor("förnamn" => model.First().fornamn)
+            @Html.DisplayNameFor(model => model.First().fornamn)
         </th>
         <th>
             @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
