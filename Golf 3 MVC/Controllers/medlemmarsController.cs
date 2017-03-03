@@ -17,9 +17,27 @@ namespace Golf_3_MVC.Controllers
     {
         private dsu3Entities db = new dsu3Entities();
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string sortOrder, string searchString)
         {
+            ViewBag.EfternamnSortParm = String.IsNullOrEmpty(sortOrder) ? "efternamn_desc" : "";
+
             var medlemmars = db.medlemmars.Include(m => m.medlemskategori);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                medlemmars = medlemmars.Where(m => m.fornamn.Contains(searchString) ||
+                m.efternamn.Contains(searchString) || m.golf_id.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "efternamn_desc":
+                    medlemmars = medlemmars.OrderByDescending(m => m.efternamn);
+                    break;
+                default:
+                    medlemmars = medlemmars.OrderBy(m => m.efternamn);
+                    break;
+            }
+                        
             return View(medlemmars.ToList().ToPagedList(page ?? 1, 16));
         }
 

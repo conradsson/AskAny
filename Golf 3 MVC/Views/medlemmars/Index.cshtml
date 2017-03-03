@@ -12,13 +12,21 @@
 <p>
     @Html.ActionLink("Skapa ny medlem", "Create")
 </p>
+@using (Html.BeginForm())
+{
+    <p>
+        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr class="success">
         <th>
             @Html.DisplayNameFor(model => model.First().fornamn)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().efternamn)
+            @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().adress)

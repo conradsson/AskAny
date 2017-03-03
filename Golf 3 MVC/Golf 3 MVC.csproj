@@ -248,8 +248,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\banorna\bana2-1280.jpg" />
     <Content Include="Content\img\banorna\bana3-1280.jpg" />
+    <Content Include="Content\img\error1-1280.jpg" />
     <Content Include="Content\img\klubben\logotyp1.png" />
     <Content Include="Content\img\kontakt\kontakt1-1920.jpg" />
     <Content Include="Content\img\logotyp1-1.png" />
@@ -315,6 +318,7 @@
     <None Include="Properties\PublishProfiles\DSU3 - FTP %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DSU3 - FTP %288%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %283%29.pubxml" />
@@ -322,6 +326,7 @@
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DSU3 - Web Deploy %288%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dhtmlxScheduler\dhtmlxscheduler.css" />

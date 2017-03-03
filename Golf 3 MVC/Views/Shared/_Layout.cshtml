@@ -11,6 +11,7 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            <a href="@Url.Action("Index", "Home")"><div class="logo"></div></a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -27,6 +28,14 @@
                     <li class="klubbenbtn">@Html.ActionLink("Klubben", "Klubben", "Home")</li>
                     <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
                     <li class="kalenderbtn">@Html.ActionLink("KalenderTEST", "Index", "Calendar")</li>
+                    @*<li class="loggainbtn dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Logga in<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Login", "Account")">Logga in</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Register", "Account")">Bli medlem</a></li>
+                        </ul>
+                    </li*@>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -48,12 +57,18 @@
                             </p>
                         </div>
                         <div class="col-md-3">
-                            <img class="img-responsive" src="~/Content/img/start/footermap.jpg" alt="Google Maps">
+                            <img class="img-responsive mapimg" src="~/Content/img/start/footermap.jpg" alt="Google Maps">
                         </div>
                         <div class="col-md-3">
                             <ul class="list-unstyled">
                                 <li>070-00 00 000
                                 <li><a href="mailto:index@halslagetgk.se" target="_blank">index@halslagetgk.se</a></li>
+                            </ul>
+                            <ul class="social-network social-circle">
+                                <li><a href="mailto:index@halslagetgk.se" class="icoMail" title="E-mail"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                         <div class="col-md-3">
