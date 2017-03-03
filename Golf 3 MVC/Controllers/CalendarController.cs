@@ -9,6 +9,7 @@ using DHTMLX.Common;
 using DHTMLX.Scheduler.Data;
 using DHTMLX.Scheduler.Controls;
 using Golf_3_MVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Golf_3_MVC.Controllers
 {
@@ -49,9 +50,7 @@ namespace Golf_3_MVC.Controllers
         }
 
         public ContentResult Save(int? id, FormCollection actionValues)
-
         {
-
             var action = new DataAction(actionValues);
 
             try
@@ -67,6 +66,7 @@ namespace Golf_3_MVC.Controllers
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;
                         EV.golf_id = "12319_182";
+                        // EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
                         ds.SaveChanges();
                         break;
