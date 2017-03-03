@@ -6,8 +6,8 @@ namespace Golf_3_MVC.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "golfID")]
+        public string golfID { get; set; }
     }
 
     public class ExternalLoginListViewModel
