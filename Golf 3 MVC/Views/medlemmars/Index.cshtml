@@ -22,13 +22,13 @@
                 Sök medlem <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-@using (Html.BeginForm())
-{
-    <p>
-        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
-                        <input type="submit" value="Sök" />
-    </p>
-}
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
+                                        <input type="submit" value="Sök" />
+                    </p>
+                }
             </ul>
         </li>
         @*
