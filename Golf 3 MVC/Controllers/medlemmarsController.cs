@@ -19,7 +19,10 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Index(int? page, string sortOrder, string searchString)
         {
-            ViewBag.EfternamnSortParm = String.IsNullOrEmpty(sortOrder) ? "efternamn_desc" : "";
+
+            ViewBag.FörnamnSortParm = sortOrder == "fornamn" ? "fornamn_desc" : "fornamn";
+            ViewBag.EfternamnSortParm = sortOrder == "efternamn_desc" ? "efternamn" : "efternamn_desc";
+
 
             var medlemmars = db.medlemmars.Include(m => m.medlemskategori);
 
@@ -30,14 +33,24 @@ namespace Golf_3_MVC.Controllers
             }
             switch (sortOrder)
             {
+                case "fornamn":
+                    medlemmars = medlemmars.OrderBy(m => m.fornamn + m.efternamn);
+                    break;
+                case "fornamn_desc":
+                    medlemmars = medlemmars.OrderByDescending(m => m.fornamn + m.efternamn);
+                    break;
+                case "efternamn":
+                    medlemmars = medlemmars.OrderBy(m => m.efternamn + m.fornamn);
+                    break;
                 case "efternamn_desc":
-                    medlemmars = medlemmars.OrderByDescending(m => m.efternamn);
+                    medlemmars = medlemmars.OrderByDescending(m => m.efternamn + m.fornamn);
                     break;
                 default:
-                    medlemmars = medlemmars.OrderBy(m => m.efternamn);
+                    medlemmars = medlemmars.OrderBy(m => m.efternamn + m.fornamn);
+
                     break;
             }
-                        
+
             return View(medlemmars.ToList().ToPagedList(page ?? 1, 16));
         }
 
@@ -76,19 +89,42 @@ namespace Golf_3_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,fornamn,efternamn,adress,postnummer,ort,epost,kon,hcp,golf_id,kategori,telefonnr,betalstatus")] medlemmar medlemmar)
+        public ActionResult Create([Bind(Include = "fornamn,efternamn,adress,postnummer,ort,epost,kon,hcp,golf_id,kategori,telefonnr,betalstatus")] medlemmar medlemmar)
         {
             if (ModelState.IsValid)
             {
-                db.medlemmars.Add(medlemmar);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string pnr;
+                int gid = 001;
+                pnr = medlemmar.golf_id + "-" + gid;
+                Boolean san = false;
+
+                while (san == false)
+                {
+                    using (var db = new dsu3Entities())
+                    {
+                        var results = (from c in db.medlemmars
+                                       where c.golf_id == pnr
+                                       select c).SingleOrDefault();
+                        if (results != null)
+                        {
+                            gid++;
+
+                        }
+                        else
+                        {
+                            medlemmar.golf_id = pnr;
+                            san = true;
+                            db.medlemmars.Add(medlemmar);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
             }
 
             ViewBag.kategori = new SelectList(db.medlemskategoris, "namn", "namn", medlemmar.kategori);
             return View(medlemmar);
         }
-
         // GET: medlemmars/Edit/5
         public ActionResult Edit(int? id)
         {

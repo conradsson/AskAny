@@ -22,13 +22,13 @@
                 Sök medlem <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-@using (Html.BeginForm())
-{
-    <p>
-        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
-                        <input type="submit" value="Sök" />
-    </p>
-}
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
+                                        <input type="submit" value="Sök" />
+                    </p>
+                }
             </ul>
         </li>
         @*
@@ -44,7 +44,7 @@
 <table class="table">
     <tr class="success">
         <th>
-            @Html.DisplayNameFor(model => model.First().fornamn)
+            @Html.ActionLink("Förnamn", "Index", new { sortOrder = ViewBag.FörnamnSortParm })
         </th>
         <th>
             @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })

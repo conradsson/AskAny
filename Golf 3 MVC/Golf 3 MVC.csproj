@@ -196,7 +196,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\bokning.cs">
-      <DependentUpon>CalendarData.tt</DependentUpon>
+      <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CalendarData.Context.cs">
       <AutoGen>True</AutoGen>

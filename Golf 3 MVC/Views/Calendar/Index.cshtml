@@ -16,17 +16,39 @@
     </style>
 </head>
 <body>
-    <div style="height:700px;width:900px;margin:0 auto">
-        @Html.Raw(Model.Render())
+    <div class="row">
+        <ul class="nav nav-pills nav-stacked">
+            @*<li class="pill-nyheter"><a href="">Nyheter</a></li>*@
+            <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                Stäng banor <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        Från: @Html.TextBox("SearchString")<br />
+                        Till: @Html.TextBox("SearchString")
+                        <input type="submit" value="Lägg till" />
+                    </p>
+                }
+            </ul>
+        </li>
 
-        <div id="scheduler_here" class="dhx_cal_container" ...>
-            <div class="dhx_cal_navline">
-                ...
-                <div class="dhx_cal_tab" name="timeline_tab" style="right:280px;"></div>
+        </ul>
+
+        <div class="panel panel-default panel-nyheter">
+            <div class="panel-heading">Bokningsschema</div>
+            <div class="panel-body">
+                <div style="height:700px;width:auto;margin:0 auto">
+                    @Html.Raw(Model.Render())
+                </div>
             </div>
-            ...
         </div>
 
     </div>
+    @*<div style="height:700px;width:900px;margin:0 auto">
+        @Html.Raw(Model.Render())
+    </div>*@
 </body>
 </html>
