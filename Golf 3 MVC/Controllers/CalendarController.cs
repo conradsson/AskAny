@@ -15,15 +15,6 @@ namespace Golf_3_MVC.Controllers
     public class CalendarController : Controller
     {
         dsu3Entities ds = new dsu3Entities();
-        //bokning bok = new bokning()
-        //{
-        //    id = 33,
-        //    text = "Nu fungerar det",
-        //    start_date = DateTime.Now.AddHours(+1),
-        //    end_date = DateTime.Now.AddHours(+2),
-        //    golf_id = "12319_182"
-        //};
-
 
         public ActionResult Index()
         {
@@ -42,17 +33,6 @@ namespace Golf_3_MVC.Controllers
             return View(sched);
         }
 
-
-        //public ContentResult Data()
-        //{
-        //    return (new SchedulerAjaxData(
-        //        new  dsu3Entities().boknings
-        //            .Select(e => new { e.id, e.text, e.start_date, e.end_date, e.golf_id })
-        //        )
-        //    );
-
-
-        //}
         public ContentResult Data()
         {
             try
@@ -76,7 +56,7 @@ namespace Golf_3_MVC.Controllers
 
             try
             {
-                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning),actionValues);
+                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
                 switch (action.Type)
                 {
@@ -110,44 +90,6 @@ namespace Golf_3_MVC.Controllers
             }
             return (ContentResult)new AjaxSaveResponse(action);
         }
-        //public ContentResult Save(int? id, FormCollection actionValues)
-        //{
-        //    var action = new DataAction(actionValues);
-        //    var changedEvent = DHXEventsHelper.Bind<bokning>(actionValues);
-        //    var entities = new dsu3Entities();
-
-        //    try
-        //    {
-        //        //var changedEvent = DHXEventsHelper.Bind<bokning>(actionValues);
-        //        //var entities = new dsu3Entities();
-
-        //        switch (action.Type)
-        //        {
-        //            case DataActionTypes.Insert:     
-        //                entities.boknings.Add(changedEvent);                      
-        //                //entities.boknings.Add(bok);
-        //                break;
-        //            case DataActionTypes.Delete:
-        //                changedEvent = entities.boknings.FirstOrDefault(ev => ev.id == action.SourceId);
-        //                entities.boknings.Remove(changedEvent);
-        //                break;
-        //            default:// "update"   
-        //                var target = entities.boknings.Single(e => e.id == changedEvent.id);
-        //                DHXEventsHelper.Update(target, changedEvent, new List<string> { "id" });
-        //                break;
-        //        }
-
-        //        entities.SaveChanges();
-        //        action.TargetId = changedEvent.id;
-        //    }
-        //    catch (Exception a)
-        //    {
-        //        action.Type = DataActionTypes.Error;
-        //    }
-
-        //    return (new AjaxSaveResponse(action));
-        //}
-
 
     }
 }
