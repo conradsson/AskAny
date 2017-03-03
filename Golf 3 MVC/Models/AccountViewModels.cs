@@ -6,8 +6,8 @@ namespace Golf_3_MVC.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "golfID")]
-        public string golfID { get; set; }
+        [Display(Name = "Email ")]
+        public string Email { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -49,8 +49,8 @@ namespace Golf_3_MVC.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "golfID")]
-        public string golfID { get; set; }
+        [Display(Name = "Email ")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,8 +64,8 @@ namespace Golf_3_MVC.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "golfID")]
-        public string golfID { get; set; }
+        [Display(Name = "Email ")]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
