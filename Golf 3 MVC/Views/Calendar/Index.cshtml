@@ -20,8 +20,23 @@
         <ul class="nav nav-pills nav-stacked">
             @*<li class="pill-nyheter"><a href="">Nyheter</a></li>*@
             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Öppna bokningen <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @using (Html.BeginForm())
+                    {
+                        <p>
+                            Från: @Html.TextBox("SearchString")<br />
+                            Till: @Html.TextBox("SearchString")
+                            <input type="submit" value="Lägg till" />
+                        </p>
+                    }
+                </ul>
+            </li>
+            <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                Stäng banor <span class="caret"></span>
+                Stäng bokningen <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
                 @using (Html.BeginForm())
