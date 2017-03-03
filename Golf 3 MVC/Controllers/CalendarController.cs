@@ -62,7 +62,7 @@ namespace Golf_3_MVC.Controllers
                 {
                     case DataActionTypes.Insert:
                         bokning EV = new bokning();
-                        EV.id = 110;
+                        EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;

@@ -22,13 +22,13 @@
                 Sök medlem <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                @using (Html.BeginForm())
-                {
-                    <p>
-                        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
+@using (Html.BeginForm())
+{
+    <p>
+        Sök på namn eller golf-ID: @Html.TextBox("SearchString")
                         <input type="submit" value="Sök" />
-                    </p>
-                }
+    </p>
+}
             </ul>
         </li>
         @*
@@ -41,96 +41,96 @@
         <div class="panel-heading">Medlemmar</div>
         <div class="panel-body">
 
-            <table class="table">
-                <tr class="success">
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().fornamn)
-                    </th>
-                    <th>
-                        @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().adress)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().postnummer)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().ort)
-                    </th>
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.First().epost)
-                </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().kon)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().hcp)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().golf_id)
-                    </th>
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.First().telefonnr)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().betalstatus)
-                </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().medlemskategori.namn)
-                    </th>
-                    <th></th>
-                </tr>
+<table class="table">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor("förnamn" => model.First().fornamn)
+        </th>
+        <th>
+            @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().postnummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ort)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().epost)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().kon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().hcp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().golf_id)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().telefonnr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().betalstatus)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().medlemskategori.namn)
+        </th>
+        <th></th>
+    </tr>
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fornamn)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.efternamn)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.adress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.postnummer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ort)
-                        </td>
-                        @*<td>
-                        @Html.DisplayFor(modelItem => item.epost)
-                    </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.kon)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hcp)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.golf_id)
-                        </td>
-                        @*<td>
-                        @Html.DisplayFor(modelItem => item.telefonnr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.betalstatus)
-                    </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.medlemskategori.namn)
-                        </td>
-                        <td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fornamn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.efternamn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postnummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ort)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.epost)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.kon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hcp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.golf_id)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.telefonnr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.betalstatus)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.medlemskategori.namn)
+        </td>
+        <td>
                             @Html.ActionLink("Ändra", "Edit", new { id = item.id }) |
                             @Html.ActionLink("Detaljer", "Details", new { id = item.id }) |
                             @Html.ActionLink("Ta bort", "Delete", new { id = item.id })
-                        </td>
-                    </tr>
+        </td>
+    </tr>
 
-                }
+}
 
-            </table>
+</table>
 
         </div>
     </div>
