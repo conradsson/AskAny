@@ -21,9 +21,22 @@ namespace Golf_3_MVC.Controllers
         {
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
-            var timeline = new TimelineView("timeline", "room_id");//initializes the view
+            var timeline = new TimelineView("timeline", "golf_id");//initializes the view
+            timeline.FitEvents = false;
+            timeline.X_Unit = TimelineView.XScaleUnits.Hour;
+            timeline.X_Step = 30;
+            timeline.X_Size = 24;  // (8PM - 8AM)/30min
+            timeline.X_Start = 16; // 8AM/30min
+            timeline.X_Length = 48; // 24/30min
             sched.Views.Add(timeline);//adds the view to the scheduler
-            timeline.AddOptions(ds.boknings);//
+          //timeline.AddOptions(ds.boknings);//
+            var banor = new List<object>(){
+                new { key = "1", label = "Bana 1"},
+                new { key = "2", label = "Bana 2"},
+                new { key = "3", label = "Bana 3"}
+            };
+
+            timeline.AddOptions(banor);
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
