@@ -91,27 +91,30 @@
 
         @RenderBody()
         <hr />
+    </div>
+
         <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-md-3">
+            <div class="footer" id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
                             <h4>Hålslaget GK</h4>
                             <p>
                                 Golfgatan 3
                                 <br />100 03 Golfstad
                             </p>
-                        </div>
-                        <div class="col-md-3">
-                            <img class="img-responsive mapimg" src="~/Content/img/start/footermap.jpg" alt="Google Maps">
-                        </div>
-                        <div class="col-md-3">
                             <ul class="list-unstyled">
                                 <li>070-00 00 000
                                 <li><a href="mailto:index@halslagetgk.se" target="_blank">index@halslagetgk.se</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+
+                            <img class="img-responsive mapimg" src="~/Content/img/start/footermap.jpg" alt="Google Maps">
+
+                        </div>
+
+                        <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
                             <ul class="social-network social-circle">
                                 <li><a href="mailto:index@halslagetgk.se" class="icoMail" title="E-mail"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
                                 <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
@@ -119,14 +122,32 @@
                                 <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
+                        <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                            <h4> Registrera nyhetsbrev </h4>
+                            <ul>
+                                <li style="list-style-type:none;">
+                                    <div class="input-append newsletter-box">
+                                        <input type="text" class="full pull-left" placeholder="E-mail">
+                                        <button class="btn bg-gray" type="button"> Bekräfta <i class="fa fa-long-arrow-right"> </i> </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <!--/.row-->
                 </div>
-                <div class="row">
-                    <p class="muted center text-center">&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
+                <!--/.container-->
+            </div>
+            <!--/.footer-->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="center"> &copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
                 </div>
             </div>
+            <!--/.footer-bottom-->
         </footer>
-    </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
