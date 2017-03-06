@@ -54,7 +54,7 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create", "Calendar", FormMethod.Post))
                     {
                         <p>
                             Golfid: @Html.TextBox("SearchString")
@@ -66,7 +66,7 @@
 
         </ul>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-kalender">
             <div class="panel-heading">Bokningsschema</div>
             <div class="panel-body">
                 <div style="height:700px;width:auto;margin:0 auto">

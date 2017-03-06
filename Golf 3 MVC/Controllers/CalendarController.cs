@@ -17,22 +17,47 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
-        public ActionResult Index()
+
+
+        public ActionResult Create(/*FormCollection actionValues, */ string searchString)
+        {
+            //    //var action = new DataAction(actionValues);
+            //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+            //    bokningstid bokningstid = new bokningstid();
+
+            //    bokningstid.id = 33;
+            //    bokningstid.huvudbokare = User.Identity.GetUserName();
+            //    bokningstid.person2 = searchString;
+            //    bokningstid.person3 = "132";
+            //    bokningstid.person4 = "11";
+            //    ds.bokningstids.Add(bokningstid);
+            //    ds.SaveChanges();
+
+            return View();
+
+        }
+
+    public ActionResult Index()
         {
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
             var timeline = new TimelineView("timeline", "golf_id");//initializes the view
-            timeline.RenderMode = TimelineView.RenderModes.Bar;
+            //timeline.RenderMode = TimelineView.RenderModes.Bar;
             timeline.FitEvents = false;
             timeline.X_Unit = TimelineView.XScaleUnits.Minute;
-            timeline.X_Step = 15;
+            timeline.X_Step = 10;
             timeline.X_Size = 6;  // (8PM - 8AM)/30min
-            timeline.X_Start = 8; // 8AM/30min
-            timeline.X_Length = 24; // 24/30min
+            //timeline.X_Start = 50; // 8AM/30min
+            timeline.X_Length = 48; // 24/30min
             sched.Views.Add(timeline);//adds the view to the scheduler
           //timeline.AddOptions(ds.boknings);//
             var banor = new List<object>(){
-                new { key = "1", label = "Bana 1"}
+                new { key = "1", label = "08.00"},
+                new { key = "2", label = "09.00"},
+                new { key = "3", label = "10.00"},
+                new { key = "4", label = "11.00"},
+                new { key = "5", label = "12.00"},
+                new { key = "6", label = "13.00"}
             };
 
             timeline.AddOptions(banor);
