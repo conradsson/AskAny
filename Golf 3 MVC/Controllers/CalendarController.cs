@@ -22,6 +22,7 @@ namespace Golf_3_MVC.Controllers
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
             var timeline = new TimelineView("timeline", "golf_id");//initializes the view
+            timeline.RenderMode = TimelineView.RenderModes.Bar;
             timeline.FitEvents = false;
             timeline.X_Unit = TimelineView.XScaleUnits.Hour;
             timeline.X_Step = 30;
