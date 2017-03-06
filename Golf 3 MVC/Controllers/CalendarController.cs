@@ -77,6 +77,7 @@ namespace Golf_3_MVC.Controllers
             sched.InitialView = "day";
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
             sched.Config.separate_short_events = true;
+            sched.Config.hour_size_px = 84;
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
