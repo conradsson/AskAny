@@ -24,11 +24,11 @@ namespace Golf_3_MVC.Controllers
             var timeline = new TimelineView("timeline", "golf_id");//initializes the view
             timeline.RenderMode = TimelineView.RenderModes.Bar;
             timeline.FitEvents = false;
-            timeline.X_Unit = TimelineView.XScaleUnits.Hour;
-            timeline.X_Step = 30;
-            timeline.X_Size = 24;  // (8PM - 8AM)/30min
-            timeline.X_Start = 16; // 8AM/30min
-            timeline.X_Length = 48; // 24/30min
+            timeline.X_Unit = TimelineView.XScaleUnits.Minute;
+            timeline.X_Step = 15;
+            timeline.X_Size = 6;  // (8PM - 8AM)/30min
+            timeline.X_Start = 8; // 8AM/30min
+            timeline.X_Length = 24; // 24/30min
             sched.Views.Add(timeline);//adds the view to the scheduler
           //timeline.AddOptions(ds.boknings);//
             var banor = new List<object>(){
