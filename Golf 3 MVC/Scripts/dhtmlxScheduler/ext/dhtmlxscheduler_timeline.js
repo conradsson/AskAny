@@ -71,4 +71,24 @@ t.fields={},a>=0&&e.y_unit[a]&&(t.section=t.fields[e.y_property]=e.y_unit[a].key
 o+=i,o>d.x){n=(d.x-(o-i))/i,n=0>n?0:n;break}if(r.round_position){var s=1,_=e.getState().drag_mode;_&&"move"!=_&&"create"!=_&&(s=.5),n>=s&&l++,n=0}if(0===l&&this._ignores[0])for(l=1,n=0;this._ignores[l];)l++;else if(l==this._cols.length&&this._ignores[l-1]){for(l=this._cols.length-1,n=0;this._ignores[l];)l--;l++}var c;if(l>=r._trace_x.length)c=e.date.add(r._trace_x[r._trace_x.length-1],r.x_step,r.x_unit),r._end_correction&&(c=new Date(c-r._end_correction));else{var u=n*i*r._step+r._start_correction;
 
 c=new Date(+r._trace_x[l]+u)}return c},e.attachEvent("onBeforeTodayDisplayed",function(){for(var t in e.matrix){var a=e.matrix[t];a.x_start=a._original_x_start}return!0}),e.attachEvent("onOptionsLoad",function(){for(var t in e.matrix){var a=e.matrix[t];a.order={},e.callEvent("onOptionsLoadStart",[]);for(var t=0;t<a.y_unit.length;t++)a.order[a.y_unit[t].key]=t;e.callEvent("onOptionsLoadFinal",[]),e._date&&a.name==e._mode&&e.setCurrentView(e._date,e._mode)}}),e.attachEvent("onSchedulerResize",function(){
-if(e.matrix[this._mode]){var t=e.matrix[this._mode];return e._renderMatrix.call(t,!0,!0),!1}return!0}),e.attachEvent("onBeforeDrag",function(t,a,n){if("resize"==a){var i=n.target||n.srcElement,r=e._getClassName(i);e._drag_from_start=r.indexOf("dhx_event_resize_end")<0?!0:!1}return!0})},e._temp_matrix_scope()});
+    if (e.matrix[this._mode]) { var t = e.matrix[this._mode]; return e._renderMatrix.call(t, !0, !0), !1 } return !0
+}), e.attachEvent("onBeforeDrag", function (t, a, n) { if ("resize" == a) { var i = n.target || n.srcElement, r = e._getClassName(i); e._drag_from_start = r.indexOf("dhx_event_resize_end") < 0 ? !0 : !1 } return !0 })
+}, e._temp_matrix_scope()
+});
+scheduler.locale.labels.timeline_tab = "Timeline";
+scheduler.createTimelineView({
+    name: "timeline",
+    x_unit: "minute",//measuring unit of the X-Axis.
+    x_date: "%H:%i", //date format of the X-Axis
+    x_step: 30,      //X-Axis step in 'x_unit's
+    x_size: 24,      //X-Axis length specified as the total number of 'x_step's
+    x_start: 16,     //X-Axis offset in 'x_unit's
+    x_length: 48,    //number of 'x_step's that will be scrolled at a time
+    y_unit:         //sections of the view (titles of Y-Axis)
+       [{ key: 1, label: "Section A" },
+        { key: 2, label: "Section B" },
+        { key: 3, label: "Section C" },
+        { key: 4, label: "Section D" }],
+    y_property: "section_id", //mapped data property
+    render: "bar"             //view mode
+});
