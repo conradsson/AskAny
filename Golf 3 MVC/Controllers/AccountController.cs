@@ -166,9 +166,10 @@ namespace Golf_3_MVC.Controllers
                                     where c.golf_id == sök
                                     select c.kategori).FirstOrDefault();
 
-                        var rollid = (from c in db.medlemskategoris
-                                      where c.namn == roll
-                                      select c.kategori_id).FirstOrDefault();
+                        if (roll == "Studerande" || roll == "Senior" || roll == "Junior 13 - 21 år" || roll == "Junior 0 - 12 år")
+                        {
+                            roll = "User";
+                        }
 
                         var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                         var result = await UserManager.CreateAsync(user, model.Password);
