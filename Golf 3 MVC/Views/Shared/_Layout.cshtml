@@ -26,27 +26,51 @@
 
                 @if (Request.IsAuthenticated)
                 {
-                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
-                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
                         @Html.AntiForgeryToken()
 
-                    <ul class="nav navbar-nav">
-                        <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
-                        <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
-                        @*<li class="medlembtn">@Html.ActionLink("Banstatus", "Medlem", "medlemmars/index")</li>*@
-                        <li class="banornabtn">@Html.ActionLink("Tävling", "Tavling", "Home")</li>
-                        <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
-                    </ul>
+                        if (User.IsInRole("Personal"))  // PERSONAL
+                        {
+                            <ul class="nav navbar-nav">
+                                <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
+                                <li class="medlembtn">@Html.ActionLink("Hantera medlemar", "Medlem", "medlemmars/index")</li>
+                                <li class="banornabtn">@Html.ActionLink("Tävling", "Tavling", "Home")</li>
+                                @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
+                            </ul>
+                        }
+                        if (User.IsInRole("Admin"))  // ADMIN
+                        {
+                            <ul class="nav navbar-nav">
+                                <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
+                                <li class="medlembtn">@Html.ActionLink("Hantera medlemar", "Medlem", "medlemmars/index")</li>
+                                <li class="banornabtn">@Html.ActionLink("Tävling", "Tavling", "Home")</li>
+                                @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
+                            </ul>
+                        }
+                        else  // MEDLEM
+                        {
+                            <ul class="nav navbar-nav">
+                                <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Boka bantid", "Index", "Calendar")</li>
+                                @*<li class="medlembtn">@Html.ActionLink("Banstatus", "Medlem", "medlemmars/index")</li>*@
+                                <li class="banornabtn">@Html.ActionLink("Tävling", "Tavling", "Home")</li>
+                                <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
+                            </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            @Html.ActionLink("Golf-ID: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                        </li>
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a></li>
-                    </ul>
+                        }  // ALLA INLOGGADE
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    @Html.ActionLink("Golf-ID: " + User.Identity.GetUserName() + "Inloggad som: " + User.ToString(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a></li>
+                            </ul>
+                        
                     }
                 }
-                else
+                else // BESÖKARE
                 {
                     <ul class="nav navbar-nav">
                         <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
@@ -98,7 +122,7 @@
                     </div>
                 </div>
                 <div class="row">
-                        <p class="muted center text-center">&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
+                    <p class="muted center text-center">&copy; @DateTime.Now.Year - Hålslaget GK - Grupp 3</p>
                 </div>
             </div>
         </footer>
