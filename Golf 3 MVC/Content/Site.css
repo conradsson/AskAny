@@ -173,6 +173,10 @@
 	height: auto;
 }
 
+.panel-nyheter, .panel-banstatus {
+    display: none;
+}
+
 .dropdown-menu{
     text-transform:none;
 }

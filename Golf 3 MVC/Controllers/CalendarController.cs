@@ -21,6 +21,23 @@ namespace Golf_3_MVC.Controllers
         {
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
+            var timeline = new TimelineView("timeline", "golf_id");//initializes the view
+            timeline.RenderMode = TimelineView.RenderModes.Bar;
+            timeline.FitEvents = false;
+            timeline.X_Unit = TimelineView.XScaleUnits.Hour;
+            timeline.X_Step = 30;
+            timeline.X_Size = 24;  // (8PM - 8AM)/30min
+            timeline.X_Start = 16; // 8AM/30min
+            timeline.X_Length = 48; // 24/30min
+            sched.Views.Add(timeline);//adds the view to the scheduler
+          //timeline.AddOptions(ds.boknings);//
+            var banor = new List<object>(){
+                new { key = "1", label = "Bana 1"},
+                new { key = "2", label = "Bana 2"},
+                new { key = "3", label = "Bana 3"}
+            };
+
+            timeline.AddOptions(banor);
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
@@ -33,9 +50,9 @@ namespace Golf_3_MVC.Controllers
 
             return View(sched);
         }
-
         public ContentResult Data()
         {
+
             try
             {
                 var details = ds.boknings.ToList();
@@ -56,18 +73,17 @@ namespace Golf_3_MVC.Controllers
 
                 switch (action.Type)
                 {
-                    case DataActionTypes.Insert:
+                    case DataActionTypes.Insert: // "inset new data"
                         bokning EV = new bokning();
                         EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;
-                        //EV.golf_id = "12319_182";
                         EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
                         ds.SaveChanges();
                         break;
-                    case DataActionTypes.Delete:
+                    case DataActionTypes.Delete: // "delete chosen data"
                         var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                         ds.boknings.Remove(details);
                         ds.SaveChanges();

@@ -66,15 +66,21 @@
 
         </ul>
 
-        <div class="panel panel-default panel-nyheter">
+        <div class="panel panel-default">
             <div class="panel-heading">Bokningsschema</div>
             <div class="panel-body">
                 <div style="height:700px;width:auto;margin:0 auto">
                     @Html.Raw(Model.Render())
+                    <div id="scheduler_here" class="dhx_cal_container" ...>
+                        <div class="dhx_cal_navline">
+                            ...
+                            <div class="dhx_cal_tab" name="timeline_tab" style="right:280px;"></div>
+                        </div>
+                        ...
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
     @*<div style="height:700px;width:900px;margin:0 auto">
         @Html.Raw(Model.Render())
