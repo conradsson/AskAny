@@ -148,3 +148,25 @@ $(".kalender").ready(function (e) {
 //        scrollTop: $(identifier).offset().top
 //    }, speed || 750);
 //}
+
+var step = 10;
+var format = scheduler.date.date_to_str("%h:%i");
+
+scheduler.config.hour_size_px=(60/step)*22;
+scheduler.templates.hour_scale = function(date){
+    html="";
+    for (var i=0; i<60/step; i++){
+        html+="<div style='height:22px;line-height:22px;'>"+format(date)+"</div>";
+        date = scheduler.date.add(date,step,"minute");
+    }
+    return html;
+}
+
+var format = scheduler.date.date_to_str("%h:%i")
+scheduler.xy.min_event_height = 41;
+scheduler.templates.event_header = function(s,e,ev){
+    return format(s) + " - " + format(s) + " " + ev.text;
+}
+scheduler.templates.event_body = function (s, e, ev) {
+    return "";
+}
