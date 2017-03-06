@@ -32,9 +32,7 @@ namespace Golf_3_MVC.Controllers
             sched.Views.Add(timeline);//adds the view to the scheduler
           //timeline.AddOptions(ds.boknings);//
             var banor = new List<object>(){
-                new { key = "1", label = "Bana 1"},
-                new { key = "2", label = "Bana 2"},
-                new { key = "3", label = "Bana 3"}
+                new { key = "1", label = "Bana 1"}
             };
 
             timeline.AddOptions(banor);
