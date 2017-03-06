@@ -198,6 +198,9 @@
     <Compile Include="Models\bokning.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\bokningstid.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CalendarData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,9 +227,9 @@
       <DependentUpon>medlemsdata.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\medlemsdata.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>medlemsdata.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\medlemsdata.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -284,8 +287,8 @@
       <LastGenOutput>medlemsdata.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\medlemsdata.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>medlemsdata.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>medlemsdata.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />

@@ -1,18 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
+using System.Data.Entity;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Golf_3_MVC.Controllers;
+using DHTMLX.Scheduler;
+using DHTMLX.Common;
+using DHTMLX.Scheduler.Data;
+using DHTMLX.Scheduler.Controls;
 using Golf_3_MVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Golf_3_MVC.Controllers
 {
     public class bokningsController : Controller
     {
         private dsu3Entities db = new dsu3Entities();
+
+
+        public void Save(string searchString)
+        {
+            
+        }
+
 
         // GET: boknings
         public ActionResult Index()

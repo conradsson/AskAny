@@ -49,6 +49,20 @@
                 }
             </ul>
         </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Skriv in golfid <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @using (Html.BeginForm())
+                    {
+                        <p>
+                            Golfid: @Html.TextBox("SearchString")
+                            <input type="submit" value="Lägg till" />
+                        </p>
+                    }
+                </ul>
+            </li>
 
         </ul>
 
