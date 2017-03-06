@@ -57,7 +57,14 @@ namespace Golf_3_MVC.Controllers
                 new { key = "3", label = "10.00"},
                 new { key = "4", label = "11.00"},
                 new { key = "5", label = "12.00"},
-                new { key = "6", label = "13.00"}
+                new { key = "6", label = "13.00"},
+                new { key = "1", label = "14.00"},
+                new { key = "2", label = "15.00"},
+                new { key = "3", label = "16.00"},
+                new { key = "4", label = "17.00"},
+                new { key = "5", label = "18.00"},
+                new { key = "6", label = "19.00"},
+                new { key = "6", label = "20.00"}
             };
 
             timeline.AddOptions(banor);
