@@ -63,7 +63,7 @@
                         }  // ALLA INLOGGADE
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    @Html.ActionLink("Golf-ID: " + User.Identity.GetUserName() + ""  + "Inloggad som: " + "(MEDLEMSTYPEN)", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                    @Html.ActionLink("Golf-ID: " + User.Identity.GetUserName() +" "+ "Inloggad som: " + "(MEDLEMSTYPEN)", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                                 </li>
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a></li>
                             </ul>
