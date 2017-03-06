@@ -183,10 +183,18 @@
 
 
 
+footer .container{
+    width: 100%;
+    margin: 0 0;
+    padding: 0 0;
+    background-color: aquamarine;
+}
+
 .mapimg{
 	height:70%;
 	width: 70%;
 }
+
 
 /* SOCIAL BUTTONS */
 

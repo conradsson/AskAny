@@ -51,7 +51,7 @@ namespace Golf_3_MVC.Controllers
             timeline.X_Length = 48; // 24/30min
             sched.Views.Add(timeline);//adds the view to the scheduler
           //timeline.AddOptions(ds.boknings);//
-            var banor = new List<object>(){
+            var timmar = new List<object>(){
                 new { key = "1", label = "08.00"},
                 new { key = "2", label = "09.00"},
                 new { key = "3", label = "10.00"},
@@ -60,7 +60,7 @@ namespace Golf_3_MVC.Controllers
                 new { key = "6", label = "13.00"}
             };
 
-            timeline.AddOptions(banor);
+            timeline.AddOptions(timmar);
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
