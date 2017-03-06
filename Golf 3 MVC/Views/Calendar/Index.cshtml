@@ -54,7 +54,7 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create", "Calendar", FormMethod.Post))
                     {
                         <p>
                             Golfid: @Html.TextBox("SearchString")
