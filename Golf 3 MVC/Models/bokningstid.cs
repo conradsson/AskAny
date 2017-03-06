@@ -12,14 +12,15 @@ namespace Golf_3_MVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class bokning
+    public partial class bokningstid
     {
         public int id { get; set; }
-        public string text { get; set; }
-        public System.DateTime start_date { get; set; }
-        public Nullable<System.DateTime> end_date { get; set; }
-        public string golf_id { get; set; }
+        public Nullable<int> bokningsId { get; set; }
+        public string huvudbokare { get; set; }
+        public string person2 { get; set; }
+        public string person3 { get; set; }
+        public string person4 { get; set; }
     
-        public virtual bokningstid bokningstid { get; set; }
+        public virtual bokning bokning { get; set; }
     }
 }
