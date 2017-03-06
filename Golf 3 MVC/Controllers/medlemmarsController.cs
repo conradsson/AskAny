@@ -19,7 +19,7 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Index(int? page, string sortOrder, string searchString)
         {
-
+            
             ViewBag.FörnamnSortParm = sortOrder == "fornamn" ? "fornamn_desc" : "fornamn";
             ViewBag.EfternamnSortParm = sortOrder == "efternamn_desc" ? "efternamn" : "efternamn_desc";
 
