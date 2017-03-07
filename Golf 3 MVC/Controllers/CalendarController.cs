@@ -130,7 +130,7 @@ namespace Golf_3_MVC.Controllers
             //});
 
             sched.Config.start_on_monday = true;
-            sched.InitialView = "day";
+            sched.InitialView = "week";
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
             sched.Config.separate_short_events = true;
             sched.Config.hour_size_px = 84;
