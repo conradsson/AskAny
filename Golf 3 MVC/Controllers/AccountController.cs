@@ -143,7 +143,6 @@ namespace Golf_3_MVC.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -152,33 +151,37 @@ namespace Golf_3_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                //var user = new ApplicationUser { UserName = model.golfID, Email = model.golfID };
-                //var result = await UserManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                //    // Send an email with this link
-                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    string  sök = model.Email;
+                //var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                string sök = model.Email;
                 using (var db = new dsu3Entities())
+                {
+
+                    var results = (from c in db.medlemmars
+                                   where c.golf_id == sök
+                                   select c).SingleOrDefault();
+                    if (results != null)
                     {
-                       
-                            var results = (from c in db.medlemmars
-                                       where c.golf_id == sök
-                                       select c).SingleOrDefault();
-                        if (results != null)
+
+                        var roll = (from c in db.medlemmars
+                                    where c.golf_id == sök
+                                    select c.kategori).FirstOrDefault();
+
+                        if (roll == "Studerande" || roll == "Senior" || roll == "Junior 13 - 21 år" || roll == "Junior 0 - 12 år")
                         {
+                            roll = "User";
+                        }
+
                         var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                         var result = await UserManager.CreateAsync(user, model.Password);
+
                         if (result.Succeeded)
                         {
+
+                            await UserManager.AddToRoleAsync(user.Id, roll);
+
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
 
                             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                             // Send an email with this link
@@ -189,18 +192,17 @@ namespace Golf_3_MVC.Controllers
                         AddErrors(result);
 
                         return RedirectToAction("Index", "Home");
-                        }
-                        else
-                        {
-                            return RedirectToAction("Create", "medlemmars");
-                        }
                     }
+                    else
+                    {
+                        return RedirectToAction("Create", "medlemmars");
+                    }
+                }
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

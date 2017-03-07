@@ -17,14 +17,34 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
-        
+
 
 
         public ActionResult Bokning()
+        //public ActionResult Create(/*FormCollection actionValues, */ string searchString)
+        //{
+        //    //    //var action = new DataAction(actionValues);
+        //    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //    //    bokningstid bokningstid = new bokningstid();
+
+        //    //    bokningstid.id = 33;
+        //    //    bokningstid.huvudbokare = User.Identity.GetUserName();
+        //    //    bokningstid.person2 = searchString;
+        //    //    bokningstid.person3 = "132";
+        //    //    bokningstid.person4 = "11";
+        //    //    ds.bokningstids.Add(bokningstid);
+        //    //    ds.SaveChanges();
+
+        //    return View();
+
+        //}
+
+        [HttpPost]
+        public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
         {
 
             ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
-            
+
             return View();
         }
 
@@ -53,41 +73,68 @@ namespace Golf_3_MVC.Controllers
             //return (ContentResult)new AjaxSaveResponse(action);
         }
 
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Unblockinterval(string blockfrom, string blockto, string unblockbtn)
+        {
+            //    //var action = new DataAction(actionValues);
+            //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+            //    bokningstid bokningstid = new bokningstid();
+
+            //    bokningstid.id = 33;
+            //    bokningstid.huvudbokare = User.Identity.GetUserName();
+            //    bokningstid.person2 = searchString;
+            //    bokningstid.person3 = "132";
+            //    bokningstid.person4 = "11";
+            //    ds.bokningstids.Add(bokningstid);
+            //    ds.SaveChanges();
+
+            return View();
+
+        }
+
+    public ActionResult Index()
         {
 
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
-            var timeline = new TimelineView("timeline", "golf_id");//initializes the view
-            //timeline.RenderMode = TimelineView.RenderModes.Bar;
-            timeline.FitEvents = false;
-            timeline.X_Unit = TimelineView.XScaleUnits.Minute;
-            timeline.X_Step = 10;
-            timeline.X_Size = 6;  // (8PM - 8AM)/30min
-            //timeline.X_Start = 50; // 8AM/30min
-            timeline.X_Length = 48; // 24/30min
-            sched.Views.Add(timeline);//adds the view to the scheduler
-          //timeline.AddOptions(ds.boknings);//
-            var banor = new List<object>(){
-                new { key = "1", label = "08.00"},
-                new { key = "2", label = "09.00"},
-                new { key = "3", label = "10.00"},
-                new { key = "4", label = "11.00"},
-                new { key = "5", label = "12.00"},
-                new { key = "6", label = "13.00"}
-            };
 
-            timeline.AddOptions(banor);
+          //  var timeline = new TimelineView("timeline", "golf_id");//initializes the view
+          //  //timeline.RenderMode = TimelineView.RenderModes.Bar;
+          //  timeline.FitEvents = false;
+          //  timeline.X_Unit = TimelineView.XScaleUnits.Minute;
+          //  timeline.X_Step = 10;
+          //  timeline.X_Size = 6;  // (8PM - 8AM)/30min
+          //  //timeline.X_Start = 50; // 8AM/30min
+          //  timeline.X_Length = 48; // 24/30min
+          //  sched.Views.Add(timeline);//adds the view to the scheduler
+          ////timeline.AddOptions(ds.boknings);//
+          //  var banor = new List<object>(){
+          //      new { key = "1", label = "08.00"},
+          //      new { key = "2", label = "09.00"},
+          //      new { key = "3", label = "10.00"},
+          //      new { key = "4", label = "11.00"},
+          //      new { key = "5", label = "12.00"},
+          //      new { key = "6", label = "13.00"},
+          //      new { key = "1", label = "14.00"},
+          //      new { key = "2", label = "15.00"},
+          //      new { key = "3", label = "16.00"},
+          //      new { key = "4", label = "17.00"},
+          //      new { key = "5", label = "18.00"},
+          //      new { key = "6", label = "19.00"},
+          //      new { key = "6", label = "20.00"}
+          //  };
+
+          //  timeline.AddOptions(banor);
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
+            sched.Config.time_step = 10;
+
+            sched.Config.start_on_monday = true;
             sched.InitialView = "day";
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
-
-            var check = new LightboxText("highlighting", "Important");
-            check.MapTo = "textColor";
-            sched.Lightbox.Add(check);
-            sched.Lightbox.AddDefaults();
+            sched.Config.separate_short_events = true;
+            sched.Config.hour_size_px = 84;
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
@@ -97,7 +144,6 @@ namespace Golf_3_MVC.Controllers
         }
         public ContentResult Data()
         {
-
             try
             {
                 var details = ds.boknings.ToList();
@@ -118,7 +164,7 @@ namespace Golf_3_MVC.Controllers
 
                 switch (action.Type)
                 {
-                    case DataActionTypes.Insert: // "inset new data"
+                    case DataActionTypes.Insert: // "insert new data"
                         bokning EV = new bokning();
                         EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;

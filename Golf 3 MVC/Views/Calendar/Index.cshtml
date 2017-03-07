@@ -23,30 +23,30 @@
             @*<li class="pill-nyheter"><a href="">Nyheter</a></li>*@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Öppna bokningen <span class="caret"></span>
+                    Öppna bokning <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Unblockinterval", "Calendar", FormMethod.Post))
                     {
                         <p>
-                            Från: @Html.TextBox("SearchString")<br />
-                            Till: @Html.TextBox("SearchString")
-                            <input type="submit" value="Lägg till" />
+                            Från: @Html.TextBox("unblockfrom")<br />
+                            Till: @Html.TextBox("unblockto")
+                            <input id="unblockbtn" type="submit" value="Lägg till" />
                         </p>
                     }
                 </ul>
             </li>
             <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                Stäng bokningen <span class="caret"></span>
+                Stäng bokning <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Blockinterval", "Calendar", FormMethod.Post))
                 {
                     <p>
-                        Från: @Html.TextBox("SearchString")<br />
-                        Till: @Html.TextBox("SearchString")
-                        <input type="submit" value="Lägg till" />
+                        Från: @Html.TextBox("blockfrom")<br />
+                        Till: @Html.TextBox("blockto")
+                        <input id="blockbtn" type="submit" value="Lägg till" />
                     </p>
                 }
             </ul>
@@ -81,19 +81,9 @@
             <div class="panel-body">
                 <div style="height:700px;width:auto;margin:0 auto">
                     @Html.Raw(Model.Render())
-                    <div id="scheduler_here" class="dhx_cal_container" ...>
-                        <div class="dhx_cal_navline">
-                            ...
-                            <div class="dhx_cal_tab" name="timeline_tab" style="right:280px;"></div>
-                        </div>
-                        ...
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    @*<div style="height:700px;width:900px;margin:0 auto">
-        @Html.Raw(Model.Render())
-    </div>*@
 </body>
 </html>
