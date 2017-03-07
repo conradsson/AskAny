@@ -40,17 +40,6 @@ namespace Golf_3_MVC.Controllers
             //return (ContentResult)new AjaxSaveResponse(action);
         }
 
-        //[HttpPost]
-        //public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
-        //{
-        //    //    //var action = new DataAction(actionValues);
-        //    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-        //    //    bokningstid bokningstid = new bokningstid();
-
-
-        //    return View();
-
-        //}
 
     public ActionResult Index()
         {
@@ -58,33 +47,6 @@ namespace Golf_3_MVC.Controllers
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
 
-          //  var timeline = new TimelineView("timeline", "golf_id");//initializes the view
-          //  //timeline.RenderMode = TimelineView.RenderModes.Bar;
-          //  timeline.FitEvents = false;
-          //  timeline.X_Unit = TimelineView.XScaleUnits.Minute;
-          //  timeline.X_Step = 10;
-          //  timeline.X_Size = 6;  // (8PM - 8AM)/30min
-          //  //timeline.X_Start = 50; // 8AM/30min
-          //  timeline.X_Length = 48; // 24/30min
-          //  sched.Views.Add(timeline);//adds the view to the scheduler
-          ////timeline.AddOptions(ds.boknings);//
-          //  var banor = new List<object>(){
-          //      new { key = "1", label = "08.00"},
-          //      new { key = "2", label = "09.00"},
-          //      new { key = "3", label = "10.00"},
-          //      new { key = "4", label = "11.00"},
-          //      new { key = "5", label = "12.00"},
-          //      new { key = "6", label = "13.00"},
-          //      new { key = "1", label = "14.00"},
-          //      new { key = "2", label = "15.00"},
-          //      new { key = "3", label = "16.00"},
-          //      new { key = "4", label = "17.00"},
-          //      new { key = "5", label = "18.00"},
-          //      new { key = "6", label = "19.00"},
-          //      new { key = "6", label = "20.00"}
-          //  };
-
-          //  timeline.AddOptions(banor);
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
@@ -105,23 +67,24 @@ namespace Golf_3_MVC.Controllers
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
 
+
             return View(sched);
 
         }
 
         [HttpPost]
-        public ActionResult Blockinterval(long blockfrom, long blockto)
+        public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-            var sched = new DHXScheduler(this);
+           
 
-            sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
-        {
-                StartDate = new DateTime(blockfrom),
-                EndDate = new DateTime(blockto)
-            });
+        //    sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
+        //{
+        //        StartDate =  DateTime.Parse(blockfrom),
+        //        EndDate = DateTime.Parse(blockto)
+        //    });
 
+            return RedirectToAction("index");
 
-            return View();
         }
 
         public ContentResult Data()
