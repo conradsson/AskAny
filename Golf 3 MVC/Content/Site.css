@@ -181,6 +181,11 @@
     text-transform:none;
 }
 
+.dhx_scheduler_month .dhx_marked_timespan{
+      display: block;
+   }
+
+
 
 /*    FOOTER     */
 
