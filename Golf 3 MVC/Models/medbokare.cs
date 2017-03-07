@@ -20,12 +20,11 @@ namespace Golf_3_MVC.Models
             this.bokning = bokning;
         }
 
-
         public int Id { get; set; }
         public string Huvudbokare { get; set; }
         public string Medbokare1 { get; set; }
         public int BokningsId { get; set; }
-
+    
         public virtual bokning bokning { get; set; }
     }
 }
