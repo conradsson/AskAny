@@ -39,58 +39,58 @@ namespace Golf_3_MVC.Controllers
 
         ////}
 
-        [HttpPost]
-        public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
-        {
+        //[HttpPost]
+        //public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
+        //{
 
-            ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
+        //    ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        public ActionResult Create(FormCollection actionValues, string searchString)
-        {
-            //var action = new DataAction(actionValues);
-            //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-            //bokningstid bokningstid = new bokningstid();
-            ////bokning bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
-            medbokare medbokare = new medbokare();
-            bokning bokning = new bokning();
-
-
+        //public ActionResult Create(FormCollection actionValues, string searchString)
+        //{
+        //    //var action = new DataAction(actionValues);
+        //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //    //bokningstid bokningstid = new bokningstid();
+        //    ////bokning bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
+        //    medbokare medbokare = new medbokare();
+        //    bokning bokning = new bokning();
 
 
-            medbokare.Id = 33;
-            medbokare.BokningsId = 1;
-            medbokare.Huvudbokare = /*User.Identity.GetUserName();*/ "33";
-            medbokare.Medbokare1 = "333";
-            medbokare.bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
-            ds.medbokares.Add(medbokare);
-            ds.SaveChanges();
 
-            //return View();
-            return RedirectToAction("index");
-            //return (ContentResult)new AjaxSaveResponse(action);
-        }
 
-        [HttpPost]
-        public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
-        {
-            //    //var action = new DataAction(actionValues);
-            //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-            //    bokningstid bokningstid = new bokningstid();
+        //    medbokare.Id = 33;
+        //    medbokare.BokningsId = 1;
+        //    medbokare.Huvudbokare = /*User.Identity.GetUserName();*/ "33";
+        //    medbokare.Medbokare1 = "333";
+        //    medbokare.bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
+        //    ds.medbokares.Add(medbokare);
+        //    ds.SaveChanges();
 
-            //    bokningstid.id = 33;
-            //    bokningstid.huvudbokare = User.Identity.GetUserName();
-            //    bokningstid.person2 = searchString;
-            //    bokningstid.person3 = "132";
-            //    bokningstid.person4 = "11";
-            //    ds.bokningstids.Add(bokningstid);
-            //    ds.SaveChanges();
+        //    //return View();
+        //    return RedirectToAction("index");
+        //    //return (ContentResult)new AjaxSaveResponse(action);
+        //}
 
-            return View();
+        //[HttpPost]
+        //public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
+        //{
+        //    //    //var action = new DataAction(actionValues);
+        //    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //    //    bokningstid bokningstid = new bokningstid();
 
-        }
+        //    //    bokningstid.id = 33;
+        //    //    bokningstid.huvudbokare = User.Identity.GetUserName();
+        //    //    bokningstid.person2 = searchString;
+        //    //    bokningstid.person3 = "132";
+        //    //    bokningstid.person4 = "11";
+        //    //    ds.bokningstids.Add(bokningstid);
+        //    //    ds.SaveChanges();
+
+        //    return View();
+
+        //}
 
     public ActionResult Index()
         {
