@@ -17,11 +17,6 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
-        [HttpPost]
-        public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
-        {
-
-            ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
 
         public ActionResult Create(FormCollection actionValues, string searchString)
         {
