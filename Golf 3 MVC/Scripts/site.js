@@ -147,10 +147,49 @@ $(".kalender").ready(function (e) {
 //    }, speed || 750);
 //}
 
+
+$("#blockbtn").click(function () {
+
+    var blockfrom = document.getElementsByName('blockfrom')[0].value
+    var blockto = document.getElementsByName('blockto')[0].value
+
+    scheduler.addMarkedTimespan({
+        start_date: new Date(blockfrom),
+        end_date: new Date(blockto),
+        zones: "fullday",
+        css: "gray_section",
+        type: "dhx_time_block"
+    });
+
+    scheduler.updateView();
+    
+});
+
+$("#unblockbtn").click(function () {
+
+    var unblockfrom = document.getElementsByName('unblockfrom')[0].value
+    var unblockto = document.getElementsByName('unblockto')[0].value
+
+    scheduler.deleteMarkedTimespan({
+        start_date: new Date(unblockfrom),
+        end_date: new Date(unblockto),
+        zones: "fullday",
+        css: "gray_section",
+        type: "dhx_time_block"
+    });
+
+    scheduler.updateView();
+
+});
+
+
+
+
+// START | Tonnys grejs | 10 minuters interval
 var step = 10;
 var format = scheduler.date.date_to_str("%H:%i");
 
-scheduler.config.hour_size_px=(60/step)*22;
+scheduler.config.hour_size_px=(60/step)*22;    
 scheduler.templates.hour_scale = function(date){
     html="";
     for (var i=0; i<60/step; i++){
@@ -160,14 +199,25 @@ scheduler.templates.hour_scale = function(date){
     return html;
 }
 
+// SLUT | Tonnys grejs | 10 minuters interval
+
+
+/////
+
 var format = scheduler.date.date_to_str("%H:%i")
 scheduler.xy.min_event_height = 41;
 scheduler.templates.event_header = function(s,e,ev){
     return format(s) + " - " + format(s) + " " + ev.text;
 }
+
+////
+
 scheduler.templates.event_body = function (s, e, ev) {
     return "";
 }
+
+/////
+
 scheduler.renderEvent = function (container, ev) {
     var container_width = container.style.width; // e.g. "105px"
 
@@ -197,3 +247,4 @@ scheduler.renderEvent = function (container, ev) {
     return true; //required, true - display a custom form, false - the default form
 };
 
+////
