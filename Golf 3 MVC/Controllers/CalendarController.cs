@@ -97,8 +97,8 @@ namespace Golf_3_MVC.Controllers
             });
 
             sched.Config.start_on_monday = true;
-            sched.InitialView = "week";
-            //sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
+            sched.InitialView = "day";
+            sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
             sched.Config.separate_short_events = true;
             sched.Config.hour_size_px = 84;
 
@@ -115,7 +115,7 @@ namespace Golf_3_MVC.Controllers
             var sched = new DHXScheduler(this);
 
             sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
-            {
+        {
                 StartDate = new DateTime(blockfrom),
                 EndDate = new DateTime(blockto)
             });
