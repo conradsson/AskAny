@@ -258,7 +258,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

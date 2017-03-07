@@ -12,7 +12,7 @@
         <AssociationConnector Association="dsu3Model.FK_medlemmar_kategori" ManuallyRouted="false" />
         <EntityTypeShape EntityType="dsu3Model.medbokare" Width="1.5" PointX="8" PointY="0.875" />
         <AssociationConnector Association="dsu3Model.FK_medbokare_ToTable" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
