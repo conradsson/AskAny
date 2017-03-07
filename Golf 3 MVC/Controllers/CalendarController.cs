@@ -18,6 +18,22 @@ namespace Golf_3_MVC.Controllers
         dsu3Entities ds = new dsu3Entities();
 
 
+        public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
+        {
+            var action = new DataAction(actionValues);
+
+                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+
+                medbokare.BokningsId = 33;
+                medbokare.Huvudbokare = User.Identity.GetUserName();
+                medbokare.Medbokare1 = changedEvent.text;
+                medbokare.BokningsId = changedEvent.id;
+
+            return medbokare;
+        }
+
+
+
         public ActionResult Create(FormCollection actionValues, string searchString)
         {
             //var action = new DataAction(actionValues);
@@ -96,21 +112,24 @@ namespace Golf_3_MVC.Controllers
                 EndDate = DateTime.Now
             });
 
-            var check = new LightboxText("Highlighting", "Lägg till person");
-            sched.Lightbox.Add(check);
+            //var check = new LightboxText("Highlighting", "Lägg till person");
+            //check.Height = 30;
+            //sched.Lightbox.Add(check);
+            //sched.Lightbox.AddDefaults();
 
-            sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+
+            
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
-                
+
             //    Label = "Lägg till medlem",
             //    OnClick = "some_function",
             //    Name = "location"
-                
+
             //});
 
-            sched.Lightbox.AddDefaults();
+            
 
             sched.Config.start_on_monday = true;
             sched.InitialView = "day";
@@ -160,22 +179,31 @@ namespace Golf_3_MVC.Controllers
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
+               
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert: // "insert new data"
                         bokning EV = new bokning();
+                        medbokare MB = new medbokare();
                         EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;
                         EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
+                        //MB.BokningsId = 33;
+                        //MB.Huvudbokare = User.Identity.GetUserName();
+                        //MB.Medbokare1 = changedEvent.text;
+                        //MB.BokningsId = changedEvent.id;
+                        LäggTillMedbokare(MB, actionValues);
+                        ds.medbokares.Add(MB);
                         ds.SaveChanges();
 
                         break;
                     case DataActionTypes.Delete: // "delete chosen data"
                         var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                         ds.boknings.Remove(details);
+
                         ds.SaveChanges();
                         break;
                     default:// "update"

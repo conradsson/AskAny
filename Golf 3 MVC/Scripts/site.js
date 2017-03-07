@@ -196,3 +196,4 @@ scheduler.renderEvent = function (container, ev) {
     container.innerHTML = html;
     return true; //required, true - display a custom form, false - the default form
 };
+
