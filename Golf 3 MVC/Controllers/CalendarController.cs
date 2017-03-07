@@ -74,7 +74,7 @@ namespace Golf_3_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Unblockinterval(string blockfrom, string blockto, string unblockbtn)
+        public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
         {
             //    //var action = new DataAction(actionValues);
             //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
