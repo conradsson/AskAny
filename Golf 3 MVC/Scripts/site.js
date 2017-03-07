@@ -150,7 +150,7 @@ $(".kalender").ready(function (e) {
 //}
 
 var step = 10;
-var format = scheduler.date.date_to_str("%h:%i");
+var format = scheduler.date.date_to_str("%H:%i");
 
 scheduler.config.hour_size_px=(60/step)*22;
 scheduler.templates.hour_scale = function(date){
@@ -162,7 +162,7 @@ scheduler.templates.hour_scale = function(date){
     return html;
 }
 
-var format = scheduler.date.date_to_str("%h:%i")
+var format = scheduler.date.date_to_str("%H:%i")
 scheduler.xy.min_event_height = 41;
 scheduler.templates.event_header = function(s,e,ev){
     return format(s) + " - " + format(s) + " " + ev.text;
