@@ -81,7 +81,7 @@ namespace Golf_3_MVC.Controllers
 
 
 
-            sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+            //sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
