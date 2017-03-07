@@ -20,7 +20,7 @@ namespace Golf_3_MVC.Controllers
 
 
 
-        public ActionResult Bokning()
+        //public ActionResult Bokning()
         //public ActionResult Create(/*FormCollection actionValues, */ string searchString)
         //{
         //    //    //var action = new DataAction(actionValues);
