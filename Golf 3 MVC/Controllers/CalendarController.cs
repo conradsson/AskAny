@@ -121,11 +121,13 @@ namespace Golf_3_MVC.Controllers
             sched.Config.last_hour = 21;
             sched.Config.time_step = 10;
 
-            sched.TimeSpans.Add(new DHXBlockTime()   // 
-            {
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = new DateTime(2017,3 , 8)
-            });
+            //var nu = Convert.ToInt64(DateTime.Now.ToShortDateString());
+
+            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
+            //{
+            //    StartDate = new DateTime(2000, 1, 1),
+            //    EndDate = new DateTime(nu)
+            //});
 
             sched.Config.start_on_monday = true;
             sched.InitialView = "day";
