@@ -17,61 +17,33 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
+        [HttpPost]
+        public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
+        {
 
+            ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
 
+        public ActionResult Create(FormCollection actionValues, string searchString)
+        {
+            //var action = new DataAction(actionValues);
+            //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+            //bokningstid bokningstid = new bokningstid();
+            ////bokning bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
+            medbokare medbokare = new medbokare();
+            //bokning bokning = new bokning();
 
-        //public ActionResult Bokning()
-        ////public ActionResult Create(/*FormCollection actionValues, */ string searchString)
-        ////{
-        ////    //    //var action = new DataAction(actionValues);
-        ////    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-        ////    //    bokningstid bokningstid = new bokningstid();
+            medbokare.Id = 33;
+            medbokare.BokningsId = 87;
+            medbokare.Huvudbokare = User.Identity.GetUserName();
+            medbokare.Medbokare1 = searchString;
+            //medbokare.bokning = ds.boknings.Where(x => x.id == 87).FirstOrDefault();
+            ds.medbokares.Add(medbokare);
+            ds.SaveChanges();
 
-        ////    //    bokningstid.id = 33;
-        ////    //    bokningstid.huvudbokare = User.Identity.GetUserName();
-        ////    //    bokningstid.person2 = searchString;
-        ////    //    bokningstid.person3 = "132";
-        ////    //    bokningstid.person4 = "11";
-        ////    //    ds.bokningstids.Add(bokningstid);
-        ////    //    ds.SaveChanges();
-
-        ////    return View();
-
-        ////}
-
-        //[HttpPost]
-        //public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
-        //{
-
-        //    ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
-
-        //    return View();
-        //}
-
-        //public ActionResult Create(FormCollection actionValues, string searchString)
-        //{
-        //    //var action = new DataAction(actionValues);
-        //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-        //    //bokningstid bokningstid = new bokningstid();
-        //    ////bokning bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
-        //    medbokare medbokare = new medbokare();
-        //    bokning bokning = new bokning();
-
-
-
-
-        //    medbokare.Id = 33;
-        //    medbokare.BokningsId = 1;
-        //    medbokare.Huvudbokare = /*User.Identity.GetUserName();*/ "33";
-        //    medbokare.Medbokare1 = "333";
-        //    medbokare.bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
-        //    ds.medbokares.Add(medbokare);
-        //    ds.SaveChanges();
-
-        //    //return View();
-        //    return RedirectToAction("index");
-        //    //return (ContentResult)new AjaxSaveResponse(action);
-        //}
+            //return View();
+            return RedirectToAction("index");
+            //return (ContentResult)new AjaxSaveResponse(action);
+        }
 
         //[HttpPost]
         //public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
@@ -80,13 +52,6 @@ namespace Golf_3_MVC.Controllers
         //    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
         //    //    bokningstid bokningstid = new bokningstid();
 
-        //    //    bokningstid.id = 33;
-        //    //    bokningstid.huvudbokare = User.Identity.GetUserName();
-        //    //    bokningstid.person2 = searchString;
-        //    //    bokningstid.person3 = "132";
-        //    //    bokningstid.person4 = "11";
-        //    //    ds.bokningstids.Add(bokningstid);
-        //    //    ds.SaveChanges();
 
         //    return View();
 
@@ -130,8 +95,16 @@ namespace Golf_3_MVC.Controllers
             sched.Config.last_hour = 21;
             sched.Config.time_step = 10;
 
+            //var nu = Convert.ToInt64(DateTime.Now.ToShortDateString());
+
+            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
+            //{
+            //    StartDate = new DateTime(2000, 1, 1),
+            //    EndDate = new DateTime(nu)
+            //});
+
             sched.Config.start_on_monday = true;
-            sched.InitialView = "day";
+            sched.InitialView = "week";
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
             sched.Config.separate_short_events = true;
             sched.Config.hour_size_px = 84;
@@ -142,6 +115,15 @@ namespace Golf_3_MVC.Controllers
             return View(sched);
 
         }
+
+        [HttpPost]
+        public ActionResult Blockinterval(string blockfrom, string blockto)
+        {
+            //ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
+
+            return View();
+        }
+
         public ContentResult Data()
         {
             try

@@ -14,19 +14,26 @@ namespace Golf_3_MVC.Models
     
     public partial class bokning
     {
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         //public bokning()
         //{
         //    this.medbokares = new HashSet<medbokare>();
         //}
-    
+
+        //public bokning()
+        //{
+        //    this.medbokares = medbokares;
+        //}
+
         public int id { get; set; }
         public string text { get; set; }
         public System.DateTime start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
         public string golf_id { get; set; }
-    
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<medbokare> medbokares { get; set; }
+
         public virtual medbokare medbokares { get; set; }
     }
 }
