@@ -143,7 +143,7 @@ namespace Golf_3_MVC.Controllers
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
-               
+
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert: // "insert new data"
@@ -164,33 +164,59 @@ namespace Golf_3_MVC.Controllers
                         ds.SaveChanges();
 
                         break;
+
                     case DataActionTypes.Delete: // "delete chosen data"
 
                         if (User.IsInRole("User") == true)
                         {
                             string golf_id = User.Identity.GetUserName();
+
+                            foreach (var x in ds.medbokares)
+                            {
+                                if (x.BokningsId == id && x.Huvudbokare == golf_id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                            }
+
+                            ds.SaveChanges();
                             var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
+
                             ds.boknings.Remove(details);
+                            ds.SaveChanges();
                         }
+
                         else
                         {
-                        var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-                        ds.boknings.Remove(details);
+                            foreach (var x in ds.medbokares)
+                            {
+                                if (x.BokningsId == id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                            }
+                            ds.SaveChanges();
 
-                        ds.SaveChanges();
+                            var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
+
+                            ds.boknings.Remove(details);
+                            ds.SaveChanges();
+                        }
 
 
 
                         break;
+
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-                        data.start_date = changedEvent.start_date;
-                        data.end_date = changedEvent.end_date;
-                        data.text = changedEvent.text;
-                        ds.SaveChanges();
-                        break;
+                            data.start_date = changedEvent.start_date;
+                            data.end_date = changedEvent.end_date;
+                            data.text = changedEvent.text;
+                            ds.SaveChanges();
+                            break;
+                        }
                 }
-            }
+            
             catch
             {
                 action.Type = DataActionTypes.Error;
