@@ -61,7 +61,7 @@ namespace Golf_3_MVC.Controllers
             var check = new LightboxText("Highlighting", "Lägg till person");
             sched.Lightbox.Add(check);
 
-            //sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+           // sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
@@ -93,11 +93,11 @@ namespace Golf_3_MVC.Controllers
         {
            
 
-        //    sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
+            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
         //{
-        //        StartDate =  DateTime.Parse(blockfrom),
-        //        EndDate = DateTime.Parse(blockto)
-        //    });
+            //    StartDate = DateTime.Parse(blockfrom),
+            //    EndDate = DateTime.Parse(blockto)
+            //});
 
             return RedirectToAction("index");
 
@@ -137,9 +137,23 @@ namespace Golf_3_MVC.Controllers
 
                         break;
                     case DataActionTypes.Delete: // "delete chosen data"
+
+                        if (User.IsInRole("User") == true)
+                        {
+                            string golf_id = User.Identity.GetUserName();
+                            var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
+                            ds.boknings.Remove(details);
+                        }
+                        else
+                        {
                         var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                         ds.boknings.Remove(details);
+                        }
+                        
                         ds.SaveChanges();
+
+
+
                         break;
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();

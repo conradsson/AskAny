@@ -26,14 +26,13 @@
                     Öppna bokning <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm("Unblockinterval", "Calendar", FormMethod.Post))
-                    {
+
                         <p>
                             Från: @Html.TextBox("unblockfrom")<br />
                             Till: @Html.TextBox("unblockto")
-                            <input id="unblockbtn" type="submit" value="Lägg till" />
+                            <input id="unblockbtn" type="button" value="Lägg till" />
                         </p>
-                    }
+
                 </ul>
             </li>
             <li class="dropdown">
@@ -41,14 +40,13 @@
                 Stäng bokning <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                @using (Html.BeginForm("Blockinterval", "Calendar", FormMethod.Post))
-                {
+
                     <p>
                         Från: @Html.TextBox("blockfrom")<br />
                         Till: @Html.TextBox("blockto")
-                        <input id="blockbtn" type="submit" value="Lägg till" />
+                        <input id="blockbtn" type="button" value="Lägg till" />
                     </p>
-                }
+                
             </ul>
         </li>
             <li class="dropdown">
