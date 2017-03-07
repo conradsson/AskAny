@@ -90,13 +90,11 @@ namespace Golf_3_MVC.Controllers
             sched.Config.last_hour = 21;
             sched.Config.time_step = 10;
 
-            //var nu = Convert.ToInt64(DateTime.Now.ToShortDateString());
-
-            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
-            //{
-            //    StartDate = new DateTime(2000, 1, 1),
-            //    EndDate = new DateTime(nu)
-            //});
+            sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT INNAN NU
+            {
+                StartDate = new DateTime(2000, 1, 1),
+                EndDate = DateTime.Now
+            });
 
             var check = new LightboxText("Highlighting", "Lägg till person");
             sched.Lightbox.Add(check);
@@ -115,7 +113,7 @@ namespace Golf_3_MVC.Controllers
             sched.Lightbox.AddDefaults();
 
             sched.Config.start_on_monday = true;
-            sched.InitialView = "week";
+            sched.InitialView = "day";
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
             sched.Config.separate_short_events = true;
             sched.Config.hour_size_px = 84;
@@ -128,9 +126,16 @@ namespace Golf_3_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Blockinterval(string blockfrom, string blockto)
+        public ActionResult Blockinterval(long blockfrom, long blockto)
         {
-            //ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
+            var sched = new DHXScheduler(this);
+
+            sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
+        {
+                StartDate = new DateTime(blockfrom),
+                EndDate = new DateTime(blockto)
+            });
+
 
             return View();
         }
