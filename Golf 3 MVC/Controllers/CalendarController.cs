@@ -17,7 +17,7 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
-        
+
 
 
         //public ActionResult Bokning()
@@ -39,7 +39,12 @@ namespace Golf_3_MVC.Controllers
 
         ////}
 
+        //[HttpPost]
+        //public ActionResult Blockinterval(string blockfrom, string blockto, string blockbtn)
+        //{
 
+        //    ViewBag.Bokningar = new SelectList(ds.boknings, "id", "golf_id");
+        //}
 
         public ActionResult Create(FormCollection actionValues, string searchString)
         {
@@ -66,14 +71,17 @@ namespace Golf_3_MVC.Controllers
             //return (ContentResult)new AjaxSaveResponse(action);
         }
 
-        [HttpPost]
-        public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
-        {
+        //[HttpPost]
+        //public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
+        //{
+        //    //    //var action = new DataAction(actionValues);
+        //    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //    //    bokningstid bokningstid = new bokningstid();
 
 
-            return View();
+        //    return View();
 
-        }
+        //}
 
     public ActionResult Index()
         {
