@@ -29,6 +29,6 @@ namespace Golf_3_MVC.Models
         public virtual DbSet<medlemmar> medlemmars { get; set; }
         public virtual DbSet<medlemskategori> medlemskategoris { get; set; }
         public virtual DbSet<starttid> starttids { get; set; }
-        public virtual DbSet<bokningstid> bokningstids { get; set; }
+        public virtual DbSet<medbokare> medbokares { get; set; }
     }
 }

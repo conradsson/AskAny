@@ -8,10 +8,10 @@
         <EntityTypeShape EntityType="dsu3Model.bokning" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dsu3Model.medlemmar" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="dsu3Model.medlemskategori" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="dsu3Model.starttid" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dsu3Model.starttid" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="dsu3Model.FK_medlemmar_kategori" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dsu3Model.bokningstid" Width="1.5" PointX="8" PointY="5" />
-        <AssociationConnector Association="dsu3Model.FK_bokningstid_ToTable" />
+        <EntityTypeShape EntityType="dsu3Model.medbokare" Width="1.5" PointX="8" PointY="0.875" />
+        <AssociationConnector Association="dsu3Model.FK_medbokare_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

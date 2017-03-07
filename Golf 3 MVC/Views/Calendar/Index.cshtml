@@ -1,6 +1,8 @@
 ﻿@{
-//Layout = null;
+    //Layout = null;
+    ViewBag.Title = "Bokning";
 }
+
 
 <!DOCTYPE html>
 <html>
@@ -54,13 +56,21 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm("Create", "Calendar", FormMethod.Post))
+                    @using (Html.BeginForm())
                     {
+                        <p>
+                            Välj bokning: @*@Html.DropDownList("Bokning", (IEnumerable<SelectListItem>)ViewBag.Bokningar, "Välj Namn")*@
+                                         @*@Html.DropDownList("golf_id", (SelectList)(ViewData["Bokningar"]), "Välj Namn")*@
+                        </p>
+                    }
+                                @using (Html.BeginForm("Create", "Calendar"))
+            {
                         <p>
                             Golfid: @Html.TextBox("SearchString")
                             <input type="submit" value="Lägg till" />
                         </p>
                     }
+
                 </ul>
             </li>
 

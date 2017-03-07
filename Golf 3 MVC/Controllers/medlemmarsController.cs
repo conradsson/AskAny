@@ -17,6 +17,7 @@ namespace Golf_3_MVC.Controllers
     {
         private dsu3Entities db = new dsu3Entities();
 
+
         public ActionResult Index(int? page, string sortOrder, string searchString)
         {
             

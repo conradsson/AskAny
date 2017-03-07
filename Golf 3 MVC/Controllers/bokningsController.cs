@@ -23,26 +23,6 @@ namespace Golf_3_MVC.Controllers
         private dsu3Entities db = new dsu3Entities();
 
 
-
-
-
-        //public void Save(FormCollection actionValues, string searchString)
-        //{
-        //    var action = new DataAction(actionValues);
-        //    var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-        //    bokningstid bokningstid = new bokningstid();
-
-        //    bokningstid.id = 33;
-        //    bokningstid.huvudbokare = User.Identity.GetUserName();
-        //    bokningstid.person2 = searchString;
-        //    bokningstid.person3 = "132";
-        //    bokningstid.person4 = "11";
-        //    db.bokningstids.Add(bokningstid);
-        //    db.SaveChanges();
-
-        //}
-
-
         // GET: boknings
         public ActionResult Index()
         {
