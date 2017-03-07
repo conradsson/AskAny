@@ -92,11 +92,11 @@ namespace Golf_3_MVC.Controllers
 
             //var nu = Convert.ToInt64(DateTime.Now.ToShortDateString());
 
-            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
-            //{
-            //    StartDate = new DateTime(2000, 1, 1),
-            //    EndDate = new DateTime(nu)
-            //});
+            sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
+            {
+                StartDate = new DateTime(2000, 1, 1),
+                EndDate = DateTime.Now
+            });
 
             sched.Config.start_on_monday = true;
             sched.InitialView = "week";
