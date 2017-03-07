@@ -147,6 +147,9 @@
 				 /* MEDLEM */
 .fade-carousel .slides .medlemslide1 {
   background-image: url(img/medlem/medlem1-1280.jpg);
+  background-size: 100%;
+  background-position:top;
+
 }
 
 				 /* KONTAKT */
@@ -184,14 +187,10 @@
     text-transform:none;
 }
 
-.dhx_scheduler_month .dhx_marked_timespan{
-      display: block;
-   }
-
-.dhx_time_block{
-    text-align: center;
-    font-size: large;
+.adminmedlemmarDiv{
+    margin-top: 5%;
 }
+
 
 
 /*    FOOTER     */

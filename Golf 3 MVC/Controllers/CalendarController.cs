@@ -18,22 +18,6 @@ namespace Golf_3_MVC.Controllers
         dsu3Entities ds = new dsu3Entities();
 
 
-        public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
-        {
-            var action = new DataAction(actionValues);
-
-                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-
-                medbokare.BokningsId = 33;
-                medbokare.Huvudbokare = User.Identity.GetUserName();
-                medbokare.Medbokare1 = changedEvent.text;
-                medbokare.BokningsId = changedEvent.id;
-
-            return medbokare;
-        }
-
-
-
         public ActionResult Create(FormCollection actionValues, string searchString)
         {
             //var action = new DataAction(actionValues);
@@ -74,14 +58,10 @@ namespace Golf_3_MVC.Controllers
                 EndDate = DateTime.Now
             });
 
-            //var check = new LightboxText("Highlighting", "Lägg till person");
-            //check.Height = 30;
-            //sched.Lightbox.Add(check);
-            //sched.Lightbox.AddDefaults();
+            var check = new LightboxText("Highlighting", "Lägg till person");
+            sched.Lightbox.Add(check);
 
-
-
-            //sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+           // sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
@@ -92,7 +72,7 @@ namespace Golf_3_MVC.Controllers
                 
             //});
 
-            
+            sched.Lightbox.AddDefaults();
 
             sched.Config.start_on_monday = true;
             sched.InitialView = "day";
@@ -111,7 +91,7 @@ namespace Golf_3_MVC.Controllers
         [HttpPost]
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-
+           
 
             //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
         //{
@@ -143,80 +123,47 @@ namespace Golf_3_MVC.Controllers
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
-
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert: // "insert new data"
                         bokning EV = new bokning();
-                        medbokare MB = new medbokare();
                         EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;
                         EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
-                        //MB.BokningsId = 33;
-                        //MB.Huvudbokare = User.Identity.GetUserName();
-                        //MB.Medbokare1 = changedEvent.text;
-                        //MB.BokningsId = changedEvent.id;
-                        LäggTillMedbokare(MB, actionValues);
-                        ds.medbokares.Add(MB);
                         ds.SaveChanges();
 
                         break;
-
                     case DataActionTypes.Delete: // "delete chosen data"
 
                         if (User.IsInRole("User") == true)
                         {
                             string golf_id = User.Identity.GetUserName();
-
-                            foreach (var x in ds.medbokares)
-                            {
-                                if (x.BokningsId == id && x.Huvudbokare == golf_id)
-                                {
-                                    ds.medbokares.Remove(x);
-                                }
-                            }
-
-                            ds.SaveChanges();
                             var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
-
                             ds.boknings.Remove(details);
-                            ds.SaveChanges();
                         }
-
                         else
                         {
-                            foreach (var x in ds.medbokares)
-                            {
-                                if (x.BokningsId == id)
-                                {
-                                    ds.medbokares.Remove(x);
-                                }
-                            }
-                            ds.SaveChanges();
-
-                            var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-
-                            ds.boknings.Remove(details);
-                            ds.SaveChanges();
+                        var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
+                        ds.boknings.Remove(details);
                         }
+                        
+                        ds.SaveChanges();
 
 
 
                         break;
-
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-                            data.start_date = changedEvent.start_date;
-                            data.end_date = changedEvent.end_date;
-                            data.text = changedEvent.text;
-                            ds.SaveChanges();
-                            break;
-                        }
+                        data.start_date = changedEvent.start_date;
+                        data.end_date = changedEvent.end_date;
+                        data.text = changedEvent.text;
+                        ds.SaveChanges();
+                        break;
                 }
-            
+            }
             catch
             {
                 action.Type = DataActionTypes.Error;
