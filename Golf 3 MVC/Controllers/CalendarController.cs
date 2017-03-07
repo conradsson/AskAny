@@ -61,7 +61,9 @@ namespace Golf_3_MVC.Controllers
             var check = new LightboxText("Highlighting", "Lägg till person");
             sched.Lightbox.Add(check);
 
-            sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+            
+
+            //sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
@@ -91,13 +93,13 @@ namespace Golf_3_MVC.Controllers
         [HttpPost]
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-           
 
-        //    sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
-        //{
-        //        StartDate =  DateTime.Parse(blockfrom),
-        //        EndDate = DateTime.Parse(blockto)
-        //    });
+
+            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
+            //{
+            //    StartDate = DateTime.Parse(blockfrom),
+            //    EndDate = DateTime.Parse(blockto)
+            //});
 
             return RedirectToAction("index");
 
