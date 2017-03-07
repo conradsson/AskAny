@@ -17,6 +17,7 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
+
         public ActionResult Create(FormCollection actionValues, string searchString)
         {
             //var action = new DataAction(actionValues);
@@ -38,6 +39,18 @@ namespace Golf_3_MVC.Controllers
             return RedirectToAction("index");
             //return (ContentResult)new AjaxSaveResponse(action);
         }
+
+        //[HttpPost]
+        //public ActionResult Unblockinterval(string unblockfrom, string unblockto, string unblockbtn)
+        //{
+        //    //    //var action = new DataAction(actionValues);
+        //    //    //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //    //    bokningstid bokningstid = new bokningstid();
+
+
+        //    return View();
+
+        //}
 
     public ActionResult Index()
         {
@@ -79,18 +92,17 @@ namespace Golf_3_MVC.Controllers
 
             //var nu = Convert.ToInt64(DateTime.Now.ToShortDateString());
 
-            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
-            //{
-            //    StartDate = new DateTime(2000, 1, 1),
-            //    EndDate = new DateTime(nu)
-            //});
+            sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT BAKOM NU
+            {
+                StartDate = new DateTime(2000, 1, 1),
+                EndDate = DateTime.Now
+            });
 
             sched.Config.start_on_monday = true;
-            sched.InitialView = "day";
+            sched.InitialView = "week";
             sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
             sched.Config.separate_short_events = true;
             sched.Config.hour_size_px = 84;
-
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
