@@ -1,6 +1,8 @@
-﻿@{
+﻿
+@{
     //Layout = null;
-    ViewBag.Title = "Bokning";
+    ViewBag.Title = "MinaBokningar";
+    @model Golf_3_MVC.Models.CalendarBookings
 }
 
 
@@ -57,8 +59,8 @@
                     @using (Html.BeginForm())
                     {
                         <p>
-                            Välj bokning: @*@Html.DropDownList("Bokning", (IEnumerable<SelectListItem>)ViewBag.Bokningar, "Välj Namn")*@
-                                         @*@Html.DropDownList("golf_id", (SelectList)(ViewData["Bokningar"]), "Välj Namn")*@
+                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                                        
                         </p>
                     }
                                 @using (Html.BeginForm("Create", "Calendar"))
@@ -78,7 +80,7 @@
             <div class="panel-heading">Bokningsschema</div>
             <div class="panel-body">
                 <div style="height:700px;width:auto;margin:0 auto">
-                    @Html.Raw(Model.Render())
+                    @Html.Raw(Model.sched.Render())
                 </div>
             </div>
         </div>
