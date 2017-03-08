@@ -141,18 +141,36 @@ namespace Golf_3_MVC.Controllers
                         if (User.IsInRole("User") == true)
                         {
                             string golf_id = User.Identity.GetUserName();
+
+                            foreach (var x in ds.medbokares)
+                            {
+                                if (x.BokningsId == id && x.Huvudbokare == golf_id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                            }
+                            ds.SaveChanges();
                             var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
+
                             ds.boknings.Remove(details);
+                            ds.SaveChanges();
                         }
+
                         else
                         {
-                        var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-                        ds.boknings.Remove(details);
+                            foreach (var x in ds.medbokares)
+                            {
+                                if (x.BokningsId == id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                            }
+                            ds.SaveChanges();
+                            var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
+
+                            ds.boknings.Remove(details);
+                            ds.SaveChanges();
                         }
-                        
-                        ds.SaveChanges();
-
-
 
                         break;
                     default:// "update"
