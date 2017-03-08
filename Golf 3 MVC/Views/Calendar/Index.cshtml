@@ -1,7 +1,7 @@
 ﻿
 @{
     //Layout = null;
-    ViewBag.Title = "MinaBokningar";
+    ViewBag.Title = "Bokningsschema";
     @model Golf_3_MVC.Models.CalendarBookings
 }
 
@@ -22,7 +22,9 @@
 <body>
     <div class="row">
         <ul class="nav nav-pills nav-stacked">
-            @*<li class="pill-nyheter"><a href="">Nyheter</a></li>*@
+            
+            @if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
+            { 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Säsong <span class="caret"></span>
@@ -67,6 +69,9 @@
                 
             </ul>
         </li>
+
+            }
+
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Skriv in golfid <span class="caret"></span>
