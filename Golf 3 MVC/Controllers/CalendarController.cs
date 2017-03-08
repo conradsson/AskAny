@@ -51,30 +51,30 @@ namespace Golf_3_MVC.Controllers
         //}
 
 
-        public ActionResult MinaBokningar()
-        {
-            dsu3Entities db = new dsu3Entities();
-            ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
+        //public ActionResult MinaBokningar()
+        //{
+        //    dsu3Entities db = new dsu3Entities();
+        //    ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
             
 
-            return RedirectToAction("index");
-        }
+        //    return RedirectToAction("index");
+        //}
 
 
-        public ActionResult Create(FormCollection actionValues, string searchString)
+        public ActionResult Create(FormCollection actionValues, string searchString, bokning Bokningar)
         {
-            //var action = new DataAction(actionValues);
-            //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-            //bokningstid bokningstid = new bokningstid();
-            ////bokning bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
             medbokare medbokare = new medbokare();
-            //bokning bokning = new bokning();
+            CalendarBookings model = new CalendarBookings();
+            bokning bokning = new bokning();
+
+
+
+            var valtVarde = actionValues.GetValue("Bokningar");
 
             medbokare.Id = 33;
-            medbokare.BokningsId = 87;
+            medbokare.BokningsId = Bokningar.id;
             medbokare.Huvudbokare = User.Identity.GetUserName();
             medbokare.Medbokare1 = searchString;
-            //medbokare.bokning = ds.boknings.Where(x => x.id == 87).FirstOrDefault();
             ds.medbokares.Add(medbokare);
             ds.SaveChanges();
 
@@ -86,10 +86,8 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             medlemmar aktuellMedlem = new medlemmar();
-
             List<bokning> allaBokningar = new List<bokning>();
             List<bokning> minaBokningar = new List<bokning>();
 
@@ -97,12 +95,9 @@ namespace Golf_3_MVC.Controllers
 
             allaMedlemmar = ds.medlemmars.ToList();
             aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
-
             allaBokningar = ds.boknings.ToList();
-
             model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-            
-
+           
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
 
