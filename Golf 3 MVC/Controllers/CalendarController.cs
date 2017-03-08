@@ -91,16 +91,33 @@ namespace Golf_3_MVC.Controllers
         [HttpPost]
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-           
+
+            // Hämta värdena från blockfrom och blockto
+            // Kontrollera att värdena har rätt format. (år(xxxx),månad(x),dag(x))
+            // Skicka det nya värdena till DB och boknings tabellen
+            // 
+            // Uppdatera vyn med att returnera till index
 
             //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
-        //{
+            //{
             //    StartDate = DateTime.Parse(blockfrom),
             //    EndDate = DateTime.Parse(blockto)
             //});
 
             return RedirectToAction("index");
 
+        }
+
+        public ActionResult Seasontoggle(string seasontoggle)
+        {
+            // Hämta värdet från seasontoggle
+            // Kontrollera att värdet är antingen True eller False
+            // Skicka det nya värdet till DB och season tabellen i seasontoggle kolumnen på knapptrycket seasontogglebtn
+            // Uppdatera vyn med att returnera till index
+
+
+
+            return RedirectToAction("index");
         }
 
         public ContentResult Data()
