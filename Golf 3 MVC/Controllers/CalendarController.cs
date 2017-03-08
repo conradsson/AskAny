@@ -148,6 +148,10 @@ namespace Golf_3_MVC.Controllers
                                 {
                                     ds.medbokares.Remove(x);
                                 }
+                                else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
                             }
                             ds.SaveChanges();
                             var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
