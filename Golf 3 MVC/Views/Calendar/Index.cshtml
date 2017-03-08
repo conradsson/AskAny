@@ -30,9 +30,9 @@
                     @using (Html.BeginForm("Seasontoggle", "Calendar"))
                     {
                     <p>
-                        Aktiv: @Html.RadioButton("seasontoggle", "seasonon")<br />
-                        Inaktiv: @Html.RadioButton("seasontoggle", "seasonoff")<br />
-                        <input id="seasontogglebtn" type="button" value="Bekräfta" />
+                        Aktiv: @Html.RadioButton("seasontoggle", "seasonon", false)<br />
+                        Inaktiv: @Html.RadioButton("seasontoggle", "seasonoff", false)<br />
+                        <input id="seasontogglebtn" type="submit" value="Bekräfta" />
                     </p>
                     }
                 </ul>

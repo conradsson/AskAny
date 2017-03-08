@@ -108,20 +108,24 @@ namespace Golf_3_MVC.Controllers
 
         }
 
-        public ActionResult Seasontoggle(string seasonon, string seasonoff)
+        public ActionResult Seasontoggle()
         {
             // Hämta värdet från seasontoggle
             // Kontrollera att värdet är antingen True eller False
             // Skicka det nya värdet till DB och season tabellen i seasontoggle kolumnen på knapptrycket seasontogglebtn
             // Uppdatera vyn med att returnera till index
-            if(seasonon == "true" || seasonon == "false" || seasonoff == "true" || seasonoff == "false")
-            {
 
-            }
-            else
-            {
 
-            }
+
+
+            //if(seasonon == "true" || seasonon == "false" || seasonoff == "true" || seasonoff == "false")
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
             
 
 
