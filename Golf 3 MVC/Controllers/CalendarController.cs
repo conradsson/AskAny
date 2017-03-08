@@ -10,6 +10,9 @@ using DHTMLX.Scheduler.Data;
 using DHTMLX.Scheduler.Controls;
 using Golf_3_MVC.Models;
 using Microsoft.AspNet.Identity;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace Golf_3_MVC.Controllers
 {
@@ -18,20 +21,60 @@ namespace Golf_3_MVC.Controllers
         dsu3Entities ds = new dsu3Entities();
 
 
-        public ActionResult Create(FormCollection actionValues, string searchString)
+        public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
         {
-            //var action = new DataAction(actionValues);
-            //var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-            //bokningstid bokningstid = new bokningstid();
-            ////bokning bokning = ds.boknings.Where(x => x.id == 1).FirstOrDefault();
+            var action = new DataAction(actionValues);
+
+                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+
+                medbokare.BokningsId = 33;
+                medbokare.Huvudbokare = User.Identity.GetUserName();
+                medbokare.Medbokare1 = changedEvent.text;
+                medbokare.BokningsId = changedEvent.id;
+
+            return medbokare;
+        }
+
+        //public ViewResult Index1()
+        //{
+        //    //Create db context object here 
+        //    dsu3Entities db = new dsu3Entities();
+        //    //Get the value from database and then set it to ViewBag to pass it View
+        //    IEnumerable<SelectListItem> items = db.boknings.Select(c => new SelectListItem
+        //    {
+        //        Value = c.golf_id,
+        //        Text = c.text
+
+        //    });
+        //    ViewBag.Bokningar = items;
+        //    return View();
+        //}
+
+
+        //public ActionResult MinaBokningar()
+        //{
+        //    dsu3Entities db = new dsu3Entities();
+        //    ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
+            
+
+        //    return RedirectToAction("index");
+        //}
+
+
+        public ActionResult Create(FormCollection actionValues, string searchString, bokning Bokningar)
+        {
             medbokare medbokare = new medbokare();
-            //bokning bokning = new bokning();
+            CalendarBookings model = new CalendarBookings();
+            bokning bokning = new bokning();
+
+
+
+            var valtVarde = actionValues.GetValue("Bokningar");
 
             medbokare.Id = 33;
-            medbokare.BokningsId = 87;
+            medbokare.BokningsId = Bokningar.id;
             medbokare.Huvudbokare = User.Identity.GetUserName();
             medbokare.Medbokare1 = searchString;
-            //medbokare.bokning = ds.boknings.Where(x => x.id == 87).FirstOrDefault();
             ds.medbokares.Add(medbokare);
             ds.SaveChanges();
 
@@ -43,8 +86,21 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
+            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+            medlemmar aktuellMedlem = new medlemmar();
+            List<bokning> allaBokningar = new List<bokning>();
+            List<bokning> minaBokningar = new List<bokning>();
+
+            CalendarBookings model = new CalendarBookings();
+
+            allaMedlemmar = ds.medlemmars.ToList();
+            aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
+            allaBokningar = ds.boknings.ToList();
+            model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+           
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
+
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
@@ -81,15 +137,20 @@ namespace Golf_3_MVC.Controllers
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
 
-
-            return View(sched);
+            model.sched = sched;
+            return View(model);
 
         }
 
         [HttpPost]
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-           
+
+            // Hämta värdena från blockfrom och blockto
+            // Kontrollera att värdena har rätt format. (år(xxxx),månad(x),dag(x))
+            // Skicka det nya värdena till DB och boknings tabellen
+            // 
+            // Uppdatera vyn med att returnera till index
 
             //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
         //{
@@ -99,6 +160,31 @@ namespace Golf_3_MVC.Controllers
 
             return RedirectToAction("index");
 
+        }
+
+        public ActionResult Seasontoggle()
+        {
+            // Hämta värdet från seasontoggle
+            // Kontrollera att värdet är antingen True eller False
+            // Skicka det nya värdet till DB och season tabellen i seasontoggle kolumnen på knapptrycket seasontogglebtn
+            // Uppdatera vyn med att returnera till index
+
+
+
+
+            //if(seasonon == "true" || seasonon == "false" || seasonoff == "true" || seasonoff == "false")
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
+            
+
+
+
+            return RedirectToAction("index");
         }
 
         public ContentResult Data()
@@ -133,35 +219,58 @@ namespace Golf_3_MVC.Controllers
                         ds.boknings.Add(EV);
                         ds.SaveChanges();
 
+
                         break;
                     case DataActionTypes.Delete: // "delete chosen data"
 
                         if (User.IsInRole("User") == true)
                         {
                             string golf_id = User.Identity.GetUserName();
+
+                            foreach (var x in ds.medbokares)
+                            {
+                                if (x.BokningsId == id && x.Huvudbokare == golf_id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                                else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                            }
+                            ds.SaveChanges();
                             var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
+
                             ds.boknings.Remove(details);
+                            ds.SaveChanges();
                         }
+
                         else
                         {
-                        var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-                        ds.boknings.Remove(details);
+                            foreach (var x in ds.medbokares)
+                            {
+                                if (x.BokningsId == id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
+                            }
+                            ds.SaveChanges();
+                            var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
+
+                            ds.boknings.Remove(details);
+                            ds.SaveChanges();
                         }
-                        
-                        ds.SaveChanges();
-
-
 
                         break;
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
-                        data.start_date = changedEvent.start_date;
-                        data.end_date = changedEvent.end_date;
-                        data.text = changedEvent.text;
-                        ds.SaveChanges();
-                        break;
+                            data.start_date = changedEvent.start_date;
+                            data.end_date = changedEvent.end_date;
+                            data.text = changedEvent.text;
+                            ds.SaveChanges();
+                            break;
+                        }
                 }
-            }
             catch
             {
                 action.Type = DataActionTypes.Error;

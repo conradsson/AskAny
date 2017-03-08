@@ -1,6 +1,8 @@
-﻿@{
+﻿
+@{
     //Layout = null;
-    ViewBag.Title = "Bokning";
+    ViewBag.Title = "MinaBokningar";
+    @model Golf_3_MVC.Models.CalendarBookings
 }
 
 
@@ -23,7 +25,23 @@
             @*<li class="pill-nyheter"><a href="">Nyheter</a></li>*@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Öppna bokning <span class="caret"></span>
+                    Säsong <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+
+                    @using (Html.BeginForm("Seasontoggle", "Calendar"))
+                    {
+                    <p>
+                        Aktiv: @Html.RadioButton("seasontoggle", "seasonon", false)<br />
+                        Inaktiv: @Html.RadioButton("seasontoggle", "seasonoff", false)<br />
+                        <input id="seasontogglebtn" type="submit" value="Bekräfta" />
+                    </p>
+                    }
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Öppna bokningstider <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
 
@@ -37,7 +55,7 @@
             </li>
             <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                Stäng bokning <span class="caret"></span>
+                Stäng bokningstider <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
 
@@ -57,8 +75,8 @@
                     @using (Html.BeginForm())
                     {
                         <p>
-                            Välj bokning: @*@Html.DropDownList("Bokning", (IEnumerable<SelectListItem>)ViewBag.Bokningar, "Välj Namn")*@
-                                         @*@Html.DropDownList("golf_id", (SelectList)(ViewData["Bokningar"]), "Välj Namn")*@
+                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                                        
                         </p>
                     }
                                 @using (Html.BeginForm("Create", "Calendar"))
@@ -78,7 +96,7 @@
             <div class="panel-heading">Bokningsschema</div>
             <div class="panel-body">
                 <div style="height:700px;width:auto;margin:0 auto">
-                    @Html.Raw(Model.Render())
+                    @Html.Raw(Model.sched.Render())
                 </div>
             </div>
         </div>

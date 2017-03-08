@@ -22,7 +22,7 @@
                         @using (Html.BeginForm())
                         {
                             <p>
-                                Sök på namn eller golf-ID: @Html.TextBox("SearchString")
+                                Sök: @Html.TextBox("SearchString")
                                 <input type="submit" value="Sök" />
                             </p>
                         }
@@ -48,26 +48,30 @@
                                 @Html.ActionLink("Efternamn", "Index", new { sortOrder = ViewBag.EfternamnSortParm })
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.First().adress)
+                                @*@Html.DisplayNameFor(model => model.First().adress)*@
+                                @Html.DisplayName("Adress")
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.First().postnummer)
+                                @*@Html.DisplayNameFor(model => model.First().postnummer)*@
+                                @Html.DisplayName("Postnummer")
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.First().ort)
+                                @*@Html.DisplayNameFor(model => model.First().ort)*@
+                                @Html.DisplayName("Ort")
                             </th>
                             @*<th>
                                     @Html.DisplayNameFor(model => model.First().epost)
                                 </th>*@
-                            <th>
-                                @Html.DisplayNameFor(model => model.First().kon)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.First().hcp)
-                            </th>
                             @*<th>
-                                    @Html.DisplayNameFor(model => model.First().golf_id)
-                                </th>*@
+                                @Html.DisplayName("Kön")
+                            </th>*@
+                            <th>
+                                @*@Html.DisplayNameFor(model => model.First().hcp)*@
+                                @Html.DisplayName("HCP")
+                            </th>
+                            <th>
+                                    @Html.DisplayName("Golf-ID")
+                                </th>
                             @*<th>
                                     @Html.DisplayNameFor(model => model.First().telefonnr)
                                 </th>
@@ -75,7 +79,8 @@
                                     @Html.DisplayNameFor(model => model.First().betalstatus)
                                 </th>*@
                             <th>
-                                @Html.DisplayNameFor(model => model.First().medlemskategori.namn)
+                                @*@Html.DisplayNameFor(model => model.First().medlemskategori.namn)*@
+                                @Html.DisplayName("Kategori")
                             </th>
                             <th></th>
                         </tr>
@@ -101,15 +106,15 @@
                                 @*<td>
                                         @Html.DisplayFor(modelItem => item.epost)
                                     </td>*@
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.kon)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.hcp)
                                 </td>
-                                @*<td>
+                                <td>
                                         @Html.DisplayFor(modelItem => item.golf_id)
-                                    </td>*@
+                                    </td>
                                 @*<td>
                                         @Html.DisplayFor(modelItem => item.telefonnr)
                                     </td>

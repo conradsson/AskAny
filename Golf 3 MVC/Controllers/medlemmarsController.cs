@@ -30,7 +30,10 @@ namespace Golf_3_MVC.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 medlemmars = medlemmars.Where(m => m.fornamn.Contains(searchString) ||
-                m.efternamn.Contains(searchString) || m.golf_id.Contains(searchString));
+                m.efternamn.Contains(searchString) || m.golf_id.Contains(searchString) || 
+                m.telefonnr.Contains(searchString) || m.epost.Contains(searchString) || 
+                m.ort.Contains(searchString) || m.postnummer.Contains(searchString) || 
+                m.kategori.Contains(searchString));
             }
             switch (sortOrder)
             {
