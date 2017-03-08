@@ -43,10 +43,8 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-
             var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
-
 
             sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
