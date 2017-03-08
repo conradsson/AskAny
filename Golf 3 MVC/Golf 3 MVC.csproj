@@ -241,6 +241,9 @@
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
+    <Compile Include="Models\season.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\starttid.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>

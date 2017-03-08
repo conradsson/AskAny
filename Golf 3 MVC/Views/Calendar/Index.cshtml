@@ -33,11 +33,11 @@
 
                     @using (Html.BeginForm("Seasontoggle", "Calendar"))
                     {
-                    <p>
-                        @*Aktiv: @Html.RadioButton("seasontoggle", "seasonon", false)<br />
-                        Inaktiv: @Html.RadioButton("seasontoggle", "seasonoff", false)<br />*@
-                        <input id="seasontogglebtn" type="submit" value="Stäng säsong" />
-                    </p>
+                        <p>
+                            På/Av: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                            <br />
+                            <input id="seasontogglebtn" type="submit" value="Bekräfta" />
+                        </p>
                     }
                 </ul>
             </li>
