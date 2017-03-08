@@ -86,16 +86,16 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-            season season = new season();
+            //season season = new season();
 
 
            
-            if (season.seasontoggle == false)
-            {
-                return View("index");
-            }
-            else
-            {
+            //if (season.seasontoggle == false)
+            //{
+            //    return View("index");
+            //}
+            //else
+            //{
 
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
@@ -150,7 +150,7 @@ namespace Golf_3_MVC.Controllers
 
             model.sched = sched;
             return View(model);
-            }
+            //}
 
         }
 
