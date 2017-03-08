@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     $(".navbar").hide(0).fadeIn(500)
+    $("footer").hide(0).fadeIn(500)
     $(".body-content").hide(0).delay(450).fadeIn(1000)
     $(".carousel").hide(0).delay(450).fadeIn(1000)
 
@@ -31,15 +32,26 @@ $(".pill-banstatus").click(function (e) {
     $(".pill-nyheter").removeClass("active")
 });
 
-//  MEDLEM FLIKEN-EFFEKTER
+//  MEDLEM PERSONAL ADMIN FLIKEN-EFFEKTER
 $(".medlembtn").ready(function (e) {
 
     $(".panel-medlemmar").show();
 
 });
-//$(".medlembtn").click(function (e) {
-//    $(".panel-medlemmar").show();
-//});
+
+//  MEDLEM BESÖKARE FLIKEN-EFFEKTER
+$(".medlembtn").ready(function (e) {
+
+    $(".panel-infomedlem").show();
+    $(".pill-infomedlem").addClass("active")
+
+});
+$(".pill-infomedlem").click(function (e) {
+    e.preventDefault()
+    $(".panel-infomedlem").show();
+    $(".pill-infomedlem").addClass("active")
+});
+
 
 
 //  BANORNA FLIKEN-EFFEKTER
@@ -148,40 +160,6 @@ $(".kalender").ready(function (e) {
 //}
 
 
-$("#blockbtn").click(function () {
-
-    var blockfrom = document.getElementsByName('blockfrom')[0].value
-    var blockto = document.getElementsByName('blockto')[0].value
-
-    scheduler.addMarkedTimespan({
-        start_date: new Date(blockfrom),
-        end_date: new Date(blockto),
-        zones: "fullday",
-        css: "gray_section",
-        type: "dhx_time_block"
-    });
-
-    scheduler.updateView();
-    
-});
-
-$("#unblockbtn").click(function () {
-
-    var unblockfrom = document.getElementsByName('unblockfrom')[0].value
-    var unblockto = document.getElementsByName('unblockto')[0].value
-
-    scheduler.deleteMarkedTimespan({
-        start_date: new Date(unblockfrom),
-        end_date: new Date(unblockto),
-        zones: "fullday",
-        css: "gray_section",
-        type: "dhx_time_block"
-    });
-
-    scheduler.updateView();
-
-});
-
 
 
 
@@ -248,3 +226,21 @@ scheduler.renderEvent = function (container, ev) {
 };
 
 ////
+
+scheduler.form_blocks["color"] = {
+    render: function (sns) {
+        return "<div class='dhx_cal_block'><input type='color'/></div>";
+    },
+    set_value: function (node, value, ev) {
+        node.firstChild.value = value || "";
+    },
+    get_value: function (node, ev) {
+        return node.firstChild.value;
+    },
+    focus: function (node) {
+        var a = node; scheduler._focus(a, true);
+    }
+}
+
+/////
+

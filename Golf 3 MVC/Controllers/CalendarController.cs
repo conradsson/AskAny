@@ -117,14 +117,10 @@ namespace Golf_3_MVC.Controllers
                 EndDate = DateTime.Now
             });
 
-            //var check = new LightboxText("Highlighting", "Lägg till person");
-            //check.Height = 30;
-            //sched.Lightbox.Add(check);
-            //sched.Lightbox.AddDefaults();
+            var check = new LightboxText("Highlighting", "Lägg till person");
+            sched.Lightbox.Add(check);
 
-
-
-            //sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+           // sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
@@ -135,7 +131,7 @@ namespace Golf_3_MVC.Controllers
                 
             //});
 
-            
+            sched.Lightbox.AddDefaults();
 
             sched.Config.start_on_monday = true;
             sched.InitialView = "day";
@@ -155,6 +151,11 @@ namespace Golf_3_MVC.Controllers
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
 
+            // Hämta värdena från blockfrom och blockto
+            // Kontrollera att värdena har rätt format. (år(xxxx),månad(x),dag(x))
+            // Skicka det nya värdena till DB och boknings tabellen
+            // 
+            // Uppdatera vyn med att returnera till index
 
             //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
         //{
@@ -164,6 +165,27 @@ namespace Golf_3_MVC.Controllers
 
             return RedirectToAction("index");
 
+        }
+
+        public ActionResult Seasontoggle(string seasonon, string seasonoff)
+        {
+            // Hämta värdet från seasontoggle
+            // Kontrollera att värdet är antingen True eller False
+            // Skicka det nya värdet till DB och season tabellen i seasontoggle kolumnen på knapptrycket seasontogglebtn
+            // Uppdatera vyn med att returnera till index
+            if(seasonon == "true" || seasonon == "false" || seasonoff == "true" || seasonoff == "false")
+            {
+
+            }
+            else
+            {
+
+            }
+            
+
+
+
+            return RedirectToAction("index");
         }
 
         public ContentResult Data()
@@ -186,29 +208,20 @@ namespace Golf_3_MVC.Controllers
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
-
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert: // "insert new data"
                         bokning EV = new bokning();
-                        medbokare MB = new medbokare();
                         EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;
                         EV.end_date = changedEvent.end_date;
                         EV.text = changedEvent.text;
                         EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
-                        //MB.BokningsId = 33;
-                        //MB.Huvudbokare = User.Identity.GetUserName();
-                        //MB.Medbokare1 = changedEvent.text;
-                        //MB.BokningsId = changedEvent.id;
-                        LäggTillMedbokare(MB, actionValues);
-                        ds.medbokares.Add(MB);
-                        ds.SaveChanges(); 
-                        
+                        ds.SaveChanges();
+
 
                         break;
-
                     case DataActionTypes.Delete: // "delete chosen data"
 
                         if (User.IsInRole("User") == true)
@@ -221,8 +234,11 @@ namespace Golf_3_MVC.Controllers
                                 {
                                     ds.medbokares.Remove(x);
                                 }
+                                else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                                {
+                                    ds.medbokares.Remove(x);
+                                }
                             }
-
                             ds.SaveChanges();
                             var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
 
@@ -240,17 +256,13 @@ namespace Golf_3_MVC.Controllers
                                 }
                             }
                             ds.SaveChanges();
-
                             var details = ds.boknings.Where(x => x.id == id).FirstOrDefault();
 
                             ds.boknings.Remove(details);
                             ds.SaveChanges();
                         }
 
-
-
                         break;
-
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                             data.start_date = changedEvent.start_date;
@@ -260,7 +272,6 @@ namespace Golf_3_MVC.Controllers
                             break;
                         }
                 }
-            
             catch
             {
                 action.Type = DataActionTypes.Error;
