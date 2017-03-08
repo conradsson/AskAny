@@ -14,6 +14,7 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" />
           <Property Name="golf_id" Type="varchar" MaxLength="255" />
+          <Property Name="medlemsid" Type="int" />
         </EntityType>
         <EntityType Name="medbokare">
           <Key>
@@ -59,18 +60,6 @@
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_bokning_ToTable" />-->
-        <Association Name="FK_medbokare_ToTable">
-          <End Role="bokning" Type="Self.bokning" Multiplicity="1" />
-          <End Role="medbokare" Type="Self.medbokare" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bokning">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="medbokare">
-              <PropertyRef Name="BokningsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_medlemmar_kategori">
           <End Role="medlemskategori" Type="Self.medlemskategori" Multiplicity="0..1" />
           <End Role="medlemmar" Type="Self.medlemmar" Multiplicity="*" />
@@ -89,10 +78,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medlemmar" EntityType="Self.medlemmar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemskategori" EntityType="Self.medlemskategori" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="starttid" EntityType="Self.starttid" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_medbokare_ToTable" Association="Self.FK_medbokare_ToTable">
-            <End Role="bokning" EntitySet="bokning" />
-            <End Role="medbokare" EntitySet="medbokare" />
-          </AssociationSet>
           <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
             <End Role="medlemskategori" EntitySet="medlemskategori" />
             <End Role="medlemmar" EntitySet="medlemmar" />
@@ -102,6 +87,32 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dsu3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="medlemskategori">
+          <Key>
+            <PropertyRef Name="namn" />
+          </Key>
+          <Property Name="avgift" Type="Int32" />
+          <Property Name="namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kategori_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="medlemmars" Relationship="dsu3Model.FK_medlemmar_kategori" FromRole="medlemskategori" ToRole="medlemmar" />
+        </EntityType>
+        <EntityType Name="starttid">
+          <Key>
+            <PropertyRef Name="starttid1" />
+          </Key>
+          <Property Name="starttid1" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="dsu3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="medlemskategoris" EntityType="Self.medlemskategori" />
+          <EntitySet Name="starttids" EntityType="Self.starttid" />
+          <EntitySet Name="boknings" EntityType="dsu3Model.bokning" />
+          <EntitySet Name="medlemmars" EntityType="dsu3Model.medlemmar" />
+          <AssociationSet Name="FK_medlemmar_kategori" Association="dsu3Model.FK_medlemmar_kategori">
+            <End Role="medlemskategori" EntitySet="medlemskategoris" />
+            <End Role="medlemmar" EntitySet="medlemmars" />
+          </AssociationSet>
+          <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
+          </EntityContainer>
         <EntityType Name="bokning">
           <Key>
             <PropertyRef Name="id" />
@@ -111,13 +122,13 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Precision="3" />
           <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="medbokares" Relationship="dsu3Model.FK_medbokare_ToTable" FromRole="bokning" ToRole="medbokare" />
+          <Property Name="medlemsid" Type="Int32" />
         </EntityType>
         <EntityType Name="medlemmar">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fornamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="efternamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="adress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -130,26 +141,11 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="kategori" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="telefonnr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="betalstatus" Type="Boolean" />
-          <NavigationProperty Name="medlemskategori" Relationship="Self.FK_medlemmar_kategori" FromRole="medlemmar" ToRole="medlemskategori" />
-        </EntityType>
-        <EntityType Name="medlemskategori">
-          <Key>
-            <PropertyRef Name="namn" />
-          </Key>
-          <Property Name="avgift" Type="Int32" />
-          <Property Name="namn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="kategori_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="medlemmars" Relationship="Self.FK_medlemmar_kategori" FromRole="medlemskategori" ToRole="medlemmar" />
-        </EntityType>
-        <EntityType Name="starttid">
-          <Key>
-            <PropertyRef Name="starttid1" />
-          </Key>
-          <Property Name="starttid1" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="medlemskategori" Relationship="dsu3Model.FK_medlemmar_kategori" FromRole="medlemmar" ToRole="medlemskategori" />
         </EntityType>
         <Association Name="FK_medlemmar_kategori">
-          <End Role="medlemskategori" Type="Self.medlemskategori" Multiplicity="0..1" />
-          <End Role="medlemmar" Type="Self.medlemmar" Multiplicity="*" />
+          <End Type="dsu3Model.medlemskategori" Role="medlemskategori" Multiplicity="0..1" />
+          <End Type="dsu3Model.medlemmar" Role="medlemmar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="medlemskategori">
               <PropertyRef Name="namn" />
@@ -159,21 +155,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dsu3Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="boknings" EntityType="Self.bokning" />
-          <EntitySet Name="medlemmars" EntityType="Self.medlemmar" />
-          <EntitySet Name="medlemskategoris" EntityType="Self.medlemskategori" />
-          <EntitySet Name="starttids" EntityType="Self.starttid" />
-          <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
-            <End Role="medlemskategori" EntitySet="medlemskategoris" />
-            <End Role="medlemmar" EntitySet="medlemmars" />
-          </AssociationSet>
-          <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
-          <AssociationSet Name="FK_medbokare_ToTable" Association="dsu3Model.FK_medbokare_ToTable">
-            <End Role="bokning" EntitySet="boknings" />
-            <End Role="medbokare" EntitySet="medbokares" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="medbokare">
           <Key>
             <PropertyRef Name="Id" />
@@ -182,56 +163,13 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="Huvudbokare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Medbokare1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="BokningsId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="bokning" Relationship="dsu3Model.FK_medbokare_ToTable" FromRole="medbokare" ToRole="bokning" />
         </EntityType>
-        <Association Name="FK_medbokare_ToTable">
-          <End Type="dsu3Model.bokning" Role="bokning" Multiplicity="1" />
-          <End Type="dsu3Model.medbokare" Role="medbokare" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bokning">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="medbokare">
-              <PropertyRef Name="BokningsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dsu3ModelStoreContainer" CdmEntityContainer="dsu3Entities">
-          <EntitySetMapping Name="boknings">
-            <EntityTypeMapping TypeName="dsu3Model.bokning">
-              <MappingFragment StoreEntitySet="bokning">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="text" ColumnName="text" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="medlemmars">
-            <EntityTypeMapping TypeName="dsu3Model.medlemmar">
-              <MappingFragment StoreEntitySet="medlemmar">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="fornamn" ColumnName="fornamn" />
-                <ScalarProperty Name="efternamn" ColumnName="efternamn" />
-                <ScalarProperty Name="adress" ColumnName="adress" />
-                <ScalarProperty Name="postnummer" ColumnName="postnummer" />
-                <ScalarProperty Name="ort" ColumnName="ort" />
-                <ScalarProperty Name="epost" ColumnName="epost" />
-                <ScalarProperty Name="kon" ColumnName="kon" />
-                <ScalarProperty Name="hcp" ColumnName="hcp" />
-                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
-                <ScalarProperty Name="kategori" ColumnName="kategori" />
-                <ScalarProperty Name="telefonnr" ColumnName="telefonnr" />
-                <ScalarProperty Name="betalstatus" ColumnName="betalstatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="medlemskategoris">
             <EntityTypeMapping TypeName="dsu3Model.medlemskategori">
               <MappingFragment StoreEntitySet="medlemskategori">
@@ -245,6 +183,37 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
             <EntityTypeMapping TypeName="dsu3Model.starttid">
               <MappingFragment StoreEntitySet="starttid">
                 <ScalarProperty Name="starttid1" ColumnName="starttid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="boknings">
+            <EntityTypeMapping TypeName="dsu3Model.bokning">
+              <MappingFragment StoreEntitySet="bokning">
+                <ScalarProperty Name="medlemsid" ColumnName="medlemsid" />
+                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medlemmars">
+            <EntityTypeMapping TypeName="dsu3Model.medlemmar">
+              <MappingFragment StoreEntitySet="medlemmar">
+                <ScalarProperty Name="betalstatus" ColumnName="betalstatus" />
+                <ScalarProperty Name="telefonnr" ColumnName="telefonnr" />
+                <ScalarProperty Name="kategori" ColumnName="kategori" />
+                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
+                <ScalarProperty Name="hcp" ColumnName="hcp" />
+                <ScalarProperty Name="kon" ColumnName="kon" />
+                <ScalarProperty Name="epost" ColumnName="epost" />
+                <ScalarProperty Name="ort" ColumnName="ort" />
+                <ScalarProperty Name="postnummer" ColumnName="postnummer" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="efternamn" ColumnName="efternamn" />
+                <ScalarProperty Name="fornamn" ColumnName="fornamn" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
