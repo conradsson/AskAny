@@ -31,6 +31,5 @@ namespace Golf_3_MVC.Models
         public virtual DbSet<medbokare> medbokares { get; set; }
         public virtual DbSet<bokning> boknings { get; set; }
         public virtual DbSet<season> seasons { get; set; }
-        public virtual DbSet<blocktime> blocktimes { get; set; }
     }
 }

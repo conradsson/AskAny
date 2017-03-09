@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dsu3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="blocktime">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="text" Type="nvarchar(max)" />
-          <Property Name="start_date" Type="datetime" Nullable="false" />
-          <Property Name="end_date" Type="datetime" />
-          <Property Name="golf_id" Type="varchar" MaxLength="255" />
-        </EntityType>
         <EntityType Name="bokning">
           <Key>
             <PropertyRef Name="id" />
@@ -74,9 +64,6 @@
           <Property Name="starttid" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_blocktime_ToTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_blocktime_ToTable" />-->
-        <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_bokning_ToTable" />-->
         <Association Name="FK_medlemmar_kategori">
@@ -92,7 +79,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dsu3ModelStoreContainer">
-          <EntitySet Name="blocktime" EntityType="Self.blocktime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bokning" EntityType="Self.bokning" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medbokare" EntityType="Self.medbokare" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemmar" EntityType="Self.medlemmar" Schema="dbo" store:Type="Tables" />
@@ -134,7 +120,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="boknings" EntityType="dsu3Model.bokning" />
           <EntitySet Name="seasons" EntityType="dsu3Model.season" />
-          <EntitySet Name="blocktimes" EntityType="dsu3Model.blocktime" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -192,16 +177,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="seasontoggle" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="blocktime">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Precision="3" />
-          <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -269,17 +244,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
             <EntityTypeMapping TypeName="dsu3Model.season">
               <MappingFragment StoreEntitySet="season">
                 <ScalarProperty Name="seasontoggle" ColumnName="seasontoggle" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="blocktimes">
-            <EntityTypeMapping TypeName="dsu3Model.blocktime">
-              <MappingFragment StoreEntitySet="blocktime">
-                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
