@@ -195,7 +195,6 @@ namespace Golf_3_MVC.Controllers
 
             season.seasontoggle = checkResp;
 
-
             if (season.seasontoggle == true)
             {
                 var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
@@ -208,7 +207,6 @@ namespace Golf_3_MVC.Controllers
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-
 
                 return RedirectToAction("index");
         }
@@ -244,8 +242,6 @@ namespace Golf_3_MVC.Controllers
                         EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
                         ds.SaveChanges();
-
-
                         break;
                     case DataActionTypes.Delete: // "delete chosen data"
 
