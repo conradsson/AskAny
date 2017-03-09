@@ -14,6 +14,8 @@ namespace Golf_3_MVC.Models
 
         public DHXScheduler sched { get; set; }
 
+        public List<medlemmar> medlems { get; set; }
+
     }
 
 

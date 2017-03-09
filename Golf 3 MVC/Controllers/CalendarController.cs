@@ -98,6 +98,8 @@ namespace Golf_3_MVC.Controllers
             }
             else
             {
+                List<medlemmar> medlemmars = new List<medlemmar>();
+                medlemmars = ds.medlemmars.ToList();
 
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
@@ -105,6 +107,7 @@ namespace Golf_3_MVC.Controllers
                 List<bokning> minaBokningar = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
+                model.medlems = medlemmars;
 
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
