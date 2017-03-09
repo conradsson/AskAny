@@ -98,8 +98,7 @@ namespace Golf_3_MVC.Controllers
             }
             else
             {
-                List<medlemmar> medlemmars = new List<medlemmar>();
-                medlemmars = ds.medlemmars.ToList();
+                
 
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
@@ -158,7 +157,16 @@ namespace Golf_3_MVC.Controllers
             }
 
         }
+            List<medlemmar> medlemmars = new List<medlemmar>();
+        public JsonResult Sök(string Prefix)
+        {
+            medlemmars = ds.medlemmars.ToList();
+            return Json(medlemmars, JsonRequestBehavior.AllowGet);
+        }
 
+
+
+        
         
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
