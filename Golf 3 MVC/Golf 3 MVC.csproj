@@ -634,6 +634,7 @@
     <Content Include="Views\scorekorts\Edit.cshtml" />
     <Content Include="Views\scorekorts\Index.cshtml" />
     <Content Include="Views\scorekorts\scorekort.cshtml" />
+    <Content Include="Views\Calendar\offseason.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

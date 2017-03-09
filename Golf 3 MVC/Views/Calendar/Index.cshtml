@@ -34,7 +34,7 @@
                     @using (Html.BeginForm("Seasontoggle", "Calendar"))
                     {
                         <p>
-                            På/Av: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                            Öppna/Stäng: <input id="responsable" name="checkResp" value="true" type="checkbox" />
                             <br />
                             <input id="seasontogglebtn" type="submit" value="Bekräfta" />
                         </p>
@@ -61,12 +61,14 @@
             </a>
             <ul class="dropdown-menu">
 
+                @using (Html.BeginForm("Blockinterval", "Calendar"))
+                {
                     <p>
                         Från: @Html.TextBox("blockfrom")<br />
                         Till: @Html.TextBox("blockto")
-                        <input id="blockbtn" type="button" value="Lägg till" />
+                        <input id="blockbtn" type="submit" value="Lägg till" />
                     </p>
-                
+                }
             </ul>
         </li>
 
