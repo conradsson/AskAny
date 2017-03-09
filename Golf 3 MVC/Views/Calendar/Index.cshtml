@@ -10,6 +10,10 @@
 <html>
 <head>
     <title>Hållslaget GK</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <script src="medlemmar.js"></script>
     <style>
         body
         {
@@ -20,6 +24,7 @@
     </style>
 </head>
 <body>
+
     <div class="row">
         <ul class="nav nav-pills nav-stacked">
             
@@ -94,12 +99,15 @@
                             Golfid: @Html.TextBox("SearchString")
                             <input type="submit" value="Lägg till" />
                         </p>
+                       
                     }
-
                 </ul>
+               
+
             </li>
 
         </ul>
+
 
         <div class="panel panel-default panel-kalender">
             <div class="panel-heading">Bokningsschema</div>

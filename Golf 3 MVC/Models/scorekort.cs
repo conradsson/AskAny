@@ -16,9 +16,11 @@ namespace Golf_3_MVC.Models
     {
         public int Id { get; set; }
         public string Hole_nr { get; set; }
-        public string Lenght_Tee1 { get; set; }
-        public string Lenght_Tee2 { get; set; }
+        public string Lenght_Tee_Red { get; set; }
+        public string Lenght_Tee_Yellow { get; set; }
         public string Par { get; set; }
         public Nullable<int> Index { get; set; }
+        public string Lenght_Tee_White { get; set; }
+        public string Lenght_Tee_Blue { get; set; }
     }
 }

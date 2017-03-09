@@ -98,8 +98,7 @@ namespace Golf_3_MVC.Controllers
             }
             else
             {
-                List<medlemmar> medlemmars = new List<medlemmar>();
-                medlemmars = ds.medlemmars.ToList();
+
 
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
@@ -158,7 +157,16 @@ namespace Golf_3_MVC.Controllers
             }
 
         }
+            List<medlemmar> medlemmars = new List<medlemmar>();
+        public JsonResult Sök(string Prefix)
+        {
+            medlemmars = ds.medlemmars.ToList();
+            return Json(medlemmars, JsonRequestBehavior.AllowGet);
+        }
 
+        
+
+        
         
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
@@ -187,7 +195,6 @@ namespace Golf_3_MVC.Controllers
 
             season.seasontoggle = checkResp;
 
-
             if (season.seasontoggle == true)
             {
                 var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
@@ -200,7 +207,6 @@ namespace Golf_3_MVC.Controllers
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-
 
                 return RedirectToAction("index");
         }
@@ -239,14 +245,14 @@ namespace Golf_3_MVC.Controllers
                         //}
                         //else
                         //{
-                            bokning EV = new bokning();
-                            EV.id = changedEvent.id;
-                            EV.start_date = changedEvent.start_date;
-                            EV.end_date = changedEvent.end_date;
-                            EV.text = changedEvent.text;
-                            EV.golf_id = User.Identity.GetUserName();
-                            ds.boknings.Add(EV);
-                            ds.SaveChanges();
+                        bokning EV = new bokning();
+                        EV.id = changedEvent.id;
+                        EV.start_date = changedEvent.start_date;
+                        EV.end_date = changedEvent.end_date;
+                        EV.text = changedEvent.text;
+                        EV.golf_id = User.Identity.GetUserName();
+                        ds.boknings.Add(EV);
+                        ds.SaveChanges();
                         //}
 
                         break;
