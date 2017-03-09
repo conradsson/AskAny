@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\medlemmarsController.cs" />
     <Compile Include="Controllers\medlemskategorisController.cs" />
+    <Compile Include="Controllers\scorekortsController.cs" />
     <Compile Include="Controllers\starttidsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -241,6 +242,24 @@
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
+    <Compile Include="Models\scorekort.cs">
+      <DependentUpon>ScorekortDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScorekortDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScorekortDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScorekortDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScorekortDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScorekortDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\season.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
@@ -295,6 +314,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>medlemsdata.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ScorekortDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+      <LastGenOutput>ScorekortDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ScorekortDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+      <LastGenOutput>ScorekortDataModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\medlemsdata.edmx">
@@ -318,6 +347,13 @@
     </EntityDeploy>
     <Content Include="Models\CalendarData.edmx.diagram">
       <DependentUpon>CalendarData.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ScorekortDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScorekortDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ScorekortDataModel.edmx.diagram">
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\DSU3 - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %283%29.pubxml" />
@@ -592,6 +628,12 @@
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
     <Content Include="Views\Home\Tavling.cshtml" />
+    <Content Include="Views\scorekorts\Create.cshtml" />
+    <Content Include="Views\scorekorts\Delete.cshtml" />
+    <Content Include="Views\scorekorts\Details.cshtml" />
+    <Content Include="Views\scorekorts\Edit.cshtml" />
+    <Content Include="Views\scorekorts\Index.cshtml" />
+    <Content Include="Views\scorekorts\scorekort.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
