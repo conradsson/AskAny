@@ -12,7 +12,6 @@ namespace Golf_3_MVC.Models
     {
         public IEnumerable<bokning> minaBokningar { get; set; }
 
-
         public DHXScheduler sched { get; set; }
 
     }

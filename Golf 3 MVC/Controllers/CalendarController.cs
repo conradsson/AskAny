@@ -61,18 +61,17 @@ namespace Golf_3_MVC.Controllers
         //}
 
 
-        public ActionResult Create(FormCollection actionValues, string searchString, bokning Bokningar)
+        public ActionResult Create(FormCollection actionValues, string searchString, CalendarBookings CB)
         {
             medbokare medbokare = new medbokare();
             CalendarBookings model = new CalendarBookings();
             bokning bokning = new bokning();
 
+            string id = actionValues["Bokningar"];
 
-
-            var valtVarde = actionValues.GetValue("Bokningar");
 
             medbokare.Id = 33;
-            medbokare.BokningsId = Bokningar.id;
+            medbokare.BokningsId = Convert.ToInt32(id);
             medbokare.Huvudbokare = User.Identity.GetUserName();
             medbokare.Medbokare1 = searchString;
             ds.medbokares.Add(medbokare);
