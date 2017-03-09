@@ -20,7 +20,7 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
 
-       
+
         public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
         {
             var action = new DataAction(actionValues);
@@ -40,7 +40,7 @@ namespace Golf_3_MVC.Controllers
         
         //public ViewResult Index1()
         //{
-        //    //Create db context object here
+        //    //Create db context object here 
         //    dsu3Entities db = new dsu3Entities();
         //    //Get the value from database and then set it to ViewBag to pass it View
         //    IEnumerable<SelectListItem> items = db.boknings.Select(c => new SelectListItem
@@ -58,7 +58,7 @@ namespace Golf_3_MVC.Controllers
         //{
         //    dsu3Entities db = new dsu3Entities();
         //    ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
-
+            
 
         //    return RedirectToAction("index");
         //}
@@ -98,12 +98,12 @@ namespace Golf_3_MVC.Controllers
             }
             else
             {
-                medbokare.Id = 33;
-                medbokare.BokningsId = Convert.ToInt32(id);
-                medbokare.Huvudbokare = User.Identity.GetUserName();
-                medbokare.Medbokare1 = searchString;
-                ds.medbokares.Add(medbokare);
-                ds.SaveChanges();
+            medbokare.Id = 33;
+            medbokare.BokningsId = Convert.ToInt32(id);
+            medbokare.Huvudbokare = User.Identity.GetUserName();
+            medbokare.Medbokare1 = searchString;
+            ds.medbokares.Add(medbokare);
+            ds.SaveChanges();
             }
 
 
@@ -116,16 +116,20 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-            //season season = new season();
+            season season = new season();
 
+            var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
 
+           
 
-            //if (season.seasontoggle == false)
-            //{
-            //    return View("index");
-            //}
-            //else
-            //{
+            if (data.seasontoggle == false)
+            {
+
+                return View("offseason");
+            }
+            else
+            {
+
 
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
@@ -133,6 +137,7 @@ namespace Golf_3_MVC.Controllers
                 List<bokning> minaBokningar = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
+                model.medlems = medlemmars;
 
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
@@ -160,11 +165,11 @@ namespace Golf_3_MVC.Controllers
 
             //sched.Config.buttons_right.Add(new EventButton
             //{
-
+                
             //    Label = "Lägg till medlem",
             //    OnClick = "some_function",
             //    Name = "location"
-
+                
             //});
 
             sched.Lightbox.AddDefaults();
@@ -180,19 +185,30 @@ namespace Golf_3_MVC.Controllers
 
             model.sched = sched;
             return View(model);
-            //}
+            }
 
         }
+            List<medlemmar> medlemmars = new List<medlemmar>();
+        public JsonResult Sök(string Prefix)
+        {
+            medlemmars = ds.medlemmars.ToList();
+            return Json(medlemmars, JsonRequestBehavior.AllowGet);
+        }
 
-        [HttpPost]
+        
+
+        
+        
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-
             // Hämta värdena från blockfrom och blockto
             // Kontrollera att värdena har rätt format. (år(xxxx),månad(x),dag(x))
             // Skicka det nya värdena till DB och boknings tabellen
-            //
+            // 
             // Uppdatera vyn med att returnera till index
+
+
+            //var sched = new DHXScheduler(this);
 
             //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
         //{
@@ -210,20 +226,18 @@ namespace Golf_3_MVC.Controllers
 
             season.seasontoggle = checkResp;
 
-
             if (season.seasontoggle == true)
             {
                 var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-            else
+            else 
             {
                 var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-
 
                 return RedirectToAction("index");
         }
@@ -251,6 +265,17 @@ namespace Golf_3_MVC.Controllers
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert: // "insert new data"
+
+                        //int startmin = Convert.ToInt32(changedEvent.start_date.Minute);   /// TONNY JOHAN PILL!!!
+                        //int endmin = Convert.ToInt32(changedEvent.end_date.);             /// FIXA  DATETIME END_DATE TILL NOT NULL FÖRST
+
+
+                        //if (antalmin > 10)
+                        //{
+
+                        //}
+                        //else
+                        //{
                         bokning EV = new bokning();
                         EV.id = changedEvent.id;
                         EV.start_date = changedEvent.start_date;
@@ -259,7 +284,7 @@ namespace Golf_3_MVC.Controllers
                         EV.golf_id = User.Identity.GetUserName();
                         ds.boknings.Add(EV);
                         ds.SaveChanges();
-
+                        //}
 
                         break;
                     case DataActionTypes.Delete: // "delete chosen data"

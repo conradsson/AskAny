@@ -14,6 +14,8 @@ namespace Golf_3_MVC.Models
         public IEnumerable<medbokare> aktuellaMedbokare { get; set; }
         public DHXScheduler sched { get; set; }
 
+        public List<medlemmar> medlems { get; set; }
+
     }
 
 

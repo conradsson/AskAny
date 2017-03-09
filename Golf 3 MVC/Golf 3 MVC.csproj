@@ -190,8 +190,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\medlemmarsController.cs" />
     <Compile Include="Controllers\medlemskategorisController.cs" />
+    <Compile Include="Controllers\scorekortsController.cs" />
     <Compile Include="Controllers\starttidsController.cs" />
-    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +242,24 @@
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
+    <Compile Include="Models\scorekort.cs">
+      <DependentUpon>ScorekortDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScorekortDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScorekortDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScorekortDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScorekortDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScorekortDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\season.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
@@ -271,10 +289,6 @@
     <Content Include="Content\img\start\start2-1280.jpg" />
     <Content Include="Content\img\banorna\bana1-1280.jpg" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
-    <Content Include="Content\sweetalert\docs.css" />
-    <Content Include="Content\sweetalert\sweet-alert.css" />
-    <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -300,6 +314,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>medlemsdata.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ScorekortDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+      <LastGenOutput>ScorekortDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ScorekortDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+      <LastGenOutput>ScorekortDataModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\medlemsdata.edmx">
@@ -324,11 +348,13 @@
     <Content Include="Models\CalendarData.edmx.diagram">
       <DependentUpon>CalendarData.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\sweetalert\sweet-alert.less" />
-    <Content Include="Content\sweetalert\sweet-alert-combine.less" />
-    <Content Include="Content\sweetalert\sweet-alert-animations.less" />
-    <Content Include="Content\bootstrap\variables.less" />
-    <Content Include="Content\bootstrap\mixins.less" />
+    <EntityDeploy Include="Models\ScorekortDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScorekortDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ScorekortDataModel.edmx.diagram">
+      <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\DSU3 - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %284%29.pubxml" />
@@ -525,8 +551,6 @@
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ru.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_sk.html" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\dist\sweetalert-dev.js" />
-    <Content Include="Scripts\dist\sweetalert.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -536,6 +560,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\medlemmar.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
@@ -604,7 +629,13 @@
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
     <Content Include="Views\Home\Tavling.cshtml" />
-    <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\scorekorts\Create.cshtml" />
+    <Content Include="Views\scorekorts\Delete.cshtml" />
+    <Content Include="Views\scorekorts\Details.cshtml" />
+    <Content Include="Views\scorekorts\Edit.cshtml" />
+    <Content Include="Views\scorekorts\Index.cshtml" />
+    <Content Include="Views\scorekorts\scorekort.cshtml" />
+    <Content Include="Views\Calendar\offseason.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

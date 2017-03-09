@@ -14,6 +14,7 @@
           <Property Name="start_date" Type="datetime" Nullable="false" />
           <Property Name="end_date" Type="datetime" />
           <Property Name="golf_id" Type="varchar" MaxLength="255" />
+          <Property Name="blocktime" Type="bit" />
         </EntityType>
         <EntityType Name="medbokare">
           <Key>
@@ -170,6 +171,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Precision="3" />
           <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="blocktime" Type="Boolean" />
         </EntityType>
         <EntityType Name="season">
           <Key>
@@ -232,6 +234,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySetMapping Name="boknings">
             <EntityTypeMapping TypeName="dsu3Model.bokning">
               <MappingFragment StoreEntitySet="bokning">
+                <ScalarProperty Name="blocktime" ColumnName="blocktime" />
                 <ScalarProperty Name="golf_id" ColumnName="golf_id" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />

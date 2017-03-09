@@ -12,13 +12,15 @@ namespace Golf_3_MVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class bokning
+    public partial class scorekort
     {
-        public int id { get; set; }
-        public string text { get; set; }
-        public System.DateTime start_date { get; set; }
-        public Nullable<System.DateTime> end_date { get; set; }
-        public string golf_id { get; set; }
-        public Nullable<bool> blocktime { get; set; }
+        public int Id { get; set; }
+        public string Hole_nr { get; set; }
+        public string Lenght_Tee_Red { get; set; }
+        public string Lenght_Tee_Yellow { get; set; }
+        public string Par { get; set; }
+        public Nullable<int> Index { get; set; }
+        public string Lenght_Tee_White { get; set; }
+        public string Lenght_Tee_Blue { get; set; }
     }
 }

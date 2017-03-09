@@ -11,6 +11,10 @@
 <html>
 <head>
     <title>Hållslaget GK</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <script src="medlemmar.js"></script>
     <style>
         body
         {
@@ -23,6 +27,7 @@
     <script src="~/Scripts/dist/sweetalert.min.js"></script>
 </head>
 <body>
+
     <div class="row">
         <ul class="nav nav-pills nav-stacked">
             
@@ -37,7 +42,7 @@
                     @using (Html.BeginForm("Seasontoggle", "Calendar"))
                     {
                         <p>
-                            På/Av: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                            Öppna/Stäng: <input id="responsable" name="checkResp" value="true" type="checkbox" />
                             <br />
                             <input id="seasontogglebtn" type="submit" value="Bekräfta" />
                         </p>
@@ -64,12 +69,14 @@
             </a>
             <ul class="dropdown-menu">
 
+                @using (Html.BeginForm("Blockinterval", "Calendar"))
+                {
                     <p>
                         Från: @Html.TextBox("blockfrom")<br />
                         Till: @Html.TextBox("blockto")
-                        <input id="blockbtn" type="button" value="Lägg till" />
+                        <input id="blockbtn" type="submit" value="Lägg till" />
                     </p>
-                
+                }
             </ul>
         </li>
 
@@ -81,32 +88,35 @@
                 </a>
                 <ul class="dropdown-menu">
                     @*@using (Html.BeginForm())
-            {
-                <p>
-                    Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
-                </p>
-            }*@
-                    @using (Html.BeginForm("Create", "Calendar"))
+                    {
+                        <p>
+                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                        </p>
+                    }*@
+                                @using (Html.BeginForm("Create", "Calendar"))
                     {
                         <p>
                             Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar,  "id", "start_date"), "Välj Bokning")
                         </p>
                         <p>
                             Medbokare: @*@Html.ListBoxFor(x => x.aktuellaMedbokare, new SelectList(Model.aktuellaMedbokare, "Id", "Medbokare"), "Medgolfare")*@
-                        </p>
+                       </p>
                         <p>
-                            Golfid: @Html.TextBox("SearchString") 
+                            Golfid: @Html.TextBox("SearchString")
                             <input type="submit" value="Lägg till" />
                             @Html.Raw(TempData["msg"])
 
 
                         </p>
+                       
                     }
-
                 </ul>
+               
+
             </li>
 
         </ul>
+
 
         <div class="panel panel-default panel-kalender">
             <div class="panel-heading">Bokningsschema</div>

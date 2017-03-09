@@ -224,23 +224,33 @@ scheduler.renderEvent = function (container, ev) {
     container.innerHTML = html;
     return true; //required, true - display a custom form, false - the default form
 };
+///////
 
-////
 
-scheduler.form_blocks["color"] = {
-    render: function (sns) {
-        return "<div class='dhx_cal_block'><input type='color'/></div>";
-    },
-    set_value: function (node, value, ev) {
-        node.firstChild.value = value || "";
-    },
-    get_value: function (node, ev) {
-        return node.firstChild.value;
-    },
-    focus: function (node) {
-        var a = node; scheduler._focus(a, true);
-    }
-}
 
-/////
+//$("#blockbtn").click(function () {
 
+//    var blockfrom = document.getElementsByName('blockfrom')[0].value
+//    var blockto = document.getElementsByName('blockto')[0].value
+
+//    var url = '@Url.Action("Blockinterval")';
+//    $.ajax({
+//        url: url,
+//        type: 'GET',
+//        cache: false,
+//        data: { value: strId }
+//    });
+    
+//    scheduler.addMarkedTimespan({
+
+//                start_date: new Date(blockfrom),
+//                end_date: new Date(blockto),
+//                zones: "fullday",
+//                css: "gray_section",
+//                type: "dhx_time_block"
+//        });
+    
+
+//    scheduler.updateView();
+    
+//});
