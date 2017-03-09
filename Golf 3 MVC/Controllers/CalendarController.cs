@@ -228,15 +228,26 @@ namespace Golf_3_MVC.Controllers
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert: // "insert new data"
-                        bokning EV = new bokning();
-                        EV.id = changedEvent.id;
-                        EV.start_date = changedEvent.start_date;
-                        EV.end_date = changedEvent.end_date;
-                        EV.text = changedEvent.text;
-                        EV.golf_id = User.Identity.GetUserName();
-                        ds.boknings.Add(EV);
-                        ds.SaveChanges();
 
+                        //int startmin = Convert.ToInt32(changedEvent.start_date.Minute);   /// TONNY JOHAN PILL!!!
+                        //int endmin = Convert.ToInt32(changedEvent.end_date.);             /// FIXA  DATETIME END_DATE TILL NOT NULL FÖRST
+
+
+                        //if (antalmin > 10)
+                        //{
+
+                        //}
+                        //else
+                        //{
+                            bokning EV = new bokning();
+                            EV.id = changedEvent.id;
+                            EV.start_date = changedEvent.start_date;
+                            EV.end_date = changedEvent.end_date;
+                            EV.text = changedEvent.text;
+                            EV.golf_id = User.Identity.GetUserName();
+                            ds.boknings.Add(EV);
+                            ds.SaveChanges();
+                        //}
 
                         break;
                     case DataActionTypes.Delete: // "delete chosen data"
