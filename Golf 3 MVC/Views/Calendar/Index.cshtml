@@ -72,15 +72,17 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm())
+                    @*@using (Html.BeginForm())
                     {
                         <p>
                             Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
-                                        
                         </p>
-                    }
+                    }*@
                                 @using (Html.BeginForm("Create", "Calendar"))
-            {
+                    {
+                        <p>
+                              Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                       </p>
                         <p>
                             Golfid: @Html.TextBox("SearchString")
                             <input type="submit" value="Lägg till" />
