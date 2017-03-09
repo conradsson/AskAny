@@ -23,8 +23,8 @@
     <div class="row">
         <ul class="nav nav-pills nav-stacked">
             
-            @*@if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
-            {*@ 
+            @if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
+            { 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Säsong <span class="caret"></span>
@@ -43,7 +43,7 @@
             </li>
 
 
-            @*}*@
+            }
 
         </ul>
 
