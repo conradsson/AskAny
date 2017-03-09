@@ -23,11 +23,18 @@
             @Html.DisplayName("Längd gul tee")
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Lenght_Tee_White)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lenght_Tee_Blue)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Par)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Index)
         </th>
+        
         <th></th>
     </tr>
 
@@ -37,10 +44,16 @@
             @Html.DisplayFor(modelItem => item.Hole_nr)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Lenght_Tee1)
+            @Html.DisplayFor(modelItem => item.Lenght_Tee_Red)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Lenght_Tee2)
+            @Html.DisplayFor(modelItem => item.Lenght_Tee_Yellow)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lenght_Tee_White)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lenght_Tee_Blue)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Par)
@@ -48,6 +61,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Index)
         </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
