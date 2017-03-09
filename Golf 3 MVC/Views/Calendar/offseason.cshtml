@@ -1,0 +1,64 @@
+﻿
+@{
+    //Layout = null;
+    ViewBag.Title = "Bokningsschema";
+    @model Golf_3_MVC.Models.CalendarBookings
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hållslaget GK</title>
+    <style>
+        body
+        {
+            background-color:#eee;
+            margin-top: 5%;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <ul class="nav nav-pills nav-stacked">
+            
+            @*@if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
+            {*@ 
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Säsong <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+
+                    @using (Html.BeginForm("Seasontoggle", "Calendar"))
+                    {
+                        <p>
+                            På/Av: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                            <br />
+                            <input id="seasontogglebtn" type="submit" value="Bekräfta" />
+                        </p>
+                    }
+                </ul>
+            </li>
+
+
+            @*}*@
+
+        </ul>
+
+        <div class="panel panel-default panel-kalender">
+            <div class="panel-heading">Bokningsschema</div>
+            <div class="panel-body">
+                <div class="offseason">
+                    <p>
+                        Stängt för säsongen @DateTime.Now.Year <br />
+                        Öppnar igen nästa säsong
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

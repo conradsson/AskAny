@@ -592,6 +592,7 @@
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
     <Content Include="Views\Home\Tavling.cshtml" />
+    <Content Include="Views\Calendar\offseason.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

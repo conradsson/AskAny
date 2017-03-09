@@ -23,8 +23,8 @@
     <div class="row">
         <ul class="nav nav-pills nav-stacked">
             
-            @if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
-            { 
+            @*@if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
+            {*@ 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Säsong <span class="caret"></span>
@@ -34,7 +34,7 @@
                     @using (Html.BeginForm("Seasontoggle", "Calendar"))
                     {
                         <p>
-                            På/Av: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                            Öppna/Stäng: <input id="responsable" name="checkResp" value="true" type="checkbox" />
                             <br />
                             <input id="seasontogglebtn" type="submit" value="Bekräfta" />
                         </p>
@@ -61,16 +61,18 @@
             </a>
             <ul class="dropdown-menu">
 
+                @using (Html.BeginForm("Blockinterval", "Calendar"))
+                {
                     <p>
                         Från: @Html.TextBox("blockfrom")<br />
                         Till: @Html.TextBox("blockto")
-                        <input id="blockbtn" type="button" value="Lägg till" />
+                        <input id="blockbtn" type="submit" value="Lägg till" />
                     </p>
-                
+                }
             </ul>
         </li>
 
-            }
+            @*}*@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
