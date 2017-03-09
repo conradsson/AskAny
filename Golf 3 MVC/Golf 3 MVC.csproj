@@ -191,6 +191,7 @@
     <Compile Include="Controllers\medlemmarsController.cs" />
     <Compile Include="Controllers\medlemskategorisController.cs" />
     <Compile Include="Controllers\starttidsController.cs" />
+    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,6 +271,10 @@
     <Content Include="Content\img\start\start2-1280.jpg" />
     <Content Include="Content\img\banorna\bana1-1280.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
+    <Content Include="Content\sweetalert\docs.css" />
+    <Content Include="Content\sweetalert\sweet-alert.css" />
+    <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="dhxscheduler.sample.mvc3.readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -319,6 +324,11 @@
     <Content Include="Models\CalendarData.edmx.diagram">
       <DependentUpon>CalendarData.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\sweetalert\sweet-alert.less" />
+    <Content Include="Content\sweetalert\sweet-alert-combine.less" />
+    <Content Include="Content\sweetalert\sweet-alert-animations.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\DSU3 - FTP %284%29.pubxml" />
@@ -515,6 +525,8 @@
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ru.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_sk.html" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\dist\sweetalert-dev.js" />
+    <Content Include="Scripts\dist\sweetalert.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -592,6 +604,7 @@
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
     <Content Include="Views\Home\Tavling.cshtml" />
+    <Content Include="Views\Sweet\Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

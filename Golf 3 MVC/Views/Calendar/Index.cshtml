@@ -3,6 +3,7 @@
     //Layout = null;
     ViewBag.Title = "Bokningsschema";
     @model Golf_3_MVC.Models.CalendarBookings
+
 }
 
 
@@ -18,6 +19,8 @@
 
         }
     </style>
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <script src="~/Scripts/dist/sweetalert.min.js"></script>
 </head>
 <body>
     <div class="row">
@@ -78,19 +81,25 @@
                 </a>
                 <ul class="dropdown-menu">
                     @*@using (Html.BeginForm())
+            {
+                <p>
+                    Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                </p>
+            }*@
+                    @using (Html.BeginForm("Create", "Calendar"))
                     {
                         <p>
-                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar,  "id", "start_date"), "Välj Bokning")
                         </p>
-                    }*@
-                                @using (Html.BeginForm("Create", "Calendar"))
-                    {
                         <p>
-                              Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
-                       </p>
+                            Medbokare: @*@Html.ListBoxFor(x => x.aktuellaMedbokare, new SelectList(Model.aktuellaMedbokare, "Id", "Medbokare"), "Medgolfare")*@
+                        </p>
                         <p>
-                            Golfid: @Html.TextBox("SearchString")
+                            Golfid: @Html.TextBox("SearchString") 
                             <input type="submit" value="Lägg till" />
+                            @Html.Raw(TempData["msg"])
+
+
                         </p>
                     }
 
@@ -102,7 +111,7 @@
         <div class="panel panel-default panel-kalender">
             <div class="panel-heading">Bokningsschema</div>
             <div class="panel-body">
-                <div style="height:700px;width:auto;margin:0 auto">
+                <div style="height:1850px;width:auto;margin:0 auto">
                     @Html.Raw(Model.sched.Render())
                 </div>
             </div>
