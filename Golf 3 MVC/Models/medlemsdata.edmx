@@ -50,6 +50,13 @@
           <Property Name="namn" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="kategori_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="season">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seasontoggle" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="starttid">
           <Key>
             <PropertyRef Name="starttid" />
@@ -76,6 +83,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokare" EntityType="Self.medbokare" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemmar" EntityType="Self.medlemmar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemskategori" EntityType="Self.medlemskategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="season" EntityType="Self.season" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="starttid" EntityType="Self.starttid" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
             <End Role="medlemskategori" EntitySet="medlemskategori" />
@@ -111,6 +119,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </AssociationSet>
           <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="boknings" EntityType="dsu3Model.bokning" />
+          <EntitySet Name="seasons" EntityType="dsu3Model.season" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -161,6 +170,13 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_date" Type="DateTime" Precision="3" />
           <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="season">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seasontoggle" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -220,6 +236,14 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seasons">
+            <EntityTypeMapping TypeName="dsu3Model.season">
+              <MappingFragment StoreEntitySet="season">
+                <ScalarProperty Name="seasontoggle" ColumnName="seasontoggle" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

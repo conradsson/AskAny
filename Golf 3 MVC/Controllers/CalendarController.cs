@@ -85,19 +85,30 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-            List<medlemmar> allaMedlemmar = new List<medlemmar>();
-            medlemmar aktuellMedlem = new medlemmar();
-            List<bokning> allaBokningar = new List<bokning>();
-            List<bokning> minaBokningar = new List<bokning>();
+            //season season = new season();
 
-            CalendarBookings model = new CalendarBookings();
 
-            allaMedlemmar = ds.medlemmars.ToList();
-            aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
-            allaBokningar = ds.boknings.ToList();
-            model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
            
-            var sched = new DHXScheduler(this);
+            //if (season.seasontoggle == false)
+            //{
+            //    return View("index");
+            //}
+            //else
+            //{
+
+                List<medlemmar> allaMedlemmar = new List<medlemmar>();
+                medlemmar aktuellMedlem = new medlemmar();
+                List<bokning> allaBokningar = new List<bokning>();
+                List<bokning> minaBokningar = new List<bokning>();
+
+                CalendarBookings model = new CalendarBookings();
+
+                allaMedlemmar = ds.medlemmars.ToList();
+                aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
+                allaBokningar = ds.boknings.ToList();
+                model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+
+                var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
 
 
@@ -138,6 +149,7 @@ namespace Golf_3_MVC.Controllers
 
             model.sched = sched;
             return View(model);
+            //}
 
         }
 
@@ -161,29 +173,28 @@ namespace Golf_3_MVC.Controllers
 
         }
 
-        public ActionResult Seasontoggle()
+        public ActionResult Seasontoggle(string responsables, bool checkResp = false)
         {
-            // Hämta värdet från seasontoggle
-            // Kontrollera att värdet är antingen True eller False
-            // Skicka det nya värdet till DB och season tabellen i seasontoggle kolumnen på knapptrycket seasontogglebtn
-            // Uppdatera vyn med att returnera till index
+            season season = new season();
+
+            season.seasontoggle = checkResp;
 
 
+            if (season.seasontoggle == true)
+            {
+                var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
+                data.seasontoggle = season.seasontoggle;
+                ds.SaveChanges();
+            }
+            else 
+            {
+                var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
+                data.seasontoggle = season.seasontoggle;
+                ds.SaveChanges();
+            }
 
 
-            //if(seasonon == "true" || seasonon == "false" || seasonoff == "true" || seasonoff == "false")
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
-            
-
-
-
-            return RedirectToAction("index");
+                return RedirectToAction("index");
         }
 
         public ContentResult Data()
