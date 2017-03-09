@@ -61,18 +61,17 @@ namespace Golf_3_MVC.Controllers
         //}
 
 
-        public ActionResult Create(FormCollection actionValues, string searchString, bokning Bokningar)
+        public ActionResult Create(FormCollection actionValues, string searchString, CalendarBookings CB)
         {
             medbokare medbokare = new medbokare();
             CalendarBookings model = new CalendarBookings();
             bokning bokning = new bokning();
 
+            string id = actionValues["Bokningar"];
 
-
-            var valtVarde = actionValues.GetValue("Bokningar");
 
             medbokare.Id = 33;
-            medbokare.BokningsId = Bokningar.id;
+            medbokare.BokningsId = Convert.ToInt32(id);
             medbokare.Huvudbokare = User.Identity.GetUserName();
             medbokare.Medbokare1 = searchString;
             ds.medbokares.Add(medbokare);
@@ -86,16 +85,19 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-            //season season = new season();
+            season season = new season();
+
+            var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
+            
 
 
-           
-            //if (season.seasontoggle == false)
-            //{
-            //    return View("index");
-            //}
-            //else
-            //{
+            if (data.seasontoggle == false)
+            {
+
+                return View("offseason");
+            }
+            else
+            {
 
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
@@ -150,22 +152,24 @@ namespace Golf_3_MVC.Controllers
 
             model.sched = sched;
             return View(model);
-            //}
+            }
 
         }
 
-        [HttpPost]
+        
         public ActionResult Blockinterval(string blockfrom, string blockto)
         {
-
             // Hämta värdena från blockfrom och blockto
             // Kontrollera att värdena har rätt format. (år(xxxx),månad(x),dag(x))
             // Skicka det nya värdena till DB och boknings tabellen
             // 
             // Uppdatera vyn med att returnera till index
 
+
+            //var sched = new DHXScheduler(this);
+
             //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
-        //{
+            //{
             //    StartDate = DateTime.Parse(blockfrom),
             //    EndDate = DateTime.Parse(blockto)
             //});

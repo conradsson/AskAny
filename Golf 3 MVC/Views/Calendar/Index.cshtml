@@ -34,7 +34,7 @@
                     @using (Html.BeginForm("Seasontoggle", "Calendar"))
                     {
                         <p>
-                            På/Av: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                            Öppna/Stäng: <input id="responsable" name="checkResp" value="true" type="checkbox" />
                             <br />
                             <input id="seasontogglebtn" type="submit" value="Bekräfta" />
                         </p>
@@ -61,12 +61,14 @@
             </a>
             <ul class="dropdown-menu">
 
+                @using (Html.BeginForm("Blockinterval", "Calendar"))
+                {
                     <p>
                         Från: @Html.TextBox("blockfrom")<br />
                         Till: @Html.TextBox("blockto")
-                        <input id="blockbtn" type="button" value="Lägg till" />
+                        <input id="blockbtn" type="submit" value="Lägg till" />
                     </p>
-                
+                }
             </ul>
         </li>
 
@@ -77,15 +79,17 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @using (Html.BeginForm())
+                    @*@using (Html.BeginForm())
                     {
                         <p>
                             Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
-                                        
                         </p>
-                    }
+                    }*@
                                 @using (Html.BeginForm("Create", "Calendar"))
-            {
+                    {
+                        <p>
+                              Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                       </p>
                         <p>
                             Golfid: @Html.TextBox("SearchString")
                             <input type="submit" value="Lägg till" />
