@@ -79,10 +79,6 @@ namespace Golf_3_MVC.Controllers
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
-            }
 
             if (Request.Form["laggtill"] != null)
             {
