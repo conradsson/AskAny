@@ -65,6 +65,24 @@ namespace Golf_3_MVC.Controllers
         //    return RedirectToAction("index");
         //}
 
+        public ActionResult AutoComplete()
+        {
+            return View();
+        }
+
+        public ActionResult GetAutoCompleteData(string term)
+        {
+
+            var result = ds.medlemmars.Where(x => x.fornamn.Contains(term))
+                .Select(s => new GolfareAutoComplete { value = s.fornamn, fornamn = s.fornamn })
+                .Union(ds.medlemmars.Where(x => x.efternamn.Contains(term))
+                .Select(s => new GolfareAutoComplete { value = s.efternamn, fornamn = s.efternamn })
+                .Union(ds.medlemmars.Where(x => x.golf_id.Contains(term))
+                .Select(s => new GolfareAutoComplete { value = s.golf_id, fornamn = s.golf_id }))).ToList();
+
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Create(FormCollection actionValues, string searchString)
         {
