@@ -108,7 +108,7 @@ namespace Golf_3_MVC.Controllers
                     }
                 }
                 totalHcp += hHcp;
-                totalHcp += mHcp;
+                totalHcp += mHcp; 
 
                 if (totalHcp >= 120)
                 {
