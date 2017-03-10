@@ -371,5 +371,21 @@ namespace Golf_3_MVC.Controllers
             }
             return View();
         }
+
+        //public ActionResult MedbokareDelete(string golfid, int bokningsid)
+        //{
+
+        //    foreach (var i in ds.medbokares)
+        //    {
+        //        if (i.BokningsId == bokningsid && i.Medbokare1 == golfid)
+        //        {
+        //            ds.medbokares.Remove(i);
+        //        }
+        //    }
+        //    ds.SaveChanges();
+
+        //    return RedirectToAction("index");
+        //}
     }
+
 }
