@@ -131,21 +131,15 @@ namespace Golf_3_MVC.Controllers
 
     public ActionResult Index()
         {
-            season season = new season();
-
+            season season = new season();   
             var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
 
-           
-
-            if (data.seasontoggle == false)
+            if (data.seasontoggle == false)  // KOLLAR OM SÄSONGEN ÄR AKTIV
             {
-
                 return View("offseason");
             }
             else
             {
-
-
                 List<medlemmar> allaMedlemmar = new List<medlemmar>();
                 medlemmar aktuellMedlem = new medlemmar();
                 List<bokning> allaBokningar = new List<bokning>();
@@ -159,6 +153,7 @@ namespace Golf_3_MVC.Controllers
                 allaBokningar = ds.boknings.ToList();
                 model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
 
+
                 var sched = new DHXScheduler(this);
             sched.Skin = DHXScheduler.Skins.Flat;
 
@@ -167,25 +162,24 @@ namespace Golf_3_MVC.Controllers
             sched.Config.last_hour = 21;
             sched.Config.time_step = 10;
 
-            sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT INNAN NU
-            {
-                StartDate = new DateTime(2000, 1, 1),
-                EndDate = DateTime.Now
-            });
+                foreach (bokning b in allaBokningar) // HÄMTAR OCH URSKILJER BLOCKTIME-BOKNINGAR UR BOKNINGAR
+                {
+                    if (b.blocktime == true)
+                    {
+                        sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLA BLOCKTIME-BOKNINGAR
+                        {
+                            StartDate = b.start_date,
+                            EndDate = b.end_date
+                        });
+                    }
+                }
 
-            var check = new LightboxText("Highlighting", "Lägg till person");
-            sched.Lightbox.Add(check);
+                sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ALLT INNAN NU
+                {
+                    StartDate = new DateTime(2000, 1, 1),
+                    EndDate = DateTime.Now
+                });
 
-           // sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
-
-            //sched.Config.buttons_right.Add(new EventButton
-            //{
-                
-            //    Label = "Lägg till medlem",
-            //    OnClick = "some_function",
-            //    Name = "location"
-                
-            //});
 
             sched.Lightbox.AddDefaults();
 
@@ -208,31 +202,6 @@ namespace Golf_3_MVC.Controllers
         {
             medlemmars = ds.medlemmars.ToList();
             return Json(medlemmars, JsonRequestBehavior.AllowGet);
-        }
-
-        
-
-        
-        
-        public ActionResult Blockinterval(string blockfrom, string blockto)
-        {
-            // Hämta värdena från blockfrom och blockto
-            // Kontrollera att värdena har rätt format. (år(xxxx),månad(x),dag(x))
-            // Skicka det nya värdena till DB och boknings tabellen
-            // 
-            // Uppdatera vyn med att returnera till index
-
-
-            //var sched = new DHXScheduler(this);
-
-            //sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR TIDER IFRÅN TEXTBOXARNA
-        //{
-            //    StartDate = DateTime.Parse(blockfrom),
-            //    EndDate = DateTime.Parse(blockto)
-            //});
-
-            return RedirectToAction("index");
-
         }
 
         public ActionResult Seasontoggle(string responsables, bool checkResp = false)
@@ -279,30 +248,51 @@ namespace Golf_3_MVC.Controllers
 
                 switch (action.Type)
                 {
-                    case DataActionTypes.Insert: // "insert new data"
+                    case DataActionTypes.Insert:
 
-                        //int startmin = Convert.ToInt32(changedEvent.start_date.Minute);   /// TONNY JOHAN PILL!!!
-                        //int endmin = Convert.ToInt32(changedEvent.end_date.);             /// FIXA  DATETIME END_DATE TILL NOT NULL FÖRST
+                        var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
 
 
-                        //if (antalmin > 10)
-                        //{
+                        if (diff.TotalHours > 0.17) // om det är mer än 10min
+                        {//BLOCKTIME
 
-                        //}
-                        //else
-                        //{
-                        bokning EV = new bokning();
-                        EV.id = changedEvent.id;
-                        EV.start_date = changedEvent.start_date;
-                        EV.end_date = changedEvent.end_date;
-                        EV.text = changedEvent.text;
-                        EV.golf_id = User.Identity.GetUserName();
-                        ds.boknings.Add(EV);
-                        ds.SaveChanges();
-                        //}
+                            if (User.IsInRole("Personal") || User.IsInRole("Admin"))
+                            {// ENDAST FÖR PERSONAL OCH ADMIN
+
+                                bokning EV = new bokning();
+                                EV.id = changedEvent.id;
+                                EV.start_date = changedEvent.start_date;
+                                EV.end_date = changedEvent.end_date;
+                                EV.text = changedEvent.text;
+                                EV.golf_id = User.Identity.GetUserName();
+                                EV.blocktime = true;
+                                ds.boknings.Add(EV);
+                                ds.SaveChanges();
+                            }
+                            else 
+                            {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
+
+                                TempData["msg"] = "<script>alert('Du kan bara boka 10 minuter');</script>";
+
+                            }
+
+                        }
+                        else
+                        { // VANLIG BOKNING
+
+                            bokning EV = new bokning();
+                            EV.id = changedEvent.id;
+                            EV.start_date = changedEvent.start_date;
+                            EV.end_date = changedEvent.end_date;
+                            EV.text = changedEvent.text;
+                            EV.golf_id = User.Identity.GetUserName();
+                            EV.blocktime = false;
+                            ds.boknings.Add(EV);
+                            ds.SaveChanges();
+                        }
 
                         break;
-                    case DataActionTypes.Delete: // "delete chosen data"
+                    case DataActionTypes.Delete:
 
                         if (User.IsInRole("User") == true)
                         {
@@ -351,13 +341,35 @@ namespace Golf_3_MVC.Controllers
                             ds.SaveChanges();
                             break;
                         }
+
                 }
             catch
             {
                 action.Type = DataActionTypes.Error;
             }
+
             return (ContentResult)new AjaxSaveResponse(action);
         }
 
+        public ActionResult BlockTimeDelete(DateTime start, DateTime stop, FormCollection actionValues)
+        {
+            foreach (var i in ds.boknings)
+            {
+                if (i.start_date > start && i.start_date < stop)
+                {
+                    ds.boknings.Remove(i);
+                    ds.SaveChanges();
+                    foreach (var x in ds.medbokares)
+                    {
+                        if (i.id == x.BokningsId)
+                        {
+                            ds.medbokares.Remove(x);
+                            ds.SaveChanges();
+                        }
+                    }
+                }
+            }
+            return View();
+        }
     }
 }

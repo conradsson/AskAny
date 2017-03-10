@@ -51,34 +51,17 @@
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Öppna bokningstider <span class="caret"></span>
+                    Blockera tider <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
 
                         <p>
-                            Från: @Html.TextBox("unblockfrom")<br />
-                            Till: @Html.TextBox("unblockto")
-                            <input id="unblockbtn" type="button" value="Lägg till" />
+                            För att blockera tider boka en golftid som vanligt och välj hur länge tiden ska vara blockerad.
+                            Systemet identifierar av sig självt att det är en ny blockering och inte en ny bokning.
                         </p>
 
                 </ul>
             </li>
-            <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                Stäng bokningstider <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-
-                @using (Html.BeginForm("Blockinterval", "Calendar"))
-                {
-                    <p>
-                        Från: @Html.TextBox("blockfrom")<br />
-                        Till: @Html.TextBox("blockto")
-                        <input id="blockbtn" type="submit" value="Lägg till" />
-                    </p>
-                }
-            </ul>
-        </li>
 
             }
 
