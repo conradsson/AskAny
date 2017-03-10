@@ -80,13 +80,13 @@ namespace Golf_3_MVC.Controllers
             allaMedlemmar = ds.medlemmars.ToList();
 
 
-            if (aktuellaMedbokare.Count >= 3)
+            if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLE 4 (inkl. huvudbokare) PERSONER ELLER FLER
             {
                 TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
             }
             else
             {
-                foreach (medbokare mb in aktuellaMedbokare)
+                foreach (medbokare mb in aktuellaMedbokare) // LOOPAR IGENOM ALLA I BOKNINGEN O HÄMTAR HCP SAMT KONTROLL FÖR DUBBELBOKNING
                 {
                     medlemmar m = new medlemmar();
                     double hcp;
@@ -110,11 +110,11 @@ namespace Golf_3_MVC.Controllers
                 totalHcp += hHcp;
                 totalHcp += mHcp;
 
-                if (totalHcp >= 100)
+                if (totalHcp >= 100) // MAX 100 HANDIKAPP
                 {
                     TempData["msg"] = "<script>alert('Bokningen går ej att göra då det totala handikappet är över 120');</script>";
                 }
-                else
+                else // OM ALLT OK; LÄGGER TILL PERSON
                 {
                     medbokare.Id = 33;
                     medbokare.BokningsId = Convert.ToInt32(id);
