@@ -336,5 +336,25 @@ namespace Golf_3_MVC.Controllers
             return (ContentResult)new AjaxSaveResponse(action);
         }
 
+        public ActionResult BlockTimeDelete(DateTime start, DateTime stop, FormCollection actionValues)
+        {
+            foreach (var i in ds.boknings)
+            {
+                if (i.start_date > start && i.start_date < stop)
+                {
+                    ds.boknings.Remove(i);
+                    ds.SaveChanges();
+                    foreach (var x in ds.medbokares)
+                    {
+                        if (i.id == x.BokningsId)
+                        {
+                            ds.medbokares.Remove(x);
+                            ds.SaveChanges();
+                        }
+                    }
+                }
+            }
+            return View();
+        }
     }
 }

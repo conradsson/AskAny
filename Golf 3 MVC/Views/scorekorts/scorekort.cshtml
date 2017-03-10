@@ -1,8 +1,8 @@
-﻿
+﻿@model IEnumerable<Golf_3_MVC.Models.scorekort>
 @{
     ViewBag.Title = "scorekort";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    @model Golf_3_MVC.Models.scorekort
+    // @model Golf_3_MVC.Models.scorekort
 }
 
 <!DOCTYPE html>
@@ -97,6 +97,15 @@
                         vertical-align: top;
                     }
             </style>
+
+@*@foreach (var item in Model)
+{
+    if (item.Hole_nr == "1")
+    {
+        string gul = item.Lenght_Tee_Yellow;
+        string röd = item.Lenght_Tee_Red;
+    }*@
+}
             <table class="tg">
                 <tr>
                     <th class="tg-dx8v" colspan="7" rowspan="2">Spelare:</th>
@@ -132,9 +141,12 @@
                     <td class="tg-uqo3">Slag</td>
                     <td class="tg-baqh">Poäng</td>
                 </tr>
+}
+
                 <tr>
                     <td class="tg-baqh" colspan="2">1</td>
-                    <td class="tg-21yu" colspan="2"></td>
+                    <td class="tg-21yu" colspan="2">              
+                    </td>
                     <td class="tg-q9qv" colspan="2"></td>
                     <td class="tg-yw4l"></td>
                     <td class="tg-yzt1"></td>
@@ -148,6 +160,8 @@
                     <td class="tg-yzt1"></td>
                     <td class="tg-yw4l"></td>
                 </tr>
+                    
+                
                 <tr>
                     <td class="tg-baqh" colspan="2">2</td>
                     <td class="tg-21yu" colspan="2"></td>
@@ -468,6 +482,7 @@
                     <td class="tg-yw4l" colspan="5" rowspan="2">Markörs Sign:<br></td>
                     <td class="tg-yw4l" colspan="3" rowspan="2">Markörs Golf-ID:<br><br></td>
                 </tr>
+
                 <tr></tr>
             </table>
     </div>
