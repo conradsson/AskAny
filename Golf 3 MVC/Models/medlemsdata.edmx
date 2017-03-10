@@ -12,7 +12,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="text" Type="nvarchar(max)" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
-          <Property Name="end_date" Type="datetime" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="golf_id" Type="varchar" MaxLength="255" />
           <Property Name="blocktime" Type="bit" />
         </EntityType>
@@ -22,7 +22,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Huvudbokare" Type="varchar" MaxLength="255" />
-          <Property Name="Medbokare" Type="nchar" MaxLength="10" />
+          <Property Name="Medbokare" Type="varchar" MaxLength="255" />
           <Property Name="BokningsId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="medlemmar">
@@ -118,9 +118,9 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
             <End Role="medlemskategori" EntitySet="medlemskategoris" />
             <End Role="medlemmar" EntitySet="medlemmars" />
           </AssociationSet>
-          <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="boknings" EntityType="dsu3Model.bokning" />
           <EntitySet Name="seasons" EntityType="dsu3Model.season" />
+          <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -153,15 +153,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="medbokare">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Huvudbokare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Medbokare1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BokningsId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="bokning">
           <Key>
             <PropertyRef Name="id" />
@@ -169,7 +160,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="blocktime" Type="Boolean" />
         </EntityType>
@@ -179,6 +170,15 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="seasontoggle" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="medbokare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Huvudbokare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Medbokare1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BokningsId" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -221,16 +221,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="medbokares">
-            <EntityTypeMapping TypeName="dsu3Model.medbokare">
-              <MappingFragment StoreEntitySet="medbokare">
-                <ScalarProperty Name="BokningsId" ColumnName="BokningsId" />
-                <ScalarProperty Name="Medbokare1" ColumnName="Medbokare" />
-                <ScalarProperty Name="Huvudbokare" ColumnName="Huvudbokare" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="boknings">
             <EntityTypeMapping TypeName="dsu3Model.bokning">
               <MappingFragment StoreEntitySet="bokning">
@@ -248,6 +238,16 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
               <MappingFragment StoreEntitySet="season">
                 <ScalarProperty Name="seasontoggle" ColumnName="seasontoggle" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medbokares">
+            <EntityTypeMapping TypeName="dsu3Model.medbokare">
+              <MappingFragment StoreEntitySet="medbokare">
+                <ScalarProperty Name="BokningsId" ColumnName="BokningsId" />
+                <ScalarProperty Name="Medbokare1" ColumnName="Medbokare" />
+                <ScalarProperty Name="Huvudbokare" ColumnName="Huvudbokare" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

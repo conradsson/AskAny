@@ -19,7 +19,9 @@ namespace Golf_3_MVC.Controllers
     public class CalendarController : Controller
     {
         dsu3Entities ds = new dsu3Entities();
-
+        double totalHcp = 0;
+        double hHcp;
+        double mHcp;
 
         public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
         {
@@ -69,48 +71,63 @@ namespace Golf_3_MVC.Controllers
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
-            medlemmar medlem = new medlemmar();
+            medlemmar aktuellMedlem = new medlemmar();
+            medlemmar huvudbokare = new medlemmar();
             string id = actionValues["Bokningar"];
             aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
             model.aktuellaMedbokare = aktuellaMedbokare;
+            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+            allaMedlemmar = ds.medlemmars.ToList();
 
-            
-            if (aktuellaMedbokare.Count >= 4)
+
+            if (aktuellaMedbokare.Count >= 3)
             {
                 TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
-
-                foreach (medbokare mb in aktuellaMedbokare)
-                {
-                    medlemmar m = new medlemmar();
-                    medbokare a = new medbokare();
-                    List<medlemmar> allaMedlemmar = new List<medlemmar>();
-                    allaMedlemmar = ds.medlemmars.ToList();
-
-                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1).FirstOrDefault();
-
-                    //int hcp;
-
-                    //hcp = Convert.ToInt32(m.hcp); /*m.hcp.ToString().Where(x => m.golf_id == mb.Medbokare1).FirstOrDefault();*/
-
-
-
-                }
             }
             else
             {
-            medbokare.Id = 33;
-            medbokare.BokningsId = Convert.ToInt32(id);
-            medbokare.Huvudbokare = User.Identity.GetUserName();
-            medbokare.Medbokare1 = searchString;
-            ds.medbokares.Add(medbokare);
-            ds.SaveChanges();
+                foreach (medbokare mb in aktuellaMedbokare)
+                {
+                    medlemmar m = new medlemmar();
+                    double hcp;
+
+                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1).FirstOrDefault();
+                    huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
+                    aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == searchString).FirstOrDefault();
+
+                    hcp = Convert.ToDouble(m.hcp);
+                    mHcp = Convert.ToDouble(aktuellMedlem.hcp);
+                    hHcp = Convert.ToDouble(huvudbokare.hcp);
+
+                    totalHcp += hcp;
+
+                    if (aktuellMedlem == huvudbokare || aktuellMedlem == m)
+                    {
+                        TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
+                        goto Foo;
+                    }
+
+                }
+
+                totalHcp += hHcp;
+                totalHcp += mHcp;
+
+                if (totalHcp >= 120)
+                {
+                    TempData["msg"] = "<script>alert('Bokningen går ej att göra då det totala handikappet är över 120');</script>";
+                }
+                else
+                {
+                    medbokare.Id = 33;
+                    medbokare.BokningsId = Convert.ToInt32(id);
+                    medbokare.Huvudbokare = User.Identity.GetUserName();
+                    medbokare.Medbokare1 = searchString;
+                    ds.medbokares.Add(medbokare);
+                    ds.SaveChanges();
+                }
             }
-
-
-
-            //return View();
-            return RedirectToAction("index");
-            //return (ContentResult)new AjaxSaveResponse(action);
+             Foo:
+             return RedirectToAction("index");
         }
 
 
