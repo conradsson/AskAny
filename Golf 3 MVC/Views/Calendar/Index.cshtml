@@ -70,34 +70,23 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @*@using (Html.BeginForm())
-                    {
+                    @using (Html.BeginForm("Create", "Calendar"))
+                                {
                         <p>
                             Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
-                        </p>
-                    }*@
-                                @using (Html.BeginForm("Create", "Calendar"))
-                    {
-                        <p>
-                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar,  "id", "start_date"), "Välj Bokning")
                         </p>
                         <p>
                             Medbokare: @*@Html.ListBoxFor(x => x.aktuellaMedbokare, new SelectList(Model.aktuellaMedbokare, "Id", "Medbokare"), "Medgolfare")*@
                        </p>
                         <p>
                             Golfid: @Html.TextBox("SearchString")
-                            <input type="submit" value="Lägg till" />
+                            <input type="submit" name="laggtill" value="Lägg till" />
+                            <input type="submit" name="tabort" value="Ta bort" />
                             @Html.Raw(TempData["msg"])
-
-
                         </p>
-                       
                     }
                 </ul>
-               
-
             </li>
-
         </ul>
 
 
