@@ -106,9 +106,7 @@ namespace Golf_3_MVC.Controllers
                         TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
                         goto Foo;
                     }
-
                 }
-
                 totalHcp += hHcp;
                 totalHcp += mHcp;
 
