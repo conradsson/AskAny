@@ -34,9 +34,7 @@ namespace Golf_3_MVC.Controllers
                 medbokare.Medbokare1 = changedEvent.text;
                 medbokare.BokningsId = changedEvent.id;
 
-            return medbokare;
-
-            
+            return medbokare;            
         }
 
         
@@ -80,7 +78,6 @@ namespace Golf_3_MVC.Controllers
                 .Union(ds.medlemmars.Where(x => x.golf_id.Contains(term))
                 .Select(s => new GolfareAutoComplete { value = s.golf_id, fornamn = s.golf_id }))).ToList();
 
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -96,7 +93,6 @@ namespace Golf_3_MVC.Controllers
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
-
             
             if (Request.Form["laggtill"] != null)
             {
