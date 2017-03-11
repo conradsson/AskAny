@@ -225,32 +225,3 @@ scheduler.renderEvent = function (container, ev) {
     return true; //required, true - display a custom form, false - the default form
 };
 ///////
-
-
-
-//$("#blockbtn").click(function () {
-
-//    var blockfrom = document.getElementsByName('blockfrom')[0].value
-//    var blockto = document.getElementsByName('blockto')[0].value
-
-//    var url = '@Url.Action("Blockinterval")';
-//    $.ajax({
-//        url: url,
-//        type: 'GET',
-//        cache: false,
-//        data: { value: strId }
-//    });
-    
-//    scheduler.addMarkedTimespan({
-
-//                start_date: new Date(blockfrom),
-//                end_date: new Date(blockto),
-//                zones: "fullday",
-//                css: "gray_section",
-//                type: "dhx_time_block"
-//        });
-    
-
-//    scheduler.updateView();
-    
-//});

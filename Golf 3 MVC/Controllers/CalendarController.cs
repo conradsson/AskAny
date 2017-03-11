@@ -168,18 +168,18 @@ namespace Golf_3_MVC.Controllers
             var check = new LightboxText("Highlighting", "Lägg till person");
             sched.Lightbox.Add(check);
 
-           // sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
+                // sched.Config.buttons_left =["dhx_save_btn", "dhx_cancel_btn", "locate_button"];
 
-            //sched.Config.buttons_right.Add(new EventButton
-            //{
-                
-            //    Label = "Lägg till medlem",
-            //    OnClick = "some_function",
-            //    Name = "location"
-                
-            //});
+                //sched.Config.buttons_right.Add(new EventButton
+                //{
 
-            sched.Lightbox.AddDefaults();
+                //    Label = "Lägg till medlem",
+                //    OnClick = "some_function",
+                //    Name = "location"
+
+                //});
+
+                sched.Lightbox.AddDefaults();
 
             sched.Config.start_on_monday = true;
             sched.InitialView = "day";
