@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Postal;
+
 
 namespace Golf_3_MVC.Controllers
 {
@@ -10,6 +12,10 @@ namespace Golf_3_MVC.Controllers
     {
         public ActionResult Index()
         {
+            //dynamic email = new Email("Example");
+            //email.To = "webninja@example.com";
+            //email.FunnyLink = DB.GetRandomLolcatLink();
+            //email.Send();
             return View();
         }
 
