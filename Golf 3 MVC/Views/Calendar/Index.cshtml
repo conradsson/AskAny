@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="medlemmar.js"></script>
     <style>
         body
@@ -25,6 +27,35 @@
     </style>
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
     <script src="~/Scripts/dist/sweetalert.min.js"></script>
+    @*<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" />*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#medlemsId").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Calendar/GetAutoCompleteData",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.fornamn, value: item.efternamn, value: item.golf_id
+                                }
+                            }))
+                        },
+                        messages: {
+                            noResults: "", results: ""
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
 </head>
 <body>
 
@@ -70,34 +101,25 @@
                     Skriv in golfid <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    @*@using (Html.BeginForm())
-                    {
+                    @using (Html.BeginForm("Create", "Calendar"))
+                                {
                         <p>
                             Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
-                        </p>
-                    }*@
-                                @using (Html.BeginForm("Create", "Calendar"))
-                    {
-                        <p>
-                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar,  "id", "start_date"), "Välj Bokning")
                         </p>
                         <p>
                             Medbokare: @*@Html.ListBoxFor(x => x.aktuellaMedbokare, new SelectList(Model.aktuellaMedbokare, "Id", "Medbokare"), "Medgolfare")*@
                        </p>
                         <p>
                             Golfid: @Html.TextBox("SearchString")
-                            <input type="submit" value="Lägg till" />
+                            <input type="submit" name="laggtill" value="Lägg till" />
+                            <input type="submit" name="tabort" value="Ta bort" />
+
                             @Html.Raw(TempData["msg"])
-
-
                         </p>
-                       
                     }
                 </ul>
-               
-
             </li>
-
+            <input type="text" name="medlemmar" id="medlemsId" />
         </ul>
 
 
