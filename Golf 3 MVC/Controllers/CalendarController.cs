@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using Postal;
 
 namespace Golf_3_MVC.Controllers
 {
@@ -419,6 +420,20 @@ namespace Golf_3_MVC.Controllers
 
         //    return RedirectToAction("index");
         //}
+        public ActionResult Send(string to, string subject, string message)
+        {
+            dynamic email = new Email("Example");
+            email.To = to;
+            email.Subject = subject;
+            email.Message = message;
+            email.Date = DateTime.Now;
+
+            //EmailService.Send(email);
+            //service.Send(email);
+            
+
+            return RedirectToAction("Sent");
+        }
     }
 
 }

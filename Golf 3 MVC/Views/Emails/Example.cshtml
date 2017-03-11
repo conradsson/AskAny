@@ -1,9 +1,10 @@
-﻿To: @ViewBag.To
-From: lolcats@website.com
-Subject: Important Message
+﻿To: @View.To
+From: example@website.com
+Subject: @View.Subject
 
 Hello,
-You wanted important web links right?
-Check out this: @ViewBag.FunnyLink
+This email was generated using Postal for asp.net mvc on @View.Date.ToShortDateString()
+Message follows:
+@View.Message
 
-<3
+Thanks!
