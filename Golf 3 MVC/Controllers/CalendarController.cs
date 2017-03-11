@@ -433,7 +433,7 @@ namespace Golf_3_MVC.Controllers
             email.Message = message;
             email.Send();
 
-            return RedirectToAction("Sent");
+            return RedirectToAction("index");
         }
     }
 
