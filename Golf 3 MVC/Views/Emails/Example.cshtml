@@ -1,10 +1,6 @@
-﻿To: @View.To
-From: example@website.com
-Subject: @View.Subject
+﻿To: @ViewBag.To
+From: postal@myapp.com
+Subject: An example message
 
 Hello,
-This email was generated using Postal for asp.net mvc on @View.Date.ToShortDateString()
-Message follows:
-@View.Message
-
-Thanks!
+The message is: @ViewBag.Message

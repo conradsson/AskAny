@@ -424,17 +424,14 @@ namespace Golf_3_MVC.Controllers
 
         //    return RedirectToAction("index");
         //}
-        public ActionResult Send(string to, string subject, string message)
+        
+            //Used to send email
+      public ActionResult Send(string message)
         {
             dynamic email = new Email("Example");
-            email.To = to;
-            email.Subject = subject;
+            email.To = "test@example.com";
             email.Message = message;
-            email.Date = DateTime.Now;
-
-            //EmailService.Send(email);
-            //service.Send(email);
-
+            email.Send();
 
             return RedirectToAction("Sent");
         }
