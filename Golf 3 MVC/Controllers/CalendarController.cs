@@ -14,6 +14,10 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using Postal;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+
 
 namespace Golf_3_MVC.Controllers
 {
@@ -430,7 +434,7 @@ namespace Golf_3_MVC.Controllers
 
             //EmailService.Send(email);
             //service.Send(email);
-            
+
 
             return RedirectToAction("Sent");
         }
