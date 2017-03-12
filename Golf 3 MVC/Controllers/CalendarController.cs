@@ -77,11 +77,11 @@ namespace Golf_3_MVC.Controllers
         {
 
             var result = ds.medlemmars.Where(x => x.fornamn.Contains(term))
-                .Select(s => new GolfareAutoComplete { value = s.fornamn, fornamn = s.fornamn })
+                .Select(s => new GolfareAutoComplete { value = s.fornamn, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id})
                 .Union(ds.medlemmars.Where(x => x.efternamn.Contains(term))
-                .Select(s => new GolfareAutoComplete { value = s.efternamn, fornamn = s.efternamn })
+                .Select(s => new GolfareAutoComplete { value = s.efternamn, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id })
                 .Union(ds.medlemmars.Where(x => x.golf_id.Contains(term))
-                .Select(s => new GolfareAutoComplete { value = s.golf_id, fornamn = s.golf_id }))).ToList();
+                .Select(s => new GolfareAutoComplete { value = s.golf_id, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id }))).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
