@@ -120,7 +120,7 @@ namespace Golf_3_MVC.Controllers
 
                         hcp = Convert.ToDouble(m.hcp);
                         mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                        hHcp = Convert.ToDouble(huvudbokare.hcp);
+                        hHcp = Convert.ToDouble(huvudbokare.hcp); 
 
                         totalHcp += hcp;
 
