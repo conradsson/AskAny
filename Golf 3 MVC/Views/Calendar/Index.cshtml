@@ -107,10 +107,7 @@
                             Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
                         </p>
                         <p>
-                            Medbokare: @*@Html.ListBoxFor(x => x.aktuellaMedbokare, new SelectList(Model.aktuellaMedbokare, "Id", "Medbokare"), "Medgolfare")*@
-                       </p>
-                        <p>
-                            Golfid: @Html.TextBox("medlemsId", "Sök person")
+                            Sök efter person: @Html.TextBox("medlemsId", "Sök person")
                             <input type="submit" name="laggtill" value="Lägg till" />
                             <input type="submit" name="tabort" value="Ta bort" />
 
