@@ -12,11 +12,10 @@
 
 #medlemsId.ui-autocomplete-input{
 
-
 }
 
 #ui-id-1{
-
+         max-height: 200px; overflow-y: scroll; overflow-x: hidden;
         z-index: 1000;
 }
 
