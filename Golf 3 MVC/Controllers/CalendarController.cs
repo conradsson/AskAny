@@ -86,8 +86,9 @@ namespace Golf_3_MVC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Create(FormCollection actionValues, string searchString)
+        public ActionResult Create(FormCollection actionValues, string medlemsId)
         {
+            string golfID = medlemsId.Split(' ').Last();
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
@@ -98,6 +99,7 @@ namespace Golf_3_MVC.Controllers
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
+
             
             if (Request.Form["laggtill"] != null)
             {
@@ -112,9 +114,9 @@ namespace Golf_3_MVC.Controllers
                     medlemmar m = new medlemmar();
                         double hcp;
 
-                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1).FirstOrDefault();
+                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                         huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
-                        aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == searchString).FirstOrDefault();
+                        aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
                         hcp = Convert.ToDouble(m.hcp);
                         mHcp = Convert.ToDouble(aktuellMedlem.hcp);
@@ -140,7 +142,7 @@ namespace Golf_3_MVC.Controllers
             medbokare.Id = 33;
             medbokare.BokningsId = Convert.ToInt32(id);
             medbokare.Huvudbokare = User.Identity.GetUserName();
-            medbokare.Medbokare1 = searchString;
+            medbokare.Medbokare1 = golfID;
             ds.medbokares.Add(medbokare);
             ds.SaveChanges();
             }
@@ -153,7 +155,7 @@ namespace Golf_3_MVC.Controllers
 
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
-                    if (mb.Medbokare1 == searchString)
+                    if (mb.Medbokare1 == golfID)
                     {
                         ds.medbokares.Remove(mb);
 
