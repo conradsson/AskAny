@@ -28,19 +28,19 @@ namespace Golf_3_MVC.Controllers
         double hHcp;
         double mHcp;
 
-        public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
-        {
-            var action = new DataAction(actionValues);
+        //public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
+        //{
+        //    var action = new DataAction(actionValues);
 
-                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //        var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
-                medbokare.BokningsId = 33;
-                medbokare.Huvudbokare = User.Identity.GetUserName();
-                medbokare.Medbokare1 = changedEvent.text;
-                medbokare.BokningsId = changedEvent.id;
+        //        medbokare.BokningsId = 33;
+        //        medbokare.Huvudbokare = User.Identity.GetUserName();
+        //        medbokare.Medbokare1 = changedEvent.text;
+        //        medbokare.BokningsId = changedEvent.id;
 
-            return medbokare;            
-        }
+        //    return medbokare;            
+        //}
 
         
         //public ViewResult Index1()
@@ -155,7 +155,7 @@ namespace Golf_3_MVC.Controllers
 
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
-                    if (mb.Medbokare1 == golfID)
+                    if (mb.Medbokare1.Trim() == golfID)
                     {
                         ds.medbokares.Remove(mb);
 
