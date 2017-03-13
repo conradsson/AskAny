@@ -259,7 +259,7 @@ namespace Golf_3_MVC.Controllers
 
                             m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                             string epost = m.epost;
-                            SendEmail(m.epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
+                            SendEmail(epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
 
                         }
 
@@ -294,7 +294,7 @@ namespace Golf_3_MVC.Controllers
 
                     m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                     string epost = m.epost;
-                    SendEmail(m.epost, "Avbokning", "En spelare har avbokat sig från samma tid som du är inbokad på!");
+                    SendEmail(epost, "Avbokning", "En spelare har avbokat sig från samma tid som du är inbokad på!");
 
                 }
             }
