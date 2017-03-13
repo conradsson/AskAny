@@ -187,7 +187,7 @@ namespace Golf_3_MVC.Controllers
             return RedirectToAction("index");
         }
 
-        public ActionResult CreateMedlem(FormCollection actionValues, string golfidstring)
+        public ActionResult CreateMedlem(FormCollection actionValues, string golfidstring, IEnumerable<bool> checkbox)
         {
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
@@ -200,12 +200,16 @@ namespace Golf_3_MVC.Controllers
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
+            if (checkbox != null && checkbox.Count() == 2)
+            {
+                TempData["msg"] = "<script>alert('HEJ');</script>";
+            }
 
             if (Request.Form["laggtill"] != null)
             {
                 if (id == null)
                 {
-                    TempData["msg"] = "<script>alert(Du måste välja en bokning');</script>";
+                    TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
                     
                 }
                 
@@ -245,6 +249,8 @@ namespace Golf_3_MVC.Controllers
                     }
                     else // OM ALLT OK; LÄGGER TILL PERSON
                     {
+
+
                         medbokare.Id = 33;
                         medbokare.BokningsId = Convert.ToInt32(id);
                         medbokare.Huvudbokare = User.Identity.GetUserName();
@@ -272,7 +278,7 @@ namespace Golf_3_MVC.Controllers
             {
                 if (id == null)
                 {
-                    TempData["msg"] = "<script>alert(Du måste välja en bokning');</script>";
+                    TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
                     goto Foo;
                 }
 
