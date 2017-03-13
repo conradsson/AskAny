@@ -423,7 +423,7 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;                            
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
-                            SendEmail("johanconradsson1993@hotmail.com", "Tack för bokning", "Vi love you long time",true);
+                            SendEmail("conradsson1993@hotmail.com", "Tack för bokning", "Vi love you long time");
                         }
 
                         break;
@@ -525,13 +525,13 @@ namespace Golf_3_MVC.Controllers
         //    return RedirectToAction("index");
         //}
 
-        public static void SendEmail(string toAddress, string subject, string body, bool isBodyHtml = true)
+        public static void SendEmail(string toAddress, string subject, string body)
         {
             var mailMessage = new MailMessage();
             mailMessage.To.Add(toAddress);
             mailMessage.Subject = subject;
             mailMessage.Body = body;
-            mailMessage.IsBodyHtml = isBodyHtml;
+
 
             var smtpClient = new SmtpClient { EnableSsl = true };
             smtpClient.Send(mailMessage);
