@@ -108,7 +108,7 @@ namespace Golf_3_MVC.Controllers
             medlemmar aktuellMedlem = new medlemmar();
             medlemmar huvudbokare = new medlemmar();
             string id = actionValues["Bokningar"];
-            aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == sokBokning).ToList();
+            aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsID).ToList();
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
