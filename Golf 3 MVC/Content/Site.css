@@ -10,10 +10,17 @@
 	margin-right: 0%
 }*/
 
+#medlemsId.ui-autocomplete-input{
+
+}
+
+#ui-id-1{
+         max-height: 200px; overflow-y: scroll; overflow-x: hidden;
+        z-index: 1000;
+}
 
 
-
-.logo { 
+.logo {
 	position: absolute;
 	background: url('../Content/img/logotyp1-1.png');
 	background-size:100%;
@@ -25,7 +32,7 @@
 	margin: 0;
 	cursor:pointer;
 }
-.logo:hover { 
+.logo:hover {
 	cursor:pointer;
 }
 
@@ -83,24 +90,24 @@
 .fade-carousel .carousel-inner .item .hero {
 	opacity: 0;
 	-webkit-transition: 1s all ease-in-out .1s;
-	   -moz-transition: 1s all ease-in-out .1s; 
-		-ms-transition: 1s all ease-in-out .1s; 
-		 -o-transition: 1s all ease-in-out .1s; 
-			transition: 1s all ease-in-out .1s; 
+	   -moz-transition: 1s all ease-in-out .1s;
+		-ms-transition: 1s all ease-in-out .1s;
+		 -o-transition: 1s all ease-in-out .1s;
+			transition: 1s all ease-in-out .1s;
 }
 .fade-carousel .carousel-inner .item.active .hero {
 	opacity: 1;
 	-webkit-transition: 1s all ease-in-out .1s;
-	   -moz-transition: 1s all ease-in-out .1s; 
-		-ms-transition: 1s all ease-in-out .1s; 
-		 -o-transition: 1s all ease-in-out .1s; 
-			transition: 1s all ease-in-out .1s;    
+	   -moz-transition: 1s all ease-in-out .1s;
+		-ms-transition: 1s all ease-in-out .1s;
+		 -o-transition: 1s all ease-in-out .1s;
+			transition: 1s all ease-in-out .1s;
 }
 
 /********************************/
 /*       Slides backgrounds     */
 /********************************/
-.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-1,
 .fade-carousel .slides .slide-2,
 .fade-carousel .slides .slide-3 {
   height: 400px;
@@ -119,7 +126,7 @@
 
 				 /* START */
 .fade-carousel .slides .startslide1 {
-  background-image: url(img/start/start1-1280.jpg); 
+  background-image: url(img/start/start1-1280.jpg);
 }
 .fade-carousel .slides .startslide2 {
   background-image: url(img/start/start2-1280.jpg);
@@ -130,7 +137,7 @@
 
 				 /* BANORNA */
 .fade-carousel .slides .banornaslide1 {
-  background-image: url(img/banorna/bana1-1280.jpg); 
+  background-image: url(img/banorna/bana1-1280.jpg);
 }
 .fade-carousel .slides .banornaslide2 {
   background-image: url(img/banorna/bana2-1280.jpg);
@@ -209,7 +216,7 @@
     width: 99%;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 
@@ -222,7 +229,7 @@
 	width: 70%;
 }
 .full {
-    width: 100%;    
+    width: 100%;
 }
 
 .footer {
@@ -349,7 +356,7 @@
 	padding-top: 6px;
 }
 .payments {
-	font-size: 1.5em;	
+	font-size: 1.5em;
 }
 
 /* SOCIAL BUTTONS */
@@ -436,8 +443,8 @@ ul.social-network li {
 	padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
 	white-space: normal;
@@ -455,9 +462,9 @@ textarea {
 /********************************/
 
 @media screen and (min-width: 980px){
-	.hero { width: 980px; }    
+	.hero { width: 980px; }
 }
 
 @media screen and (max-width: 640px){
-	.hero h1 { font-size: 4em; }    
+	.hero h1 { font-size: 4em; }
 }

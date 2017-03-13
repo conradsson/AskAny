@@ -28,19 +28,19 @@ namespace Golf_3_MVC.Controllers
         double hHcp;
         double mHcp;
 
-        public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
-        {
-            var action = new DataAction(actionValues);
+        //public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
+        //{
+        //    var action = new DataAction(actionValues);
 
-                var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
+        //        var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
 
-                medbokare.BokningsId = 33;
-                medbokare.Huvudbokare = User.Identity.GetUserName();
-                medbokare.Medbokare1 = changedEvent.text;
-                medbokare.BokningsId = changedEvent.id;
+        //        medbokare.BokningsId = 33;
+        //        medbokare.Huvudbokare = User.Identity.GetUserName();
+        //        medbokare.Medbokare1 = changedEvent.text;
+        //        medbokare.BokningsId = changedEvent.id;
 
-            return medbokare;            
-        }
+        //    return medbokare;            
+        //}
 
         
         //public ViewResult Index1()
@@ -77,17 +77,18 @@ namespace Golf_3_MVC.Controllers
         {
 
             var result = ds.medlemmars.Where(x => x.fornamn.Contains(term))
-                .Select(s => new GolfareAutoComplete { value = s.fornamn, fornamn = s.fornamn })
+                .Select(s => new GolfareAutoComplete { value = s.fornamn, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id})
                 .Union(ds.medlemmars.Where(x => x.efternamn.Contains(term))
-                .Select(s => new GolfareAutoComplete { value = s.efternamn, fornamn = s.efternamn })
+                .Select(s => new GolfareAutoComplete { value = s.efternamn, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id })
                 .Union(ds.medlemmars.Where(x => x.golf_id.Contains(term))
-                .Select(s => new GolfareAutoComplete { value = s.golf_id, fornamn = s.golf_id }))).ToList();
+                .Select(s => new GolfareAutoComplete { value = s.golf_id, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id }))).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Create(FormCollection actionValues, string searchString)
+        public ActionResult Create(FormCollection actionValues, string medlemsId)
         {
+            string golfID = medlemsId.Split(' ').Last();
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
@@ -98,6 +99,7 @@ namespace Golf_3_MVC.Controllers
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
+
             
             if (Request.Form["laggtill"] != null)
             {
@@ -112,13 +114,13 @@ namespace Golf_3_MVC.Controllers
                     medlemmar m = new medlemmar();
                         double hcp;
 
-                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1).FirstOrDefault();
+                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                         huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
-                        aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == searchString).FirstOrDefault();
+                        aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
                         hcp = Convert.ToDouble(m.hcp);
                         mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                        hHcp = Convert.ToDouble(huvudbokare.hcp);
+                        hHcp = Convert.ToDouble(huvudbokare.hcp); 
 
                         totalHcp += hcp;
 
@@ -140,7 +142,7 @@ namespace Golf_3_MVC.Controllers
             medbokare.Id = 33;
             medbokare.BokningsId = Convert.ToInt32(id);
             medbokare.Huvudbokare = User.Identity.GetUserName();
-            medbokare.Medbokare1 = searchString;
+            medbokare.Medbokare1 = golfID;
             ds.medbokares.Add(medbokare);
             ds.SaveChanges();
             }
@@ -153,7 +155,7 @@ namespace Golf_3_MVC.Controllers
 
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
-                    if (mb.Medbokare1 == searchString)
+                    if (mb.Medbokare1.Trim() == golfID)
                     {
                         ds.medbokares.Remove(mb);
 

@@ -12,6 +12,7 @@
 <head>
     <title>Hållslaget GK</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
     <script src="~/Scripts/jquery-3.1.1.js"></script>
@@ -47,7 +48,7 @@
                         },
                         messages: {
                             noResults: "", results: ""
-                        }
+                        } 
                     });
                 }
             });
@@ -98,19 +99,16 @@
 
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Skriv in golfid <span class="caret"></span>
+                    Lägg till person <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                     @using (Html.BeginForm("Create", "Calendar"))
                                 {
                         <p>
-                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"), "Välj Bokning")
+                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
                         </p>
                         <p>
-                            Medbokare: @*@Html.ListBoxFor(x => x.aktuellaMedbokare, new SelectList(Model.aktuellaMedbokare, "Id", "Medbokare"), "Medgolfare")*@
-                       </p>
-                        <p>
-                            Golfid: @Html.TextBox("SearchString")
+                            Sök efter person: @Html.TextBox("medlemsId")
                             <input type="submit" name="laggtill" value="Lägg till" />
                             <input type="submit" name="tabort" value="Ta bort" />
 
@@ -119,7 +117,7 @@
                     }
                 </ul>
             </li>
-            <input type="text" name="medlemmar" id="medlemsId" />
+            @*<input type="text" name="medlemmar" id="medlemsId" />*@
         </ul>
 
 
