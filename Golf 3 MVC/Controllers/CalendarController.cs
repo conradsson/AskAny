@@ -99,6 +99,7 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning)
         {
+
             string bokningsID = sokBokning.Split(' ').Last();
             string golfID = medlemsId.Split(' ').Last();
             medbokare medbokare = new medbokare();
@@ -107,7 +108,7 @@ namespace Golf_3_MVC.Controllers
             medlemmar aktuellMedlem = new medlemmar();
             medlemmar huvudbokare = new medlemmar();
             string id = actionValues["Bokningar"];
-            aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
+            aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == sokBokning).ToList();
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
@@ -151,9 +152,13 @@ namespace Golf_3_MVC.Controllers
             }
                     else // OM ALLT OK; LÄGGER TILL PERSON
             {
+
+                        bokning hej;
+                        hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
+
             medbokare.Id = 33;
-            medbokare.BokningsId = Convert.ToInt32(id);
-            medbokare.Huvudbokare = User.Identity.GetUserName();
+            medbokare.BokningsId = Convert.ToInt32(bokningsID);
+            medbokare.Huvudbokare = hej.golf_id;
             medbokare.Medbokare1 = golfID;
             ds.medbokares.Add(medbokare);
             ds.SaveChanges();
@@ -163,7 +168,7 @@ namespace Golf_3_MVC.Controllers
             else if (Request.Form["tabort"] != null) // TAR BORT EN MEDBOKARE FRÅN EN BOKNING
             {
 
-                aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
+                aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsID).ToList();
 
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
@@ -257,10 +262,7 @@ namespace Golf_3_MVC.Controllers
 
                         }
 
-
-
                         TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
-
 
                     }
                 }
