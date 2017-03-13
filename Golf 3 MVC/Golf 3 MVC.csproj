@@ -647,7 +647,7 @@
     <Content Include="Views\Calendar\offseason.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
-    <Content Include="Views\Emails\Example.cshtml" />
+    <Content Include="Views\Emails\Bokning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

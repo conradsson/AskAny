@@ -526,7 +526,7 @@ namespace Golf_3_MVC.Controllers
       public ActionResult Send(string message)
         {
             bokning EV = new bokning();
-            dynamic email = new Email("Example");
+            dynamic email = new Email("Bokning");
             email.To = EV.golf_id; // "conradsson1993@hotmail.com"; //Komma åt användarna på bokningens emails.
             email.Message = message;
             email.Send();
