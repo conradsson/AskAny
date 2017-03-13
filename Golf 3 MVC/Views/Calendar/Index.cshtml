@@ -97,10 +97,29 @@
 
             }
 
-            @if (User.IsInRole("Medlem"))  // ENDAST FÖR MEDLEM
+            @if (User.IsInRole("User"))  // ENDAST FÖR MEDLEM
             {
 
-                // MODIFIERAD SÖK FÖR MEDLEM
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Lägg till person <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @using (Html.BeginForm("CreateMedlem", "Calendar"))
+                        {
+                            <p>
+                                Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
+                            </p>
+                            <p>
+                                Sök efter person: @Html.TextBox("golfidstring")
+                                <input type="submit" name="laggtill" value="Lägg till" />
+                                <input type="submit" name="tabort" value="Ta bort" />
+
+                                @Html.Raw(TempData["msg"])
+                            </p>
+                        }
+                    </ul>
+                </li>
 
             }
             else
