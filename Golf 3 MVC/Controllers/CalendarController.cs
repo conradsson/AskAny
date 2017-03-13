@@ -299,7 +299,11 @@ namespace Golf_3_MVC.Controllers
 
                             if (User.IsInRole("Personal") || User.IsInRole("Admin"))
                             {// ENDAST FÖR PERSONAL OCH ADMIN
-                                BlockTimeDelete(changedEvent.start_date, changedEvent.end_date);
+                                
+                                // OM DET REDAN FINNS EN BLOCKTIME PÅ TIDEN
+
+
+                                //ANNARS
                                 bokning EV = new bokning();
                                 EV.id = changedEvent.id;
                                 EV.start_date = changedEvent.start_date;
@@ -307,6 +311,7 @@ namespace Golf_3_MVC.Controllers
                                 EV.text = changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
+                                //BlockTimeDelete(changedEvent.start_date, changedEvent.end_date);
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
                             }
@@ -397,7 +402,7 @@ namespace Golf_3_MVC.Controllers
         {
             foreach (var i in ds.boknings)
             {
-                if (i.start_date > start && i.start_date < stop)
+                if (i.start_date > start && i.end_date < stop)
                 {
                     ds.boknings.Remove(i);
                     ds.SaveChanges();
