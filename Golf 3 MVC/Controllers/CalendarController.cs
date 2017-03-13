@@ -432,11 +432,12 @@ namespace Golf_3_MVC.Controllers
             //Used to send email
       public ActionResult Send(string message)
         {
+            bokning EV = new bokning();
             dynamic email = new Email("Example");
-            email.To = "test@example.com";
+            email.To = EV.golf_id; // "conradsson1993@hotmail.com"; //Komma åt användarna på bokningens emails.
             email.Message = message;
             email.Send();
-
+            
             return RedirectToAction("index");
         }
     }
