@@ -388,7 +388,6 @@ namespace Golf_3_MVC.Controllers
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
 
-
                         if (diff.TotalHours > 0.17) // om det är mer än 10min
                         {//BLOCKTIME
 
@@ -422,9 +421,10 @@ namespace Golf_3_MVC.Controllers
                             EV.end_date = changedEvent.end_date;
                             EV.text = changedEvent.text;
                             EV.golf_id = User.Identity.GetUserName();
-                            EV.blocktime = false;
+                            EV.blocktime = false;                            
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
+                            Send("Hej");
                         }
 
                         break;
@@ -527,7 +527,7 @@ namespace Golf_3_MVC.Controllers
         {
             bokning EV = new bokning();
             dynamic email = new Email("Bokning");
-            email.To = EV.golf_id; // "conradsson1993@hotmail.com"; //Komma åt användarna på bokningens emails.
+            email.To = "conradsson1993@hotmail.com"; //Komma åt användarna på bokningens emails.
             email.Message = message;
             email.Send();
             
