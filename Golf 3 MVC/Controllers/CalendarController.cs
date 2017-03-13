@@ -423,6 +423,7 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;                            
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
+                            SendEmail("johanconradsson1993@hotmail.com", "Tack för bokning", "Vi love you long time",true);
                         }
 
                         break;
@@ -532,7 +533,7 @@ namespace Golf_3_MVC.Controllers
             mailMessage.Body = body;
             mailMessage.IsBodyHtml = isBodyHtml;
 
-            var smtpClient = new SmtpClient { EnableSsl = false };
+            var smtpClient = new SmtpClient { EnableSsl = true };
             smtpClient.Send(mailMessage);
         }
     }
