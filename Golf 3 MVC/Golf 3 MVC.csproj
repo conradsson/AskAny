@@ -207,6 +207,7 @@
     <Compile Include="Models\bokning.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BokningarAutoComplete.cs" />
     <Compile Include="Models\CalendarBookings.cs" />
     <Compile Include="Models\CalendarData.Context.cs">
       <AutoGen>True</AutoGen>

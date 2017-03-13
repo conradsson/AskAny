@@ -39,13 +39,13 @@ namespace Golf_3_MVC.Controllers
         //        medbokare.Medbokare1 = changedEvent.text;
         //        medbokare.BokningsId = changedEvent.id;
 
-        //    return medbokare;            
+        //    return medbokare;
         //}
 
-        
+
         //public ViewResult Index1()
         //{
-        //    //Create db context object here 
+        //    //Create db context object here
         //    dsu3Entities db = new dsu3Entities();
         //    //Get the value from database and then set it to ViewBag to pass it View
         //    IEnumerable<SelectListItem> items = db.boknings.Select(c => new SelectListItem
@@ -63,7 +63,7 @@ namespace Golf_3_MVC.Controllers
         //{
         //    dsu3Entities db = new dsu3Entities();
         //    ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
-            
+
 
         //    return RedirectToAction("index");
         //}
@@ -86,8 +86,21 @@ namespace Golf_3_MVC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Create(FormCollection actionValues, string medlemsId)
+        public ActionResult GetAutoCompleteDataBokning(string term)
         {
+            var result = ds.boknings.Where(x => x.text.Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.text, text = s.start_date + " " + s.text + " ID: " + s.id })
+                .Union(ds.boknings.Where(x => x.start_date.ToString().Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.start_date.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })
+                .Union(ds.boknings.Where(x => x.id.ToString().Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id }))).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning)
+        {
+            string bokningsID = sokBokning.Split(' ').Last();
             string golfID = medlemsId.Split(' ').Last();
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
@@ -100,7 +113,7 @@ namespace Golf_3_MVC.Controllers
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
-            
+
             if (Request.Form["laggtill"] != null)
             {
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
@@ -120,7 +133,7 @@ namespace Golf_3_MVC.Controllers
 
                         hcp = Convert.ToDouble(m.hcp);
                         mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                        hHcp = Convert.ToDouble(huvudbokare.hcp); 
+                        hHcp = Convert.ToDouble(huvudbokare.hcp);
 
                         totalHcp += hcp;
 
@@ -165,7 +178,7 @@ namespace Golf_3_MVC.Controllers
                 ds.SaveChanges();
             }
 
-           
+
              Foo:
             return RedirectToAction("index");
         }
@@ -189,9 +202,9 @@ namespace Golf_3_MVC.Controllers
                 if (id == null)
                 {
                     TempData["msg"] = "<script>alert(Du måste välja en bokning');</script>";
-                    
+
                 }
-                
+
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
@@ -267,7 +280,7 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Index()
         {
-            season season = new season();   
+            season season = new season();
             var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
 
             if (data.seasontoggle == false)  // KOLLAR OM SÄSONGEN ÄR AKTIV
@@ -294,7 +307,7 @@ namespace Golf_3_MVC.Controllers
             sched.Skin = DHXScheduler.Skins.Flat;
 
 
-            sched.Config.first_hour = 8;
+                sched.Config.first_hour = 8;
             sched.Config.last_hour = 21;
             sched.Config.time_step = 10;
 
@@ -327,7 +340,7 @@ namespace Golf_3_MVC.Controllers
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
-            
+
             model.sched = sched;
             return View(model);
             }
@@ -352,7 +365,7 @@ namespace Golf_3_MVC.Controllers
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-            else 
+            else
             {
                 var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
                 data.seasontoggle = season.seasontoggle;
@@ -394,7 +407,7 @@ namespace Golf_3_MVC.Controllers
 
                             if (User.IsInRole("Personal") || User.IsInRole("Admin"))
                             {// ENDAST FÖR PERSONAL OCH ADMIN
-                                
+
                                 // OM DET REDAN FINNS EN BLOCKTIME PÅ TIDEN
 
 
@@ -410,7 +423,7 @@ namespace Golf_3_MVC.Controllers
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
                             }
-                            else 
+                            else
                             {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
 
                                 TempData["msg"] = "<script>alert('Du kan bara boka 10 minuter');</script>";
@@ -528,7 +541,7 @@ namespace Golf_3_MVC.Controllers
 
         //    return RedirectToAction("index");
         //}
-        
+
             //Used to send email
       public ActionResult Send(string message)
         {
@@ -537,7 +550,7 @@ namespace Golf_3_MVC.Controllers
             email.To = EV.golf_id; // "conradsson1993@hotmail.com"; //Komma åt användarna på bokningens emails.
             email.Message = message;
             email.Send();
-            
+
             return RedirectToAction("index");
         }
     }
