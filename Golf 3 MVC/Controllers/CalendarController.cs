@@ -13,7 +13,6 @@ using Microsoft.AspNet.Identity;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Collections.Generic;
-using Postal;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -400,9 +399,9 @@ namespace Golf_3_MVC.Controllers
                                 EV.text = changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
-                                BlockTimeDelete(changedEvent.start_date, changedEvent.end_date);
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
+                                BlockTimeDelete(EV.start_date, EV.end_date);
                             }
                             else 
                             {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
@@ -424,7 +423,6 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;                            
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
-                            Send("Hej");
                         }
 
                         break;
@@ -488,21 +486,25 @@ namespace Golf_3_MVC.Controllers
         }
         public ActionResult BlockTimeDelete(DateTime start, DateTime stop)
         {
+            dsu3Entities ds3 = new dsu3Entities();
+
             foreach (var i in ds.boknings)
             {
                 if (i.start_date > start && i.end_date < stop)
                 {
-                    ds.boknings.Remove(i);
-                    ds.SaveChanges();
-                    foreach (var x in ds.medbokares)
+                    foreach (var x in ds3.medbokares)
                     {
                         if (i.id == x.BokningsId)
                         {
-                            ds.medbokares.Remove(x);
-                            ds.SaveChanges();
+                            ds3.medbokares.Remove(x);
+                            ds3.SaveChanges();
                         }
                     }
                 }
+
+                ds3.boknings.Remove(i);
+                ds3.SaveChanges();
+                
             }
             return View();
         }
@@ -521,17 +523,19 @@ namespace Golf_3_MVC.Controllers
 
         //    return RedirectToAction("index");
         //}
-        
-            //Used to send email
-      public ActionResult Send(string message)
+
+        public static void SendEmail(string toAddress, string subject, string body, bool isBodyHtml = true)
         {
-            dynamic email = new Email("Bokning");
-            email.To = "conradsson1993@hotmail.com"; //Komma åt användarna på bokningens emails.
-            email.Message = message;
-            email.Send();
-            
-            return RedirectToAction("index");
+            var mailMessage = new MailMessage();
+            mailMessage.To.Add(toAddress);
+            mailMessage.Subject = subject;
+            mailMessage.Body = body;
+            mailMessage.IsBodyHtml = isBodyHtml;
+
+            var smtpClient = new SmtpClient { EnableSsl = false };
+            smtpClient.Send(mailMessage);
         }
     }
+
 
 }
