@@ -259,6 +259,7 @@ namespace Golf_3_MVC.Controllers
 
                             m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                             string epost = m.epost;
+                            SendEmail(m.epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
 
                         }
 
@@ -287,6 +288,15 @@ namespace Golf_3_MVC.Controllers
                 }
                 TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                 ds.SaveChanges();
+                foreach (medbokare mb in aktuellaMedbokare)
+                {
+                    medlemmar m;
+
+                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                    string epost = m.epost;
+                    SendEmail(m.epost, "Avbokning", "En spelare har avbokat sig från samma tid som du är inbokad på!");
+
+                }
             }
 
 
@@ -432,7 +442,7 @@ namespace Golf_3_MVC.Controllers
                                 EV.blocktime = true;
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
-                                BlockTimeDelete(EV.start_date, EV.end_date);
+                                BlockTimeDelete(EV.id,EV.start_date, EV.end_date);
 
                                 SendEmail("conradsson1993@hotmail.com", "Din tid har avbokats!", "På grund av yttre omständigheter måste banan vara stängd under denna tid!");
                             }
@@ -518,29 +528,45 @@ namespace Golf_3_MVC.Controllers
 
             return (ContentResult)new AjaxSaveResponse(action);
         }
-        public ActionResult BlockTimeDelete(DateTime start, DateTime stop)
+        public void BlockTimeDelete(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
+            string golf_id = User.Identity.GetUserName();
 
             foreach (var i in ds.boknings)
             {
                 if (i.start_date > start && i.end_date < stop)
                 {
+                    //foreach (var x in ds3.medbokares)
+                    //{
+                    //    if (i.id == x.BokningsId)
+                    //    {
+                    //        ds3.medbokares.Remove(x);
+                    //        ds3.SaveChanges();
+                    //    }
+                    //}
                     foreach (var x in ds3.medbokares)
                     {
-                        if (i.id == x.BokningsId)
+                        if (x.BokningsId == id && x.Huvudbokare == golf_id)
                         {
                             ds3.medbokares.Remove(x);
-                            ds3.SaveChanges();
+                        }
+                        else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                        {
+                            ds3.medbokares.Remove(x);
                         }
                     }
-                }
 
-                ds3.boknings.Remove(i);
+                }
                 ds3.SaveChanges();
-                
+                var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
+
+                ds3.boknings.Remove(details);
+                ds3.SaveChanges();
+
+                //ds3.boknings.Remove(i);
+                //ds3.SaveChanges();               
             }
-            return View();
         }
 
         //public ActionResult MedbokareDelete(string golfid, int bokningsid)
