@@ -402,6 +402,7 @@ namespace Golf_3_MVC.Controllers
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
                                 BlockTimeDelete(EV.start_date, EV.end_date);
+                                SendEmail("conradsson1993@hotmail.com", "Din tid har avbokats!", "På grund av yttre omständigheter måste banan vara stängd under denna tid!");
                             }
                             else 
                             {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
@@ -423,7 +424,7 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;                            
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
-                            SendEmail("conradsson1993@hotmail.com", "Tack för bokning", "Vi love you long time");
+                            SendEmail("conradsson1993@hotmail.com", "Bokning", "En spelare har bokat sig på samma tid som dig!");
                         }
 
                         break;
@@ -466,7 +467,7 @@ namespace Golf_3_MVC.Controllers
                             ds.boknings.Remove(details);
                             ds.SaveChanges();
                         }
-
+                        SendEmail("conradsson1993@hotmail.com", "Avbokning", "En spelare har avbokat sig på samma tid som dig!");
                         break;
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
