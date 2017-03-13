@@ -426,7 +426,7 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;                            
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
-                            Send("Hej");
+                            //Send("Hej");
                         }
 
                         break;
