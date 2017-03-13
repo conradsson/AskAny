@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Golf_3_MVC.Models.scorekort>
+﻿@*@model IEnumerable<Golf_3_MVC.Models.Score>*@
 @{
     ViewBag.Title = "scorekort";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    // @model Golf_3_MVC.Models.scorekort
+     @model Golf_3_MVC.Models.Score
 }
 
 <!DOCTYPE html>
@@ -97,15 +97,6 @@
                         vertical-align: top;
                     }
             </style>
-
-@*@foreach (var item in Model)
-{
-    if (item.Hole_nr == "1")
-    {
-        string gul = item.Lenght_Tee_Yellow;
-        string röd = item.Lenght_Tee_Red;
-    }*@
-}
             <table class="tg">
                 <tr>
                     <th class="tg-dx8v" colspan="7" rowspan="2">Spelare:</th>
@@ -118,7 +109,7 @@
                 </tr>
                 <tr>
                     <td class="tg-baqh" colspan="2"><br>Hål:</td>
-                    <td class="tg-baqh" colspan="4"><br>Läng i m:</td>
+                    <td class="tg-baqh" colspan="4"><br>Längd i m:</td>
                     <td class="tg-baqh" colspan="3"></td>
                     <td class="tg-nrw1" colspan="2">Spelare 1<br><br> </td>
                     <td class="tg-nrw1" colspan="2">Spelare 2<br></td>
@@ -142,312 +133,65 @@
                     <td class="tg-baqh">Poäng</td>
                 </tr>
 }
-
-                <tr>
-                    <td class="tg-baqh" colspan="2">1</td>
-                    <td class="tg-21yu" colspan="2">              
-                    </td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                    
                 
-                <tr>
-                    <td class="tg-baqh" colspan="2">2</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">3</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">4</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">5</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">6</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">7</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">8</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">9</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-lqy6" colspan="6">UT</td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">10</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">11</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">12</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">13</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">14</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">15</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">16</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">17</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
-                <tr>
-                    <td class="tg-baqh" colspan="2">18</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                    <td class="tg-yzt1"></td>
-                    <td class="tg-yw4l"></td>
-                </tr>
+                @{ int hål = 1;
+                    foreach (var i in Model.scoreKort)
+                    {
+                        if (i.Hole_nr == "9")
+                        {
+                            <tr>
+                                <td class="tg-baqh" colspan="2">@hål.ToString()</td>
+                                <td class="tg-21yu" colspan="2"> @i.Lenght_Tee_Yellow</td>
+                                <td class="tg-q9qv" colspan="2"> @i.Lenght_Tee_Red</td>
+                                <td class="tg-yw4l">@i.Par</td>
+                                <td class="tg-yzt1">@i.Index</td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                            </tr>
+                            <tr>
+                                <td class="tg-lqy6" colspan="6">UT</td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                            </tr>
+                        }
+                        else if (i.Hole_nr == hål.ToString())
+                        {
+                            <tr>
+                                <td class="tg-baqh" colspan="2">@hål.ToString()</td>
+                                <td class="tg-21yu" colspan="2"> @i.Lenght_Tee_Yellow</td>
+                                <td class="tg-q9qv" colspan="2"> @i.Lenght_Tee_Red</td>
+                                <td class="tg-yw4l">@i.Par</td>
+                                <td class="tg-yzt1">@i.Index</td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                                <td class="tg-yzt1"></td>
+                                <td class="tg-yw4l"></td>
+                            </tr>
+                        }
+                    hål++;
+                    }
+                    }
                 <tr>
                     <td class="tg-lqy6" colspan="6">IN</td>
                     <td class="tg-yw4l"></td>

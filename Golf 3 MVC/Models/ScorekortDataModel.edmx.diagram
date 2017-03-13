@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d40f466842894be0ae0ada6a0673d502" Name="Diagram1">
         <EntityTypeShape EntityType="dsu3Model2.scorekort" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dsu3Model2.slope" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
