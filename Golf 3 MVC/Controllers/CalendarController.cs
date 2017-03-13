@@ -232,7 +232,7 @@ namespace Golf_3_MVC.Controllers
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
-
+            
             model.sched = sched;
             return View(model);
             }
@@ -330,6 +330,8 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
+
+
                         }
 
                         break;
