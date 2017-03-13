@@ -400,8 +400,9 @@ namespace Golf_3_MVC.Controllers
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
                                 ds.boknings.Add(EV);
-                                ds.SaveChanges();
-                                BlockTimeDelete(EV.start_date, EV.end_date);
+                                ds.SaveChanges();                               
+                                BlockTimeDelete(EV.start_date, EV.end_date);                               
+
                                 SendEmail("conradsson1993@hotmail.com", "Din tid har avbokats!", "På grund av yttre omständigheter måste banan vara stängd under denna tid!");
                             }
                             else 
@@ -423,7 +424,7 @@ namespace Golf_3_MVC.Controllers
                             EV.golf_id = User.Identity.GetUserName();
                             EV.blocktime = false;                            
                             ds.boknings.Add(EV);
-                            ds.SaveChanges();
+                            ds.SaveChanges();                           
                             SendEmail("conradsson1993@hotmail.com", "Bokning", "En spelare har bokat sig på samma tid som dig!");
                         }
 
