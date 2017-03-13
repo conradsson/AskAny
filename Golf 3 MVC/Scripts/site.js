@@ -3,9 +3,6 @@
     $("footer").hide(0).fadeIn(500)
     $(".body-content").hide(0).delay(450).fadeIn(1000)
     $(".carousel").hide(0).delay(450).fadeIn(1000)
-
-
-
 });
 
 //  START FLIKEN-EFFEKTER
@@ -22,7 +19,7 @@ $(".pill-nyheter").click(function (e) {
     $(".panel-banstatus").hide();
     $(".pill-nyheter").addClass("active")
     $(".pill-banstatus").removeClass("active")
-    
+
 });
 $(".pill-banstatus").click(function (e) {
     e.preventDefault()
@@ -167,7 +164,7 @@ $(".kalender").ready(function (e) {
 var step = 10;
 var format = scheduler.date.date_to_str("%H:%i");
 
-scheduler.config.hour_size_px=(60/step)*22;    
+scheduler.config.hour_size_px=(60/step)*22;
 scheduler.templates.hour_scale = function(date){
     html="";
     for (var i=0; i<60/step; i++){
@@ -225,3 +222,7 @@ scheduler.renderEvent = function (container, ev) {
     return true; //required, true - display a custom form, false - the default form
 };
 ///////
+
+
+
+

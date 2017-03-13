@@ -85,8 +85,21 @@ namespace Golf_3_MVC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Create(FormCollection actionValues, string medlemsId)
+        public ActionResult GetAutoCompleteDataBokning(string term)
         {
+            var result = ds.boknings.Where(x => x.text.Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.text, text = s.start_date + " " + s.text + " ID: " + s.id })
+                .Union(ds.boknings.Where(x => x.start_date.ToString().Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.start_date.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })
+                .Union(ds.boknings.Where(x => x.id.ToString().Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id }))).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning)
+        {
+            string bokningsID = sokBokning.Split(' ').Last();
             string golfID = medlemsId.Split(' ').Last();
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
@@ -113,7 +126,7 @@ namespace Golf_3_MVC.Controllers
                     medlemmar m = new medlemmar();
                         double hcp;
 
-                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                        m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                         huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
                         aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
@@ -233,7 +246,22 @@ namespace Golf_3_MVC.Controllers
                         medbokare.Medbokare1 = golfidstring;
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
+
+
+                        foreach (medbokare mb in aktuellaMedbokare)
+                        {
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                            string epost = m.epost;
+
+                        }
+
+
+
                         TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+
+
                     }
                 }
             }
@@ -387,6 +415,7 @@ namespace Golf_3_MVC.Controllers
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
 
+
                         if (diff.TotalHours > 0.17) // om det är mer än 10min
                         {//BLOCKTIME
 
@@ -400,8 +429,8 @@ namespace Golf_3_MVC.Controllers
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
                                 ds.boknings.Add(EV);
-                                ds.SaveChanges();                               
-                                BlockTimeDelete(EV.start_date, EV.end_date);                               
+                                ds.SaveChanges();
+                                BlockTimeDelete(EV.start_date, EV.end_date);
 
                                 SendEmail("conradsson1993@hotmail.com", "Din tid har avbokats!", "På grund av yttre omständigheter måste banan vara stängd under denna tid!");
                             }
@@ -422,9 +451,9 @@ namespace Golf_3_MVC.Controllers
                             EV.end_date = changedEvent.end_date;
                             EV.text = changedEvent.text;
                             EV.golf_id = User.Identity.GetUserName();
-                            EV.blocktime = false;                            
+                            EV.blocktime = false;
                             ds.boknings.Add(EV);
-                            ds.SaveChanges();                           
+                            ds.SaveChanges();
                             SendEmail("conradsson1993@hotmail.com", "Bokning", "En spelare har bokat sig på samma tid som dig!");
                         }
 
@@ -526,7 +555,7 @@ namespace Golf_3_MVC.Controllers
 
         //    return RedirectToAction("index");
         //}
-
+        
         public static void SendEmail(string toAddress, string subject, string body)
         {
             var mailMessage = new MailMessage();
@@ -534,7 +563,7 @@ namespace Golf_3_MVC.Controllers
             mailMessage.Subject = subject;
             mailMessage.Body = body;
 
-
+            
             var smtpClient = new SmtpClient { EnableSsl = true };
             smtpClient.Send(mailMessage);
         }

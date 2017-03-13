@@ -7,6 +7,8 @@
 }
 
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +32,7 @@
     <script src="~/Scripts/dist/sweetalert.min.js"></script>
     @*<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" />*@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/site.js"></script>
     <script>
         $(document).ready(function () {
             $("#medlemsId").autocomplete({
@@ -54,12 +57,35 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $("#sokBokning").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Calendar/GetAutoCompleteDataBokning",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.text
+                                }
+                            }))
+                        },
+                        messages: {
+                            noResults: "", results: ""
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 
 
 </head>
 <body>
-
     <div class="row">
         <ul class="nav nav-pills nav-stacked">
 
@@ -131,9 +157,9 @@
                     <ul class="dropdown-menu">
                         @using (Html.BeginForm("Create", "Calendar"))
                         {
-                            @*<p>
-                                Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
-                            </p>*@
+                            <p>
+                                Sök efter bokning: @Html.TextBox("sokBokning")
+                            </p>
                             <p>
                                 Sök efter person: @Html.TextBox("medlemsId")
                                 <input type="submit" name="laggtill" value="Lägg till" />

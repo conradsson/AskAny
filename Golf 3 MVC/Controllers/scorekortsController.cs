@@ -12,6 +12,7 @@ namespace Golf_3_MVC.Controllers
 {
     public class scorekortsController : Controller
     {
+        private dsu3Entities ds = new dsu3Entities();
         private dsu3Entities3 db = new dsu3Entities3();
 
         // GET: scorekorts
@@ -22,7 +23,29 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult scorekort()
         {
-            return View();
+            Score model = new Score();
+
+            List<scorekort> scorkort1 = new List<scorekort>();           
+
+            scorkort1 = db.scorekort.ToList();
+
+            List<slope> slope1 = new List<slope>();
+
+            slope1 = db.slope.ToList();
+
+            model.scoreKort = scorkort1;
+            model.slope = slope1;
+
+
+            //model.scoreKort = ds.scorekorts.ToList();
+            //model.slope = ds.slopes.ToList();
+            //model.medlems = ds.medlemmars.ToList();
+            //model.scoreKort = db.scorekort.ToList();
+            //model.slope = db.slope.ToList();
+
+
+
+            return View(model);
         }
 
         // GET: scorekorts/Details/5
