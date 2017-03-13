@@ -33,6 +33,14 @@ namespace Golf_3_MVC.Controllers
 
             slope1 = db.slope.ToList();
 
+            List<medlemmar> medlem1 = new List<medlemmar>();
+            medlem1 = ds.medlemmars.ToList();
+
+            List<bokning> bokning1 = new List<bokning>();
+            bokning1 = ds.boknings.ToList();
+
+            model.bokning = bokning1;
+            model.medlems = medlem1;
             model.scoreKort = scorkort1;
             model.slope = slope1;
 

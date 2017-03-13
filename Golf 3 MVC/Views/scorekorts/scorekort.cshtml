@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<Golf_3_MVC.Models.Score>*@
-@{
+﻿@{
     ViewBag.Title = "scorekort";
     Layout = "~/Views/Shared/_Layout.cshtml";
      @model Golf_3_MVC.Models.Score
@@ -14,7 +13,6 @@
     <div class="row">
             <style type="text/css">
                     body { 
-                        background-color:#eee;
                         margin-top: 5%;
                     }
                 .tg {
@@ -102,20 +100,48 @@
                     }
             </style>
             <table class="tg">
-                <tr>
-                    <th class="tg-dx8v" colspan="7" rowspan="2">Spelare:</th>
-                    <th class="tg-yw4l" colspan="6">Starttid:</th>
-                    <th class="tg-yw4l" colspan="4">Ex.hcp:</th>
-                </tr>
-                <tr>
-                    <td class="tg-yw4l" colspan="6">Datum:</td>
-                    <td class="tg-yw4l" colspan="4">Erh.slag:</td>
-                </tr>
+                
+                    @{
+                        string golfid = "920626-1";
+                        string HCP="";
+                        string ESlag="";
+                        string starttid="";
+                        string datum="";
+                        string spelare1="";
+
+                        foreach (var i in Model.medlems)
+                        {
+                            if (i.golf_id == golfid)
+                            {
+                                HCP = i.hcp.ToString();
+                                spelare1 = i.fornamn + " " + i.efternamn;
+                                foreach (var x in Model.bokning)
+                                {
+                                    if (x.golf_id == golfid)
+                                    {
+                                        datum = x.start_date.ToShortDateString();
+                                        starttid = x.start_date.ToShortTimeString();
+                                    }
+                                }
+                                // ESlag = erhållnaslag
+                            }
+                        }
+                        <tr>
+                            <th class="tg-dx8v" colspan="7" rowspan="2">Spelare: @spelare1</th>
+                            <th class="tg-yw4l" colspan="6">Starttid: @starttid</th>
+                            <th class="tg-yw4l" colspan="4">Ex.hcp: @HCP</th>
+                        </tr>
+                        <tr>
+                            <td class="tg-yw4l" colspan="6">Datum: @datum</td>
+                            <td class="tg-yw4l" colspan="4">Erh.slag: @ESlag</td>
+                        </tr>
+                    }
+                        
                 <tr>
                     <td class="tg-baqh" colspan="2"><br>Hål:</td>
                     <td class="tg-baqh" colspan="4"><br>Längd i m:</td>
                     <td class="tg-baqh" colspan="3"></td>
-                    <td class="tg-nrw1" colspan="2">Spelare 1<br><br> </td>
+                    <td class="tg-nrw1" colspan="2">Spelare 1<br>@spelare1<br> </td>
                     <td class="tg-nrw1" colspan="2">Spelare 2<br></td>
                     <td class="tg-nrw1" colspan="2">Spelare 3</td>
                     <td class="tg-nrw1" colspan="2">Spelare 4</td>

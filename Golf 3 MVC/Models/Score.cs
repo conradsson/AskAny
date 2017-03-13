@@ -9,7 +9,8 @@ namespace Golf_3_MVC.Models
     {
         public List<scorekort> scoreKort { get; set; }
         public List<slope> slope { get; set; }
-       // public List<medlemmar> medlems { get; set; }
+        public List<medlemmar> medlems { get; set; }
+        public List<bokning> bokning { get; set; }
 
     }
 }
