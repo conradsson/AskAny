@@ -26,5 +26,6 @@ namespace Golf_3_MVC.Models
         }
     
         public virtual DbSet<scorekort> scorekort { get; set; }
+        public virtual DbSet<slope> slope { get; set; }
     }
 }

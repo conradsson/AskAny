@@ -18,8 +18,20 @@
           <Property Name="Lenght_Tee_White" Type="nvarchar" MaxLength="50" />
           <Property Name="Lenght_Tee_Blue" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tee" Type="varchar" MaxLength="50" />
+          <Property Name="Kvinna_CR" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Kvinna_Slope" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_CR" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_Slope" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
         <EntityContainer Name="dsu3Model2StoreContainer">
           <EntitySet Name="scorekort" EntityType="Self.scorekort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="slope" EntityType="Self.slope" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -27,6 +39,7 @@
       <Schema Namespace="dsu3Model2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="dsu3Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="scorekort" EntityType="dsu3Model2.scorekort" />
+          <EntitySet Name="slope" EntityType="dsu3Model2.slope" />
         </EntityContainer>
         <EntityType Name="scorekort">
           <Key>
@@ -40,6 +53,17 @@
           <Property Name="Index" Type="Int32" />
           <Property Name="Lenght_Tee_White" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Lenght_Tee_Blue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Kvinna_CR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Kvinna_Slope" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_CR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_Slope" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -57,6 +81,18 @@
                 <ScalarProperty Name="Lenght_Tee_Yellow" ColumnName="Lenght_Tee_Yellow" />
                 <ScalarProperty Name="Lenght_Tee_Red" ColumnName="Lenght_Tee_Red" />
                 <ScalarProperty Name="Hole_nr" ColumnName="Hole_nr" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="slope">
+            <EntityTypeMapping TypeName="dsu3Model2.slope">
+              <MappingFragment StoreEntitySet="slope">
+                <ScalarProperty Name="Herr_Slope" ColumnName="Herr_Slope" />
+                <ScalarProperty Name="Herr_CR" ColumnName="Herr_CR" />
+                <ScalarProperty Name="Kvinna_Slope" ColumnName="Kvinna_Slope" />
+                <ScalarProperty Name="Kvinna_CR" ColumnName="Kvinna_CR" />
+                <ScalarProperty Name="Tee" ColumnName="Tee" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

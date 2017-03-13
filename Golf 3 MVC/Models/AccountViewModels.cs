@@ -57,7 +57,7 @@ namespace Golf_3_MVC.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Komma ihåg användaren?")]
         public bool RememberMe { get; set; }
     }
 
