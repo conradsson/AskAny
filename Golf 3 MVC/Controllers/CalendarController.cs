@@ -126,7 +126,7 @@ namespace Golf_3_MVC.Controllers
                     medlemmar m = new medlemmar();
                         double hcp;
 
-                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                        m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                         huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
                         aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
@@ -246,7 +246,22 @@ namespace Golf_3_MVC.Controllers
                         medbokare.Medbokare1 = golfidstring;
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
+
+
+                        foreach (medbokare mb in aktuellaMedbokare)
+                        {
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                            string epost = m.epost;
+
+                        }
+
+
+
                         TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+
+
                     }
                 }
             }
@@ -400,6 +415,7 @@ namespace Golf_3_MVC.Controllers
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
 
+
                         if (diff.TotalHours > 0.17) // om det är mer än 10min
                         {//BLOCKTIME
 
@@ -415,6 +431,7 @@ namespace Golf_3_MVC.Controllers
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
                                 BlockTimeDelete(EV.start_date, EV.end_date);
+
                                 SendEmail("conradsson1993@hotmail.com", "Din tid har avbokats!", "På grund av yttre omständigheter måste banan vara stängd under denna tid!");
                             }
                             else 
