@@ -395,7 +395,7 @@ namespace Golf_3_MVC.Controllers
         {
             foreach (var i in ds.boknings)
             {
-                if (i.start_date > start && i.start_date < stop)
+                if (i.start_date > start && i.end_date < stop)
                 {
                     ds.boknings.Remove(i);
                     ds.SaveChanges();
