@@ -400,9 +400,11 @@ namespace Golf_3_MVC.Controllers
                                 EV.text = changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
-                                BlockTimeDelete(changedEvent.start_date, changedEvent.end_date);
+                                
                                 ds.boknings.Add(EV);
+
                                 ds.SaveChanges();
+                                BlockTimeDelete(changedEvent.start_date, changedEvent.end_date);
                             }
                             else 
                             {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
@@ -486,26 +488,30 @@ namespace Golf_3_MVC.Controllers
 
             return (ContentResult)new AjaxSaveResponse(action);
         }
-        public ActionResult BlockTimeDelete(DateTime start, DateTime stop)
+        public void BlockTimeDelete(DateTime start, DateTime stop)
         {
-            foreach (var i in ds.boknings)
+            dsu3Entities dsu = new dsu3Entities();
+
+            foreach (var i in dsu.boknings)
             {
+
                 if (i.start_date > start && i.end_date < stop)
                 {
-                    ds.boknings.Remove(i);
-                    ds.SaveChanges();
-                    foreach (var x in ds.medbokares)
+                    foreach (var x in dsu.medbokares)
                     {
                         if (i.id == x.BokningsId)
                         {
-                            ds.medbokares.Remove(x);
-                            ds.SaveChanges();
+                            dsu.medbokares.Remove(x);
+                            dsu.SaveChanges();
                         }
                     }
+                    dsu.boknings.Remove(i);
+                    dsu.SaveChanges();
+
+                    }
                 }
+
             }
-            return View();
-        }
 
         //public ActionResult MedbokareDelete(string golfid, int bokningsid)
         //{
