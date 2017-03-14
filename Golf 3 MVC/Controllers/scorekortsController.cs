@@ -47,8 +47,8 @@ namespace Golf_3_MVC.Controllers
             model.scoreKort = scorkort1;
             model.slope = slope1;
             model.medbokare = medbokare1;
-            //model.bokningsID = bokningsID;
-            //model.golfID = golfID;
+            model.bokningsID = ViewBag.bokningsID;
+            model.golfID = ViewBag.golfID;
 
 
             return View(model);

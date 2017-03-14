@@ -787,13 +787,28 @@ namespace Golf_3_MVC.Controllers
                     bok.incheckad = true;
                     ds3.SaveChanges();
                     TempData["msg"] = "<script>alert('Incheckningen lyckades.');</script>";
+                    //SkrivUtScoreKort(bok.golf_id, bok.id.ToString());
+
+                    TempData["bokningsID"] = bok.id;
+                    TempData["golfID"] = bok.golf_id;
 
                 }
 
             }
 
-            Boo:
-            return RedirectToAction("index");
+        Boo:
+            Score model = new Score();
+            model.bokningsID = bok.id;
+            model.golfID = bok.golf_id;
+            ViewBag.golfID = bok.golf_id;
+            ViewBag.bokningsID = bok.id;
+            //return RedirectToAction("index");
+            //return RedirectToAction("scorekort", "scorekort", new {bok.id, bok.golf_id });
+            //return RedirectToAction("scorekort", "scorekort");
+           // return View("~/Views/scorekorts/scorekort.cshtml");
+
+            return RedirectToAction("scorekort", "scorekorts");
+
         }
 
         public void AutoDeleteBokning()

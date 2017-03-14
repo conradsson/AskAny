@@ -102,7 +102,7 @@
             <table class="tg">
                 
                     @{
-                        string golfid = "920626-1";// lägg till  Model.golfID
+                        string golfid = Model.golfID; //ViewBag.golfID; // lägg till  Model.golfID
                         string golfid2 = "";
                         string golfid3 = "";
                         string golfid4 = "";
@@ -117,7 +117,7 @@
                         decimal ESlag;
                         string starttid = "";
                         string datum = "";
-                        int bokningsID = 267; //lägg till Model.bokningsID
+                        int bokningsID = Model.bokningsID; //ViewBag.bokningsID; //lägg till Model.bokningsID
                         decimal slope = 124;
                         decimal CR = 73;
 
@@ -298,7 +298,7 @@
                                 räknare = 0;
                                 goto Start;
                             }
-                            Start:
+                        Start:
                             ESlag--;
                             räknare++;
 
