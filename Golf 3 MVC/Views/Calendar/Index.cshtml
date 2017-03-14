@@ -137,7 +137,8 @@
                                 Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
                             </p>
                             <p>
-                                Skriv in golfID: @Html.TextBox("golfidstring")
+                                Skriv in golfID: @Html.TextBox("golfidstring")<br/><br />
+                                Är personen en gäst? @Html.CheckBox("checkbox", "false")<br /><br />
                                 <input type="submit" name="laggtill" value="Lägg till" />
                                 <input type="submit" name="tabort" value="Ta bort" />
 
