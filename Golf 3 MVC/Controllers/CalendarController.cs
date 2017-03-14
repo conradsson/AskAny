@@ -162,7 +162,12 @@ namespace Golf_3_MVC.Controllers
             medbokare.Medbokare1 = golfID;
             ds.medbokares.Add(medbokare);
             ds.SaveChanges();
-            }
+
+            medlemmar m;
+            m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
+            string epost = m.epost;
+            SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
+                    }
                 }
             }
             else if (Request.Form["tabort"] != null) // TAR BORT EN MEDBOKARE FRÅN EN BOKNING
@@ -258,16 +263,21 @@ namespace Golf_3_MVC.Controllers
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
 
+                        medlemmar m;
 
-                        foreach (medbokare mb in aktuellaMedbokare)
-                        {
-                            medlemmar m;
+                        m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
+                        string epost = m.epost;
+                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
 
-                            m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
-                            string epost = m.epost;
-                            SendEmail(epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
+                        //foreach (medbokare mb in aktuellaMedbokare)
+                        //{
+                        //    medlemmar m;
 
-                        }
+                        //    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                        //    string epost = m.epost;
+                        //    SendEmail(epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
+
+                        //}
 
                         TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
 
@@ -294,15 +304,12 @@ namespace Golf_3_MVC.Controllers
                 }
                 TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                 ds.SaveChanges();
-                foreach (medbokare mb in aktuellaMedbokare)
-                {
-                    medlemmar m;
 
-                    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
-                    string epost = m.epost;
-                    SendEmail(epost, "Avbokning", "En spelare har avbokat sig från samma tid som du är inbokad på!");
+                medlemmar m;
 
-                }
+                m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
+                string epost = m.epost;
+                SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
             }
 
 
@@ -336,12 +343,12 @@ namespace Golf_3_MVC.Controllers
 
 
                 var sched = new DHXScheduler(this);
-            sched.Skin = DHXScheduler.Skins.Flat;
+                sched.Skin = DHXScheduler.Skins.Flat;
 
 
-            sched.Config.first_hour = 8;
-            sched.Config.last_hour = 21;
-            sched.Config.time_step = 10;
+                sched.Config.first_hour = 8;
+                sched.Config.last_hour = 21;
+                sched.Config.time_step = 10;
 
                 foreach (bokning b in allaBokningar) // HÄMTAR OCH URSKILJER BLOCKTIME-BOKNINGAR UR BOKNINGAR
                 {
@@ -450,7 +457,6 @@ namespace Golf_3_MVC.Controllers
                                 ds.SaveChanges();
                                 BlockTimeDelete(EV.id,EV.start_date, EV.end_date);
 
-                                SendEmail("conradsson1993@hotmail.com", "Din tid har avbokats!", "På grund av yttre omständigheter måste banan vara stängd under denna tid!");
                             }
                             else 
                             {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
@@ -472,7 +478,18 @@ namespace Golf_3_MVC.Controllers
                             EV.blocktime = false;
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
-                            SendEmail("conradsson1993@hotmail.com", "Bokning", "En spelare har bokat sig på samma tid som dig!");
+
+
+                            List<medlemmar> allaMedlemmar = new List<medlemmar>();                           
+                            allaMedlemmar = ds.medlemmars.ToList();                        
+
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
+
+                            string epost = m.epost;
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!");
+
                         }
 
                         break;
@@ -498,6 +515,16 @@ namespace Golf_3_MVC.Controllers
 
                             ds.boknings.Remove(details);
                             ds.SaveChanges();
+
+                            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+                            allaMedlemmar = ds.medlemmars.ToList();
+
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
+
+                            string epost = m.epost;
+                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
                         }
 
                         else
@@ -514,8 +541,18 @@ namespace Golf_3_MVC.Controllers
 
                             ds.boknings.Remove(details);
                             ds.SaveChanges();
+
+                            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+                            allaMedlemmar = ds.medlemmars.ToList();
+
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
+
+                            string epost = m.epost;
+                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
                         }
-                        SendEmail("conradsson1993@hotmail.com", "Avbokning", "En spelare har avbokat sig på samma tid som dig!");
+
                         break;
                     default:// "update"
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
