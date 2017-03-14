@@ -118,7 +118,27 @@
                             Systemet identifierar av sig självt att det är en ny blockering och inte en ny bokning.
                         </p>
 
+
                 </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Ta bort blocktider <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @using (Html.BeginForm("DeleteBlocktime", "Calendar"))
+                    {
+                        <p>
+                            Välj bokning: @Html.DropDownList("BlocktimeBokningar", new SelectList(Model.allaBlocktimeBokningar, "id", "start_date"))
+
+                            <input type="submit" name="tabort" value="Ta bort" />
+
+                            @Html.Raw(TempData["msg"])
+                        </p>
+                    }
+
+                </ul>
+
             </li>
 
             }
