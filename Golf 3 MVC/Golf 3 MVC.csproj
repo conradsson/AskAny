@@ -200,18 +200,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\bokning.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
@@ -231,9 +219,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CalendarData.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GolfareAutoComplete.cs" />
     <Compile Include="Models\IdentityModels.cs" />
