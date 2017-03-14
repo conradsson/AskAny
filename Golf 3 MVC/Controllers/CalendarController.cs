@@ -812,12 +812,8 @@ namespace Golf_3_MVC.Controllers
             model.golfID = bok.golf_id;
             ViewBag.golfID = bok.golf_id;
             ViewBag.bokningsID = bok.id;
-            //return RedirectToAction("index");
-            //return RedirectToAction("scorekort", "scorekort", new {bok.id, bok.golf_id });
-            //return RedirectToAction("scorekort", "scorekort");
-           // return View("~/Views/scorekorts/scorekort.cshtml");
+            return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
 
-            return RedirectToAction("scorekort", "scorekorts");
 
         }
 
