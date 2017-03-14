@@ -165,6 +165,26 @@
 
             </li>
 
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Incheckning <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @using (Html.BeginForm("Incheckning", "Calendar"))
+                    {
+                        <p>
+                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"))
+
+                            <input type="submit" name="checkainBtn" value="Checka in" />
+
+                            @Html.Raw(TempData["msg"])
+                        </p>
+                    }
+
+                </ul>
+
+            </li>
+
             }
 
             @if (User.IsInRole("User"))  // ENDAST FÖR MEDLEM
