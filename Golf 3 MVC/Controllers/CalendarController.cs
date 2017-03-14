@@ -638,9 +638,8 @@ namespace Golf_3_MVC.Controllers
         public void BlocktimeDeleteBokning(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
-            string golf_id = User.Identity.GetUserName();
 
-            foreach (var i in ds.boknings)
+            foreach (var i in ds3.boknings)
             {
                 if (i.start_date.TimeOfDay > start.TimeOfDay && i.end_date.TimeOfDay < stop.TimeOfDay && i.start_date.DayOfYear == start.DayOfYear)
                 {
@@ -654,32 +653,10 @@ namespace Golf_3_MVC.Controllers
                     //    }
                     //}
 
-                    //foreach (var x in ds3.medbokares)
-                    //{
-                    //    if (x.BokningsId == i.id && x.Huvudbokare == golf_id)
-                    //    {
-                    //        ds3.medbokares.Remove(x);
-                    //        ds3.SaveChanges();
-                    //    }
-                    //    else if (x.BokningsId == id && x.Medbokare1 == golf_id)
-                    //    {
-                    //        ds3.medbokares.Remove(x);
-                    //        ds3.SaveChanges();
-                    //    }
-                    //}
-
                     ds3.boknings.Remove(i);
                     ds3.SaveChanges();
 
                 }
-                //ds3.SaveChanges();
-                //var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
-
-                //ds3.boknings.Remove(details);
-                //ds3.SaveChanges();
-
-                //ds3.boknings.Remove(i);
-                //ds3.SaveChanges();
             }
         }
 
