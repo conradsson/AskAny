@@ -111,6 +111,7 @@ namespace Golf_3_MVC.Controllers
             allaMedlemmar = ds.medlemmars.ToList();
 
 
+
             if (Request.Form["laggtill"] != null)
             {
                 string bokningsID = sokBokning.Split(' ').Last();
@@ -247,6 +248,14 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("index");
         }
+
+        public ActionResult SkrivUtScoreKort(string medlemsId, string sokBokning)
+        {
+            string bokningsID = sokBokning.Split(' ').Last();
+            string golfID = medlemsId.Split(' ').Last();
+            return RedirectToAction("scorekort", "scorekortsController", new { bokningsID, golfID });
+        }
+
 
         public ActionResult CreateMedlem(FormCollection actionValues, string golfidstring, IEnumerable<bool> checkbox)
         {
