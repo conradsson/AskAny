@@ -81,6 +81,30 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $("#sokBokning2").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Calendar/GetAutoCompleteDataBokning",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.text
+                                }
+                            }))
+                        },
+                        messages: {
+                            noResults: "", results: ""
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 
 
@@ -163,6 +187,24 @@
                             </p>
                             <p>
                                 Sök efter medlem: @Html.TextBox("medlemsId")
+                                <input type="submit" name="laggtill" value="Lägg till" />
+                                <input type="submit" name="tabort" value="Ta bort" />
+
+                                @Html.Raw(TempData["msg"])
+                            </p>
+                        }
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Lägg till gäst <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @using (Html.BeginForm("Create", "Calendar"))
+                        {
+                            <p>
+                                Sök efter bokning: @Html.TextBox("sokBokning2")<br />
+                                Skriv in gästens namn: @Html.TextBox("gast")<br /><br />
                                 <input type="submit" name="laggtill" value="Lägg till" />
                                 <input type="submit" name="tabort" value="Ta bort" />
 
