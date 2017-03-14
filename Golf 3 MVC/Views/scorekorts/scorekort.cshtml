@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "scorekort";
     Layout = "~/Views/Shared/_Layout.cshtml";
-     @model Golf_3_MVC.Models.Score
+    @model Golf_3_MVC.Models.Score
 }
 
 <!DOCTYPE html>
@@ -102,32 +102,106 @@
             <table class="tg">
                 
                     @{
-                        string golfid = "920626-1";
-                        string HCP="";
-                        string ESlag="";
-                        string starttid="";
-                        string datum="";
-                        string spelare1="";
+                        string golfid = "10102_299";// lägg till  Model.golfID
+                        string golfid2 = "";
+                        string golfid3 = "";
+                        string golfid4 = "";
+                        string spelare1 = "";
+                        string spelare2 = "";
+                        string spelare3 = "";
+                        string spelare4 = "";
+                        string HCP = "";
+                        string HCP2 = "";
+                        string HCP3 = "";
+                        string HCP4 = "";
+                        decimal ESlag;
+                        string starttid = "";
+                        string datum = "";
+                        int bokningsID = 196; //lägg till Model.bokningsID
+                        decimal slope = 124;
+                        decimal CR = 73;
 
-                        foreach (var i in Model.medlems)
+                        foreach (var x in Model.medbokare)//Tar fram golfID på de som är med i bollen och sätter den man vill skriva ut scorekortet till som spelare ett
                         {
-                            if (i.golf_id == golfid)
+                            if (x.BokningsId == bokningsID) //läggtill model.boknigsID
+                            {
+                                if (golfid2 == "")
+                                {
+                                    golfid2 = x.Medbokare1;
+                                }
+                                else if (golfid3 == "")
+                                {
+                                    golfid3 = x.Medbokare1;
+
+                                }
+                                else if (golfid4 == "")
+                                {
+                                    golfid4 = x.Medbokare1;
+                                }
+
+                                if (golfid2.Trim() == golfid)
+                                {
+
+                                    golfid2 = x.Huvudbokare;
+
+                                }
+                                if (golfid3.Trim() == golfid)
+                                {
+
+                                    golfid3 = x.Huvudbokare;
+                                }
+                                if (golfid4.Trim() == golfid)
+                                {
+
+                                    golfid4 = x.Huvudbokare;
+                                }
+                            }
+                        }
+
+
+                        foreach (var i in Model.medlems)// sätter namn och HCP till spelarna i bollen
+                        {
+                            if (i.golf_id == golfid.Trim())
                             {
                                 HCP = i.hcp.ToString();
                                 spelare1 = i.fornamn + " " + i.efternamn;
-                                foreach (var x in Model.bokning)
+                                foreach (var x in Model.bokning)//sätter datum och starttid för bokningen
                                 {
-                                    if (x.golf_id == golfid)
+                                    if (x.golf_id == golfid.Trim() || x.golf_id == golfid2.Trim() || x.golf_id == golfid3.Trim() || x.golf_id == golfid4.Trim())
                                     {
                                         datum = x.start_date.ToShortDateString();
                                         starttid = x.start_date.ToShortTimeString();
                                     }
                                 }
-                                // ESlag = erhållnaslag
+                            }
+                            if (i.golf_id == golfid2.Trim())
+                            {
+                                spelare2 = i.fornamn + " " + i.efternamn;
+                                HCP2 = i.hcp.ToString();
+                            }
+                            if (i.golf_id == golfid3.Trim())
+                            {
+                                spelare3 = i.fornamn + " " + i.efternamn;
+                                HCP3 = i.hcp.ToString();
+                            }
+                            if (i.golf_id == golfid4.Trim())
+                            {
+                                spelare4 = i.fornamn + " " + i.efternamn;
+                                HCP4 = i.hcp.ToString();
                             }
                         }
+
+
+
+                        decimal hcpRäkna = Convert.ToDecimal(HCP);
+
+
+                        ESlag = (hcpRäkna * (slope / 113)) + (CR - 72);
+
+                        ESlag = Math.Round(ESlag);
+
                         <tr>
-                            <th class="tg-dx8v" colspan="7" rowspan="2">Spelare: @spelare1</th>
+                            <th class="tg-dx8v" colspan="7" rowspan="2">Spelare:<br> @spelare1</th>
                             <th class="tg-yw4l" colspan="6">Starttid: @starttid</th>
                             <th class="tg-yw4l" colspan="4">Ex.hcp: @HCP</th>
                         </tr>
@@ -142,9 +216,9 @@
                     <td class="tg-baqh" colspan="4"><br>Längd i m:</td>
                     <td class="tg-baqh" colspan="3"></td>
                     <td class="tg-nrw1" colspan="2">Spelare 1<br>@spelare1<br> </td>
-                    <td class="tg-nrw1" colspan="2">Spelare 2<br></td>
-                    <td class="tg-nrw1" colspan="2">Spelare 3</td>
-                    <td class="tg-nrw1" colspan="2">Spelare 4</td>
+                    <td class="tg-nrw1" colspan="2">Spelare 2<br>@spelare2</td>
+                    <td class="tg-nrw1" colspan="2">Spelare 3<br>@spelare3</td>
+                    <td class="tg-nrw1" colspan="2">Spelare 4<br>@spelare4</td>
                 </tr>
                 <tr>
                     <td class="tg-baqh" colspan="2"></td>

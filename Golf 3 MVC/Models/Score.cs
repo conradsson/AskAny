@@ -11,6 +11,9 @@ namespace Golf_3_MVC.Models
         public List<slope> slope { get; set; }
         public List<medlemmar> medlems { get; set; }
         public List<bokning> bokning { get; set; }
+        public List<medbokare> medbokare { get; set; }
+        public int bokningsID { get; set; }
+        public string golfID { get; set; }
 
     }
 }
