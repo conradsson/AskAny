@@ -541,8 +541,9 @@ namespace Golf_3_MVC.Controllers
 
             foreach (var i in ds.boknings)
             {
-                if (i.start_date > start && i.end_date < stop)
+                if (i.start_date.TimeOfDay > start.TimeOfDay && i.end_date.TimeOfDay < stop.TimeOfDay && i.start_date.DayOfYear == start.DayOfYear)
                 {
+
                     //foreach (var x in ds3.medbokares)
                     //{
                     //    if (i.id == x.BokningsId)
@@ -551,24 +552,30 @@ namespace Golf_3_MVC.Controllers
                     //        ds3.SaveChanges();
                     //    }
                     //}
-                    foreach (var x in ds3.medbokares)
-                    {
-                        if (x.BokningsId == id && x.Huvudbokare == golf_id)
-                        {
-                            ds3.medbokares.Remove(x);
-                        }
-                        else if (x.BokningsId == id && x.Medbokare1 == golf_id)
-                        {
-                            ds3.medbokares.Remove(x);
-                        }
-                    }
+
+                    //foreach (var x in ds3.medbokares)
+                    //{
+                    //    if (x.BokningsId == i.id && x.Huvudbokare == golf_id)
+                    //    {
+                    //        ds3.medbokares.Remove(x);
+                    //        ds3.SaveChanges();
+                    //    }
+                    //    else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                    //    {
+                    //        ds3.medbokares.Remove(x);
+                    //        ds3.SaveChanges();
+                    //    }
+                    //}
+
+                    ds3.boknings.Remove(i);
+                    ds3.SaveChanges();
 
                 }
-                ds3.SaveChanges();
-                var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
+                //ds3.SaveChanges();
+                //var details = ds.boknings.Where(x => x.id == id && x.golf_id == golf_id).FirstOrDefault();
 
-                ds3.boknings.Remove(details);
-                ds3.SaveChanges();
+                //ds3.boknings.Remove(details);
+                //ds3.SaveChanges();
 
                 //ds3.boknings.Remove(i);
                 //ds3.SaveChanges();               
