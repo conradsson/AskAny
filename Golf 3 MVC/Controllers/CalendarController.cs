@@ -38,13 +38,13 @@ namespace Golf_3_MVC.Controllers
         //        medbokare.Medbokare1 = changedEvent.text;
         //        medbokare.BokningsId = changedEvent.id;
 
-        //    return medbokare;            
+        //    return medbokare;
         //}
 
-        
+
         //public ViewResult Index1()
         //{
-        //    //Create db context object here 
+        //    //Create db context object here
         //    dsu3Entities db = new dsu3Entities();
         //    //Get the value from database and then set it to ViewBag to pass it View
         //    IEnumerable<SelectListItem> items = db.boknings.Select(c => new SelectListItem
@@ -62,7 +62,7 @@ namespace Golf_3_MVC.Controllers
         //{
         //    dsu3Entities db = new dsu3Entities();
         //    ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
-            
+
 
         //    return RedirectToAction("index");
         //}
@@ -113,7 +113,7 @@ namespace Golf_3_MVC.Controllers
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
-            
+
             if (Request.Form["laggtill"] != null)
             {
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
@@ -133,7 +133,7 @@ namespace Golf_3_MVC.Controllers
 
                         hcp = Convert.ToDouble(m.hcp);
                         mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                        hHcp = Convert.ToDouble(huvudbokare.hcp); 
+                        hHcp = Convert.ToDouble(huvudbokare.hcp);
 
                         totalHcp += hcp;
 
@@ -187,7 +187,7 @@ namespace Golf_3_MVC.Controllers
                 ds.SaveChanges();
             }
 
-           
+
              Foo:
             return RedirectToAction("index");
         }
@@ -215,9 +215,9 @@ namespace Golf_3_MVC.Controllers
                 if (id == null)
                 {
                     TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
-                    
+
                 }
-                
+
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
@@ -319,7 +319,7 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Index()
         {
-            season season = new season();   
+            season season = new season();
             var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
 
             if (data.seasontoggle == false)  // KOLLAR OM SÄSONGEN ÄR AKTIV
@@ -332,6 +332,10 @@ namespace Golf_3_MVC.Controllers
                 medlemmar aktuellMedlem = new medlemmar();
                 List<bokning> allaBokningar = new List<bokning>();
                 List<bokning> minaBokningar = new List<bokning>();
+                List<medbokare> allaMedbokare = new List<medbokare>();
+                List<medbokare> aktuellaMedbokningar = new List<medbokare>();
+                List<bokning> aktuellaBokningar = new List<bokning>();
+                List<bokning> allaBokningarr = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
                 model.medlems = medlemmars;
@@ -339,7 +343,24 @@ namespace Golf_3_MVC.Controllers
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
                 allaBokningar = ds.boknings.ToList();
-                model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+                allaMedbokare = ds.medbokares.ToList();
+                aktuellaMedbokningar = allaMedbokare.Where(x => x.Medbokare1.Trim() == User.Identity.GetUserName()).ToList();
+
+
+                foreach (medbokare mb in aktuellaMedbokningar)
+                {
+                    bokning ny;
+                    ny = allaBokningar.Where(x => x.id == mb.BokningsId).FirstOrDefault();
+
+                    aktuellaBokningar.Add(ny);
+                }
+
+                allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+                allaBokningarr.AddRange(aktuellaBokningar);
+
+                model.minaBokningar = allaBokningarr;
+                //model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+
 
 
                 var sched = new DHXScheduler(this);
@@ -379,7 +400,7 @@ namespace Golf_3_MVC.Controllers
 
             sched.LoadData = true;
             sched.EnableDataprocessor = true;
-            
+
             model.sched = sched;
             return View(model);
             }
@@ -404,7 +425,7 @@ namespace Golf_3_MVC.Controllers
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-            else 
+            else
             {
                 var data = ds.seasons.Where(x => x.id == 1).FirstOrDefault();
                 data.seasontoggle = season.seasontoggle;
@@ -458,7 +479,7 @@ namespace Golf_3_MVC.Controllers
                                 BlockTimeDelete(EV.id,EV.start_date, EV.end_date);
 
                             }
-                            else 
+                            else
                             {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
 
                                 TempData["msg"] = "<script>alert('Du kan bara boka 10 minuter');</script>";
@@ -608,7 +629,7 @@ namespace Golf_3_MVC.Controllers
                 ds3.SaveChanges();
 
                 //ds3.boknings.Remove(i);
-                //ds3.SaveChanges();               
+                //ds3.SaveChanges();
             }
         }
 
@@ -626,7 +647,7 @@ namespace Golf_3_MVC.Controllers
 
         //    return RedirectToAction("index");
         //}
-        
+
         public static void SendEmail(string toAddress, string subject, string body)
         {
             var mailMessage = new MailMessage();
@@ -634,7 +655,7 @@ namespace Golf_3_MVC.Controllers
             mailMessage.Subject = subject;
             mailMessage.Body = body;
 
-            
+
             var smtpClient = new SmtpClient { EnableSsl = true };
             smtpClient.Send(mailMessage);
         }
