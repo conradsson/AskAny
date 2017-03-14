@@ -99,7 +99,7 @@ namespace Golf_3_MVC.Controllers
 
         public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning, string sokBokning2, string gast)
         {
-            
+
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
@@ -197,7 +197,7 @@ namespace Golf_3_MVC.Controllers
 
                     }
                 }
-
+                TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                 ds.SaveChanges();
             }
             else if (Request.Form["laggtillGast"] != null)
@@ -227,7 +227,20 @@ namespace Golf_3_MVC.Controllers
             }
             else if (Request.Form["tabortGast"] != null)
             {
+                string bokningsIDgast = sokBokning2.Split(' ').Last();
+                aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
 
+
+                foreach (medbokare mb in aktuellaMedbokare)
+                {
+                    if (mb.Medbokare1.Trim() == gast)
+                    {
+                        ds.medbokares.Remove(mb);
+
+                    }
+                }
+                TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
+                ds.SaveChanges();
             }
 
 
@@ -749,7 +762,7 @@ namespace Golf_3_MVC.Controllers
                         TempData["msg"] = "<script>alert('Den blockerade tiden är nu borttagen.');</script>";
 
                 }
-                
+
             }
 
             Boo:
