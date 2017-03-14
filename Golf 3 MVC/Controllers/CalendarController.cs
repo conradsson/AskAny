@@ -390,7 +390,7 @@ namespace Golf_3_MVC.Controllers
 
                 m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                 string epost = m.epost;
-                SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
+                SendEmail(epost, "Avbokning", "Du har blivit avbokad!" );
             }
 
 
@@ -413,6 +413,7 @@ namespace Golf_3_MVC.Controllers
                 medlemmar aktuellMedlem = new medlemmar();
                 List<bokning> allaBokningar = new List<bokning>();
                 List<bokning> minaBokningar = new List<bokning>();
+                List<bokning> allablocktimeBokningar = new List<bokning>();
                 List<medbokare> allaMedbokare = new List<medbokare>();
                 List<medbokare> aktuellaMedbokningar = new List<medbokare>();
                 List<bokning> aktuellaBokningar = new List<bokning>();
@@ -424,6 +425,7 @@ namespace Golf_3_MVC.Controllers
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
                 allaBokningar = ds.boknings.ToList();
+                allablocktimeBokningar = ds.boknings.Where(x => x.blocktime == true).ToList();
                 allaMedbokare = ds.medbokares.ToList();
                 aktuellaMedbokningar = allaMedbokare.Where(x => x.Medbokare1.Trim() == User.Identity.GetUserName()).ToList();
 
@@ -440,6 +442,7 @@ namespace Golf_3_MVC.Controllers
                 allaBokningarr.AddRange(aktuellaBokningar);
 
                 model.minaBokningar = allaBokningarr;
+                model.allaBlocktimeBokningar = allablocktimeBokningar;
                 //model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
 
 
@@ -555,9 +558,10 @@ namespace Golf_3_MVC.Controllers
                                 EV.text = changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
+                                EV.incheckad = true;
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
-                                BlockTimeDelete(EV.id,EV.start_date, EV.end_date);
+                                BlocktimeDeleteBokning(EV.id,EV.start_date, EV.end_date);
 
                             }
                             else
@@ -578,6 +582,7 @@ namespace Golf_3_MVC.Controllers
                             EV.text = changedEvent.text;
                             EV.golf_id = User.Identity.GetUserName();
                             EV.blocktime = false;
+                            EV.incheckad = false;
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
 
@@ -590,7 +595,7 @@ namespace Golf_3_MVC.Controllers
                             m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
 
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!");
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
 
                         }
 
@@ -626,7 +631,7 @@ namespace Golf_3_MVC.Controllers
                             m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
                             string epost = m.epost;
-                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
+                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         else
@@ -652,7 +657,7 @@ namespace Golf_3_MVC.Controllers
                             m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
                             string epost = m.epost;
-                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
+                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         break;
@@ -673,7 +678,7 @@ namespace Golf_3_MVC.Controllers
 
             return (ContentResult)new AjaxSaveResponse(action);
         }
-        public void BlockTimeDelete(int id,DateTime start, DateTime stop)
+        public void BlocktimeDeleteBokning(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
             string golf_id = User.Identity.GetUserName();
@@ -719,6 +724,36 @@ namespace Golf_3_MVC.Controllers
                 //ds3.boknings.Remove(i);
                 //ds3.SaveChanges();
             }
+        }
+
+        public ActionResult DeleteBlocktime(FormCollection actionValues)
+        {
+            dsu3Entities ds3 = new dsu3Entities();
+            bokning bok = new bokning();
+            string id = actionValues["BlocktimeBokningar"];
+
+            if (Request.Form["tabort"] != null)
+            {
+                if (id == null)
+                {
+                    TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
+                    goto Boo;
+                }
+
+                bok = ds3.boknings.Where(x => x.id.ToString() == id).FirstOrDefault();
+
+                    if (bok.blocktime == true)
+                    {
+                        ds3.boknings.Remove(bok);
+                        ds3.SaveChanges();
+                        TempData["msg"] = "<script>alert('Den blockerade tiden är nu borttagen.');</script>";
+
+                }
+                
+            }
+
+            Boo:
+            return RedirectToAction("index");
         }
 
         //public ActionResult MedbokareDelete(string golfid, int bokningsid)
