@@ -21,7 +21,7 @@ namespace Golf_3_MVC.Controllers
             return View(db.scorekort.ToList());
         }
 
-        public ActionResult scorekort()
+        public ActionResult scorekort() //Lägg till int bokningsID, string golfID
         {
             Score model = new Score();
 
@@ -39,18 +39,16 @@ namespace Golf_3_MVC.Controllers
             List<bokning> bokning1 = new List<bokning>();
             bokning1 = ds.boknings.ToList();
 
+            List<medbokare> medbokare1 = new List<medbokare>();
+            medbokare1 = ds.medbokares.ToList();
+
             model.bokning = bokning1;
             model.medlems = medlem1;
             model.scoreKort = scorkort1;
             model.slope = slope1;
-
-
-            //model.scoreKort = ds.scorekorts.ToList();
-            //model.slope = ds.slopes.ToList();
-            //model.medlems = ds.medlemmars.ToList();
-            //model.scoreKort = db.scorekort.ToList();
-            //model.slope = db.slope.ToList();
-
+            model.medbokare = medbokare1;
+            //model.bokningsID = bokningsID;
+            //model.golfID = golfID;
 
 
             return View(model);

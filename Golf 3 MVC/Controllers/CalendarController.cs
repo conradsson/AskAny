@@ -112,6 +112,7 @@ namespace Golf_3_MVC.Controllers
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
+            
 
             
             if (Request.Form["laggtill"] != null)
@@ -186,6 +187,14 @@ namespace Golf_3_MVC.Controllers
              Foo:
             return RedirectToAction("index");
         }
+
+        public ActionResult SkrivUtScoreKort(string medlemsId, string sokBokning)
+        {
+            string bokningsID = sokBokning.Split(' ').Last();
+            string golfID = medlemsId.Split(' ').Last();
+            return RedirectToAction("scorekort", "scorekortsController", new { bokningsID, golfID });
+        }
+
 
         public ActionResult CreateMedlem(FormCollection actionValues, string golfidstring, IEnumerable<bool> checkbox)
         {
