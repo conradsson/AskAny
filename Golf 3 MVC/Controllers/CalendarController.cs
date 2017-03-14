@@ -476,8 +476,8 @@ namespace Golf_3_MVC.Controllers
                 sched.Skin = DHXScheduler.Skins.Flat;
 
 
-                sched.Config.first_hour = 8;
-                sched.Config.last_hour = 21;
+                sched.Config.first_hour = 7;
+                sched.Config.last_hour = 18;
                 sched.Config.time_step = 10;
 
                 foreach (bokning b in allaBokningar) // HÄMTAR OCH URSKILJER BLOCKTIME-BOKNINGAR UR BOKNINGAR
