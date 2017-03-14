@@ -347,7 +347,7 @@ namespace Golf_3_MVC.Controllers
 
                 m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                 string epost = m.epost;
-                SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
+                SendEmail(epost, "Avbokning", "Du har blivit avbokad!" );
             }
 
 
@@ -549,7 +549,7 @@ namespace Golf_3_MVC.Controllers
                             m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
 
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!");
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
 
                         }
 
@@ -585,7 +585,7 @@ namespace Golf_3_MVC.Controllers
                             m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
                             string epost = m.epost;
-                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
+                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         else
@@ -611,7 +611,7 @@ namespace Golf_3_MVC.Controllers
                             m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
                             string epost = m.epost;
-                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
+                            SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         break;
