@@ -102,7 +102,7 @@
             <table class="tg">
                 
                     @{
-                        string golfid = "10102_299";// lägg till  Model.golfID
+                        string golfid = "920626-1";// lägg till  Model.golfID
                         string golfid2 = "";
                         string golfid3 = "";
                         string golfid4 = "";
@@ -117,7 +117,7 @@
                         decimal ESlag;
                         string starttid = "";
                         string datum = "";
-                        int bokningsID = 196; //lägg till Model.bokningsID
+                        int bokningsID = 267; //lägg till Model.bokningsID
                         decimal slope = 124;
                         decimal CR = 73;
 
@@ -196,9 +196,113 @@
                         decimal hcpRäkna = Convert.ToDecimal(HCP);
 
 
-                        ESlag = (hcpRäkna * (slope / 113)) + (CR - 72);
+                        ESlag = (hcpRäkna * (slope / 113)) + (CR - 72); //Räknar ut erhållna slag
 
                         ESlag = Math.Round(ESlag);
+                        decimal totESlag = ESlag;
+                        int räknare = 1;
+                        int index1=0, index2 = 0, index3 = 0, index4 = 0, index5 = 0, index6 = 0, index7 = 0, index8 = 0, index9 = 0, index10 = 0, index11 = 0, index12 = 0, index13 = 0, index14 = 0, index15 = 0, index16 = 0, index17 = 0, index18 = 0;
+
+                        int idexrätt =0;
+
+                        while (ESlag > 0)
+                        {
+                            if (räknare ==1)
+                            {
+                                index1++;
+                                goto Start;
+                            }
+                            if (räknare == 2)
+                            {
+                                index2++;
+                                goto Start;
+                            }
+                            if (räknare == 3)
+                            {
+                                index3++;
+                                goto Start;
+                            }
+                            if (räknare == 4)
+                            {
+                                index4++;
+                                goto Start;
+                            }
+                            if (räknare == 5)
+                            {
+                                index5++;
+                                goto Start;
+                            }
+                            if (räknare == 6)
+                            {
+                                index6++;
+                                goto Start;
+                            }
+                            if (räknare == 7)
+                            {
+                                index7++;
+                                goto Start;
+                            }
+                            if (räknare == 8)
+                            {
+                                index8++;
+                                goto Start;
+                            }
+                            if (räknare == 9)
+                            {
+                                index9++;
+                                goto Start;
+                            }
+                            if (räknare == 10)
+                            {
+                                index10++;
+                                goto Start;
+                            }
+                            if (räknare == 11)
+                            {
+                                index11++;
+                                goto Start;
+                            }
+                            if (räknare == 12)
+                            {
+                                index12++;
+                                goto Start;
+                            }
+                            if (räknare == 13)
+                            {
+                                index13++;
+                                goto Start;
+                            }
+                            if (räknare == 14)
+                            {
+                                index14++;
+                                goto Start;
+                            }
+                            if (räknare == 15)
+                            {
+                                index15++;
+                                goto Start;
+                            }
+                            if (räknare == 16)
+                            {
+                                index16++;
+                                goto Start;
+                            }
+                            if (räknare == 17)
+                            {
+                                index17++;
+                                goto Start;
+                            }
+                            if (räknare == 18)
+                            {
+                                index18++;
+                                räknare = 0;
+                                goto Start;
+                            }
+                            Start:
+                            ESlag--;
+                            räknare++;
+
+                        }
 
                         <tr>
                             <th class="tg-dx8v" colspan="7" rowspan="2">Spelare:<br> @spelare1</th>
@@ -207,7 +311,7 @@
                         </tr>
                         <tr>
                             <td class="tg-yw4l" colspan="6">Datum: @datum</td>
-                            <td class="tg-yw4l" colspan="4">Erh.slag: @ESlag</td>
+                            <td class="tg-yw4l" colspan="4">Erh.slag: @totESlag</td>
                         </tr>
                     }
                         
@@ -249,7 +353,83 @@
                                 <td class="tg-q9qv" colspan="2"> @i.Lenght_Tee_Red</td>
                                 <td class="tg-yw4l">@i.Par</td>
                                 <td class="tg-yzt1">@i.Index</td>
-                                <td class="tg-yw4l"></td>
+                                <td class="tg-yw4l">
+                                    @{if (i.Index == 1)
+                                        {
+                                            idexrätt = index1;
+                                        }
+                                        if (i.Index == 2)
+                                        {
+                                            idexrätt = index2;
+                                        }
+                                        if (i.Index == 3)
+                                        {
+                                            idexrätt = index3;
+                                        }
+                                        if (i.Index == 4)
+                                        {
+                                            idexrätt = index4;
+                                        }
+                                        if (i.Index == 5)
+                                        {
+                                            idexrätt = index5;
+                                        }
+                                        if (i.Index == 6)
+                                        {
+                                            idexrätt = index6;
+                                        }
+                                        if (i.Index == 7)
+                                        {
+                                            idexrätt = index7;
+                                        }
+                                        if (i.Index == 8)
+                                        {
+                                            idexrätt = index8;
+                                        }
+                                        if (i.Index == 9)
+                                        {
+                                            idexrätt = index9;
+                                        }
+                                        if (i.Index == 10)
+                                        {
+                                            idexrätt = index10;
+                                        }
+                                        if (i.Index == 11)
+                                        {
+                                            idexrätt = index11;
+                                        }
+                                        if (i.Index == 12)
+                                        {
+                                            idexrätt = index12;
+                                        }
+                                        if (i.Index == 13)
+                                        {
+                                            idexrätt = index13;
+                                        }
+                                        if (i.Index == 14)
+                                        {
+                                            idexrätt = index14;
+                                        }
+                                        if (i.Index == 15)
+                                        {
+                                            idexrätt = index15;
+                                        }
+                                        if (i.Index == 16)
+                                        {
+                                            idexrätt = index16;
+                                        }
+                                        if (i.Index == 17)
+                                        {
+                                            idexrätt = index17;
+                                        }
+                                        if (i.Index == 18)
+                                        {
+                                            idexrätt = index18;
+                                        }
+                                    }
+                                    @idexrätt
+                                    
+                                </td>
                                 <td class="tg-yzt1"></td>
                                 <td class="tg-yw4l"></td>
                                 <td class="tg-yzt1"></td>
@@ -273,16 +453,91 @@
                                 <td class="tg-yzt1"></td>
                                 <td class="tg-yw4l"></td>
                             </tr>
-                        }
-                        else if (i.Hole_nr == hål.ToString())
-                        {
+                                        }
+                                        else if (i.Hole_nr == hål.ToString())
+                                        {
                             <tr>
                                 <td class="tg-baqh" colspan="2">@hål.ToString()</td>
                                 <td class="tg-21yu" colspan="2"> @i.Lenght_Tee_Yellow</td>
                                 <td class="tg-q9qv" colspan="2"> @i.Lenght_Tee_Red</td>
                                 <td class="tg-yw4l">@i.Par</td>
                                 <td class="tg-yzt1">@i.Index</td>
-                                <td class="tg-yw4l"></td>
+                                <td class="tg-yw4l">
+                                    @{if (i.Index == 1)
+                                        {
+                                            idexrätt = index1;
+                                        }
+                                        if (i.Index == 2)
+                                        {
+                                            idexrätt = index2;
+                                        }
+                                        if (i.Index == 3)
+                                        {
+                                            idexrätt = index3;
+                                        }
+                                        if (i.Index == 4)
+                                        {
+                                            idexrätt = index4;
+                                        }
+                                        if (i.Index == 5)
+                                        {
+                                            idexrätt = index5;
+                                        }
+                                        if (i.Index == 6)
+                                        {
+                                            idexrätt = index6;
+                                        }
+                                        if (i.Index == 7)
+                                        {
+                                            idexrätt = index7;
+                                        }
+                                        if (i.Index == 8)
+                                        {
+                                            idexrätt = index8;
+                                        }
+                                        if (i.Index == 9)
+                                        {
+                                            idexrätt = index9;
+                                        }
+                                        if (i.Index == 10)
+                                        {
+                                            idexrätt = index10;
+                                        }
+                                        if (i.Index == 11)
+                                        {
+                                            idexrätt = index11;
+                                        }
+                                        if (i.Index == 12)
+                                        {
+                                            idexrätt = index12;
+                                        }
+                                        if (i.Index == 13)
+                                        {
+                                            idexrätt = index13;
+                                        }
+                                        if (i.Index == 14)
+                                        {
+                                            idexrätt = index14;
+                                        }
+                                        if (i.Index == 15)
+                                        {
+                                            idexrätt = index15;
+                                        }
+                                        if (i.Index == 16)
+                                        {
+                                            idexrätt = index16;
+                                        }
+                                        if (i.Index == 17)
+                                        {
+                                            idexrätt = index17;
+                                        }
+                                        if (i.Index == 18)
+                                        {
+                                            idexrätt = index18;
+                                        }
+                                    }
+                                    @idexrätt
+                                </td>
                                 <td class="tg-yzt1"></td>
                                 <td class="tg-yw4l"></td>
                                 <td class="tg-yzt1"></td>
