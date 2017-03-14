@@ -249,6 +249,9 @@
     </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
     <Compile Include="Models\Score.cs" />
+    <Compile Include="Models\scorekort.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ScorekortDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -265,6 +268,9 @@
       <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\season.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\slope.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\starttid.cs">

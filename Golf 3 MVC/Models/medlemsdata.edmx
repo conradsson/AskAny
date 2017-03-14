@@ -53,12 +53,36 @@
           <Property Name="namn" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="kategori_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="scorekort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hole_nr" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lenght_Tee_Red" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lenght_Tee_Yellow" Type="nvarchar" MaxLength="50" />
+          <Property Name="Par" Type="nvarchar" MaxLength="50" />
+          <Property Name="Index" Type="int" />
+          <Property Name="Lenght_Tee_White" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lenght_Tee_Blue" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="season">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="seasontoggle" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tee" Type="varchar" MaxLength="50" />
+          <Property Name="Kvinna_CR" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Kvinna_Slope" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_CR" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_Slope" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="starttid">
           <Key>
@@ -86,7 +110,9 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokare" EntityType="Self.medbokare" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemmar" EntityType="Self.medlemmar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemskategori" EntityType="Self.medlemskategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scorekort" EntityType="Self.scorekort" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="season" EntityType="Self.season" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="slope" EntityType="Self.slope" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="starttid" EntityType="Self.starttid" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
             <End Role="medlemskategori" EntitySet="medlemskategori" />
@@ -123,6 +149,8 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="seasons" EntityType="dsu3Model.season" />
           <EntitySet Name="boknings" EntityType="dsu3Model.bokning" />
+          <EntitySet Name="scorekorts" EntityType="dsu3Model.scorekort" />
+          <EntitySet Name="slopes" EntityType="dsu3Model.slope" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -183,6 +211,30 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="blocktime" Type="Boolean" />
           <Property Name="incheckad" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="scorekort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hole_nr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lenght_Tee_Red" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lenght_Tee_Yellow" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Par" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Index" Type="Int32" />
+          <Property Name="Lenght_Tee_White" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lenght_Tee_Blue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="slope">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Kvinna_CR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Kvinna_Slope" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_CR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Herr_Slope" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -254,6 +306,32 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scorekorts">
+            <EntityTypeMapping TypeName="dsu3Model.scorekort">
+              <MappingFragment StoreEntitySet="scorekort">
+                <ScalarProperty Name="Lenght_Tee_Blue" ColumnName="Lenght_Tee_Blue" />
+                <ScalarProperty Name="Lenght_Tee_White" ColumnName="Lenght_Tee_White" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="Par" ColumnName="Par" />
+                <ScalarProperty Name="Lenght_Tee_Yellow" ColumnName="Lenght_Tee_Yellow" />
+                <ScalarProperty Name="Lenght_Tee_Red" ColumnName="Lenght_Tee_Red" />
+                <ScalarProperty Name="Hole_nr" ColumnName="Hole_nr" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="slopes">
+            <EntityTypeMapping TypeName="dsu3Model.slope">
+              <MappingFragment StoreEntitySet="slope">
+                <ScalarProperty Name="Herr_Slope" ColumnName="Herr_Slope" />
+                <ScalarProperty Name="Herr_CR" ColumnName="Herr_CR" />
+                <ScalarProperty Name="Kvinna_Slope" ColumnName="Kvinna_Slope" />
+                <ScalarProperty Name="Kvinna_CR" ColumnName="Kvinna_CR" />
+                <ScalarProperty Name="Tee" ColumnName="Tee" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
