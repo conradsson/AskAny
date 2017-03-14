@@ -694,6 +694,7 @@ namespace Golf_3_MVC.Controllers
         public void BlocktimeDeleteBokning(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
+            bokning bok = new bokning();
 
             foreach (var i in ds3.boknings)
             {
@@ -708,8 +709,9 @@ namespace Golf_3_MVC.Controllers
                     //        ds3.SaveChanges();
                     //    }
                     //}
+                    bok = ds3.boknings.Where(x => x.id == id).FirstOrDefault();
 
-                    ds3.boknings.Remove(i);
+                    ds3.boknings.Remove(bok);
                     ds3.SaveChanges();
 
                 }
