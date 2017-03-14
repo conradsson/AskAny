@@ -474,6 +474,7 @@ namespace Golf_3_MVC.Controllers
                                 EV.text = changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
+                                EV.incheckad = true;
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
                                 BlockTimeDelete(EV.id,EV.start_date, EV.end_date);
@@ -497,6 +498,7 @@ namespace Golf_3_MVC.Controllers
                             EV.text = changedEvent.text;
                             EV.golf_id = User.Identity.GetUserName();
                             EV.blocktime = false;
+                            EV.incheckad = false;
                             ds.boknings.Add(EV);
                             ds.SaveChanges();
 

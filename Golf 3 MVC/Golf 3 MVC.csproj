@@ -200,18 +200,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\bokning.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
@@ -231,9 +219,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CalendarData.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GolfareAutoComplete.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -264,9 +249,6 @@
     </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
     <Compile Include="Models\Score.cs" />
-    <Compile Include="Models\scorekort.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ScorekortDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -283,9 +265,6 @@
       <DependentUpon>ScorekortDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\season.cs">
-      <DependentUpon>medlemsdata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\slope.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\starttid.cs">

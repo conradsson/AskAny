@@ -15,6 +15,7 @@
           <Property Name="end_date" Type="datetime" Nullable="false" />
           <Property Name="golf_id" Type="varchar" MaxLength="255" />
           <Property Name="blocktime" Type="bit" />
+          <Property Name="incheckad" Type="bit" />
         </EntityType>
         <EntityType Name="medbokare">
           <Key>
@@ -22,8 +23,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Huvudbokare" Type="varchar" MaxLength="255" />
-          <Property Name="Medbokare" Type="nchar" MaxLength="10" />
+          <Property Name="Medbokare" Type="varchar" MaxLength="255" />
           <Property Name="BokningsId" Type="int" Nullable="false" />
+          <Property Name="gast" Type="bit" />
         </EntityType>
         <EntityType Name="medlemmar">
           <Key>
@@ -159,8 +161,9 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Huvudbokare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Medbokare1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Medbokare1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BokningsId" Type="Int32" Nullable="false" />
+          <Property Name="gast" Type="Boolean" />
         </EntityType>
         <EntityType Name="season">
           <Key>
@@ -179,6 +182,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="golf_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="blocktime" Type="Boolean" />
+          <Property Name="incheckad" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -224,6 +228,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySetMapping Name="medbokares">
             <EntityTypeMapping TypeName="dsu3Model.medbokare">
               <MappingFragment StoreEntitySet="medbokare">
+                <ScalarProperty Name="gast" ColumnName="gast" />
                 <ScalarProperty Name="BokningsId" ColumnName="BokningsId" />
                 <ScalarProperty Name="Medbokare1" ColumnName="Medbokare" />
                 <ScalarProperty Name="Huvudbokare" ColumnName="Huvudbokare" />
@@ -242,6 +247,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySetMapping Name="boknings">
             <EntityTypeMapping TypeName="dsu3Model.bokning">
               <MappingFragment StoreEntitySet="bokning">
+                <ScalarProperty Name="incheckad" ColumnName="incheckad" />
                 <ScalarProperty Name="blocktime" ColumnName="blocktime" />
                 <ScalarProperty Name="golf_id" ColumnName="golf_id" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />

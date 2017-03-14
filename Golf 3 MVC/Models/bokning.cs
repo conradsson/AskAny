@@ -20,5 +20,6 @@ namespace Golf_3_MVC.Models
         public System.DateTime end_date { get; set; }
         public string golf_id { get; set; }
         public Nullable<bool> blocktime { get; set; }
+        public Nullable<bool> incheckad { get; set; }
     }
 }
