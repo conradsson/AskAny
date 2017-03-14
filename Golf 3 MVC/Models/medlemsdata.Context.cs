@@ -31,11 +31,6 @@ namespace Golf_3_MVC.Models
         public virtual DbSet<medbokare> medbokares { get; set; }
         public virtual DbSet<season> seasons { get; set; }
         public virtual DbSet<bokning> boknings { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<scorekort> scorekorts { get; set; }
         public virtual DbSet<slope> slopes { get; set; }
     }

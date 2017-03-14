@@ -11,6 +11,7 @@ namespace Golf_3_MVC.Models
     public class CalendarBookings
     {
         public IEnumerable<bokning> minaBokningar { get; set; }
+        public IEnumerable<bokning> allaBlocktimeBokningar { get; set; }
         public IEnumerable<medbokare> aktuellaMedbokare { get; set; }
         public DHXScheduler sched { get; set; }
 
