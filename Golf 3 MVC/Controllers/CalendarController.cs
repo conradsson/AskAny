@@ -568,9 +568,19 @@ namespace Golf_3_MVC.Controllers
                 {
                     case DataActionTypes.Insert:
 
+
+                        //DateTime nu = DateTime.Now;                          JOHANS GREJS MED ATT INTE KUNNA BOKA UTÖVER SCHED.LAST_HOUR(18.00)
+                        //TimeSpan LastHour = new TimeSpan(18, 00, 00);
+                        //TimeSpan After = nu.TimeOfDay - LastHour;
+
+                        //if (After < TimeSpan.Zero)
+                        //{
+
+                        //}
+
+
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
-
-
+                        
                         if (diff.TotalHours > 0.17) // om det är mer än 10min
                         {//BLOCKTIME
 
