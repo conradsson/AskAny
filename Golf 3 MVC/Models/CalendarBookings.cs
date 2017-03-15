@@ -15,7 +15,7 @@ namespace Golf_3_MVC.Models
         public IEnumerable<bokning> allaBlocktimeBokningar { get; set; }
         public IEnumerable<medbokare> aktuellaMedbokare { get; set; }
         public DHXScheduler sched { get; set; }
-
+        public string säsongsknapp { get; set; }
         public List<medlemmar> medlems { get; set; }
 
     }

@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    $(".navbar").hide(0).fadeIn(500)
-    $("footer").hide(0).fadeIn(500)
-    $(".body-content").hide(0).delay(450).fadeIn(1000)
-    $(".carousel").hide(0).delay(450).fadeIn(1000)
+    $(".navbar").fadeIn(500)
+    $("footer").fadeIn(500)
+    $(".body-content").delay(450).fadeIn(1000)
+    $(".carousel").delay(450).fadeIn(1000)
 });
 
 //  START FLIKEN-EFFEKTER

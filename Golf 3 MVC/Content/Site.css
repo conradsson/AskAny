@@ -1,18 +1,8 @@
 ﻿body {
 	padding-top: 50px;
-	padding-bottom: 20px;
 }
 
-/*.logo{
-	position: relative;
-	margin-top: 0px;
-	margin-left: 0%;
-	margin-right: 0%
-}*/
 
-#medlemsId.ui-autocomplete-input{
-
-}
 
 #ui-id-1, #ui-id-2, #ui-id-3{
          max-height: 200px; overflow-y: scroll; overflow-x: hidden;
@@ -38,11 +28,16 @@
 }
 
 .navbar-header{
-	margin-left: 0px;
+	position: absolute;
+	top: 0px;
+	left: 7%;
+	display: block;
+	margin: 0;
+	cursor:pointer;
 }
 
 .navbar-nav{
-	margin-left: 10%;
+	margin-left:15%;
 }
 
 
@@ -235,13 +230,19 @@
 
 .footer {
 	background: #f8f5f0;
-	height: auto;
+	height: 15em;
 	padding-bottom: 30px;
 	position: relative;
 	width: 100%;
 	border-bottom: 1px solid #dfd7ca;
 	border-top: 1px solid #dfd7ca;
 }
+
+
+.footer-bottom .container{
+    text-align: center;
+}
+
 .footer p {
 	margin: 0;
 }
@@ -254,7 +255,7 @@
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 27px;
-	padding: 40px 0 10px;
+	padding: 20px 0 10px;
 	text-transform: uppercase;
 }
 .footer ul {
@@ -442,6 +443,8 @@ ul.social-network li {
 .body-content {
 	padding-left: 15px;
 	padding-right: 15px;
+    min-width: 80%;
+    min-height: 80%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists
