@@ -158,7 +158,7 @@ namespace Golf_3_MVC.Controllers
 
                     if (totalHcp >= 100) // MAX 100 HANDIKAPP
                     {
-                        TempData["msg"] = "<script>alert('Bokningen går ej att göra då det totala handikappet är över 120');</script>";
+                        TempData["msg"] = "<script>alert('Bokningen går ej att göra då det totala handikappet är över 100');</script>";
             }
                     else // OM ALLT OK; LÄGGER TILL PERSON
             {
