@@ -71,7 +71,11 @@ namespace Golf_3_MVC.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Autocomplete
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
         public ActionResult GetAutoCompleteData(string term)
         {
 
@@ -96,7 +100,15 @@ namespace Golf_3_MVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Lägga till medbokare.
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <param name="medlemsId"></param>
+        /// <param name="sokBokning"></param>
+        /// <param name="sokBokning2"></param>
+        /// <param name="gast"></param>
+        /// <returns></returns>
         public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning, string sokBokning2, string gast)
         {
 
@@ -248,7 +260,12 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("index");
         }
-
+        /// <summary>
+        /// Utskrift av scorekort.
+        /// </summary>
+        /// <param name="medlemsId"></param>
+        /// <param name="sokBokning"></param>
+        /// <returns></returns>
         public ActionResult SkrivUtScoreKort(string medlemsId, string sokBokning)
         {
             string bokningsID = sokBokning.Split(' ').Last();
@@ -419,7 +436,10 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("index");
         }
-
+        /// <summary>
+        /// Laddning av själva bokningsschemat.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             season season = new season();
@@ -521,7 +541,12 @@ namespace Golf_3_MVC.Controllers
             medlemmars = ds.medlemmars.ToList();
             return Json(medlemmars, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Stänga/Öppna banan för säsong.
+        /// </summary>
+        /// <param name="responsables"></param>
+        /// <param name="checkResp"></param>
+        /// <returns></returns>
         public ActionResult Seasontoggle(string responsables, bool checkResp = false)
         {
             season season = new season();
@@ -556,7 +581,12 @@ namespace Golf_3_MVC.Controllers
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Sparar bokningar till databasen, ta bort bokningar, uppdatera bokningar.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ContentResult Save(int? id, FormCollection actionValues)
         {
             var action = new DataAction(actionValues);
@@ -590,7 +620,7 @@ namespace Golf_3_MVC.Controllers
                                 EV.id = changedEvent.id;
                                 EV.start_date = changedEvent.start_date;
                                 EV.end_date = changedEvent.end_date;
-                                EV.text = changedEvent.text;
+                                EV.text = " " + changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
                                 EV.incheckad = true;
@@ -620,12 +650,18 @@ namespace Golf_3_MVC.Controllers
                         }
                         else
                         { // VANLIG BOKNING
+                            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+                            allaMedlemmar = ds.medlemmars.ToList();
+
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
                             bokning EV = new bokning();
                             EV.id = changedEvent.id;
                             EV.start_date = changedEvent.start_date;
                             EV.end_date = changedEvent.end_date;
-                            EV.text = changedEvent.text;
+                            EV.text = " Kön: " + m.kon +" Handikapp: " + m.hcp;
                             EV.golf_id = User.Identity.GetUserName();
                             EV.blocktime = false;
                             EV.incheckad = false;
@@ -633,18 +669,8 @@ namespace Golf_3_MVC.Controllers
                             ds.SaveChanges();
 
 
-                            List<medlemmar> allaMedlemmar = new List<medlemmar>();
-                            allaMedlemmar = ds.medlemmars.ToList();
-
-                            medlemmar m;
-
-                            m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
-
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
-
-                            
-
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);                            
                         }
 
                         break;
@@ -713,7 +739,7 @@ namespace Golf_3_MVC.Controllers
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                             data.start_date = changedEvent.start_date;
                             data.end_date = changedEvent.end_date;
-                            data.text = changedEvent.text;
+                            data.text = " " + changedEvent.text;
                             ds.SaveChanges();
                             break;
                         }
@@ -726,6 +752,12 @@ namespace Golf_3_MVC.Controllers
 
             return (ContentResult)new AjaxSaveResponse(action);
         }
+        /// <summary>
+        /// Tar bort alla bokningar som finns i spannet där en blocktime lägs in.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="start"></param>
+        /// <param name="stop"></param>
         public void BlocktimeDeleteBokning(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -745,7 +777,11 @@ namespace Golf_3_MVC.Controllers
 
             }
         }
-
+        /// <summary>
+        /// Ta bort en blocktime om den ej är aktuell längre.
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ActionResult DeleteBlocktime(FormCollection actionValues)
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -775,7 +811,11 @@ namespace Golf_3_MVC.Controllers
             Boo:
             return RedirectToAction("index");
         }
-
+        /// <summary>
+        /// Incheckning av bokning.
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ActionResult Incheckning(FormCollection actionValues)
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -810,7 +850,9 @@ namespace Golf_3_MVC.Controllers
 
             return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
         }
-
+        /// <summary>
+        /// Tar bort bokningnar som inte är incheckade tio minuter innan dessa skall påbörjas.
+        /// </summary>
         public void AutoDeleteBokning()
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -848,6 +890,12 @@ namespace Golf_3_MVC.Controllers
         //    return RedirectToAction("index");
         //}
 
+        /// <summary>
+        /// Metod för att skicka email, tar inparametrar som epost, subject och själva bodyn.
+        /// </summary>
+        /// <param name="toAddress"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
         public static void SendEmail(string toAddress, string subject, string body)
         {
             var mailMessage = new MailMessage();

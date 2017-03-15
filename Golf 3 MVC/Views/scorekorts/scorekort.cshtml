@@ -102,7 +102,7 @@
             <table class="tg">
                 
                     @{
-                        string golfid = Model.golfID; //ViewBag.golfID; // lägg till  Model.golfID
+                        string golfid = Model.golfID; 
                         string golfid2 = "";
                         string golfid3 = "";
                         string golfid4 = "";
@@ -117,14 +117,14 @@
                         decimal ESlag;
                         string starttid = "";
                         string datum = "";
-                        int bokningsID = Model.bokningsID; //ViewBag.bokningsID; //lägg till Model.bokningsID
-                        decimal slope = 124;
-                        decimal CR = 73;
+                        int bokningsID = Model.bokningsID;
+                        decimal slope = 0;
+                        decimal CR = 0;
                         string kön = "";
 
                         foreach (var x in Model.medbokare)//Tar fram golfID på de som är med i bollen och sätter den man vill skriva ut scorekortet till som spelare ett
                         {
-                            if (x.BokningsId == bokningsID) //läggtill model.boknigsID
+                            if (x.BokningsId == bokningsID)
                             {
                                 if (golfid2 == "")
                                 {
@@ -312,7 +312,7 @@
                                 räknare = 0;
                                 goto Start;
                             }
-                            Start:
+                        Start:
                             ESlag--;
                             räknare++;
 
@@ -356,11 +356,29 @@
                 </tr>
 
                 
-                @{ int hål = 1;
+                @{  int hål = 1;
+                    int totalLängdRöd = 0;
+                    int totalLängdGul = 0;
+                    int ParUt = 0;
+                    int parIn = 0;
+                    int parTot = 0;
                     foreach (var i in Model.scoreKort)
                     {
                         if (i.Hole_nr == "9")
                         {
+                            totalLängdRöd += Convert.ToInt16(i.Lenght_Tee_Red);
+                            totalLängdGul += Convert.ToInt16(i.Lenght_Tee_Yellow);
+                            
+                            if (Convert.ToInt16(i.Hole_nr) <= 9)
+                            {
+                                ParUt += Convert.ToInt16(i.Par);
+                            }
+                            if (Convert.ToInt16(i.Hole_nr) >= 10)
+                            {
+                                parIn += Convert.ToInt16(i.Par);
+                            }
+
+
                             <tr>
                                 <td class="tg-baqh" colspan="2">@hål.ToString()</td>
                                 <td class="tg-21yu" colspan="2"> @i.Lenght_Tee_Yellow</td>
@@ -442,7 +460,7 @@
                                         }
                                     }
                                     @idexrätt
-                                    
+
                                 </td>
                                 <td class="tg-yzt1"></td>
                                 <td class="tg-yw4l"></td>
@@ -455,7 +473,7 @@
                             </tr>
                             <tr>
                                 <td class="tg-lqy6" colspan="6">UT</td>
-                                <td class="tg-yw4l"></td>
+                                <td class="tg-yw4l">@ParUt</td>
                                 <td class="tg-yzt1"></td>
                                 <td class="tg-yw4l"></td>
                                 <td class="tg-yzt1"></td>
@@ -470,6 +488,18 @@
                                         }
                                         else if (i.Hole_nr == hål.ToString())
                                         {
+                                            totalLängdRöd += Convert.ToInt16(i.Lenght_Tee_Red);
+                                            totalLängdGul += Convert.ToInt16(i.Lenght_Tee_Yellow);
+                                            if (Convert.ToInt16(i.Hole_nr) <= 9)
+                                            {
+                                                ParUt += Convert.ToInt16(i.Par);
+                                            }
+                                            if (Convert.ToInt16(i.Hole_nr) >= 10)
+                                            {
+                                                parIn += Convert.ToInt16(i.Par);
+                                            }
+
+
                             <tr>
                                 <td class="tg-baqh" colspan="2">@hål.ToString()</td>
                                 <td class="tg-21yu" colspan="2"> @i.Lenght_Tee_Yellow</td>
@@ -561,13 +591,19 @@
                                 <td class="tg-yzt1"></td>
                                 <td class="tg-yw4l"></td>
                             </tr>
-                        }
-                    hål++;
+                                            }
+                                            hål++;
+
+                                        }
+
                     }
-                    }
+                @{ 
+                    //parIn -= ParUt;
+                    parTot = ParUt + parIn;
+                }
                 <tr>
                     <td class="tg-lqy6" colspan="6">IN</td>
-                    <td class="tg-yw4l"></td>
+                    <td class="tg-yw4l">@parIn</td>
                     <td class="tg-uqo3"></td>
                     <td class="tg-yw4l"></td>
                     <td class="tg-yzt1"></td>
@@ -581,9 +617,9 @@
                 </tr>
                 <tr>
                     <td class="tg-yw4l" colspan="2">S:a</td>
-                    <td class="tg-21yu" colspan="2"></td>
-                    <td class="tg-q9qv" colspan="2"></td>
-                    <td class="tg-yw4l"></td>
+                    <td class="tg-21yu" colspan="2">@totalLängdGul</td>
+                    <td class="tg-q9qv" colspan="2">@totalLängdRöd</td>
+                    <td class="tg-yw4l">@parTot</td>
                     <td class="tg-baqh" colspan="2">Summa</td>
                     <td class="tg-yzt1"></td>
                     <td class="tg-yw4l"></td>
@@ -595,7 +631,7 @@
                     <td class="tg-yw4l"></td>
                 </tr>
                 <tr>
-                    <td class="tg-yw4l" colspan="9" rowspan="2">Spelares Golf-ID:</td>
+                    <td class="tg-yw4l" colspan="9" rowspan="2">Spelares Golf-ID: @golfid</td>
                     <td class="tg-yw4l" colspan="5" rowspan="2">Markörs Sign:<br></td>
                     <td class="tg-yw4l" colspan="3" rowspan="2">Markörs Golf-ID:<br><br></td>
                 </tr>
