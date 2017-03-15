@@ -590,7 +590,7 @@ namespace Golf_3_MVC.Controllers
                                 EV.id = changedEvent.id;
                                 EV.start_date = changedEvent.start_date;
                                 EV.end_date = changedEvent.end_date;
-                                EV.text = changedEvent.text;
+                                EV.text = " " + changedEvent.text;
                                 EV.golf_id = User.Identity.GetUserName();
                                 EV.blocktime = true;
                                 EV.incheckad = true;
@@ -620,12 +620,18 @@ namespace Golf_3_MVC.Controllers
                         }
                         else
                         { // VANLIG BOKNING
+                            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+                            allaMedlemmar = ds.medlemmars.ToList();
+
+                            medlemmar m;
+
+                            m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
                             bokning EV = new bokning();
                             EV.id = changedEvent.id;
                             EV.start_date = changedEvent.start_date;
                             EV.end_date = changedEvent.end_date;
-                            EV.text = changedEvent.text;
+                            EV.text = " Kön: " + m.kon +" Handikapp: " + m.hcp;
                             EV.golf_id = User.Identity.GetUserName();
                             EV.blocktime = false;
                             EV.incheckad = false;
@@ -633,18 +639,8 @@ namespace Golf_3_MVC.Controllers
                             ds.SaveChanges();
 
 
-                            List<medlemmar> allaMedlemmar = new List<medlemmar>();
-                            allaMedlemmar = ds.medlemmars.ToList();
-
-                            medlemmar m;
-
-                            m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
-
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
-
-                            
-
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);                            
                         }
 
                         break;
@@ -713,7 +709,7 @@ namespace Golf_3_MVC.Controllers
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                             data.start_date = changedEvent.start_date;
                             data.end_date = changedEvent.end_date;
-                            data.text = changedEvent.text;
+                            data.text = " " + changedEvent.text;
                             ds.SaveChanges();
                             break;
                         }
