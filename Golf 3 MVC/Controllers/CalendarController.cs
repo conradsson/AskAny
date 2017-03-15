@@ -598,15 +598,15 @@ namespace Golf_3_MVC.Controllers
                                 ds.SaveChanges();
                                 BlocktimeDeleteBokning(EV.id,EV.start_date, EV.end_date);
 
-                                //List<medlemmar> allaMedlemmar = new List<medlemmar>();
-                                //allaMedlemmar = ds.medlemmars.ToList();
+                                List<medlemmar> allaMedlemmar = new List<medlemmar>();
+                                allaMedlemmar = ds.medlemmars.ToList();
 
-                                //medlemmar m;
+                                medlemmar m;
 
-                                //m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
+                                m = allaMedlemmar.Where(x => x.golf_id == EV.golf_id).FirstOrDefault();
 
-                                //string epost = m.epost;
-                                //SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
+                                string epost = m.epost;
+                                SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
 
 
                             }
