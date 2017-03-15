@@ -177,20 +177,28 @@ namespace Golf_3_MVC.Controllers
 
                         bokning hej;
                         hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
+                        //bokning EV = new bokning();
 
-            medbokare.Id = 33;
-            medbokare.BokningsId = Convert.ToInt32(bokningsID);
-            medbokare.Huvudbokare = hej.golf_id;
-            medbokare.Medbokare1 = golfID;
-            ds.medbokares.Add(medbokare);
-            ds.SaveChanges();
+                        medlemmar m;
 
-            TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                        //m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
-            medlemmar m;
-            m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
-            string epost = m.epost;
-            SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
+                        medbokare.Id = 33;
+                        medbokare.BokningsId = Convert.ToInt32(bokningsID);
+                        medbokare.Huvudbokare = hej.golf_id;
+                        medbokare.Medbokare1 = golfID;
+                        //EV.text += "Kön: " + m.kon + " Handikapp: " + m.hcp;
+            
+                        ds.medbokares.Add(medbokare);
+                        ds.SaveChanges();
+
+                        TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+
+
+                        m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
+                        string epost = m.epost;
+                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
+
                     }
                 }
             }
