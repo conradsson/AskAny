@@ -556,7 +556,12 @@ namespace Golf_3_MVC.Controllers
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Sparar bokningar till databasen, ta bort bokningar, uppdatera bokningar.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ContentResult Save(int? id, FormCollection actionValues)
         {
             var action = new DataAction(actionValues);
@@ -722,6 +727,12 @@ namespace Golf_3_MVC.Controllers
 
             return (ContentResult)new AjaxSaveResponse(action);
         }
+        /// <summary>
+        /// Tar bort alla bokningar som finns i spannet där en blocktime lägs in.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="start"></param>
+        /// <param name="stop"></param>
         public void BlocktimeDeleteBokning(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -741,7 +752,11 @@ namespace Golf_3_MVC.Controllers
 
             }
         }
-
+        /// <summary>
+        /// Ta bort en blocktime om den ej är aktuell längre.
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ActionResult DeleteBlocktime(FormCollection actionValues)
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -771,7 +786,11 @@ namespace Golf_3_MVC.Controllers
             Boo:
             return RedirectToAction("index");
         }
-
+        /// <summary>
+        /// Incheckning av bokning.
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <returns></returns>
         public ActionResult Incheckning(FormCollection actionValues)
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -806,7 +825,9 @@ namespace Golf_3_MVC.Controllers
 
             return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
         }
-
+        /// <summary>
+        /// Tar bort bokningnar som inte är incheckade tio minuter innan dessa skall påbörjas.
+        /// </summary>
         public void AutoDeleteBokning()
         {
             dsu3Entities ds3 = new dsu3Entities();
@@ -844,6 +865,12 @@ namespace Golf_3_MVC.Controllers
         //    return RedirectToAction("index");
         //}
 
+        /// <summary>
+        /// Metod för att skicka email, tar inparametrar som epost, subject och själva bodyn.
+        /// </summary>
+        /// <param name="toAddress"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
         public static void SendEmail(string toAddress, string subject, string body)
         {
             var mailMessage = new MailMessage();
