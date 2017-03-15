@@ -71,7 +71,11 @@ namespace Golf_3_MVC.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Autocomplete
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
         public ActionResult GetAutoCompleteData(string term)
         {
 
@@ -96,7 +100,15 @@ namespace Golf_3_MVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Lägga till medbokare.
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <param name="medlemsId"></param>
+        /// <param name="sokBokning"></param>
+        /// <param name="sokBokning2"></param>
+        /// <param name="gast"></param>
+        /// <returns></returns>
         public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning, string sokBokning2, string gast)
         {
 
