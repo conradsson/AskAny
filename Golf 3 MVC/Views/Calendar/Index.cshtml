@@ -173,9 +173,15 @@
                     @using (Html.BeginForm("Incheckning", "Calendar"))
                     {
                         <p>
-                            Välj bokning: @Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"))
+                            &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"))&emsp;
 
-                            <input type="submit" name="checkainBtn" value="Checka in" />
+                            <hr /><label>&emsp;Checka in spelare 1 : <br />&emsp; Victor Olsson</label><hr />
+                            
+                            <label>&emsp;Checka in spelare 2 :<br />&emsp;Victor Olsson</label><br /><hr />
+                            <label>&emsp;Checka in spelare 3 :<br />&emsp;Victor Olsson</label><br /><hr />
+                            <label>&emsp;Checka in spelare 4 :<br />&emsp;Victor Olsson</label><br /><hr />
+
+                            &emsp;<input type="submit" name="checkainBtn" value="Checka in" />
 
                             @Html.Raw(TempData["msg"])
                         </p>
