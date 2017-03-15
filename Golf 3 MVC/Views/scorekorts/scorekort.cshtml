@@ -120,6 +120,7 @@
                         int bokningsID = Model.bokningsID; //ViewBag.bokningsID; //lägg till Model.bokningsID
                         decimal slope = 124;
                         decimal CR = 73;
+                        string kön = "";
 
                         foreach (var x in Model.medbokare)//Tar fram golfID på de som är med i bollen och sätter den man vill skriva ut scorekortet till som spelare ett
                         {
@@ -173,6 +174,10 @@
                                         starttid = x.start_date.ToShortTimeString();
                                     }
                                 }
+                                if (i.golf_id == golfid.Trim())
+                                {
+                                    kön = i.kon;
+                                }
                             }
                             if (i.golf_id == golfid2.Trim())
                             {
@@ -194,7 +199,16 @@
 
 
                         decimal hcpRäkna = Convert.ToDecimal(HCP);
-
+                        if (kön =="Male")
+                        {
+                            slope = 128;
+                            CR = Convert.ToDecimal(71.4);
+                        }
+                        if (kön == "Female")
+                        {
+                            slope = 124;
+                            CR = 73;
+                        }
 
                         ESlag = (hcpRäkna * (slope / 113)) + (CR - 72); //Räknar ut erhållna slag
 
@@ -298,7 +312,7 @@
                                 räknare = 0;
                                 goto Start;
                             }
-                        Start:
+                            Start:
                             ESlag--;
                             räknare++;
 
