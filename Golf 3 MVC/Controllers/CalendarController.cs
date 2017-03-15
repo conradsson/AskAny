@@ -248,7 +248,12 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("index");
         }
-
+        /// <summary>
+        /// Utskrift av scorekort.
+        /// </summary>
+        /// <param name="medlemsId"></param>
+        /// <param name="sokBokning"></param>
+        /// <returns></returns>
         public ActionResult SkrivUtScoreKort(string medlemsId, string sokBokning)
         {
             string bokningsID = sokBokning.Split(' ').Last();
@@ -419,7 +424,10 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("index");
         }
-
+        /// <summary>
+        /// Laddning av själva bokningsschemat.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             season season = new season();
@@ -521,7 +529,12 @@ namespace Golf_3_MVC.Controllers
             medlemmars = ds.medlemmars.ToList();
             return Json(medlemmars, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Stänga/Öppna banan för säsong.
+        /// </summary>
+        /// <param name="responsables"></param>
+        /// <param name="checkResp"></param>
+        /// <returns></returns>
         public ActionResult Seasontoggle(string responsables, bool checkResp = false)
         {
             season season = new season();
