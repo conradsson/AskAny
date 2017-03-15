@@ -807,14 +807,8 @@ namespace Golf_3_MVC.Controllers
             }
 
         Boo:
-            Score model = new Score();
-            model.bokningsID = bok.id;
-            model.golfID = bok.golf_id;
-            ViewBag.golfID = bok.golf_id;
-            ViewBag.bokningsID = bok.id;
+
             return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
-
-
         }
 
         public void AutoDeleteBokning()
