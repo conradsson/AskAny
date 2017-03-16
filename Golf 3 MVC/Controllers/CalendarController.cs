@@ -185,7 +185,7 @@ namespace Golf_3_MVC.Controllers
 
                         medbokare.Id = 33;
                         medbokare.BokningsId = Convert.ToInt32(bokningsID);
-                        medbokare.Huvudbokare = hej.golf_id;
+                        medbokare.Huvudbokare = hej.golf_id; 
                         medbokare.Medbokare1 = golfID;
                         hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
