@@ -213,7 +213,7 @@ namespace Golf_3_MVC.Controllers
                         }
                         catch
                         {
-
+                            TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
                         }
 
                     }
@@ -298,8 +298,6 @@ namespace Golf_3_MVC.Controllers
             string golfID = medlemsId.Split(' ').Last();
             return RedirectToAction("scorekort", "scorekortsController", new { bokningsID, golfID });
         }
-
-
         /// <summary>
         /// Medlem lägger till medbokare (person till bokning)
         /// </summary>
@@ -444,7 +442,7 @@ namespace Golf_3_MVC.Controllers
                         }
                         catch
                         {
-
+                            TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja person!');</script>";
 
                         }
 
