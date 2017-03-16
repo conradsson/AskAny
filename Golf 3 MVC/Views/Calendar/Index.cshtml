@@ -34,11 +34,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/Scripts/site.js"></script>
     <script>
-        scheduler.attachEvent("onXLE", function () {
-            scheduler.render_view_data();
-        });
-    </script>
-    <script>
         $(document).ready(function () {
             $("#medlemsId").autocomplete({
                 source: function (request, response) {
@@ -60,8 +55,6 @@
                     });
                 }
             });
-
-            
         });
     </script>
     <script>
