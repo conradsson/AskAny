@@ -72,7 +72,7 @@ namespace Golf_3_MVC.Controllers
             return View();
         }
         /// <summary>
-        /// Autocomplete
+        /// Autocomplete för medlemmar.
         /// </summary>
         /// <param name="term"></param>
         /// <returns></returns>
@@ -88,7 +88,11 @@ namespace Golf_3_MVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Autocomplete för bokningar.
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
         public ActionResult GetAutoCompleteDataBokning(string term)
         {
             var result = ds.boknings.Where(x => x.text.Contains(term))
