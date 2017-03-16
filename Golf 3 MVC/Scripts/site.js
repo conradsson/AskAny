@@ -5,6 +5,11 @@
     $(".carousel").delay(450).fadeIn(1000)
 });
 
+$(".dropdown .dropdown-toggle").click(function () {  //  DROPDOWN STÄNGER INTE SIG SJÄLV-FUNKTION
+    $(this).dropdown("toggle");
+    return false;
+});
+
 //  START FLIKEN-EFFEKTER
 $(".startbtn").ready(function (e) {
     $(".panel-nyheter").show();

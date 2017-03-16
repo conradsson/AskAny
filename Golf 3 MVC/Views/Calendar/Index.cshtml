@@ -108,6 +108,25 @@
 
 
 
+    <script type="text/javascript">
+        function GetOptions()
+        {
+            var e = document.getElementById("Bokningar");
+            var strOptions = e.options[e.selectedIndex].value;
+    
+
+            document.getElementById("hidden").innerText = strOptions;
+
+
+
+        return strOptions;
+
+        }
+        </script>
+
+
+
+
 </head>
 <body>
     <div class="row">
@@ -131,6 +150,7 @@
                     }
                 </ul>
             </li>
+                /////////////////////////////////////////
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Blockera tider <span class="caret"></span>
@@ -145,6 +165,8 @@
 
                 </ul>
             </li>
+                /////////////////////////////////////////
+
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Ta bort blocktider <span class="caret"></span>
@@ -164,7 +186,28 @@
                 </ul>
 
             </li>
+                /////////////////////////////////////////
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Lägg till person <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @using (Html.BeginForm("Create", "Calendar"))
+                        {
+                            <p>
+                                Sök efter bokning: @Html.TextBox("sokBokning")
+                            </p>
+                            <p>
+                                Sök efter medlem: @Html.TextBox("medlemsId")
+                                <input type="submit" name="laggtill" value="Lägg till" />
+                                <input type="submit" name="tabort" value="Ta bort" />
 
+                                @Html.Raw(TempData["msg"])
+                            </p>
+                        }
+                    </ul>
+                </li>
+                /////////////////////////////////////////
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                     Incheckning <span class="caret"></span>
@@ -172,14 +215,27 @@
                 <ul class="dropdown-menu">
                     @using (Html.BeginForm("Incheckning", "Calendar"))
                     {
-                        <p>
-                            &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"))&emsp;
 
-                            <hr /><label>&emsp;Checka in spelare 1 : <br />&emsp; Victor Olsson</label><hr />
+                    
+
+                        <p>
+
+                            &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"), new
+                                                 {
+
+                                                     onchange = @"Javascript:GetOptions()"
+
+                                                }) 
                             
-                            <label>&emsp;Checka in spelare 2 :<br />&emsp;Victor Olsson</label><br /><hr />
-                            <label>&emsp;Checka in spelare 3 :<br />&emsp;Victor Olsson</label><br /><hr />
-                            <label>&emsp;Checka in spelare 4 :<br />&emsp;Victor Olsson</label><br /><hr />
+                            
+                            &emsp;
+                            @Html.LabelFor(model => model.Namn1, "foo bar")
+                            <hr /><label id="Spelare 1">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
+                            <label>&emsp;Checka in spelare 2 :<br />&emsp;@Model.Namn2</label><br /><hr />
+                            <label>&emsp;Checka in spelare 3 :<br />&emsp;@Model.Namn3</label><br /><hr />
+                            <label>&emsp;Checka in spelare 4 :<br />&emsp;@Model.Namn4</label><br /><hr />
+
+                            <input id="hidden" type="hidden" value="1" />
 
                             &emsp;<input type="submit" name="checkainBtn" value="Checka in" />
 
@@ -190,7 +246,7 @@
                 </ul>
 
             </li>
-
+                /////////////////////////////////////////
             }
 
             @if (User.IsInRole("User"))  // ENDAST FÖR MEDLEM
@@ -217,56 +273,36 @@
                         }
                     </ul>
                 </li>
-
-            }
-            else
-            {
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                        Lägg till person <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        @using (Html.BeginForm("Create", "Calendar"))
-                        {
-                            <p>
-                                Sök efter bokning: @Html.TextBox("sokBokning")
-                            </p>
-                            <p>
-                                Sök efter medlem: @Html.TextBox("medlemsId")
-                                <input type="submit" name="laggtill" value="Lägg till" />
-                                <input type="submit" name="tabort" value="Ta bort" />
-
-                                @Html.Raw(TempData["msg"])
-                            </p>
-                        }
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                        Lägg till gäst <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        @using (Html.BeginForm("Create", "Calendar"))
-                        {
-                            <p>
-                                Sök efter bokning: @Html.TextBox("sokBokning2")<br />
-                                Skriv in gästens namn: @Html.TextBox("gast")<br /><br />
-                                <input type="submit" name="laggtillGast" value="Lägg till" />
-                                <input type="submit" name="tabortGast" value="Ta bort" />
-
-                                @Html.Raw(TempData["msg"])
-                            </p>
-                        }
-                    </ul>
-                </li>
+                /////////////////////////////////////////
             }
 
-            @*<input type="text" name="medlemmar" id="medlemsId" />*@
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Lägg till gäst <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @using (Html.BeginForm("Create", "Calendar"))
+                    {
+                        <p>
+                            Sök efter bokning: @Html.TextBox("sokBokning2")<br />
+                            Skriv in gästens namn: @Html.TextBox("gast")<br /><br />
+                            <input type="submit" name="laggtillGast" value="Lägg till" />
+                            <input type="submit" name="tabortGast" value="Ta bort" />
+
+                            @Html.Raw(TempData["msg"])
+                        </p>
+                    }
+                </ul>
+            </li> 
+            
         </ul>
+
+
         <div class="panel panel-default panel-kalender">
             <div class="panel-heading">Bokningsschema</div>
             <div class="panel-body">
                 <div style="height:1550px;width:auto;margin:0 auto">
+
                     @Html.Raw(Model.sched.Render())
                 </div>
             </div>

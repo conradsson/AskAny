@@ -72,7 +72,7 @@ namespace Golf_3_MVC.Controllers
             return View();
         }
         /// <summary>
-        /// Autocomplete
+        /// Autocomplete för medlemmar.
         /// </summary>
         /// <param name="term"></param>
         /// <returns></returns>
@@ -88,7 +88,11 @@ namespace Golf_3_MVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Autocomplete för bokningar.
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
         public ActionResult GetAutoCompleteDataBokning(string term)
         {
             var result = ds.boknings.Where(x => x.text.Contains(term))
@@ -111,18 +115,16 @@ namespace Golf_3_MVC.Controllers
         /// <returns></returns>
         public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning, string sokBokning2, string gast)
         {
-
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
             medlemmar huvudbokare = new medlemmar();
+            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+
             string id = actionValues["Bokningar"];
             model.aktuellaMedbokare = aktuellaMedbokare;
-            List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
-
-
 
             if (Request.Form["laggtill"] != null)
             {
@@ -138,30 +140,37 @@ namespace Golf_3_MVC.Controllers
                 {
                     foreach (medbokare mb in aktuellaMedbokare) // LOOPAR IGENOM ALLA I BOKNINGEN O HÄMTAR HCP SAMT KONTROLL FÖR DUBBELBOKNING
                 {
-                        if (mb.gast == true)
+                        try
                         {
+                            if (mb.gast == true)
+                            {
 
+                            }
+                            else
+                            {
+                                medlemmar m = new medlemmar();
+                                double hcp;
+
+                                m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                                huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
+                                aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
+
+                                hcp = Convert.ToDouble(m.hcp);
+                                mHcp = Convert.ToDouble(aktuellMedlem.hcp);
+                                hHcp = Convert.ToDouble(huvudbokare.hcp);
+
+                                totalHcp += hcp;
+
+                                if (aktuellMedlem == huvudbokare || aktuellMedlem == m)
+                                {
+                                    TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
+                                    goto Foo;
+                                }
+
+                            }
                         }
-                        else
+                          catch
                         {
-                        medlemmar m = new medlemmar();
-                        double hcp;
-
-                        m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
-                        huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
-                        aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
-
-                        hcp = Convert.ToDouble(m.hcp);
-                        mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                        hHcp = Convert.ToDouble(huvudbokare.hcp);
-
-                        totalHcp += hcp;
-
-                        if (aktuellMedlem == huvudbokare || aktuellMedlem == m)
-                        {
-                            TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
-                            goto Foo;
-                        }
 
                         }
                     }
@@ -174,48 +183,39 @@ namespace Golf_3_MVC.Controllers
             }
                     else // OM ALLT OK; LÄGGER TILL PERSON
             {
+                        try
+                        {
+                            bokning hej;
+                            hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
 
-                        bokning aktBokning;
-                        aktBokning = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
-                        medlemmar hbokare = allaMedlemmar.Where(x => x.golf_id == aktBokning.golf_id).FirstOrDefault();
-                        medlemmar m;
-                        m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
+                            medlemmar m;
+                            m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
-                        //// OM HUVUDBOKARE ÄR EN PERSONAL SÅ SKA DEN BORT OCH FÖRSTA INLAGDA MEDLEM BLIR ISTÄLLET HUVUDBOKARE.
-                        //if (hbokare.golf_id == aktBokning.golf_id && hbokare.kategori == "Personal" || hbokare.kategori == "Admin")
-                        //{
-                        //    medbokare.Id = 33;
-                        //    medbokare.BokningsId = Convert.ToInt32(bokningsID);
-                        //    medbokare.Huvudbokare = golfID;
-                        //    medbokare.Medbokare1 = golfID;
-                        //    aktBokning.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
+                            medbokare.Id = 33;
+                            medbokare.BokningsId = Convert.ToInt32(bokningsID);
+                            medbokare.Huvudbokare = hej.golf_id;
+                            medbokare.Medbokare1 = golfID;
+                            hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
-                        //    ds.medbokares.Add(medbokare);
-                        //    ds.SaveChanges();
-                        //}
+                            ds.medbokares.Add(medbokare);
+                            ds.SaveChanges();
 
-                        medbokare.Id = 33;
-                        medbokare.BokningsId = Convert.ToInt32(bokningsID);
-                        medbokare.Huvudbokare = aktBokning.golf_id;
-                        medbokare.Medbokare1 = golfID;
-                        aktBokning.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
-
-                        ds.medbokares.Add(medbokare);
-                        ds.SaveChanges();
-
-                        TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                            TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
 
 
-                        m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
-                        string epost = m.epost;
-                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + aktBokning.start_date + " - " + aktBokning.end_date);
-
+                            m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
+                            string epost = m.epost;
+                            SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + hej.start_date + " - " + hej.end_date);
+                        }
+                        catch
+                        {
+                            TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
+                        }
                     }
                 }
             }
             else if (Request.Form["tabort"] != null) // TAR BORT EN MEDBOKARE FRÅN EN BOKNING
             {
-
                 string bokningsID = sokBokning.Split(' ').Last();
                 string golfID = medlemsId.Split(' ').Last();
 
@@ -237,32 +237,37 @@ namespace Golf_3_MVC.Controllers
                 string bokningsIDgast = sokBokning2.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
 
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
                     goto Foo;
                 }
+                try
+                {
+                    bokning hej;
+                    hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
 
-                bokning hej;
-                hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
+                    medbokare.Id = 33;
+                    medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
+                    medbokare.Huvudbokare = hej.golf_id;
+                    medbokare.Medbokare1 = gast;
+                    medbokare.gast = true;
+                    hej.text += hej.golf_id;
+                    ds.medbokares.Add(medbokare);
+                    ds.SaveChanges();
 
-                medbokare.Id = 33;
-                medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
-                medbokare.Huvudbokare = hej.golf_id;
-                medbokare.Medbokare1 = gast;
-                medbokare.gast = true;
-                hej.text += hej.golf_id;
-                ds.medbokares.Add(medbokare);
-                ds.SaveChanges();
+                    TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                }
+                catch
+                {
+                    TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
+                }
 
-                TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
             }
             else if (Request.Form["tabortGast"] != null)
             {
                 string bokningsIDgast = sokBokning2.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
-
 
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
@@ -275,8 +280,6 @@ namespace Golf_3_MVC.Controllers
                 TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                 ds.SaveChanges();
             }
-
-
             Foo:
             return RedirectToAction("index");
         }
@@ -292,8 +295,13 @@ namespace Golf_3_MVC.Controllers
             string golfID = medlemsId.Split(' ').Last();
             return RedirectToAction("scorekort", "scorekortsController", new { bokningsID, golfID });
         }
-
-
+        /// <summary>
+        /// Medlem lägger till medbokare (person till bokning)
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <param name="golfidstring"></param>
+        /// <param name="checkbox"></param>
+        /// <returns></returns>
         public ActionResult CreateMedlem(FormCollection actionValues, string golfidstring, IEnumerable<bool> checkbox)
         {
             medbokare medbokare = new medbokare();
@@ -301,15 +309,16 @@ namespace Golf_3_MVC.Controllers
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
             medlemmar huvudbokare = new medlemmar();
+
             string id = actionValues["Bokningar"];
             aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
             model.aktuellaMedbokare = aktuellaMedbokare;
+
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
             if (checkbox != null && checkbox.Count() == 2)
             {
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
@@ -352,7 +361,6 @@ namespace Golf_3_MVC.Controllers
                     TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
 
                 }
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
@@ -361,6 +369,7 @@ namespace Golf_3_MVC.Controllers
                 {
                     foreach (medbokare mb in aktuellaMedbokare) // LOOPAR IGENOM ALLA I BOKNINGEN O HÄMTAR HCP SAMT KONTROLL FÖR DUBBELBOKNING
                     {
+                        
                         if (mb.gast == true)
                         {
 
@@ -397,35 +406,41 @@ namespace Golf_3_MVC.Controllers
                     }
                     else // OM ALLT OK; LÄGGER TILL PERSON
                     {
-                        bokning hej;
-                        hej = ds.boknings.Where(x => x.id.ToString() == id).FirstOrDefault();
-                        medlemmar m;
-                        m = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
+                        try
+                        {
+                            bokning hej;
+                            hej = ds.boknings.Where(x => x.id.ToString() == id).FirstOrDefault();
+                            medlemmar m;
+                            m = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
 
-                        medbokare.Id = 33;
-                        medbokare.BokningsId = Convert.ToInt32(id);
-                        medbokare.Huvudbokare = hej.golf_id;
-                        medbokare.Medbokare1 = golfidstring;
-                        hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
-                        ds.medbokares.Add(medbokare);
-                        ds.SaveChanges();
+                            medbokare.Id = 33;
+                            medbokare.BokningsId = Convert.ToInt32(id);
+                            medbokare.Huvudbokare = hej.golf_id;
+                            medbokare.Medbokare1 = golfidstring;
+                            hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
+                            ds.medbokares.Add(medbokare);
+                            ds.SaveChanges();
 
-                        m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
-                        string epost = m.epost;
-                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
+                            m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
+                            string epost = m.epost;
+                            SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
 
-                        //foreach (medbokare mb in aktuellaMedbokare)
-                        //{
-                        //    medlemmar m;
+                            //foreach (medbokare mb in aktuellaMedbokare)
+                            //{
+                            //    medlemmar m;
 
-                        //    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
-                        //    string epost = m.epost;
-                        //    SendEmail(epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
+                            //    m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
+                            //    string epost = m.epost;
+                            //    SendEmail(epost, "Bokning", "En spelare har bokat sig på samma tid som dig!");
 
-                        //}
+                            //}
 
-                        TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
-
+                            TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                        }
+                        catch
+                        {
+                            TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja person!');</script>";
+                        }
                     }
                 }
             }
@@ -444,7 +459,6 @@ namespace Golf_3_MVC.Controllers
                     if (mb.Medbokare1.Trim() == golfidstring)
                     {
                         ds.medbokares.Remove(mb);
-
                     }
                 }
                 TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
@@ -454,9 +468,8 @@ namespace Golf_3_MVC.Controllers
 
                 m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                 string epost = m.epost;
-                SendEmail(epost, "Avbokning", "Du har blivit avbokad!" );
+                SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
             }
-
 
             Foo:
             return RedirectToAction("index");
@@ -520,7 +533,7 @@ namespace Golf_3_MVC.Controllers
                 var sched = new DHXScheduler(this);
                 sched.Skin = DHXScheduler.Skins.Flat;
 
-
+                sched.Localization.Set(SchedulerLocalization.Localizations.Swedish);
                 sched.Config.first_hour = 7;
                 sched.Config.last_hour = 18;
                 sched.Config.time_step = 10;
@@ -624,12 +637,12 @@ namespace Golf_3_MVC.Controllers
                     case DataActionTypes.Insert:
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
+                        
+                        if (diff.TotalHours > 0.17) // om det är mer än 10min //BLOCKTIME
+                        {
 
-                        if (diff.TotalHours > 0.17) // om det är mer än 10min
-                        {//BLOCKTIME
-
-                            if (User.IsInRole("Personal") || User.IsInRole("Admin"))
-                            {// ENDAST FÖR PERSONAL OCH ADMIN
+                            if (User.IsInRole("Personal") || User.IsInRole("Admin")) //ENDAST FÖR PERSONAL OCH ADMIN
+                            {
                                 bokning EV = new bokning();
                                 EV.id = changedEvent.id;
                                 EV.start_date = changedEvent.start_date;
@@ -654,16 +667,16 @@ namespace Golf_3_MVC.Controllers
 
 
                             }
-                            else
-                            {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
+                            else //OM MEDLEM BOKAR MER ÄN 10 MINUTER
+                            {
 
                                 TempData["msg"] = "<script>alert('Du kan bara boka 10 minuter');</script>";
 
                             }
 
                         }
-                        else
-                        { // VANLIG BOKNING
+                        else //VANLIG BOKNING
+                        { 
                             List<medlemmar> allaMedlemmar = new List<medlemmar>();
                             allaMedlemmar = ds.medlemmars.ToList();
 
@@ -684,7 +697,7 @@ namespace Golf_3_MVC.Controllers
 
 
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);                            
                         }
 
                         break;
@@ -749,7 +762,7 @@ namespace Golf_3_MVC.Controllers
                         }
 
                         break;
-                    default:// "update"
+                    default://UPDATE
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                             data.start_date = changedEvent.start_date;
                             data.end_date = changedEvent.end_date;
