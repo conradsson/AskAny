@@ -243,7 +243,6 @@ namespace Golf_3_MVC.Controllers
                 string bokningsIDgast = sokBokning2.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
 
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
@@ -452,10 +451,7 @@ namespace Golf_3_MVC.Controllers
                         catch
                         {
                             TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja person!');</script>";
-
                         }
-
-
                     }
                 }
             }
@@ -474,7 +470,6 @@ namespace Golf_3_MVC.Controllers
                     if (mb.Medbokare1.Trim() == golfidstring)
                     {
                         ds.medbokares.Remove(mb);
-
                     }
                 }
                 TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
@@ -486,7 +481,6 @@ namespace Golf_3_MVC.Controllers
                 string epost = m.epost;
                 SendEmail(epost, "Avbokning", "Du har blivit avbokad!" );
             }
-
 
             Foo:
             return RedirectToAction("index");
