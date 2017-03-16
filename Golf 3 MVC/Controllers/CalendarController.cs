@@ -283,6 +283,13 @@ namespace Golf_3_MVC.Controllers
         }
 
 
+        /// <summary>
+        /// Medleme lägger till medbokare (person till bokning)
+        /// </summary>
+        /// <param name="actionValues"></param>
+        /// <param name="golfidstring"></param>
+        /// <param name="checkbox"></param>
+        /// <returns></returns>
         public ActionResult CreateMedlem(FormCollection actionValues, string golfidstring, IEnumerable<bool> checkbox)
         {
             medbokare medbokare = new medbokare();
