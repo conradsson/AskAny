@@ -197,7 +197,7 @@ namespace Golf_3_MVC.Controllers
 
                         m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                         string epost = m.epost;
-                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
+                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + hej.start_date + " - " + hej.end_date);
 
                     }
                 }
