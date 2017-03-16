@@ -120,9 +120,10 @@ namespace Golf_3_MVC.Controllers
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
             medlemmar huvudbokare = new medlemmar();
+            List<medlemmar> allaMedlemmar = new List<medlemmar>();
+
             string id = actionValues["Bokningar"];
             model.aktuellaMedbokare = aktuellaMedbokare;
-            List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
             if (Request.Form["laggtill"] != null)
@@ -241,7 +242,6 @@ namespace Golf_3_MVC.Controllers
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
                     goto Foo;
                 }
-
                 try
                 {
                     bokning hej;
@@ -261,7 +261,6 @@ namespace Golf_3_MVC.Controllers
                 catch
                 {
                     TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
-
                 }
 
             }
@@ -269,7 +268,6 @@ namespace Golf_3_MVC.Controllers
             {
                 string bokningsIDgast = sokBokning2.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
-
 
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
@@ -311,9 +309,11 @@ namespace Golf_3_MVC.Controllers
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
             medlemmar huvudbokare = new medlemmar();
+
             string id = actionValues["Bokningar"];
             aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
             model.aktuellaMedbokare = aktuellaMedbokare;
+
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
 
@@ -468,7 +468,7 @@ namespace Golf_3_MVC.Controllers
 
                 m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                 string epost = m.epost;
-                SendEmail(epost, "Avbokning", "Du har blivit avbokad!" );
+                SendEmail(epost, "Avbokning", "Du har blivit avbokad!");
             }
 
             Foo:
