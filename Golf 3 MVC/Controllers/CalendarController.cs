@@ -328,7 +328,6 @@ namespace Golf_3_MVC.Controllers
 
             if (checkbox != null && checkbox.Count() == 2)
             {
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
@@ -371,7 +370,6 @@ namespace Golf_3_MVC.Controllers
                     TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
 
                 }
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
