@@ -473,7 +473,7 @@ textarea {
 /********************************/
 
 @media screen and (min-width: 1500px){
-	footer {
+	/*footer {
       position: absolute;
       right: 0;
       bottom: 0;
@@ -481,10 +481,10 @@ textarea {
       /*padding: 1rem;*/
     }
 
-    .body-content {
+    /*.body-content {
         min-width: 80%;
         min-height: 100%;
-    }
+    }*/
 }
 
 @media screen and (min-width: 980px){
