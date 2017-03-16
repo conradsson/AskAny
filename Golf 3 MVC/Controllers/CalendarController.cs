@@ -174,30 +174,32 @@ namespace Golf_3_MVC.Controllers
             }
                     else // OM ALLT OK; LÄGGER TILL PERSON
             {
-
                         bokning hej;
                         hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
-                        
-
                         medlemmar m;
-
                         m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
+
 
                         medbokare.Id = 33;
                         medbokare.BokningsId = Convert.ToInt32(bokningsID);
+                        medbokare.Huvudbokare = golfID;
+                        medbokare.Medbokare1 = null;
+
                         medbokare.Huvudbokare = hej.golf_id;
                         medbokare.Medbokare1 = golfID;
+
+
+
                         hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
 
-                        TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
-
 
                         m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                         string epost = m.epost;
                         SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!");
+                        TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
 
                     }
                 }
@@ -613,7 +615,7 @@ namespace Golf_3_MVC.Controllers
                     case DataActionTypes.Insert:
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
-                        
+
                         if (diff.TotalHours > 0.17) // om det är mer än 10min
                         {//BLOCKTIME
 
@@ -657,23 +659,41 @@ namespace Golf_3_MVC.Controllers
                             allaMedlemmar = ds.medlemmars.ToList();
 
                             medlemmar m;
-
                             m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
-                            bokning EV = new bokning();
-                            EV.id = changedEvent.id;
-                            EV.start_date = changedEvent.start_date;
-                            EV.end_date = changedEvent.end_date;
-                            EV.text = " Kön: " + m.kon +" Handikapp: " + m.hcp;
-                            EV.golf_id = User.Identity.GetUserName();
-                            EV.blocktime = false;
-                            EV.incheckad = false;
-                            ds.boknings.Add(EV);
-                            ds.SaveChanges();
+                            if (User.IsInRole("Personal") || User.IsInRole("Admin"))
+                            {
+                                bokning EV = new bokning();
+                                EV.id = changedEvent.id;
+                                EV.start_date = changedEvent.start_date;
+                                EV.end_date = changedEvent.end_date;
+                                EV.text = " Kön: " + m.kon + " Handikapp: " + m.hcp;
+                                EV.golf_id = User.Identity.GetUserName();
+                                EV.blocktime = false;
+                                EV.incheckad = false;
+                                ds.boknings.Add(EV);
+                                ds.SaveChanges();
+                            }
+                            else
+                            {
+                                bokning EV = new bokning();
+                                EV.id = changedEvent.id;
+                                EV.start_date = changedEvent.start_date;
+                                EV.end_date = changedEvent.end_date;
+                                EV.text = " Kön: " + m.kon + " Handikapp: " + m.hcp;
+                                EV.golf_id = User.Identity.GetUserName();
+                                EV.blocktime = false;
+                                EV.incheckad = false;
+                                ds.boknings.Add(EV);
+                                ds.SaveChanges();
+                            }
+
+
+
 
 
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);                            
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         break;
