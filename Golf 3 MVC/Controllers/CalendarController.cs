@@ -243,7 +243,6 @@ namespace Golf_3_MVC.Controllers
                 string bokningsIDgast = sokBokning2.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
 
-
                 if (aktuellaMedbokare.Count >= 3) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
