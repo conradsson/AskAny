@@ -117,17 +117,6 @@
 
             document.getElementById("hidden").innerText = strOptions;
 
-             @{ 
-                 var a = Request.Form["hidden"].ToString();
-
-                 foreach (var x in Model.medbokareLista)
-                 {
-                     if (x.BokningsId.ToString() == a)
-                     {
-
-                     }
-                 }
-            }
 
 
         return strOptions;
