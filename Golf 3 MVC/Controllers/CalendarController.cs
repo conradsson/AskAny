@@ -115,7 +115,6 @@ namespace Golf_3_MVC.Controllers
         /// <returns></returns>
         public ActionResult Create(FormCollection actionValues, string medlemsId, string sokBokning, string sokBokning2, string gast)
         {
-
             medbokare medbokare = new medbokare();
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
@@ -125,8 +124,6 @@ namespace Golf_3_MVC.Controllers
             model.aktuellaMedbokare = aktuellaMedbokare;
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
             allaMedlemmar = ds.medlemmars.ToList();
-
-
 
             if (Request.Form["laggtill"] != null)
             {
@@ -190,9 +187,7 @@ namespace Golf_3_MVC.Controllers
                             bokning hej;
                             hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
 
-
                             medlemmar m;
-
                             m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
                             medbokare.Id = 33;
@@ -215,13 +210,11 @@ namespace Golf_3_MVC.Controllers
                         {
                             TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
                         }
-
                     }
                 }
             }
             else if (Request.Form["tabort"] != null) // TAR BORT EN MEDBOKARE FRÅN EN BOKNING
             {
-
                 string bokningsID = sokBokning.Split(' ').Last();
                 string golfID = medlemsId.Split(' ').Last();
 
@@ -289,8 +282,6 @@ namespace Golf_3_MVC.Controllers
                 TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                 ds.SaveChanges();
             }
-
-
             Foo:
             return RedirectToAction("index");
         }
