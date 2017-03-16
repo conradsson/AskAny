@@ -213,7 +213,7 @@ namespace Golf_3_MVC.Controllers
                         }
                         catch
                         {
-
+                            TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
                         }
 
                     }
@@ -250,19 +250,28 @@ namespace Golf_3_MVC.Controllers
                     goto Foo;
                 }
 
-                bokning hej;
-                hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
+                try
+                {
+                    bokning hej;
+                    hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
 
-                medbokare.Id = 33;
-                medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
-                medbokare.Huvudbokare = hej.golf_id;
-                medbokare.Medbokare1 = gast;
-                medbokare.gast = true;
-                hej.text += hej.golf_id;
-                ds.medbokares.Add(medbokare);
-                ds.SaveChanges();
+                    medbokare.Id = 33;
+                    medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
+                    medbokare.Huvudbokare = hej.golf_id;
+                    medbokare.Medbokare1 = gast;
+                    medbokare.gast = true;
+                    hej.text += hej.golf_id;
+                    ds.medbokares.Add(medbokare);
+                    ds.SaveChanges();
 
-                TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                    TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                }
+                catch
+                {
+                    TempData["msg"] = "<script>alert('Du måste fylla i både tid och person!');</script>";
+
+                }
+
             }
             else if (Request.Form["tabortGast"] != null)
             {
@@ -298,8 +307,6 @@ namespace Golf_3_MVC.Controllers
             string golfID = medlemsId.Split(' ').Last();
             return RedirectToAction("scorekort", "scorekortsController", new { bokningsID, golfID });
         }
-
-
         /// <summary>
         /// Medlem lägger till medbokare (person till bokning)
         /// </summary>
@@ -444,7 +451,7 @@ namespace Golf_3_MVC.Controllers
                         }
                         catch
                         {
-
+                            TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja person!');</script>";
 
                         }
 
