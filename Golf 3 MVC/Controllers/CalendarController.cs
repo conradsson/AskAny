@@ -175,19 +175,30 @@ namespace Golf_3_MVC.Controllers
                     else // OM ALLT OK; LÄGGER TILL PERSON
             {
 
-                        bokning hej;
-                        hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
-                        
-
+                        bokning aktBokning;
+                        aktBokning = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
+                        medlemmar hbokare = allaMedlemmar.Where(x => x.golf_id == aktBokning.golf_id).FirstOrDefault();
                         medlemmar m;
-
                         m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
+
+                        //// OM HUVUDBOKARE ÄR EN PERSONAL SÅ SKA DEN BORT OCH FÖRSTA INLAGDA MEDLEM BLIR ISTÄLLET HUVUDBOKARE.
+                        //if (hbokare.golf_id == aktBokning.golf_id && hbokare.kategori == "Personal" || hbokare.kategori == "Admin")
+                        //{
+                        //    medbokare.Id = 33;
+                        //    medbokare.BokningsId = Convert.ToInt32(bokningsID);
+                        //    medbokare.Huvudbokare = golfID;
+                        //    medbokare.Medbokare1 = golfID;
+                        //    aktBokning.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
+
+                        //    ds.medbokares.Add(medbokare);
+                        //    ds.SaveChanges();
+                        //}
 
                         medbokare.Id = 33;
                         medbokare.BokningsId = Convert.ToInt32(bokningsID);
-                        medbokare.Huvudbokare = hej.golf_id; 
+                        medbokare.Huvudbokare = aktBokning.golf_id;
                         medbokare.Medbokare1 = golfID;
-                        hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
+                        aktBokning.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
@@ -197,7 +208,7 @@ namespace Golf_3_MVC.Controllers
 
                         m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                         string epost = m.epost;
-                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + hej.start_date + " - " + hej.end_date);
+                        SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + aktBokning.start_date + " - " + aktBokning.end_date);
 
                     }
                 }
@@ -613,7 +624,7 @@ namespace Golf_3_MVC.Controllers
                     case DataActionTypes.Insert:
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
-                        
+
                         if (diff.TotalHours > 0.17) // om det är mer än 10min
                         {//BLOCKTIME
 
@@ -673,7 +684,7 @@ namespace Golf_3_MVC.Controllers
 
 
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);                            
+                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         break;
