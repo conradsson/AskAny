@@ -550,7 +550,7 @@ namespace Golf_3_MVC.Controllers
                 var sched = new DHXScheduler(this);
                 sched.Skin = DHXScheduler.Skins.Flat;
 
-
+                sched.Localization.Set(SchedulerLocalization.Localizations.Swedish);
                 sched.Config.first_hour = 7;
                 sched.Config.last_hour = 18;
                 sched.Config.time_step = 10;
