@@ -108,6 +108,36 @@
 
 
 
+    <script type="text/javascript">
+        function GetOptions()
+        {
+            var e = document.getElementById("Bokningar");
+            var strOptions = e.options[e.selectedIndex].value;
+    
+
+            document.getElementById("hidden").innerText = strOptions;
+
+             @{ 
+                 var a = Request.Form["hidden"].ToString();
+
+                 foreach (var x in Model.medbokareLista)
+                 {
+                     if (x.BokningsId.ToString() == a)
+                     {
+
+                     }
+                 }
+            }
+
+
+        return strOptions;
+
+        }
+        </script>
+
+
+
+
 </head>
 <body>
     <div class="row">
@@ -172,14 +202,27 @@
                 <ul class="dropdown-menu">
                     @using (Html.BeginForm("Incheckning", "Calendar"))
                     {
-                        <p>
-                            &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"))&emsp;
 
-                            <hr /><label>&emsp;Checka in spelare 1 : <br />&emsp; Victor Olsson</label><hr />
+                    
+
+                        <p>
+
+                            &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"), new
+                                                 {
+
+                                                     onchange = @"Javascript:GetOptions()"
+
+                                                }) 
                             
-                            <label>&emsp;Checka in spelare 2 :<br />&emsp;Victor Olsson</label><br /><hr />
-                            <label>&emsp;Checka in spelare 3 :<br />&emsp;Victor Olsson</label><br /><hr />
-                            <label>&emsp;Checka in spelare 4 :<br />&emsp;Victor Olsson</label><br /><hr />
+                            
+                            &emsp;
+                            @Html.LabelFor(model => model.Namn1, "foo bar")
+                            <hr /><label id="Spelare 1">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
+                            <label>&emsp;Checka in spelare 2 :<br />&emsp;@Model.Namn2</label><br /><hr />
+                            <label>&emsp;Checka in spelare 3 :<br />&emsp;@Model.Namn3</label><br /><hr />
+                            <label>&emsp;Checka in spelare 4 :<br />&emsp;@Model.Namn4</label><br /><hr />
+
+                            <input id="hidden" type="hidden" value="1" />
 
                             &emsp;<input type="submit" name="checkainBtn" value="Checka in" />
 
@@ -190,8 +233,9 @@
                 </ul>
 
             </li>
-
             }
+
+
 
             @if (User.IsInRole("User"))  // ENDAST FÖR MEDLEM
             {
