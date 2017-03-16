@@ -177,18 +177,18 @@ namespace Golf_3_MVC.Controllers
 
                         bokning hej;
                         hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
-                        //bokning EV = new bokning();
+                        
 
                         medlemmar m;
 
-                        //m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
+                        m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
                         medbokare.Id = 33;
                         medbokare.BokningsId = Convert.ToInt32(bokningsID);
                         medbokare.Huvudbokare = hej.golf_id;
                         medbokare.Medbokare1 = golfID;
-                        //EV.text += "Kön: " + m.kon + " Handikapp: " + m.hcp;
-            
+                        hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
+
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
 
@@ -241,6 +241,7 @@ namespace Golf_3_MVC.Controllers
                 medbokare.Huvudbokare = hej.golf_id;
                 medbokare.Medbokare1 = gast;
                 medbokare.gast = true;
+                hej.text += hej.golf_id;
                 ds.medbokares.Add(medbokare);
                 ds.SaveChanges();
 
@@ -316,11 +317,15 @@ namespace Golf_3_MVC.Controllers
                 bokning hej;
                 hej = ds.boknings.Where(x => x.id.ToString() == id).FirstOrDefault();
 
+                medlemmar m;
+                m = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
+
                 medbokare.Id = 33;
                 medbokare.BokningsId = Convert.ToInt32(id);
                 medbokare.Huvudbokare = hej.golf_id;
                 medbokare.Medbokare1 = golfidstring;
                 medbokare.gast = true;
+                hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
                 ds.medbokares.Add(medbokare);
                 ds.SaveChanges();
 
@@ -383,15 +388,16 @@ namespace Golf_3_MVC.Controllers
                     {
                         bokning hej;
                         hej = ds.boknings.Where(x => x.id.ToString() == id).FirstOrDefault();
+                        medlemmar m;
+                        m = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
 
                         medbokare.Id = 33;
                         medbokare.BokningsId = Convert.ToInt32(id);
                         medbokare.Huvudbokare = hej.golf_id;
                         medbokare.Medbokare1 = golfidstring;
+                        hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
                         ds.medbokares.Add(medbokare);
                         ds.SaveChanges();
-
-                        medlemmar m;
 
                         m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                         string epost = m.epost;
