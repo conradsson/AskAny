@@ -370,7 +370,7 @@ namespace Golf_3_MVC.Controllers
                 {
                     foreach (medbokare mb in aktuellaMedbokare) // LOOPAR IGENOM ALLA I BOKNINGEN O HÄMTAR HCP SAMT KONTROLL FÖR DUBBELBOKNING
                     {
-
+                        
                         if (mb.gast == true)
                         {
 
@@ -644,11 +644,11 @@ namespace Golf_3_MVC.Controllers
 
                         var diff = changedEvent.end_date.TimeOfDay - changedEvent.start_date.TimeOfDay;
                         
-                        if (diff.TotalHours > 0.17) // om det är mer än 10min
-                        {//BLOCKTIME
+                        if (diff.TotalHours > 0.17) // om det är mer än 10min //BLOCKTIME
+                        {
 
-                            if (User.IsInRole("Personal") || User.IsInRole("Admin"))
-                            {// ENDAST FÖR PERSONAL OCH ADMIN
+                            if (User.IsInRole("Personal") || User.IsInRole("Admin")) //ENDAST FÖR PERSONAL OCH ADMIN
+                            {
                                 bokning EV = new bokning();
                                 EV.id = changedEvent.id;
                                 EV.start_date = changedEvent.start_date;
@@ -673,16 +673,16 @@ namespace Golf_3_MVC.Controllers
 
 
                             }
-                            else
-                            {// OM MEDLEM BOKAR MER ÄN 10 MINUTER
+                            else //OM MEDLEM BOKAR MER ÄN 10 MINUTER
+                            {
 
                                 TempData["msg"] = "<script>alert('Du kan bara boka 10 minuter');</script>";
 
                             }
 
                         }
-                        else
-                        { // VANLIG BOKNING
+                        else //VANLIG BOKNING
+                        { 
                             List<medlemmar> allaMedlemmar = new List<medlemmar>();
                             allaMedlemmar = ds.medlemmars.ToList();
 
@@ -768,7 +768,7 @@ namespace Golf_3_MVC.Controllers
                         }
 
                         break;
-                    default:// "update"
+                    default://UPDATE
                         var data = ds.boknings.Where(x => x.id == id).FirstOrDefault();
                             data.start_date = changedEvent.start_date;
                             data.end_date = changedEvent.end_date;
