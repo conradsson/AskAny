@@ -37,23 +37,35 @@
 
 <div class="row">
     <ul class="nav nav-pills nav-stacked">
-        <li class="pill-tavling"><a href="">Tävling</a></li>
-        @*<li class="pill-banstatus"><a href="">Banstatus</a></li>*@
-        @*<li class=""><a href="#">Disabled</a></li>
-            <li class=""><a href="#">Disabled</a></li>*@
+
+        <li class="pill-tavling"><a href="">Tävlingar</a></li>
+
+        @if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
+        {
+            <li class="pill-nytavling"><a href="">Ny tävling</a></li>
+        }
+
+
+
+
+
     </ul>
 
     <div class="panel panel-default panel-tavling">
-        <div class="panel-heading">Tävling</div>
+        <div class="panel-heading">Tävlingar</div>
         <div class="panel-body">
             
+         
+
+
+
         </div>
     </div>
 
-    @*<div class="panel panel-default panel-banstatus">
-        <div class="panel-heading">Banstatus</div>
+    <div class="panel panel-default panel-nytavling">
+        <div class="panel-heading">Ny tävling</div>
         <div class="panel-body">
 
         </div>
-    </div>*@
+    </div>
 </div>
