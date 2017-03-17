@@ -702,7 +702,6 @@ namespace Golf_3_MVC.Controllers
                                 if (sammaDatum == true)
                                 {
                                     TempData["msg"] = "<script>alert('Man får bara göra en bokning per dag och max en månad framåt');</script>";
-
                                 }
                                 else
                                 {
