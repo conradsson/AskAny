@@ -650,6 +650,7 @@
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\Bokning.cshtml" />
     <Content Include="Views\Emails\Avbokning.cshtml" />
+    <Content Include="Views\Shared\_Aktuelltavling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
