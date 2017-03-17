@@ -52,6 +52,9 @@ body {
     margin-top: 5%;
 }
 
+footer .row{
+    margin-top: 0%;
+}
 			/* CAROUSEL */
 
 /********************************/
@@ -226,6 +229,17 @@ body {
 
 }
 
+
+.pill-tavling ul{
+    text-align: center;
+}
+
+.pill-tavling li{
+    cursor: pointer;
+}
+.dropdown-menu{
+    width: 100%;
+}
 
 
 /*    FOOTER     */
