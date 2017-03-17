@@ -108,12 +108,13 @@
 
 
 
+
     <script type="text/javascript">
         function GetOptions()
         {
             var e = document.getElementById("Bokningar");
             var strOptions = e.options[e.selectedIndex].value;
-    
+
 
             document.getElementById("hidden").innerText = strOptions;
 
@@ -216,7 +217,7 @@
                     @using (Html.BeginForm("Incheckning", "Calendar"))
                     {
 
-                    
+
 
                         <p>
 
@@ -225,9 +226,9 @@
 
                                                      onchange = @"Javascript:GetOptions()"
 
-                                                }) 
-                            
-                            
+                                                })
+
+
                             &emsp;
                             @Html.LabelFor(model => model.Namn1, "foo bar")
                             <hr /><label id="Spelare 1">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
@@ -293,8 +294,8 @@
                         </p>
                     }
                 </ul>
-            </li> 
-            
+            </li>
+
         </ul>
 
 
