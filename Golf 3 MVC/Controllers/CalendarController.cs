@@ -499,7 +499,6 @@ namespace Golf_3_MVC.Controllers
                     StartDate = new DateTime(2000, 1, 1),
                     EndDate = DateTime.Now
                 });
-
                 sched.Config.start_on_monday = true;
                 sched.InitialView = "day";
                 sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
@@ -524,8 +523,6 @@ namespace Golf_3_MVC.Controllers
         {
             List<medbokare> bokningar = new List<medbokare>();
             bokningar = ds.medbokares.Where(x => x.BokningsId == bokID).ToList();
-
-
 
             return Json(bokningar, JsonRequestBehavior.AllowGet);
         }
@@ -554,7 +551,7 @@ namespace Golf_3_MVC.Controllers
                 ds.SaveChanges();
             }
 
-                return RedirectToAction("index");
+            return RedirectToAction("index");
         }
 
         public ContentResult Data()
@@ -590,7 +587,6 @@ namespace Golf_3_MVC.Controllers
 
                         if (diff.TotalHours > 0.17) // om det är mer än 10min //BLOCKTIME
                         {
-
                             if (User.IsInRole("Personal") || User.IsInRole("Admin")) //ENDAST FÖR PERSONAL OCH ADMIN
                             {
                                 bokning EV = new bokning();
@@ -614,16 +610,11 @@ namespace Golf_3_MVC.Controllers
 
                                 string epost = m.epost;
                                 SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
-
-
                             }
                             else //OM MEDLEM BOKAR MER ÄN 10 MINUTER
                             {
-
                                 TempData["msg"] = "<script>alert('Du kan bara boka 10 minuter');</script>";
-
                             }
-
                         }
                         else //VANLIG BOKNING
                         {
@@ -644,7 +635,6 @@ namespace Golf_3_MVC.Controllers
                                 EV.incheckad = false;
                                 ds.boknings.Add(EV);
                                 ds.SaveChanges();
-
 
                                 string epost = m.epost;
                                 SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
@@ -671,8 +661,6 @@ namespace Golf_3_MVC.Controllers
                                 MB.BokningsId = EV.id;
                                 ds.medbokares.Add(MB);
                                 ds.SaveChanges();
-
-
 
                                 string epost = m.epost;
                                 SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
@@ -728,7 +716,6 @@ namespace Golf_3_MVC.Controllers
                             string epost = m.epost;
                             SendEmail(epost, "Avbokning", "Du har blivit avbokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
-
                         else
                         {
                             foreach (var x in ds.medbokares)
@@ -793,9 +780,7 @@ namespace Golf_3_MVC.Controllers
 
                     ds3.boknings.Remove(bok);
                     ds3.SaveChanges();
-
                 }
-
             }
         }
         /// <summary>
