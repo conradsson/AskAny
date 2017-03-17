@@ -280,7 +280,6 @@ namespace Golf_3_MVC.Controllers
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
-            //medlemmar huvudbokare = new medlemmar();
 
             string id = actionValues["Bokningar"];
             aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
@@ -335,7 +334,6 @@ namespace Golf_3_MVC.Controllers
                     {
                         if (mb.gast == true)
                         {
-
                         }
                         else
                         {
@@ -343,24 +341,19 @@ namespace Golf_3_MVC.Controllers
                             double hcp;
 
                             m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
-                            //huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
                             aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
 
                             hcp = Convert.ToDouble(m.hcp);
                             mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                            //hHcp = Convert.ToDouble(huvudbokare.hcp);
 
                             if (aktuellMedlem == m)
                             {
                                 TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
                                 goto Foo;
                             }
-
                             totalHcp += hcp;
                         }
                     }
-
-                    //totalHcp += hHcp;
                     totalHcp += mHcp;
 
                     if (totalHcp >= 100) // MAX 100 HANDIKAPP
@@ -376,9 +369,14 @@ namespace Golf_3_MVC.Controllers
                             medlemmar m;
                             m = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
 
+                            if (m == null)
+                            {
+                                TempData["msg"] = "<script>alert('Golf-ID:et existerar ej.');</script>";
+                            }
+                            else
+                            {
                             medbokare.Id = 33;
                             medbokare.BokningsId = Convert.ToInt32(id);
-                            //medbokare.Huvudbokare = null;
                             medbokare.Medbokare1 = golfidstring;
                             aktuellBok.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
                             ds.medbokares.Add(medbokare);
@@ -390,6 +388,7 @@ namespace Golf_3_MVC.Controllers
 
 
                             TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+                            }
                         }
                         catch
                         {
