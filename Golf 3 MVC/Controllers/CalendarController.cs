@@ -119,7 +119,7 @@ namespace Golf_3_MVC.Controllers
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
-            medlemmar huvudbokare = new medlemmar();
+            //medlemmar huvudbokare = new medlemmar();
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
 
             string id = actionValues["Bokningar"];
@@ -132,7 +132,7 @@ namespace Golf_3_MVC.Controllers
                 string golfID = medlemsId.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsID).ToList();
 
-                if (aktuellaMedbokare.Count >= 4) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
+                if (aktuellaMedbokare.Count >= 4) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 PERSONER ELLER FLER
                 {
                 TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
                 }
@@ -193,7 +193,7 @@ namespace Golf_3_MVC.Controllers
 
                             medbokare.Id = 33;
                             medbokare.BokningsId = Convert.ToInt32(bokningsID);
-                            medbokare.Huvudbokare = null;
+                            //medbokare.Huvudbokare = null;
                             medbokare.Medbokare1 = golfID;
                             hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
@@ -250,7 +250,7 @@ namespace Golf_3_MVC.Controllers
 
                     medbokare.Id = 33;
                     medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
-                    medbokare.Huvudbokare = null;
+                    //medbokare.Huvudbokare = null;
                     medbokare.Medbokare1 = gast;
                     medbokare.gast = true;
                     hej.text += hej.golf_id;
@@ -309,7 +309,7 @@ namespace Golf_3_MVC.Controllers
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
-            medlemmar huvudbokare = new medlemmar();
+            //medlemmar huvudbokare = new medlemmar();
 
             string id = actionValues["Bokningar"];
             aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
@@ -340,7 +340,7 @@ namespace Golf_3_MVC.Controllers
 
                 medbokare.Id = 33;
                 medbokare.BokningsId = Convert.ToInt32(id);
-                medbokare.Huvudbokare = null;
+                //medbokare.Huvudbokare = null;
                 medbokare.Medbokare1 = golfidstring;
                 medbokare.gast = true;
                 aktuellBok.text += ", Gäst: " + golfidstring;
@@ -359,7 +359,7 @@ namespace Golf_3_MVC.Controllers
                     TempData["msg"] = "<script>alert('Du måste välja en bokning');</script>";
 
                 }
-                if (aktuellaMedbokare.Count >= 4) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
+                if (aktuellaMedbokare.Count >= 4) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 PERSONER ELLER FLER
                 {
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
                 }
@@ -412,7 +412,7 @@ namespace Golf_3_MVC.Controllers
 
                             medbokare.Id = 33;
                             medbokare.BokningsId = Convert.ToInt32(id);
-                            medbokare.Huvudbokare = null;
+                            //medbokare.Huvudbokare = null;
                             medbokare.Medbokare1 = golfidstring;
                             aktuellBok.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
                             ds.medbokares.Add(medbokare);
@@ -702,10 +702,9 @@ namespace Golf_3_MVC.Controllers
                                 EV.blocktime = false;
                                 EV.incheckad = false;
                                 ds.boknings.Add(EV);
-                                ds.SaveChanges();
 
                                 MB.Id = 33;
-                                MB.Huvudbokare = null;
+                                //MB.Huvudbokare = null;
                                 MB.Medbokare1 = User.Identity.GetUserName();
                                 MB.BokningsId = EV.id;
                                 ds.medbokares.Add(MB);
@@ -742,7 +741,7 @@ namespace Golf_3_MVC.Controllers
 
                             foreach (var x in ds.medbokares)
                             {
-                                if (x.BokningsId == id && x.Huvudbokare == golf_id)
+                                if (x.BokningsId == id && x.Medbokare1 == golf_id)
                                 {
                                     ds.medbokares.Remove(x);
                                 }
