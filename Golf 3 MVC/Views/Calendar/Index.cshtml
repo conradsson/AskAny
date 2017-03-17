@@ -108,23 +108,6 @@
 
 
 
-    <script type="text/javascript">
-        function GetOptions()
-        {
-            var e = document.getElementById("Bokningar");
-            var strOptions = e.options[e.selectedIndex].value;
-    
-
-            document.getElementById("hidden").innerText = strOptions;
-
-
-
-        return strOptions;
-
-        }
-        </script>
-
-
 
 
 </head>
@@ -215,15 +198,11 @@
                 <ul class="dropdown-menu">
                     @using (Html.BeginForm("Incheckning", "Calendar"))
                     {
-
-                    
-
                         <p>
-
                             &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"), new
                                                  {
 
-                                                     onchange = @"Javascript:GetOptions()"
+                                                     onchange = @"Javascript:GetBokare();"
 
                                                 }) 
                             
@@ -236,8 +215,8 @@
                             <label>&emsp;Checka in spelare 4 :<br />&emsp;@Model.Namn4</label><br /><hr />
 
                             <input id="hidden" type="hidden" value="1" />
-
-                            &emsp;<input type="submit" name="checkainBtn" value="Checka in" />
+                            <input type="button" value="klicka" onClientClick ="GetBokare()" />
+                            &emsp;@*<input type="submit" name="checkainBtn" value="Checka in"/>*@
 
                             @Html.Raw(TempData["msg"])
                         </p>
@@ -308,5 +287,23 @@
             </div>
         </div>
     </div>
+
+        <script type="text/javascript">
+        function GetBokare()
+        {
+            
+            var e = document.getElementById("Bokningar");
+            var bokID = e.options[e.selectedIndex].value;
+            
+            
+
+            var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.medbokareLista).ToList());
+            var json1 = @Html.Raw(Json.Encode(Model.medbokareLista.ToList()));
+
+            
+            alert("I am an alert box!");
+        }
+        </script>
+
 </body>
 </html>

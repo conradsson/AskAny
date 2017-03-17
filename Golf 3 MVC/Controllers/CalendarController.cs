@@ -510,6 +510,7 @@ namespace Golf_3_MVC.Controllers
                 allablocktimeBokningar = ds.boknings.Where(x => x.blocktime == true).ToList();
                 allaMedbokare = ds.medbokares.ToList();
                 aktuellaMedbokningar = allaMedbokare.Where(x => x.Medbokare1.Trim() == User.Identity.GetUserName()).ToList();
+                model.medbokareLista = ds.medbokares.ToList();
 
 
                 foreach (medbokare mb in aktuellaMedbokningar)
@@ -578,6 +579,15 @@ namespace Golf_3_MVC.Controllers
         {
             medlemmars = ds.medlemmars.ToList();
             return Json(medlemmars, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult sökMedbokare(int bokID)
+        {
+            List<medbokare> bokningar = new List<medbokare>();
+            bokningar = ds.medbokares.Where(x => x.BokningsId == bokID).ToList();
+
+
+
+            return Json(bokningar, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// Stänga/Öppna banan för säsong.
