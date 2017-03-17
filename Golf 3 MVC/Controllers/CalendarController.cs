@@ -502,7 +502,12 @@ namespace Golf_3_MVC.Controllers
                     bokning ny;
                     ny = allaBokningar.Where(x => x.id == mb.BokningsId).FirstOrDefault();
 
-                    aktuellaBokningar.Add(ny);
+                    if (ny != null)
+                    {
+                        aktuellaBokningar.Add(ny);
+                    }
+
+
                 }
 
                 //allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
