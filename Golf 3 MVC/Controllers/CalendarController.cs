@@ -310,7 +310,6 @@ namespace Golf_3_MVC.Controllers
                 ds.SaveChanges();
 
                 TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
-
                 goto Foo;
             }
 
@@ -391,16 +390,31 @@ namespace Golf_3_MVC.Controllers
             {
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
 
-                //if (checkbox != null && checkbox.Count() == 2)
-                //{
-                //    foreach (medbokare mb in aktuellaMedbokare)
-                //    {
+                if (checkbox != null && checkbox.Count() == 2)
+                {
+                        medbokare aktuellgast = new medbokare();
+                        aktuellgast = aktuellaMedbokare.Where(x => x.Medbokare1 == golfidstring).FirstOrDefault();
 
-                //    }
-                //}
-                //else
-                //{
-                try
+                    if (aktuellgast == null)
+                    {
+                        TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja en gäst som är inlagd!');</script>";
+                    }
+                    else
+                    {
+                        foreach (medbokare mb in aktuellaMedbokare)
+                        {
+                            if (mb.Medbokare1 == golfidstring)
+                            {
+                                ds.medbokares.Remove(mb);
+                            }
+                        }
+                        TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
+                        ds.SaveChanges();
+                    }
+                }
+                else
+                {
+                    try
                 {
                     foreach (medbokare mb in aktuellaMedbokare)
                     {
@@ -421,7 +435,7 @@ namespace Golf_3_MVC.Controllers
                 {
                         TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja ett golf-ID som existerar!');</script>";
                 }
-                //}
+                }
             }
             Foo:
             return RedirectToAction("index");
@@ -473,10 +487,10 @@ namespace Golf_3_MVC.Controllers
                     aktuellaBokningar.Add(ny);
                 }
 
-                allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-                allaBokningarr.AddRange(aktuellaBokningar);
+                //allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+                //allaBokningarr.AddRange(aktuellaBokningar);
 
-                model.minaBokningar = allaBokningarr;
+                model.minaBokningar = aktuellaBokningar;
                 model.allaBokningar = allaBokningar;
                 model.allaBlocktimeBokningar = allablocktimeBokningar;
                 //model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
