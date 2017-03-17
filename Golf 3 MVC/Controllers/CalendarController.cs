@@ -679,25 +679,43 @@ namespace Golf_3_MVC.Controllers
                         { 
                             List<medlemmar> allaMedlemmar = new List<medlemmar>();
                             allaMedlemmar = ds.medlemmars.ToList();
-
                             medlemmar m;
-
                             m = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
 
-                            bokning EV = new bokning();
-                            EV.id = changedEvent.id;
-                            EV.start_date = changedEvent.start_date;
-                            EV.end_date = changedEvent.end_date;
-                            EV.text = " Kön: " + m.kon +" Handikapp: " + m.hcp;
-                            EV.golf_id = User.Identity.GetUserName();
-                            EV.blocktime = false;
-                            EV.incheckad = false;
-                            ds.boknings.Add(EV);
-                            ds.SaveChanges();
+                            if (User.IsInRole("Personal") || User.IsInRole("Admin")) //ENDAST FÖR PERSONAL OCH ADMIN
+                            {
+
+                                bokning EV = new bokning();
+                                EV.id = changedEvent.id;
+                                EV.start_date = changedEvent.start_date;
+                                EV.end_date = changedEvent.end_date;
+                                EV.text = changedEvent.text;
+                                EV.golf_id = "";
+                                EV.blocktime = false;
+                                EV.incheckad = false;
+                                ds.boknings.Add(EV);
+                                ds.SaveChanges();
 
 
-                            string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);                            
+                                string epost = m.epost;
+                                SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
+                            }
+
+
+                            //bokning EV = new bokning();
+                            //EV.id = changedEvent.id;
+                            //EV.start_date = changedEvent.start_date;
+                            //EV.end_date = changedEvent.end_date;
+                            //EV.text = " Kön: " + m.kon +" Handikapp: " + m.hcp;
+                            //EV.golf_id = User.Identity.GetUserName();
+                            //EV.blocktime = false;
+                            //EV.incheckad = false;
+                            //ds.boknings.Add(EV);
+                            //ds.SaveChanges();
+
+
+                            //string epost = m.epost;
+                            //SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         break;
