@@ -76,7 +76,6 @@ namespace Golf_3_MVC.Controllers
             List<medbokare> aktuellaMedbokare = new List<medbokare>();
             CalendarBookings model = new CalendarBookings();
             medlemmar aktuellMedlem = new medlemmar();
-            //medlemmar huvudbokare = new medlemmar();
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
 
             string id = actionValues["Bokningar"];
@@ -128,7 +127,6 @@ namespace Golf_3_MVC.Controllers
 
                         }
                     }
-                    //totalHcp += hHcp;
                     totalHcp += mHcp;
 
                     if (totalHcp >= 100) // MAX 100 HANDIKAPP
@@ -147,7 +145,6 @@ namespace Golf_3_MVC.Controllers
 
                             medbokare.Id = 33;
                             medbokare.BokningsId = Convert.ToInt32(bokningsID);
-                            //medbokare.Huvudbokare = null;
                             medbokare.Medbokare1 = golfID;
                             hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
@@ -300,7 +297,6 @@ namespace Golf_3_MVC.Controllers
 
                 medbokare.Id = 33;
                 medbokare.BokningsId = Convert.ToInt32(id);
-                //medbokare.Huvudbokare = null;
                 medbokare.Medbokare1 = golfidstring;
                 medbokare.gast = true;
                 aktuellBok.text += ", Gäst: " + golfidstring;
