@@ -690,7 +690,7 @@ namespace Golf_3_MVC.Controllers
                                 List<bokning> aktuellPersonsBokningar = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
                                 bool sammaDatum = false;
 
-                                foreach (bokning bokning in aktuellPersonsBokningar)
+                                foreach (bokning bokning in aktuellPersonsBokningar) // KONTROLL MAX 1 BOKNING PER DAG OCH MAX 1 MÅNAD FRAM I TID.
                                 {
                                     if (bokning.start_date.Date == changedEvent.start_date.Date || changedEvent.start_date.Date > DateTime.Today.Date.AddMonths(1))
                                     {
@@ -699,7 +699,7 @@ namespace Golf_3_MVC.Controllers
                                     }
                                 }
 
-                                if (sammaDatum == true)
+                                if (sammaDatum == true) // OM DET ÄR SANT.
                                 {
                                     TempData["msg"] = "<script>alert('Man får bara göra en bokning per dag och max en månad framåt');</script>";
                                 }
