@@ -107,7 +107,7 @@
 
 
 
-    
+
 
 </head>
 <body>
@@ -224,9 +224,9 @@
 
                                                      onchange = @"Javascript:GetBokare();"
 
-                                                }) 
-                            
-                            
+                                                })
+
+
                             &emsp;
                             @Html.LabelFor(model => model.Namn1, "foo bar")
                             <hr /><label id="Spelare 1">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
@@ -275,7 +275,7 @@
                 </li>
                 /////////////////////////////////////////
             }
-            
+
         </ul>
 
 
@@ -293,16 +293,16 @@
         <script type="text/javascript">
         function GetBokare()
         {
-            
+
             var e = document.getElementById("Bokningar");
             var bokID = e.options[e.selectedIndex].value;
-            
-            
+
+
 
             var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.medbokareLista).ToList());
             var json1 = @Html.Raw(Json.Encode(Model.medbokareLista.ToList()));
 
-            
+
             alert("I am an alert box!");
         }
         </script>

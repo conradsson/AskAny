@@ -506,8 +506,6 @@ namespace Golf_3_MVC.Controllers
                     {
                         aktuellaBokningar.Add(ny);
                     }
-
-
                 }
 
                 //allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
@@ -688,51 +686,57 @@ namespace Golf_3_MVC.Controllers
 
                             else // LÄGGER TILL EN BOKNING
                             {
-                                bokning EV = new bokning();
-                                medbokare MB = new medbokare();
+                                List<bokning> allaBokningar = ds.boknings.ToList();
+                                List<bokning> aktuellPersonsBokningar = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
+                                bool sammaDatum = false;
 
-                                EV.id = changedEvent.id;
-                                EV.start_date = changedEvent.start_date;
-                                EV.end_date = changedEvent.end_date;
-                                EV.text = " Kön: " + m.kon + " Handikapp: " + m.hcp;
-                                EV.golf_id = User.Identity.GetUserName();
-                                EV.blocktime = false;
-                                EV.incheckad = false;
-                                ds.boknings.Add(EV);
-                                ds.SaveChanges();
-
-                                try // LÄGGER TILL EN RAD I MEDBOKARE,  I TRY FÖR ATT ID:T SKA BLI ÅTKOMLIGT
+                                foreach (bokning bokning in aktuellPersonsBokningar)
                                 {
-                                MB.Id = 33;
-                                MB.Medbokare1 = User.Identity.GetUserName();
-                                MB.BokningsId = EV.id;
-                                ds.medbokares.Add(MB);
-                                ds.SaveChanges();
-                                }
-                                catch (Exception)
-                                {
-
-                                    throw;
+                                    if (bokning.start_date.Date == changedEvent.start_date.Date || changedEvent.start_date.Date > DateTime.Today.Date.AddMonths(1))
+                                    {
+                                        sammaDatum = true;
+                                        break;
+                                    }
                                 }
 
-                                string epost = m.epost;
-                                SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
+                                if (sammaDatum == true)
+                                {
+                                    TempData["msg"] = "<script>alert('Man får bara göra en bokning per dag och max en månad framåt');</script>";
+
+                                }
+                                else
+                                {
+                                    bokning EV = new bokning();
+                                    medbokare MB = new medbokare();
+                                    EV.id = changedEvent.id;
+                                    EV.start_date = changedEvent.start_date;
+                                    EV.end_date = changedEvent.end_date;
+                                    EV.text = " Kön: " + m.kon + " Handikapp: " + m.hcp;
+                                    EV.golf_id = User.Identity.GetUserName();
+                                    EV.blocktime = false;
+                                    EV.incheckad = false;
+                                    ds.boknings.Add(EV);
+                                    ds.SaveChanges();
+
+                                    try // LÄGGER TILL EN RAD I MEDBOKARE,  I TRY FÖR ATT ID:T SKA BLI ÅTKOMLIGT
+                                    {
+                                        MB.Id = 33;
+                                        MB.Medbokare1 = User.Identity.GetUserName();
+                                        MB.BokningsId = EV.id;
+                                        ds.medbokares.Add(MB);
+                                        ds.SaveChanges();
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                        throw;
+                                    }
+
+                                    string epost = m.epost;
+                                    SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
+                                }
                             }
 
-                            //    bokning EV = new bokning();
-                            //EV.id = changedEvent.id;
-                            //EV.start_date = changedEvent.start_date;
-                            //EV.end_date = changedEvent.end_date;
-                            //EV.text = " Kön: " + m.kon + " Handikapp: " + m.hcp;
-                            //EV.golf_id = User.Identity.GetUserName();
-                            //EV.blocktime = false;
-                            //EV.incheckad = false;
-                            //ds.boknings.Add(EV);
-                            //ds.SaveChanges();
-
-
-                            //string epost = m.epost;
-                            //SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
 
                         break;
