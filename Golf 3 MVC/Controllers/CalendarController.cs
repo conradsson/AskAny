@@ -24,48 +24,7 @@ namespace Golf_3_MVC.Controllers
     {
         dsu3Entities ds = new dsu3Entities();
         double totalHcp = 0;
-        double hHcp;
         double mHcp;
-
-        //public medbokare LäggTillMedbokare(medbokare medbokare, FormCollection actionValues)
-        //{
-        //    var action = new DataAction(actionValues);
-
-        //        var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-
-        //        medbokare.BokningsId = 33;
-        //        medbokare.Huvudbokare = User.Identity.GetUserName();
-        //        medbokare.Medbokare1 = changedEvent.text;
-        //        medbokare.BokningsId = changedEvent.id;
-
-        //    return medbokare;
-        //}
-
-
-        //public ViewResult Index1()
-        //{
-        //    //Create db context object here
-        //    dsu3Entities db = new dsu3Entities();
-        //    //Get the value from database and then set it to ViewBag to pass it View
-        //    IEnumerable<SelectListItem> items = db.boknings.Select(c => new SelectListItem
-        //    {
-        //        Value = c.golf_id,
-        //        Text = c.text
-
-        //    });
-        //    ViewBag.Bokningar = items;
-        //    return View();
-        //}
-
-
-        //public ActionResult MinaBokningar()
-        //{
-        //    dsu3Entities db = new dsu3Entities();
-        //    ViewBag.Bokningar = new SelectList(db.boknings, "golf_id", "text");
-
-
-        //    return RedirectToAction("index");
-        //}
 
         public ActionResult AutoComplete()
         {
