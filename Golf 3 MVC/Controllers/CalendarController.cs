@@ -125,7 +125,6 @@ namespace Golf_3_MVC.Controllers
                                     TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
                                     goto Foo;
                                 }
-
                             }
                         }
                           catch
@@ -161,7 +160,6 @@ namespace Golf_3_MVC.Controllers
 
                             TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
 
-
                             m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                             string epost = m.epost;
                             SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + hej.start_date + " - " + hej.end_date);
@@ -184,6 +182,7 @@ namespace Golf_3_MVC.Controllers
                 {
                     if (mb.Medbokare1.Trim() == golfID)
                     {
+                        
                         ds.medbokares.Remove(mb);
 
                     }
