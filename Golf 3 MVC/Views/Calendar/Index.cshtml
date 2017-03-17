@@ -261,7 +261,7 @@
                         @using (Html.BeginForm("CreateMedlem", "Calendar"))
                         {
                             <p>
-                                Välj bokning: <br /> @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
+                                Välj bokning: <br />@Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
                             </p>
                             <p>
                                 Skriv in golfID/gästnamn: @Html.TextBox("golfidstring")<br/><br />
