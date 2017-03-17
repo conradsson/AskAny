@@ -17,7 +17,6 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 
-
 namespace Golf_3_MVC.Controllers
 {
     public class CalendarController : Controller
@@ -25,7 +24,6 @@ namespace Golf_3_MVC.Controllers
         dsu3Entities ds = new dsu3Entities();
         double totalHcp = 0;
         double mHcp;
-
         public ActionResult AutoComplete()
         {
             return View();
@@ -111,12 +109,10 @@ namespace Golf_3_MVC.Controllers
                                 double hcp;
 
                                 m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
-                                //huvudbokare = allaMedlemmar.Where(x => x.golf_id == mb.Huvudbokare).FirstOrDefault();
                                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
 
                                 hcp = Convert.ToDouble(m.hcp);
                                 mHcp = Convert.ToDouble(aktuellMedlem.hcp);
-                                //hHcp = Convert.ToDouble(huvudbokare.hcp);
 
                                 totalHcp += hcp;
 
@@ -125,7 +121,6 @@ namespace Golf_3_MVC.Controllers
                                     TempData["msg"] = "<script>alert('Denna person finns redan med i bokningen');</script>";
                                     goto Foo;
                                 }
-
                             }
                         }
                         catch
@@ -161,7 +156,6 @@ namespace Golf_3_MVC.Controllers
 
                             TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
 
-
                             m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                             string epost = m.epost;
                             SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + hej.start_date + " - " + hej.end_date);
@@ -191,7 +185,6 @@ namespace Golf_3_MVC.Controllers
                             ds.medbokares.Remove(mb);
                         }
                     }
-
                     TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                     ds.SaveChanges();
                 }
@@ -213,7 +206,6 @@ namespace Golf_3_MVC.Controllers
 
                     medbokare.Id = 33;
                     medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
-                    //medbokare.Huvudbokare = null;
                     medbokare.Medbokare1 = gast;
                     medbokare.gast = true;
                     hej.text += hej.golf_id;
@@ -239,7 +231,6 @@ namespace Golf_3_MVC.Controllers
                 }
                 else
                 {
-
                     foreach (medbokare mb in aktuellaMedbokare)
                     {
                         if (mb.Medbokare1.Trim() == gast)
@@ -249,7 +240,6 @@ namespace Golf_3_MVC.Controllers
                     }
                     TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                     ds.SaveChanges();
-
                 }
             }
             Foo:
@@ -424,7 +414,6 @@ namespace Golf_3_MVC.Controllers
                     TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja person!');</script>";
                 }
             }
-
             Foo:
             return RedirectToAction("index");
         }
