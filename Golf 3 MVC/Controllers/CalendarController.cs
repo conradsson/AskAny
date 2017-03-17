@@ -196,6 +196,14 @@ namespace Golf_3_MVC.Controllers
                     TempData["msg"] = "<script>alert('Det finns redan fyra golfare i denna bokning');</script>";
                     goto Foo;
                 }
+                foreach (medbokare mb in aktuellaMedbokare)
+                {
+                    if (mb.gast == true)
+                    {
+                        TempData["msg"] = "<script>alert('Det finns redan en gäst i denna bokning');</script>";
+                        goto Foo;
+                    }
+                }
                 try
                 {
                     bokning hej;
@@ -228,15 +236,25 @@ namespace Golf_3_MVC.Controllers
                 }
                 else
                 {
-                    foreach (medbokare mb in aktuellaMedbokare)
+                    medbokare aktuellgast = new medbokare();
+                    aktuellgast = aktuellaMedbokare.Where(x => x.Medbokare1 == gast).FirstOrDefault();
+
+                    if (aktuellgast == null)
                     {
-                        if (mb.Medbokare1.Trim() == gast)
-                        {
-                            ds.medbokares.Remove(mb);
-                        }
+                        TempData["msg"] = "<script>alert('Du måste fylla i både tid och välja en gäst som är inlagd!');</script>";
                     }
-                    TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
-                    ds.SaveChanges();
+                    else
+                    {
+                        foreach (medbokare mb in aktuellaMedbokare)
+                        {
+                            if (mb.Medbokare1 == gast)
+                            {
+                                ds.medbokares.Remove(mb);
+                            }
+                        }
+                        TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
+                        ds.SaveChanges();
+                    }
                 }
             }
             Foo:
