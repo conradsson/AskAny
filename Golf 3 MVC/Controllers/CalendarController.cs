@@ -555,21 +555,18 @@ namespace Golf_3_MVC.Controllers
                     StartDate = new DateTime(2000, 1, 1),
                     EndDate = DateTime.Now
                 });
+         
+                sched.Config.start_on_monday = true;
+                sched.InitialView = "day";
+                sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
+                sched.Config.separate_short_events = true;
+                sched.Config.hour_size_px = 100;
 
+                sched.LoadData = true;
+                sched.EnableDataprocessor = true;
 
-            sched.Lightbox.AddDefaults();
-
-            sched.Config.start_on_monday = true;
-            sched.InitialView = "week";
-            sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
-            sched.Config.separate_short_events = true;
-            sched.Config.hour_size_px = 100;
-
-            sched.LoadData = true;
-            sched.EnableDataprocessor = true;
-
-            model.sched = sched;
-            return View(model);
+                model.sched = sched;
+                return View(model);
             }
 
         }
