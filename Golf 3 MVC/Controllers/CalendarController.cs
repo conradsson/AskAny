@@ -78,7 +78,6 @@ namespace Golf_3_MVC.Controllers
             medlemmar aktuellMedlem = new medlemmar();
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
 
-
             string id = actionValues["Bokningar"];
             model.aktuellaMedbokare = aktuellaMedbokare;
             allaMedlemmar = ds.medlemmars.ToList();
@@ -600,7 +599,6 @@ namespace Golf_3_MVC.Controllers
                 List<medbokare> allaMedbokare = new List<medbokare>();
                 List<medbokare> aktuellaMedbokningar = new List<medbokare>();
                 List<bokning> aktuellaBokningar = new List<bokning>();
-                List<bokning> allaBokningarr = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
                 model.medlems = medlemmars;
@@ -664,7 +662,7 @@ namespace Golf_3_MVC.Controllers
                     sched.TimeSpans.Add(new DHXBlockTime()   // INGA BOKNINGAR SENARE ÄN 1 MÅNAD FRAM I TIDEN
                     {
                         StartDate = DateTime.Now.AddMonths(+1),
-                        EndDate = DateTime.Now.AddYears(+1)
+                        EndDate = DateTime.Now.AddYears(+1),
 
                     });
 
@@ -673,8 +671,14 @@ namespace Golf_3_MVC.Controllers
                         sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ATT EN MEDLEM KAN GÖRA EN BOKNING SAMMA DAG
                         {
                             StartDate = bok.start_date.Date,
+                            EndDate = bok.start_date
+                        });
+                        sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ATT EN MEDLEM KAN GÖRA EN BOKNING SAMMA DAG
+                        {
+                            StartDate = bok.end_date,
                             EndDate = bok.start_date.Date.AddDays(1)
                         });
+
                     }
                 }
 
@@ -818,30 +822,7 @@ namespace Golf_3_MVC.Controllers
                             else // LÄGGER TILL EN BOKNING
                             {
                                 List<bokning> allaBokningar = ds.boknings.ToList();
-                                List<bokning> aktuellPersonsBokningar = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-                                bool sammaDatum = false;
 
-                                foreach (bokning bokning in aktuellPersonsBokningar) // KONTROLL MAX 1 BOKNING PER DAG OCH MAX 1 MÅNAD FRAM I TID.
-                                {
-                                    if (bokning.start_date.Date == changedEvent.start_date.Date)
-                                    {
-                                        sammaDatum = true;
-                                        break;
-                                    }
-                                }
-                                if (changedEvent.start_date.Date > DateTime.Today.Date.AddMonths(1))
-                                {
-                                    sammaDatum = true;
-                                }
-
-                                if (sammaDatum == true) // OM DET ÄR SANT.
-                                {
-
-
-                                    TempData["msg"] = "<script>alert('Man får bara göra en bokning per dag och max en månad framåt');</script>";
-                                }
-                                else
-                                {
                                     bokning EV = new bokning();
                                     medbokare MB = new medbokare();
                                     EV.id = changedEvent.id;
@@ -870,7 +851,6 @@ namespace Golf_3_MVC.Controllers
 
                                     string epost = m.epost;
                                     SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
-                                }
                             }
 
                         }
