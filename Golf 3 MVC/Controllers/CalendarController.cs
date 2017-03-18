@@ -809,11 +809,15 @@ namespace Golf_3_MVC.Controllers
 
                                 foreach (bokning bokning in aktuellPersonsBokningar) // KONTROLL MAX 1 BOKNING PER DAG OCH MAX 1 MÅNAD FRAM I TID.
                                 {
-                                    if (bokning.start_date.Date == changedEvent.start_date.Date || changedEvent.start_date.Date > DateTime.Today.Date.AddMonths(1))
+                                    if (bokning.start_date.Date == changedEvent.start_date.Date)
                                     {
                                         sammaDatum = true;
                                         break;
                                     }
+                                }
+                                if (changedEvent.start_date.Date > DateTime.Today.Date.AddMonths(1))
+                                {
+                                    sammaDatum = true;
                                 }
 
                                 if (sammaDatum == true) // OM DET ÄR SANT.
