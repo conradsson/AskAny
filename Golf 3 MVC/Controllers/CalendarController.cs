@@ -733,6 +733,7 @@ namespace Golf_3_MVC.Controllers
         /// <param name="id"></param>
         /// <param name="actionValues"></param>
         /// <returns></returns>
+        ///
         public ContentResult Save(int? id, FormCollection actionValues)
         {
             var action = new DataAction(actionValues);
@@ -822,6 +823,8 @@ namespace Golf_3_MVC.Controllers
 
                                 if (sammaDatum == true) // OM DET ÄR SANT.
                                 {
+                                    
+
                                     TempData["msg"] = "<script>alert('Man får bara göra en bokning per dag och max en månad framåt');</script>";
                                 }
                                 else
