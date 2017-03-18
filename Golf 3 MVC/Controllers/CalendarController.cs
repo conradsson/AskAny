@@ -613,7 +613,6 @@ namespace Golf_3_MVC.Controllers
                 aktuellaMedbokningar = allaMedbokare.Where(x => x.Medbokare1.Trim() == User.Identity.GetUserName()).ToList();
                 model.medbokareLista = ds.medbokares.ToList();
 
-
                 foreach (medbokare mb in aktuellaMedbokningar)
                 {
                     bokning ny;
@@ -625,23 +624,22 @@ namespace Golf_3_MVC.Controllers
                     }
                 }
 
-                //allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-                //allaBokningarr.AddRange(aktuellaBokningar);
-
                 model.minaBokningar = aktuellaBokningar;
                 model.allaBokningar = allaBokningar;
                 model.allaBlocktimeBokningar = allablocktimeBokningar;
-                //model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-
-
 
                 var sched = new DHXScheduler(this);
                 sched.Skin = DHXScheduler.Skins.Flat;
-
                 sched.Localization.Set(SchedulerLocalization.Localizations.Swedish);
                 sched.Config.first_hour = 7;
                 sched.Config.last_hour = 18;
                 sched.Config.time_step = 10;
+
+                sched.Config.start_on_monday = true;
+                sched.InitialView = "month";
+                sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
+                sched.Config.separate_short_events = true;
+                sched.Config.hour_size_px = 100;
 
                 foreach (bokning b in allaBokningar) // HÄMTAR OCH URSKILJER BLOCKTIME-BOKNINGAR UR BOKNINGAR
                 {
@@ -680,14 +678,6 @@ namespace Golf_3_MVC.Controllers
                     }
                 }
 
-
-
-
-                sched.Config.start_on_monday = true;
-                sched.InitialView = "day";
-                sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
-                sched.Config.separate_short_events = true;
-                sched.Config.hour_size_px = 100;
 
                 sched.LoadData = true;
                 sched.EnableDataprocessor = true;
