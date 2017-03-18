@@ -660,6 +660,29 @@ namespace Golf_3_MVC.Controllers
                     StartDate = new DateTime(2000, 1, 1),
                     EndDate = DateTime.Now
                 });
+
+                if (User.IsInRole("User")) // KOLLAR OM DEN INLOGGADE ÄR EN MEDLEM
+                {
+                    sched.TimeSpans.Add(new DHXBlockTime()   // INGA BOKNINGAR SENARE ÄN 1 MÅNAD FRAM I TIDEN
+                    {
+                        StartDate = DateTime.Now.AddMonths(+1),
+                        EndDate = DateTime.Now.AddYears(+1)
+
+                    });
+
+                    foreach (bokning bok in aktuellaBokningar)
+                    {
+                        sched.TimeSpans.Add(new DHXBlockTime()   // BLOCKAR ATT EN MEDLEM KAN GÖRA EN BOKNING SAMMA DAG
+                        {
+                            StartDate = bok.start_date.Date,
+                            EndDate = bok.start_date.Date.AddDays(1)
+                        });
+                    }
+                }
+
+
+
+
                 sched.Config.start_on_monday = true;
                 sched.InitialView = "day";
                 sched.EnableDynamicLoading(SchedulerDataLoader.DynamicalLoadingMode.Month);
@@ -823,7 +846,7 @@ namespace Golf_3_MVC.Controllers
 
                                 if (sammaDatum == true) // OM DET ÄR SANT.
                                 {
-                                    
+
 
                                     TempData["msg"] = "<script>alert('Man får bara göra en bokning per dag och max en månad framåt');</script>";
                                 }
