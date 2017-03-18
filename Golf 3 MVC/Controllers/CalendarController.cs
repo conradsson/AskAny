@@ -78,7 +78,6 @@ namespace Golf_3_MVC.Controllers
             medlemmar aktuellMedlem = new medlemmar();
             List<medlemmar> allaMedlemmar = new List<medlemmar>();
 
-
             string id = actionValues["Bokningar"];
             model.aktuellaMedbokare = aktuellaMedbokare;
             allaMedlemmar = ds.medlemmars.ToList();
@@ -600,7 +599,6 @@ namespace Golf_3_MVC.Controllers
                 List<medbokare> allaMedbokare = new List<medbokare>();
                 List<medbokare> aktuellaMedbokningar = new List<medbokare>();
                 List<bokning> aktuellaBokningar = new List<bokning>();
-                List<bokning> allaBokningarr = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
                 model.medlems = medlemmars;
@@ -625,15 +623,9 @@ namespace Golf_3_MVC.Controllers
                     }
                 }
 
-                //allaBokningarr = allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-                //allaBokningarr.AddRange(aktuellaBokningar);
-
                 model.minaBokningar = aktuellaBokningar;
                 model.allaBokningar = allaBokningar;
                 model.allaBlocktimeBokningar = allablocktimeBokningar;
-                //model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
-
-
 
                 var sched = new DHXScheduler(this);
                 sched.Skin = DHXScheduler.Skins.Flat;
