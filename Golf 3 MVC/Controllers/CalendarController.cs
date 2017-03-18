@@ -468,8 +468,6 @@ namespace Golf_3_MVC.Controllers
                 model.allaBlocktimeBokningar = allablocktimeBokningar;
                 //model.minaBokningar = (IEnumerable<bokning>)allaBokningar.Where(x => x.golf_id == User.Identity.GetUserName()).ToList();
 
-
-
                 var sched = new DHXScheduler(this);
                 sched.Skin = DHXScheduler.Skins.Flat;
 
@@ -546,7 +544,6 @@ namespace Golf_3_MVC.Controllers
                 data.seasontoggle = season.seasontoggle;
                 ds.SaveChanges();
             }
-
             return RedirectToAction("index");
         }
 
@@ -574,7 +571,6 @@ namespace Golf_3_MVC.Controllers
             try
             {
                 var changedEvent = (bokning)DHXEventsHelper.Bind(typeof(bokning), actionValues);
-
                 switch (action.Type)
                 {
                     case DataActionTypes.Insert:
@@ -652,7 +648,6 @@ namespace Golf_3_MVC.Controllers
                                 ds.boknings.Add(EV);
 
                                 MB.Id = 33;
-                                //MB.Huvudbokare = null;
                                 MB.Medbokare1 = User.Identity.GetUserName();
                                 MB.BokningsId = EV.id;
                                 ds.medbokares.Add(MB);
@@ -661,26 +656,9 @@ namespace Golf_3_MVC.Controllers
                                 string epost = m.epost;
                                 SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                             }
-
-                            //    bokning EV = new bokning();
-                            //EV.id = changedEvent.id;
-                            //EV.start_date = changedEvent.start_date;
-                            //EV.end_date = changedEvent.end_date;
-                            //EV.text = " Kön: " + m.kon + " Handikapp: " + m.hcp;
-                            //EV.golf_id = User.Identity.GetUserName();
-                            //EV.blocktime = false;
-                            //EV.incheckad = false;
-                            //ds.boknings.Add(EV);
-                            //ds.SaveChanges();
-
-
-                            //string epost = m.epost;
-                            //SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                         }
-
                         break;
                     case DataActionTypes.Delete:
-
                         if (User.IsInRole("User") == true)
                         {
                             string golf_id = User.Identity.GetUserName();
@@ -765,7 +743,6 @@ namespace Golf_3_MVC.Controllers
         public void BlocktimeDeleteBokning(int id,DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
-
             bokning bok = new bokning();
 
             foreach (var i in ds.boknings)
@@ -848,7 +825,7 @@ namespace Golf_3_MVC.Controllers
 
             }
 
-        Boo:
+            Boo:
 
             return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
         }
@@ -877,21 +854,6 @@ namespace Golf_3_MVC.Controllers
 
             }
         }
-        //public ActionResult MedbokareDelete(string golfid, int bokningsid)
-        //{
-
-        //    foreach (var i in ds.medbokares)
-        //    {
-        //        if (i.BokningsId == bokningsid && i.Medbokare1 == golfid)
-        //        {
-        //            ds.medbokares.Remove(i);
-        //        }
-        //    }
-        //    ds.SaveChanges();
-
-        //    return RedirectToAction("index");
-        //}
-
         /// <summary>
         /// Metod för att skicka email, tar inparametrar som epost, subject och själva bodyn.
         /// </summary>
