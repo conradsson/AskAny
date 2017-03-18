@@ -138,8 +138,8 @@ namespace Golf_3_MVC.Controllers
                     {
                         try
                         {
-                            bokning hej;
-                            hej = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
+                            bokning aktuellB;
+                            aktuellB = ds.boknings.Where(x => x.id.ToString() == bokningsID).FirstOrDefault();
 
                             medlemmar m;
                             m = allaMedlemmar.Where(x => x.golf_id == golfID).FirstOrDefault();
@@ -147,7 +147,7 @@ namespace Golf_3_MVC.Controllers
                             medbokare.Id = 33;
                             medbokare.BokningsId = Convert.ToInt32(bokningsID);
                             medbokare.Medbokare1 = golfID;
-                            hej.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
+                            aktuellB.text += ", Kön: " + m.kon + " Handikapp: " + m.hcp;
 
                             ds.medbokares.Add(medbokare);
                             ds.SaveChanges();
@@ -156,7 +156,7 @@ namespace Golf_3_MVC.Controllers
 
                             m = allaMedlemmar.Where(x => x.golf_id == medbokare.Medbokare1.Trim()).FirstOrDefault();
                             string epost = m.epost;
-                            SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + hej.start_date + " - " + hej.end_date);
+                            SendEmail(epost, "Bokning", "Du har blivit tillagd på en bokning!" + aktuellB.start_date + " - " + aktuellB.end_date);
                         }
                         catch
                         {
@@ -220,6 +220,7 @@ namespace Golf_3_MVC.Controllers
             {
                 string bokningsIDgast = sokBokning2.Split(' ').Last();
                 aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
+                bokning aktuellBok = ds.boknings.Where(x => x.id.ToString() ==  bokningsIDgast).FirstOrDefault();
 
                 if (aktuellaMedbokare.Count >= 4) // KONTROLL OM BOKNINGEN INNEHÅLLER 4 (inkl. huvudbokare) PERSONER ELLER FLER
                 {
@@ -247,7 +248,26 @@ namespace Golf_3_MVC.Controllers
                     ds.medbokares.Add(medbokare);
                     ds.SaveChanges();
 
+                    aktuellBok.text = "";
+                    aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
+
+                    foreach (medbokare mb in aktuellaMedbokare) // UPPDATERAR HCP o KÖN FÖR BOKNINGEN
+                    {
+                        if (mb.gast == true)
+                        {
+                            aktuellBok.text += ", Gäst: " + mb.Medbokare1;
+                        }
+                        else
+                        {
+                            medlemmar aktuellMed = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1).FirstOrDefault();
+
+                            aktuellBok.text += ", Kön: " + aktuellMed.kon + " Handikapp: " + aktuellMed.hcp;
+                        }
+                        ds.SaveChanges();
+                    }
+
                     TempData["msg"] = "<script>alert('Spelaren är nu tillagd');</script>";
+
                 }
                 catch
                 {
@@ -286,7 +306,7 @@ namespace Golf_3_MVC.Controllers
                         }
 
                         aktuellBok.text = "";
-                        aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == id).ToList();
+                        aktuellaMedbokare = ds.medbokares.Where(x => x.BokningsId.ToString() == bokningsIDgast).ToList();
 
                         foreach (medbokare mb in aktuellaMedbokare) // UPPDATERAR HCP o KÖN FÖR BOKNINGEN
                         {
@@ -302,8 +322,6 @@ namespace Golf_3_MVC.Controllers
                             }
                         }
 
-                        TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
-                        ds.SaveChanges();
                         TempData["msg"] = "<script>alert('Spelaren är nu borttagen');</script>";
                         ds.SaveChanges();
                     }
@@ -401,6 +419,12 @@ namespace Golf_3_MVC.Controllers
 
                             m = allaMedlemmar.Where(x => x.golf_id == mb.Medbokare1.Trim()).FirstOrDefault();
                             aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == golfidstring).FirstOrDefault();
+
+                            if (aktuellMedlem == null)
+                            {
+                                TempData["msg"] = "<script>alert('Golf-ID:et existerar ej.');</script>";
+                                goto Foo;
+                            }
 
                             hcp = Convert.ToDouble(m.hcp);
                             mHcp = Convert.ToDouble(aktuellMedlem.hcp);
