@@ -572,8 +572,6 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("index");
         }
-
-
         /// <summary>
         /// Laddning av själva bokningsschemat.
         /// </summary>
@@ -663,7 +661,6 @@ namespace Golf_3_MVC.Controllers
                     {
                         StartDate = DateTime.Now.AddMonths(+1),
                         EndDate = DateTime.Now.AddYears(+1),
-
                     });
 
                     foreach (bokning bok in aktuellaBokningar)
@@ -681,7 +678,6 @@ namespace Golf_3_MVC.Controllers
 
                     }
                 }
-
 
                 sched.LoadData = true;
                 sched.EnableDataprocessor = true;
