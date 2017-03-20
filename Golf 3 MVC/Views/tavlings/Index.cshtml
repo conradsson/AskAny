@@ -4,66 +4,68 @@
     ViewBag.Title = "Tävling";
 }
 
+<div class="row">
 
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.tavlingsNamn)*@
+                @Html.DisplayName("Tävling")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.tavlingsDatum)*@
+                @Html.DisplayName("Datum och Tid")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.forstaStarttid)*@
+                @Html.DisplayName("Första starttid")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.sistaAnmalning)*@
+                @Html.DisplayName("Sista anmälning")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.tavlingsForm)*@
+                @Html.DisplayName("Tävlingsform")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.publicerad)*@
+                @Html.DisplayName("Publicerad")
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tavlingsNamn)*@
-            @Html.DisplayName("Tävling")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tavlingsDatum)*@
-            @Html.DisplayName("Datum och Tid")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.forstaStarttid)*@
-            @Html.DisplayName("Första starttid")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.sistaAnmalning)*@
-            @Html.DisplayName("Sista anmälning")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tavlingsForm)*@
-            @Html.DisplayName("Tävlingsform")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.publicerad)*@
-            @Html.DisplayName("Publicerad")
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tavlingsNamn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tavlingsDatum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.forstaStarttid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sistaAnmalning)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tavlingsForm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.publicerad)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tavlingsNamn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tavlingsDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.forstaStarttid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sistaAnmalning)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tavlingsForm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.publicerad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
+</div>
