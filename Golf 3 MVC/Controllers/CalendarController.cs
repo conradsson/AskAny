@@ -55,10 +55,8 @@ namespace Golf_3_MVC.Controllers
         {
             var result = ds.boknings.Where(x => x.text.Contains(term))
                 .Select(s => new BokningarAutoComplete { value = s.text, text = s.start_date + " " + s.text + " ID: " + s.id })
-                .Union(ds.boknings.Where(x => x.start_date.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.start_date.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })
                 .Union(ds.boknings.Where(x => x.id.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id }))).ToList();
+                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -237,14 +235,14 @@ namespace Golf_3_MVC.Controllers
                 }
                 try
                 {
-                    bokning hej;
-                    hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
+                    bokning aktuellbokning;
+                    aktuellbokning = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
 
                     medbokare.Id = 33;
                     medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
                     medbokare.Medbokare1 = gast;
                     medbokare.gast = true;
-                    hej.text += hej.golf_id;
+                    aktuellbokning.text += aktuellbokning.golf_id;
                     ds.medbokares.Add(medbokare);
                     ds.SaveChanges();
 

@@ -13,6 +13,7 @@ namespace Golf_3_MVC.Controllers
     public class tavlingsController : Controller
     {
         private dsu3Entities db = new dsu3Entities();
+        private static Random random;
 
         // GET: tavlings
         public ActionResult Index()
@@ -115,6 +116,27 @@ namespace Golf_3_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        // Anmälning till tävling
+        public ActionResult Anmälan(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Error");
+            }
+            else
+            {
+                // Hämta den inloggades uppgifter
+                //Lägg till i relationstabellen mellan medlem och tävling
+                // Räkna in +1 i den aktuella tävlingen
+
+
+
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -122,6 +144,19 @@ namespace Golf_3_MVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Metod för lottning.
+        /// </summary>
+        public void Randomizer()
+        {
+            random = new Random();
+
+             // Använd senare för att slumpa ur 3 personer bland alla deltagare. Gör om till lista
+            // Random r = new Random();
+           //  IEnumerable<int> threeRandom = myValues.OrderBy(x => r.Next()).Take(3);
+
         }
     }
 }

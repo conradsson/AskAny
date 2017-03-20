@@ -4,15 +4,16 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Ta bort tävling</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Är du säker på att ta bort tävlingen?</h3>
 <div>
-    <h4>tavling</h4>
+    <h4>Tävling</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.tavlingsNamn)
+            @Html.DisplayName("Tävling")
         </dt>
 
         <dd>
@@ -21,6 +22,7 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.tavlingsDatum)
+            @Html.DisplayName("Datum")
         </dt>
 
         <dd>
@@ -29,6 +31,7 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.forstaStarttid)
+            @Html.DisplayName("Första starttid")
         </dt>
 
         <dd>
@@ -37,6 +40,7 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.sistaAnmalning)
+            @Html.DisplayName("Sista anmälning")
         </dt>
 
         <dd>
@@ -45,6 +49,7 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.tavlingsForm)
+            @Html.DisplayName("Tävlingsform")
         </dt>
 
         <dd>
@@ -53,6 +58,7 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.publicerad)
+            @Html.DisplayName("Publicerad")
         </dt>
 
         <dd>
