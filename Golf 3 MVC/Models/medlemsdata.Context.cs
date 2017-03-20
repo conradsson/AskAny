@@ -33,5 +33,6 @@ namespace Golf_3_MVC.Models
         public virtual DbSet<bokning> boknings { get; set; }
         public virtual DbSet<scorekort> scorekorts { get; set; }
         public virtual DbSet<slope> slopes { get; set; }
+        public virtual DbSet<tavling> tavlings { get; set; }
     }
 }

@@ -23,7 +23,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Huvudbokare" Type="varchar" MaxLength="255" />
-          <Property Name="Medbokare" Type="varchar" MaxLength="255" />
+          <Property Name="Medbokare" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="BokningsId" Type="int" Nullable="false" />
           <Property Name="gast" Type="bit" />
         </EntityType>
@@ -90,6 +90,18 @@
           </Key>
           <Property Name="starttid" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="tavling">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tavlingsNamn" Type="nvarchar(max)" />
+          <Property Name="tavlingsDatum" Type="date" />
+          <Property Name="forstaStarttid" Type="time" Precision="7" />
+          <Property Name="sistaAnmalning" Type="date" />
+          <Property Name="tavlingsForm" Type="nvarchar" MaxLength="50" />
+          <Property Name="publicerad" Type="bit" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_bokning_ToTable" />-->
@@ -114,6 +126,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="season" EntityType="Self.season" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slope" EntityType="Self.slope" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="starttid" EntityType="Self.starttid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tavling" EntityType="Self.tavling" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
             <End Role="medlemskategori" EntitySet="medlemskategori" />
             <End Role="medlemmar" EntitySet="medlemmar" />
@@ -151,6 +164,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="boknings" EntityType="dsu3Model.bokning" />
           <EntitySet Name="scorekorts" EntityType="dsu3Model.scorekort" />
           <EntitySet Name="slopes" EntityType="dsu3Model.slope" />
+          <EntitySet Name="tavlings" EntityType="dsu3Model.tavling" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -189,7 +203,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Huvudbokare" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Medbokare1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Medbokare1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BokningsId" Type="Int32" Nullable="false" />
           <Property Name="gast" Type="Boolean" />
         </EntityType>
@@ -235,6 +249,18 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="Kvinna_Slope" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Herr_CR" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Herr_Slope" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tavling">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tavlingsNamn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tavlingsDatum" Type="DateTime" Precision="0" />
+          <Property Name="forstaStarttid" Type="Time" Precision="7" />
+          <Property Name="sistaAnmalning" Type="DateTime" Precision="0" />
+          <Property Name="tavlingsForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="publicerad" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -331,6 +357,19 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
                 <ScalarProperty Name="Kvinna_Slope" ColumnName="Kvinna_Slope" />
                 <ScalarProperty Name="Kvinna_CR" ColumnName="Kvinna_CR" />
                 <ScalarProperty Name="Tee" ColumnName="Tee" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tavlings">
+            <EntityTypeMapping TypeName="dsu3Model.tavling">
+              <MappingFragment StoreEntitySet="tavling">
+                <ScalarProperty Name="publicerad" ColumnName="publicerad" />
+                <ScalarProperty Name="tavlingsForm" ColumnName="tavlingsForm" />
+                <ScalarProperty Name="sistaAnmalning" ColumnName="sistaAnmalning" />
+                <ScalarProperty Name="forstaStarttid" ColumnName="forstaStarttid" />
+                <ScalarProperty Name="tavlingsDatum" ColumnName="tavlingsDatum" />
+                <ScalarProperty Name="tavlingsNamn" ColumnName="tavlingsNamn" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
