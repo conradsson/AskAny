@@ -95,9 +95,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tavlingsNamn" Type="nvarchar(max)" />
-          <Property Name="tavlingsDatum" Type="datetime" />
+          <Property Name="tavlingsDatum" Type="date" />
           <Property Name="forstaStarttid" Type="time" Precision="7" />
-          <Property Name="sistaAnmalning" Type="datetime" />
+          <Property Name="sistaAnmalning" Type="date" />
           <Property Name="tavlingsForm" Type="nvarchar" MaxLength="50" />
           <Property Name="publicerad" Type="bit" />
         </EntityType>
@@ -239,6 +239,18 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="Herr_CR" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Herr_Slope" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="tavling">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tavlingsNamn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tavlingsDatum" Type="DateTime" Precision="0" />
+          <Property Name="forstaStarttid" Type="Time" Precision="7" />
+          <Property Name="sistaAnmalning" Type="DateTime" Precision="0" />
+          <Property Name="tavlingsForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="publicerad" Type="Boolean" />
+        </EntityType>
         <EntityType Name="medbokare">
           <Key>
             <PropertyRef Name="Id" />
@@ -247,18 +259,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="Medbokare1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="BokningsId" Type="Int32" Nullable="false" />
           <Property Name="gast" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="tavling">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tavlingsNamn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tavlingsDatum" Type="DateTime" Precision="3" />
-          <Property Name="forstaStarttid" Type="Time" Precision="7" />
-          <Property Name="sistaAnmalning" Type="DateTime" Precision="3" />
-          <Property Name="tavlingsForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="publicerad" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
