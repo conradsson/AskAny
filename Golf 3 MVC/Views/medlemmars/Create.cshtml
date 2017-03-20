@@ -71,11 +71,24 @@
             </div>
         </div>
 
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "Man",
+        Value = "male"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "Kvinna",
+        Value = "female",
+    });
+}
+
         <div class="form-group">
             @Html.LabelFor(model => model.kon, "Kön", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.kon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kon, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.kon, listItems, "-- Välj kön --")
             </div>
         </div>
 
