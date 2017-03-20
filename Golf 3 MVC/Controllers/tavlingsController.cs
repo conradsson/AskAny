@@ -153,6 +153,10 @@ namespace Golf_3_MVC.Controllers
         {
             random = new Random();
 
+             // Använd senare för att slumpa ur 3 personer bland alla deltagare. Gör om till lista
+            // Random r = new Random();
+           //  IEnumerable<int> threeRandom = myValues.OrderBy(x => r.Next()).Take(3);
+
         }
     }
 }
