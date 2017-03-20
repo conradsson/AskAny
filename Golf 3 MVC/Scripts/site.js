@@ -5,7 +5,7 @@
     $(".carousel").delay(450).fadeIn(1000)
 });
 
- 
+
 $(".dropdown .dropdown-toggle").click(function () {   //  DROPDOWN STÄNGER INTE SIG SJÄLV-FUNKTION
     $(this).closest(".dropdown-menu").prev().dropdown("toggle");
 });

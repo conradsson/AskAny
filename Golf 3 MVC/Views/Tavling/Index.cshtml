@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Tävling";
+}
+
+
+
+<div class="row">
+    <ul class="nav nav-pills nav-stacked">
+
+        <li class="dropdown pill-tavling">
+
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                Tävlingar <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a >Tävling 1@{Html.RenderPartial("_Aktuelltavling", "Shared");}</a></li>
+                <li><a>Tävling 2</a></li>
+            </ul>
+        </li>
+
+    </ul>
+
+    <div class="panel panel-default panel-tavling">
+        <div class="panel-heading">Tävlingar</div>
+        <div class="panel-body">
+
+            @Html.Partial("_Aktuelltavling")
+
+        </div>
+    </div>
+
+</div>

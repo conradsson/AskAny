@@ -6,8 +6,8 @@
 body {
 	padding-top: 50px;
     position: relative;
-      margin: 0;
-      min-height: 100%;
+    margin: 0;
+    min-height: 100%;
 }
 
 
@@ -48,7 +48,13 @@ body {
 	margin-left:15%;
 }
 
+.row{
+    margin-top: 5%;
+}
 
+footer .row{
+    margin-top: 0%;
+}
 			/* CAROUSEL */
 
 /********************************/
@@ -223,6 +229,17 @@ body {
 
 }
 
+
+.pill-tavling ul{
+    text-align: center;
+}
+
+.pill-tavling li{
+    cursor: pointer;
+}
+.dropdown-menu{
+    width: 100%;
+}
 
 
 /*    FOOTER     */

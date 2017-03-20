@@ -15,7 +15,6 @@ namespace Golf_3_MVC.Models
     public partial class medbokare
     {
         public int Id { get; set; }
-        public string Huvudbokare { get; set; }
         public string Medbokare1 { get; set; }
         public int BokningsId { get; set; }
         public Nullable<bool> gast { get; set; }

@@ -196,6 +196,7 @@
     <Compile Include="Controllers\medlemskategorisController.cs" />
     <Compile Include="Controllers\scorekortsController.cs" />
     <Compile Include="Controllers\starttidsController.cs" />
+    <Compile Include="Controllers\TavlingController.cs" />
     <Compile Include="Controllers\tavlingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -686,7 +687,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
-    <Content Include="Views\Home\Tavling.cshtml" />
+    <Content Include="Views\Tavling\Index.cshtml" />
     <Content Include="Views\scorekorts\Create.cshtml" />
     <Content Include="Views\scorekorts\Delete.cshtml" />
     <Content Include="Views\scorekorts\Details.cshtml" />
@@ -697,6 +698,7 @@
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\Bokning.cshtml" />
     <Content Include="Views\Emails\Avbokning.cshtml" />
+    <Content Include="Views\Shared\_Aktuelltavling.cshtml" />
     <Content Include="Views\tavlings\Create.cshtml" />
     <Content Include="Views\tavlings\Delete.cshtml" />
     <Content Include="Views\tavlings\Details.cshtml" />
