@@ -236,14 +236,14 @@ namespace Golf_3_MVC.Controllers
                 }
                 try
                 {
-                    bokning hej;
-                    hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
+                    bokning aktuellbokning;
+                    aktuellbokning = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
 
                     medbokare.Id = 33;
                     medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
                     medbokare.Medbokare1 = gast;
                     medbokare.gast = true;
-                    hej.text += hej.golf_id;
+                    aktuellbokning.text += aktuellbokning.golf_id;
                     ds.medbokares.Add(medbokare);
                     ds.SaveChanges();
 

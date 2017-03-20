@@ -115,6 +115,27 @@ namespace Golf_3_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        // Anmälning till tävling
+        public ActionResult Anmälan(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Error");
+            }
+            else
+            {
+                // Hämta den inloggades uppgifter
+                //Lägg till i relationstabellen mellan medlem och tävling
+                // Räkna in +1 i den aktuella tävlingen
+
+
+
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

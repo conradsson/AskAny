@@ -15,7 +15,13 @@
                 Tävlingar <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a >Tävling 1@{Html.RenderPartial("_Aktuelltavling", "Shared");}</a></li>
+                @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Alla tävlingar", "Index", "tavlings")</li>
+                }
+
+                <a href="~/Views/tavlings/Index.cshtml">~/Views/tavlings/Index.cshtml</a>
+                <li><a href="~/Views/tavlings/Index.cshtml">~/Views/tavlings/Index.cshtml</a></li>
                 <li><a>Tävling 2</a></li>
             </ul>
         </li>
