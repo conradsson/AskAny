@@ -13,6 +13,7 @@ namespace Golf_3_MVC.Controllers
     public class tavlingsController : Controller
     {
         private dsu3Entities db = new dsu3Entities();
+        private static Random random;
 
         // GET: tavlings
         public ActionResult Index()
@@ -143,6 +144,15 @@ namespace Golf_3_MVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Metod för lottning.
+        /// </summary>
+        public void Randomizer()
+        {
+            random = new Random();
+
         }
     }
 }
