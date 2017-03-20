@@ -839,21 +839,21 @@ namespace Golf_3_MVC.Controllers
                                     ds.boknings.Add(EV);
                                     ds.SaveChanges();
 
-                                    try // LÄGGER TILL EN RAD I MEDBOKARE,  I TRY FÖR ATT ID:T SKA BLI ÅTKOMLIGT
-                                    {
-                                        MB.Id = 33;
-                                        MB.Medbokare1 = User.Identity.GetUserName();
-                                        MB.BokningsId = EV.id;
-                                        ds.medbokares.Add(MB);
-                                        ds.SaveChanges();
-                                    }
-                                    catch (Exception)
-                                    {
+                                try // LÄGGER TILL EN RAD I MEDBOKARE,  I TRY FÖR ATT ID:T SKA BLI ÅTKOMLIGT
+                                {
+                                    MB.Id = 33;
+                                    MB.Medbokare1 = User.Identity.GetUserName();
+                                    MB.BokningsId = EV.id;
+                                    ds.medbokares.Add(MB);
+                                    ds.SaveChanges();
+                                }
+                                catch (Exception)
+                                {
 
-                                        throw;
-                                    }
+                                    throw;
+                                }
 
-                                    string epost = m.epost;
+                                string epost = m.epost;
                                     SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                             }
 
@@ -866,13 +866,9 @@ namespace Golf_3_MVC.Controllers
                         {
                             string golf_id = User.Identity.GetUserName();
 
-                            foreach (var x in ds.medbokares)
+                            foreach (var x in ds.medbokares)  // TAR BORT ALLA MEDBOKARE FRÅN BOKNINGEN
                             {
-                                if (x.BokningsId == id && x.Medbokare1 == golf_id)
-                                {
-                                    ds.medbokares.Remove(x);
-                                }
-                                else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                                if (x.BokningsId == id)
                                 {
                                     ds.medbokares.Remove(x);
                                 }
