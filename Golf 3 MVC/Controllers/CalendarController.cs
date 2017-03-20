@@ -17,6 +17,7 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 
+
 namespace Golf_3_MVC.Controllers
 {
     public class CalendarController : Controller
@@ -597,9 +598,11 @@ namespace Golf_3_MVC.Controllers
                 List<medbokare> allaMedbokare = new List<medbokare>();
                 List<medbokare> aktuellaMedbokningar = new List<medbokare>();
                 List<bokning> aktuellaBokningar = new List<bokning>();
+                
 
                 CalendarBookings model = new CalendarBookings();
-                model.medlems = medlemmars;
+                
+                
 
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
@@ -608,6 +611,8 @@ namespace Golf_3_MVC.Controllers
                 allaMedbokare = ds.medbokares.ToList();
                 aktuellaMedbokningar = allaMedbokare.Where(x => x.Medbokare1.Trim() == User.Identity.GetUserName()).ToList();
                 model.medbokareLista = ds.medbokares.ToList();
+                
+                model.medlemsLista = allaMedlemmar;
 
                 foreach (medbokare mb in aktuellaMedbokningar)
                 {
