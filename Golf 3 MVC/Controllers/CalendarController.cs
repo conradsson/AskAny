@@ -54,10 +54,8 @@ namespace Golf_3_MVC.Controllers
         {
             var result = ds.boknings.Where(x => x.text.Contains(term))
                 .Select(s => new BokningarAutoComplete { value = s.text, text = s.start_date + " " + s.text + " ID: " + s.id })
-                .Union(ds.boknings.Where(x => x.start_date.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.start_date.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })
                 .Union(ds.boknings.Where(x => x.id.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id }))).ToList();
+                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -236,14 +234,14 @@ namespace Golf_3_MVC.Controllers
                 }
                 try
                 {
-                    bokning hej;
-                    hej = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
+                    bokning aktuellbokning;
+                    aktuellbokning = ds.boknings.Where(x => x.id.ToString() == bokningsIDgast).FirstOrDefault();
 
                     medbokare.Id = 33;
                     medbokare.BokningsId = Convert.ToInt32(bokningsIDgast);
                     medbokare.Medbokare1 = gast;
                     medbokare.gast = true;
-                    hej.text += hej.golf_id;
+                    aktuellbokning.text += aktuellbokning.golf_id;
                     ds.medbokares.Add(medbokare);
                     ds.SaveChanges();
 
@@ -831,21 +829,21 @@ namespace Golf_3_MVC.Controllers
                                     ds.boknings.Add(EV);
                                     ds.SaveChanges();
 
-                                    try // LÄGGER TILL EN RAD I MEDBOKARE,  I TRY FÖR ATT ID:T SKA BLI ÅTKOMLIGT
-                                    {
-                                        MB.Id = 33;
-                                        MB.Medbokare1 = User.Identity.GetUserName();
-                                        MB.BokningsId = EV.id;
-                                        ds.medbokares.Add(MB);
-                                        ds.SaveChanges();
-                                    }
-                                    catch (Exception)
-                                    {
+                                try // LÄGGER TILL EN RAD I MEDBOKARE,  I TRY FÖR ATT ID:T SKA BLI ÅTKOMLIGT
+                                {
+                                    MB.Id = 33;
+                                    MB.Medbokare1 = User.Identity.GetUserName();
+                                    MB.BokningsId = EV.id;
+                                    ds.medbokares.Add(MB);
+                                    ds.SaveChanges();
+                                }
+                                catch (Exception)
+                                {
 
-                                        throw;
-                                    }
+                                    throw;
+                                }
 
-                                    string epost = m.epost;
+                                string epost = m.epost;
                                     SendEmail(epost, "Bokning", "Du har blivit bokad!" + changedEvent.start_date + "-" + changedEvent.end_date);
                             }
 
@@ -858,13 +856,9 @@ namespace Golf_3_MVC.Controllers
                         {
                             string golf_id = User.Identity.GetUserName();
 
-                            foreach (var x in ds.medbokares)
+                            foreach (var x in ds.medbokares)  // TAR BORT ALLA MEDBOKARE FRÅN BOKNINGEN
                             {
-                                if (x.BokningsId == id && x.Medbokare1 == golf_id)
-                                {
-                                    ds.medbokares.Remove(x);
-                                }
-                                else if (x.BokningsId == id && x.Medbokare1 == golf_id)
+                                if (x.BokningsId == id)
                                 {
                                     ds.medbokares.Remove(x);
                                 }
