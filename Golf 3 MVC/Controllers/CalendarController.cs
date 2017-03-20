@@ -54,10 +54,8 @@ namespace Golf_3_MVC.Controllers
         {
             var result = ds.boknings.Where(x => x.text.Contains(term))
                 .Select(s => new BokningarAutoComplete { value = s.text, text = s.start_date + " " + s.text + " ID: " + s.id })
-                .Union(ds.boknings.Where(x => x.start_date.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.start_date.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })
                 .Union(ds.boknings.Where(x => x.id.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id }))).ToList();
+                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
