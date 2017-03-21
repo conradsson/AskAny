@@ -6,9 +6,7 @@
 });
 
 
-$(".dropdown .dropdown-toggle").click(function () {   //  DROPDOWN STÄNGER INTE SIG SJÄLV-FUNKTION
-    $(this).closest(".dropdown-menu").prev().dropdown("toggle");
-});
+
 
 //  START FLIKEN-EFFEKTER
 $(".startbtn").ready(function (e) {
@@ -125,7 +123,7 @@ $(".pill-kontaktuppgifter").click(function (e) {
 $(".tavlingbtn").ready(function (e) {
 
     $(".panel-tavling").show();
-    $(".pill-tavling").addClass("active")
+    
 });
 
 $(".pill-tavling").click(function (e) {
@@ -134,37 +132,47 @@ $(".pill-tavling").click(function (e) {
     $(".pill-tavling").addClass("active")
 });
 
+$("li.litavling").click(function () {
+    
+    aktuelltavling();
+
+});
+
 //  BOKNINGSKALENDER FLIKEN-EFFEKTER
 $(".kalender").ready(function (e) {
     $(".panel-kalender").show();
-    //$("li .kalenderbtn").click
     $(".dhx_cal_tab_first").trigger('click');
 });
 
-
-
-//$(window).scroll(function () {   // Return-to-top Funktion
-//    if ($(this).scrollTop() >= 400) {
-//        $('#return-to-top').fadeIn(200);
-//    } else {
-//        $('#return-to-top').fadeOut(200);
-//    }
-//});
-//$('#return-to-top').click(function () {
-//    $('body,html').animate({
-//        scrollTop: 0
-//    }, 300);
+//$(".dhx_btn_set .dhx_left_btn_set .dhx_save_btn_set").click(function () {
+//    alert('HEJ');
+//    location.reload();
 //});
 
+function aktuelltavling() {
 
-//var scrollTo = function (identifier, speed) {  // Scroll-To function
-//    $('html, body').animate({
-//        scrollTop: $(identifier).offset().top
-//    }, speed || 750);
-//}
+    debugger
+    var id = 1;
+    //var id = document.getElementById('.litavling').value;
 
+    if (id != "") {
+        $.ajax({
+            url: '/tavlings/Aktuelltavling',
+            contentType: 'application/html; charset=utf-8',
+            data: { id },
+            type: 'GET',
+            dataType: 'html'
+        })
 
-
+        .success(function (result) {
+            $('.panel-body').html(result);
+        })
+        .error(function (xhr, status) {
+            ok
+            alert(status);
+        })
+    }
+}
 
 
 // START | Tonnys grejs | 10 minuters interval

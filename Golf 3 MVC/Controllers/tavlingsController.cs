@@ -15,6 +15,18 @@ namespace Golf_3_MVC.Controllers
         private dsu3Entities db = new dsu3Entities();
         private static Random random;
 
+
+        public PartialViewResult Aktuelltavling(int id)
+        {
+
+            tavling tavling = db.tavlings.Find(id);
+
+
+            return PartialView("_aktuelltavling", tavling);
+        }
+
+
+
         // GET: tavlings
         public ActionResult Index()
         {
