@@ -997,6 +997,15 @@ namespace Golf_3_MVC.Controllers
             medbokare medbok = new medbokare();
             string id = actionValues["Bokningar"];
 
+            string mid = actionValues["Checked1"];
+            string mid1 = actionValues["Checked2"];
+            string mid2 = actionValues["Checked3"];
+            string mid3 = actionValues["Checked4"];
+            string sc1 = actionValues["C1"];
+            string sc2 = actionValues["C2"];
+            string sc3 = actionValues["C3"];
+            string sc4 = actionValues["C4"];
+
             if (Request.Form["checkainBtn"] != null)
             {
                 if (id == null)
@@ -1008,10 +1017,49 @@ namespace Golf_3_MVC.Controllers
                 bok = ds3.boknings.Where(x => x.id.ToString() == id).FirstOrDefault();
 
                 if (bok != null)
-                {
+                {                  
+                    if (mid != null)
+                    {
+                        medbok = ds3.medbokares.Where(x => x.Medbokare1.ToString() == mid).FirstOrDefault();
+                        medbok.incheckad = true;
+                        ds3.SaveChanges();
+                    }
+                    if (mid1 != null)
+                    {
+                        medbok = ds3.medbokares.Where(x => x.Medbokare1.ToString() == mid1).FirstOrDefault();
+                        medbok.incheckad = true;
+                        ds3.SaveChanges();
+                    }
+                    if (mid2 != null)
+                    {
+                        medbok = ds3.medbokares.Where(x => x.Medbokare1.ToString() == mid2).FirstOrDefault();
+                        medbok.incheckad = true;
+                        ds3.SaveChanges();
+                    }
+                    if (mid3 != null)
+                    {
+                        medbok = ds3.medbokares.Where(x => x.Medbokare1.ToString() == mid3).FirstOrDefault();
+                        medbok.incheckad = true;
+                        ds3.SaveChanges();
+                    }
+                    if (sc1 != null)
+                    {
+                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc1 });
+                    }
+                    if (sc2 != null)
+                    {
+                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc2 });
+                    }
+                    if (sc3 != null)
+                    {
+                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc3 });
+                    }
+                    if (sc4 != null)
+                    {
+                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc4 });
+                    }
 
                     bok.incheckad = true;
-                    //medbok.incheckad = true;
                     ds3.SaveChanges();
                     TempData["msg"] = "<script>alert('Incheckningen lyckades.');</script>";
 

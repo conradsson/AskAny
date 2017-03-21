@@ -102,7 +102,8 @@
             <table class="tg">
                 
                     @{
-                        string golfid = Model.golfID; 
+                        
+                        string golfid = Model.golfID;
                         string golfid2 = "";
                         string golfid3 = "";
                         string golfid4 = "";
@@ -126,16 +127,16 @@
                         {
                             if (x.BokningsId == bokningsID)
                             {
-                                if (golfid2 == "")
+                                if (golfid2 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid2 = x.Medbokare1;
                                 }
-                                else if (golfid3 == "")
+                                else if (golfid3 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid3 = x.Medbokare1;
 
                                 }
-                                else if (golfid4 == "")
+                                else if (golfid4 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid4 = x.Medbokare1;
                                 }
