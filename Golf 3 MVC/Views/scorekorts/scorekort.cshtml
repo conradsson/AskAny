@@ -102,7 +102,8 @@
             <table class="tg">
                 
                     @{
-                        string golfid = Model.golfID; 
+
+                        string golfid = Model.golfID;
                         string golfid2 = "";
                         string golfid3 = "";
                         string golfid4 = "";
@@ -126,16 +127,22 @@
                         {
                             if (x.BokningsId == bokningsID)
                             {
-                                if (golfid2 == "")
+                                if (Char.IsLetter(x.Medbokare1[0]))
+                                {
+                                    golfid4 = x.Medbokare1;
+
+                                }
+
+                                else if (golfid2 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid2 = x.Medbokare1;
                                 }
-                                else if (golfid3 == "")
+                                else if (golfid3 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid3 = x.Medbokare1;
 
                                 }
-                                else if (golfid4 == "")
+                                else if (golfid4 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid4 = x.Medbokare1;
                                 }
@@ -162,6 +169,8 @@
                                     kön = i.kon;
                                 }
                             }
+
+
                             if (i.golf_id == golfid2.Trim())
                             {
                                 spelare2 = i.fornamn + " " + i.efternamn;
@@ -176,6 +185,10 @@
                             {
                                 spelare4 = i.fornamn + " " + i.efternamn;
                                 HCP4 = i.hcp.ToString();
+                            }
+                            else if (Char.IsLetter(golfid4[0]))
+                            {
+                                spelare4 = golfid4;
                             }
                         }
 

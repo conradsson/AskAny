@@ -6,66 +6,53 @@
 
 <div class="row">
 
-<p>
-        @Html.ActionLink("Skapa tävling", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tavlingsNamn)*@
-            @Html.DisplayName("Tävling")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tavlingsDatum)*@
-            @Html.DisplayName("Datum")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.forstaStarttid)*@
-            @Html.DisplayName("Första starttid")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.sistaAnmalning)*@
-            @Html.DisplayName("Sista anmälning")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.tavlingsForm)*@
-            @Html.DisplayName("Tävlingsform")
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.publicerad)*@
-            @Html.DisplayName("Publicerad")
-        </th>
-        <th></th>
-    </tr>
+    <ul class="nav nav-pills nav-stacked">
 
-        @foreach (var item in Model)
+        <li class="dropdown pill-anmalan">
+
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                Anmälan <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
+                {
+                    <li><a>Se anmälningar</a></li>
+                }
+
+
+                @foreach (var item in Model)
+                {
+                   <li class="litavling"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
+                }
+            </ul>
+        </li>
+        <!--////////////////////////////////////////////////////-->
+        @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tavlingsNamn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tavlingsDatum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.forstaStarttid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sistaAnmalning)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tavlingsForm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.publicerad)
-        </td>
-        <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+            <li class="pill-admintavling">
 
-</table>
+                <a href="#" aria-expanded="true">
+                    Administrera tävlingar
+                </a>
+
+            </li>
+        }
+    </ul>
+
+    <div class="panel panel-default panel-tavling">
+        <div class="panel-heading">Administrera tävlingar</div>
+        <div class="panel-body">
+
+            @*@Html.Partial("_admintavling")*@
+
+            @*@foreach (var item in Model)
+            {
+                @Html.Partial("_aktuelltavling", item);
+            }*@
+
+        </div>
+    </div>
+
+
+
 </div>

@@ -221,17 +221,28 @@
 
                                                 })
 
+                            
+
 
                             &emsp;
-                            
-                            <hr /><label id="0">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
-                            <label id="1">&emsp;Checka in spelare 2 :<br />&emsp;</label><br /><hr />
-                            <label id="2">&emsp;Checka in spelare 3 :<br />&emsp;</label><br /><hr />
-                            <label id="3">&emsp;Checka in spelare 4 :<br />&emsp;</label><br /><hr />
+                            <hr /><label id="0">&emsp;<br />&emsp;</label><br /> 
+                            <label style="display:none" id="10"><input type="checkbox" name="Check in?0" id="20" value="0" style="display:none"/> Checka in?</label>
+                            <br /><label style="display:none" id="30"><input type="checkbox" name="SkrivUt" id="40" value="0" style="display:none"/> Skriv ut scorekort?</label>
+                            <hr />
+                            <label id="1">&emsp;<br />&emsp;</label><br />
+                            <label style="display:none" id="11"><input type="checkbox" name="Check in?1" id="21" value="0" style="display:none"/> Checka in?</label>
+                            <br /><label style="display:none" id="31"><input type="checkbox" name="SkrivUt" id="41" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                            <hr />
+                            <label id="2">&emsp;<br />&emsp;</label><br />
+                            <label style="display:none" id="12"><input type="checkbox" name="Check in?2" id="22" value="0" style="display:none"/> Checka in?</label>
+                            <br /><label style="display:none" id="32"><input type="checkbox" name="SkrivUt" id="42" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                            <hr />
+                            <label id="3">&emsp;<br />&emsp;</label><br />
+                            <label style="display:none" id="13"><input type="checkbox" name="Check in?3" id="23" value="0" style="display:none" /> Checka in?</label>
+                            <br /><label style="display:none" id="33"><input type="checkbox" name="SkrivUt" id="43" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                            <hr />
 
-                            <input id="hidden" type="hidden" value="1" />
-                            <input type="button" value="klicka" onClientClick ="GetBokare()" />
-                            &emsp;@*<input type="submit" name="checkainBtn" value="Checka in"/>*@
+                            &emsp;<input type="submit" name="checkainBtn" value="Checka in" onclick="Javascript:SeCheck();"/>
 
                             @Html.Raw(TempData["msg"])
                         </p>
@@ -292,7 +303,6 @@
                 var bokID = e.options[e.selectedIndex].value;
 
                 var json1 = @Html.Raw(Json.Encode(Model.medbokareLista.ToList()));
-                @*var json2 = @Html.Raw(Json.Encode(Model.medlemsLista.ToList()));*@
 
                 var json2 = @Html.Raw(Json.Encode(Model.medlemsLista.Select(x => new {
                            efternamn = x.efternamn,
@@ -301,29 +311,83 @@
                        }
                           )));
 
-
-
-                var räknare =0;
+                var räknare = 0;
+                var räknare2 = 10;
+                var räknare3 = 20;
+                var räknare4 = 30;
+                var räknare5 = 40;
 
                 for (var i = 0; i < Object.keys(json1).length; i++)
                 {
                     if (json1[i].BokningsId == bokID)
                     {
-                        for(var x = 0; i< Object.keys(json2).length; x++)
+                        for(var x = 0; x< Object.keys(json2).length; x++)
                         {
                             if (json2[x].golf_id == json1[i].Medbokare1)
                             {
                                 document.getElementById(räknare).innerText ="Spelare: " + json2[x].fornamn + " " + json2[x].efternamn;
+                                document.getElementById(räknare3).value = json1[i].Medbokare1; //Checkbox checka in
+                                document.getElementById(räknare5).value = json1[i].Medbokare1; //checkbox skriv ut
+                                document.getElementById(räknare2).style = "display:normal";
+                                document.getElementById(räknare3).style = "display:normal";
+                                document.getElementById(räknare4).style = "display:normal";                       
+                                document.getElementById(räknare5).style = "display:normal";
+
+                                if (json1[i].incheckad == true)
+                                {
+                                    document.getElementById(räknare3).checked = "checked";
+
+                                }
                                 räknare++;
+                                räknare2++;
+                                räknare3++;
+                                räknare4++;
+                                räknare5++;
                             } 
                         }
                     }
                 }
-
                 räknare =0;
-                alert("I am an alert box!");
             }
          </script>
 
+    <script type="text/javascript">
+            function SeCheck()
+            {
+                if (document.getElementById("20").checked) 
+                {
+                    document.getElementById("20").name = "Checked1";
+                }
+                if (document.getElementById("21").checked) 
+                {
+                    document.getElementById("21").name = "Checked2";
+                }
+                if (document.getElementById("22").checked) 
+                {
+                    document.getElementById("22").name = "Checked3";
+                }
+                if (document.getElementById("23").checked) 
+                {
+                    document.getElementById("23").name = "Checked4";
+                }
+
+                if (document.getElementById("40").checked) 
+                {
+                    document.getElementById("40").name = "C1";
+                }
+                if (document.getElementById("41").checked) 
+                {
+                    document.getElementById("41").name = "C2";
+                }
+                if (document.getElementById("42").checked) 
+                {
+                    document.getElementById("42").name = "C3";
+                }
+                if (document.getElementById("43").checked) 
+                {
+                    document.getElementById("43").name = "C4";
+                }
+            }
+    </script>
 </body>
 </html>

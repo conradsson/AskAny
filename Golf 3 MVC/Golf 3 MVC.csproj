@@ -196,7 +196,6 @@
     <Compile Include="Controllers\medlemskategorisController.cs" />
     <Compile Include="Controllers\scorekortsController.cs" />
     <Compile Include="Controllers\starttidsController.cs" />
-    <Compile Include="Controllers\TavlingController.cs" />
     <Compile Include="Controllers\tavlingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -250,6 +249,7 @@
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
+    <Compile Include="Models\aktuelltavling.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="Models\scorekort.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
@@ -643,7 +643,6 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\Medlem.cshtml" />
     <Content Include="Views\Home\Banorna.cshtml" />
-    <Content Include="Views\TavlingSite\Index.cshtml" />
     <Content Include="Views\scorekorts\Create.cshtml" />
     <Content Include="Views\scorekorts\Delete.cshtml" />
     <Content Include="Views\scorekorts\Details.cshtml" />
@@ -661,6 +660,8 @@
     <Content Include="Views\tavlings\Edit.cshtml" />
     <Content Include="Views\tavlings\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\tavlings\_admintavling.cshtml" />
+    <Content Include="Views\tavlings\_aktuelltavling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
