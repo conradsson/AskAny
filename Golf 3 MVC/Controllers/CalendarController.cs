@@ -682,8 +682,8 @@ namespace Golf_3_MVC.Controllers
                     }
                 }
 
-                sched.LoadData = true;
-                sched.EnableDataprocessor = true;
+                //sched.LoadData = true;
+                //sched.EnableDataprocessor = true;
 
                 model.sched = sched;
                 return View(model);
@@ -994,6 +994,7 @@ namespace Golf_3_MVC.Controllers
         {
             dsu3Entities ds3 = new dsu3Entities();
             bokning bok = new bokning();
+            medbokare medbok = new medbokare();
             string id = actionValues["Bokningar"];
 
             if (Request.Form["checkainBtn"] != null)
@@ -1008,13 +1009,11 @@ namespace Golf_3_MVC.Controllers
 
                 if (bok != null)
                 {
+
                     bok.incheckad = true;
+                    //medbok.incheckad = true;
                     ds3.SaveChanges();
                     TempData["msg"] = "<script>alert('Incheckningen lyckades.');</script>";
-                    //SkrivUtScoreKort(bok.golf_id, bok.id.ToString());
-
-                    TempData["bokningsID"] = bok.id;
-                    TempData["golfID"] = bok.golf_id;
 
                 }
 
