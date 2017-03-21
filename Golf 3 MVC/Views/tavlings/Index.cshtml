@@ -22,7 +22,7 @@
 
                 @foreach (var item in Model)
                 {
-                   <li class="litavling"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
+                   <li class="litavling"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn, "id")</a></li>
                 }
             </ul>
         </li>
@@ -40,17 +40,17 @@
     </ul>
 
     <div class="panel panel-default panel-tavling">
-        <div class="panel-heading">Administrera tävlingar</div>
+        @*<div class="panel-heading">Administrera tävlingar</div>
         <div class="panel-body">
 
-            @*@Html.Partial("_admintavling")*@
+           @@Html.Partial("_admintavling")
 
-            @*@foreach (var item in Model)
+            @foreach (var item in Model)
             {
                 @Html.Partial("_aktuelltavling", item);
-            }*@
+            }
 
-        </div>
+        </div>*@
     </div>
 
 
