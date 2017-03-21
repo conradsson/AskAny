@@ -597,11 +597,8 @@ namespace Golf_3_MVC.Controllers
                 List<medbokare> aktuellaMedbokningar = new List<medbokare>();
                 List<bokning> aktuellaBokningar = new List<bokning>();
                 
-
                 CalendarBookings model = new CalendarBookings();
-                
-                
-
+                             
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
                 allaBokningar = ds.boknings.ToList();
@@ -682,8 +679,8 @@ namespace Golf_3_MVC.Controllers
                     }
                 }
 
-                //sched.LoadData = true;
-                //sched.EnableDataprocessor = true;
+                sched.LoadData = true;
+                sched.EnableDataprocessor = true;
 
                 model.sched = sched;
                 return View(model);
