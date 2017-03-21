@@ -676,7 +676,7 @@ namespace Golf_3_MVC.Controllers
 
                     }
                 }
-
+                
                 sched.LoadData = true;
                 sched.EnableDataprocessor = true;
 
