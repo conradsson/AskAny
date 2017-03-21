@@ -223,11 +223,11 @@
 
 
                             &emsp;
-                            @Html.LabelFor(model => model.Namn1, "foo bar")
-                            <hr /><label id="Spelare 1">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
-                            <label>&emsp;Checka in spelare 2 :<br />&emsp;@Model.Namn2</label><br /><hr />
-                            <label>&emsp;Checka in spelare 3 :<br />&emsp;@Model.Namn3</label><br /><hr />
-                            <label>&emsp;Checka in spelare 4 :<br />&emsp;@Model.Namn4</label><br /><hr />
+                            
+                            <hr /><label id="0">&emsp;Checka in spelare 1 : <br />&emsp;</label><hr />
+                            <label id="1">&emsp;Checka in spelare 2 :<br />&emsp;</label><br /><hr />
+                            <label id="2">&emsp;Checka in spelare 3 :<br />&emsp;</label><br /><hr />
+                            <label id="3">&emsp;Checka in spelare 4 :<br />&emsp;</label><br /><hr />
 
                             <input id="hidden" type="hidden" value="1" />
                             <input type="button" value="klicka" onClientClick ="GetBokare()" />
@@ -286,21 +286,44 @@
     </div>
 
         <script type="text/javascript">
-        function GetBokare()
-        {
+            function GetBokare()
+            {
+                var e = document.getElementById("Bokningar");
+                var bokID = e.options[e.selectedIndex].value;
 
-            var e = document.getElementById("Bokningar");
-            var bokID = e.options[e.selectedIndex].value;
+                var json1 = @Html.Raw(Json.Encode(Model.medbokareLista.ToList()));
+                @*var json2 = @Html.Raw(Json.Encode(Model.medlemsLista.ToList()));*@
+
+                var json2 = @Html.Raw(Json.Encode(Model.medlemsLista.Select(x => new {
+                           efternamn = x.efternamn,
+                           fornamn = x.fornamn,
+                           golf_id= x.golf_id
+                       }
+                          )));
 
 
 
-            var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.medbokareLista).ToList());
-            var json1 = @Html.Raw(Json.Encode(Model.medbokareLista.ToList()));
+                var räknare =0;
 
+                for (var i = 0; i < Object.keys(json1).length; i++)
+                {
+                    if (json1[i].BokningsId == bokID)
+                    {
+                        for(var x = 0; i< Object.keys(json2).length; x++)
+                        {
+                            if (json2[x].golf_id == json1[i].Medbokare1)
+                            {
+                                document.getElementById(räknare).innerText ="Spelare: " + json2[x].fornamn + " " + json2[x].efternamn;
+                                räknare++;
+                            } 
+                        }
+                    }
+                }
 
-            alert("I am an alert box!");
-        }
-        </script>
+                räknare =0;
+                alert("I am an alert box!");
+            }
+         </script>
 
 </body>
 </html>

@@ -1,143 +1,145 @@
-﻿//$(document).ready(function () {
-//    $(".navbar").fadeIn(500)
-//    $("footer").fadeIn(500)
-//    $(".body-content").delay(450).fadeIn(1000)
-//    $(".carousel").delay(450).fadeIn(1000)
-//});
+﻿$(document).ready(function () {
+    $(".navbar").fadeIn(500)
+    $("footer").fadeIn(500)
+    $(".body-content").delay(450).fadeIn(1000)
+    $(".carousel").delay(450).fadeIn(1000)
+});
 
 
-//$(".dropdown .dropdown-toggle").click(function () {   //  DROPDOWN STÄNGER INTE SIG SJÄLV-FUNKTION
-//    $(this).closest(".dropdown-menu").prev().dropdown("toggle");
-//});
+$(".dropdown .dropdown-toggle").click(function () {   //  DROPDOWN STÄNGER INTE SIG SJÄLV-FUNKTION
+    $(this).closest(".dropdown-menu").prev().dropdown("toggle");
+});
 
-////  START FLIKEN-EFFEKTER
-//$(".startbtn").ready(function (e) {
-//    $(".panel-nyheter").show();
-//    $(".panel-banstatus").hide();
-//    $(".pill-nyheter").addClass("active")
-//    $(".pill-banstatus").removeClass("active")
-//});
+//  START FLIKEN-EFFEKTER
+$(".startbtn").ready(function (e) {
+    $(".panel-nyheter").show();
+    $(".panel-banstatus").hide();
+    $(".pill-nyheter").addClass("active")
+    $(".pill-banstatus").removeClass("active")
+});
 
-//$(".pill-nyheter").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-nyheter").show();
-//    $(".panel-banstatus").hide();
-//    $(".pill-nyheter").addClass("active")
-//    $(".pill-banstatus").removeClass("active")
+$(".pill-nyheter").click(function (e) {
+    e.preventDefault()
+    $(".panel-nyheter").show();
+    $(".panel-banstatus").hide();
+    $(".pill-nyheter").addClass("active")
+    $(".pill-banstatus").removeClass("active")
 
-//});
-//$(".pill-banstatus").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-nyheter").hide();
-//    $(".panel-banstatus").show();
-//    $(".pill-banstatus").addClass("active")
-//    $(".pill-nyheter").removeClass("active")
-//});
+});
+$(".pill-banstatus").click(function (e) {
+    e.preventDefault()
+    $(".panel-nyheter").hide();
+    $(".panel-banstatus").show();
+    $(".pill-banstatus").addClass("active")
+    $(".pill-nyheter").removeClass("active")
+});
 
-////  MEDLEM PERSONAL ADMIN FLIKEN-EFFEKTER
-//$(".medlembtn").ready(function (e) {
+//  MEDLEM PERSONAL ADMIN FLIKEN-EFFEKTER
+$(".medlembtn").ready(function (e) {
 
-//    $(".panel-medlemmar").show();
+    $(".panel-medlemmar").show();
 
-//});
+});
 
-////  MEDLEM BESÖKARE FLIKEN-EFFEKTER
-//$(".medlembtn").ready(function (e) {
+//  MEDLEM BESÖKARE FLIKEN-EFFEKTER
+$(".medlembtn").ready(function (e) {
 
-//    $(".panel-infomedlem").show();
-//    $(".pill-infomedlem").addClass("active")
+    $(".panel-infomedlem").show();
+    $(".pill-infomedlem").addClass("active")
 
-//});
-//$(".pill-infomedlem").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-infomedlem").show();
-//    $(".pill-infomedlem").addClass("active")
-//});
+});
+$(".pill-infomedlem").click(function (e) {
+    e.preventDefault()
+    $(".panel-infomedlem").show();
+    $(".pill-infomedlem").addClass("active")
+});
 
 
 
-////  BANORNA FLIKEN-EFFEKTER
-//$(".banornabtn").ready(function (e) {
+//  BANORNA FLIKEN-EFFEKTER
+$(".banornabtn").ready(function (e) {
 
-//    $(".panel-bana1").show();
-//    $(".panel-bana2").hide();
-//    $(".panel-bana3").hide();
-//    $(".pill-bana1").addClass("active")
-//    $(".pill-bana2").removeClass("active")
-//    $(".pill-bana3").removeClass("active")
-//});
+    $(".panel-bana1").show();
+    $(".panel-bana2").hide();
+    $(".panel-bana3").hide();
+    $(".pill-bana1").addClass("active")
+    $(".pill-bana2").removeClass("active")
+    $(".pill-bana3").removeClass("active")
+});
 
-//$(".pill-bana1").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-bana1").show();
-//    $(".panel-bana2").hide();
-//    $(".panel-bana3").hide();
-//    $(".pill-bana1").addClass("active")
-//    $(".pill-bana2").removeClass("active")
-//    $(".pill-bana3").removeClass("active")
-//});
-//$(".pill-bana2").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-bana2").show();
-//    $(".panel-bana1").hide();
-//    $(".panel-bana3").hide();
-//    $(".pill-bana2").addClass("active")
-//    $(".pill-bana1").removeClass("active")
-//    $(".pill-bana3").removeClass("active")
-//});
-//$(".pill-bana3").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-bana3").show();
-//    $(".panel-bana1").hide();
-//    $(".panel-bana2").hide();
-//    $(".pill-bana3").addClass("active")
-//    $(".pill-bana1").removeClass("active")
-//    $(".pill-bana2").removeClass("active")
-//});
+$(".pill-bana1").click(function (e) {
+    e.preventDefault()
+    $(".panel-bana1").show();
+    $(".panel-bana2").hide();
+    $(".panel-bana3").hide();
+    $(".pill-bana1").addClass("active")
+    $(".pill-bana2").removeClass("active")
+    $(".pill-bana3").removeClass("active")
+});
+$(".pill-bana2").click(function (e) {
+    e.preventDefault()
+    $(".panel-bana2").show();
+    $(".panel-bana1").hide();
+    $(".panel-bana3").hide();
+    $(".pill-bana2").addClass("active")
+    $(".pill-bana1").removeClass("active")
+    $(".pill-bana3").removeClass("active")
+});
+$(".pill-bana3").click(function (e) {
+    e.preventDefault()
+    $(".panel-bana3").show();
+    $(".panel-bana1").hide();
+    $(".panel-bana2").hide();
+    $(".pill-bana3").addClass("active")
+    $(".pill-bana1").removeClass("active")
+    $(".pill-bana2").removeClass("active")
+});
 
-////  KLUBBEN FLIKEN-EFFEKTER
-//$(".klubbenbtn").ready(function (e) {
+//  KLUBBEN FLIKEN-EFFEKTER
+$(".klubbenbtn").ready(function (e) {
 
-//    $(".panel-omklubben").show();
-//    $(".pill-omklubben").addClass("active")
-//});
+    $(".panel-omklubben").show();
+    $(".pill-omklubben").addClass("active")
+});
 
-//$(".pill-omklubben").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-omklubben").show();
-//    $(".pill-omklubben").addClass("active")
-//});
+$(".pill-omklubben").click(function (e) {
+    e.preventDefault()
+    $(".panel-omklubben").show();
+    $(".pill-omklubben").addClass("active")
+});
 
-////  KONTAKT FLIKEN-EFFEKTER
-//$(".kontaktbtn").ready(function (e) {
+//  KONTAKT FLIKEN-EFFEKTER
+$(".kontaktbtn").ready(function (e) {
 
-//    $(".panel-kontaktuppgifter").show();
-//    $(".pill-kontaktuppgifter").addClass("active")
-//});
+    $(".panel-kontaktuppgifter").show();
+    $(".pill-kontaktuppgifter").addClass("active")
+});
 
-//$(".pill-kontaktuppgifter").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-kontaktuppgifter").show();
-//    $(".pill-kontaktuppgifter").addClass("active")
-//});
+$(".pill-kontaktuppgifter").click(function (e) {
+    e.preventDefault()
+    $(".panel-kontaktuppgifter").show();
+    $(".pill-kontaktuppgifter").addClass("active")
+});
 
-////  TÄVLING FLIKEN-EFFEKTER
-//$(".tavlingbtn").ready(function (e) {
+//  TÄVLING FLIKEN-EFFEKTER
+$(".tavlingbtn").ready(function (e) {
 
-//    $(".panel-tavling").show();
-//    $(".pill-tavling").addClass("active")
-//});
+    $(".panel-tavling").show();
+    $(".pill-tavling").addClass("active")
+});
 
-//$(".pill-tavling").click(function (e) {
-//    e.preventDefault()
-//    $(".panel-tavling").show();
-//    $(".pill-tavling").addClass("active")
-//});
+$(".pill-tavling").click(function (e) {
+    e.preventDefault()
+    $(".panel-tavling").show();
+    $(".pill-tavling").addClass("active")
+});
 
-////  BOKNINGSKALENDER FLIKEN-EFFEKTER
-//$(".kalender").ready(function (e) {
-//    $(".panel-kalender").show();
-//});
+//  BOKNINGSKALENDER FLIKEN-EFFEKTER
+$(".kalender").ready(function (e) {
+    $(".panel-kalender").show();
+    //$("li .kalenderbtn").click
+    $(".dhx_cal_tab_first").trigger('click');
+});
 
 
 
@@ -196,7 +198,7 @@ scheduler.templates.event_body = function (s, e, ev) {
     return "";
 }
 
-///
+/////
 
 scheduler.renderEvent = function (container, ev) {
     var container_width = container.style.width; // e.g. "105px"
