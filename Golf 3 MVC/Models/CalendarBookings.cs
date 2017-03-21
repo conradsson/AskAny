@@ -16,18 +16,8 @@ namespace Golf_3_MVC.Models
         public IEnumerable<medbokare> aktuellaMedbokare { get; set; }
         public DHXScheduler sched { get; set; }
         public string säsongsknapp { get; set; }
-        public List<medlemmar> medlems { get; set; }
         public List<medbokare> medbokareLista { get; set; }
-        public string Namn1 { get; set; }
-        public string Namn2 { get; set; }
-        public string Namn3 { get; set; }
-        public string Namn4 { get; set; }
-        public string gID1 { get; set; }
-        public string gID2 { get; set; }
-        public string gID3 { get; set; }
-        public string gID4 { get; set; }
-
-
+        public virtual List<medlemmar> medlemsLista { get; set; }
     }
 
 
