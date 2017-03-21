@@ -137,6 +137,8 @@ $(".pill-tavling").click(function (e) {
 //  BOKNINGSKALENDER FLIKEN-EFFEKTER
 $(".kalender").ready(function (e) {
     $(".panel-kalender").show();
+    //$("li .kalenderbtn").click
+    $(".dhx_cal_tab_first").trigger('click');
 });
 
 
