@@ -14,8 +14,8 @@ namespace Golf_3_MVC.Models
     
     public partial class starttid
     {
-        public System.DateTime starttid1 { get; set; }
         public int Id { get; set; }
+        public System.DateTime starttid1 { get; set; }
         public string tavlande { get; set; }
         public int tavlingsId { get; set; }
     }
