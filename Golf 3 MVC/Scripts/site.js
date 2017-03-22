@@ -147,7 +147,6 @@ $(".kalender").ready(function (e) {
 
 function aktuelltavling() {
 
-    
     //var id = document.getElementById('.litavling').value;
     var id = 1;
 
@@ -164,18 +163,19 @@ function aktuelltavling() {
             }
         })
 
+    }
+}
+
         //.success(function (result) {
         //    alert('HEJ!'),
         //    $('.panel-tavling').html(result);
         //})
         //.error(function (xhr, status) {ok
         //    alert(status);
-        //})
-    }
-}
-
+//})
 
 // START | Tonnys grejs | 10 minuters interval
+
 var step = 10;
 var format = scheduler.date.date_to_str("%H:%i");
 
