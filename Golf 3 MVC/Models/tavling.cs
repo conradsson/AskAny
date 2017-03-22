@@ -21,5 +21,6 @@ namespace Golf_3_MVC.Models
         public Nullable<System.DateTime> sistaAnmalning { get; set; }
         public string tavlingsForm { get; set; }
         public Nullable<bool> publicerad { get; set; }
+        
     }
 }

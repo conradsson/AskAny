@@ -16,6 +16,35 @@ namespace Golf_3_MVC.Controllers
         private dsu3Entities db = new dsu3Entities();
         private static Random random;
 
+        public ActionResult MinaAnmalningar()
+        {
+            string golfID = User.Identity.GetUserName();
+            List<tavlare> allaTavlare = db.tavlares.ToList();
+            List<tavling> allatavlingar = db.tavlings.ToList();
+
+            List<tavling> Minatavlingar = new List<tavling>();
+            List<tavlare> MinaAnmalningar = new List<tavlare>();
+
+            //Minatavlingar = db.tavlings.Where(x => x.Id == )
+
+            //foreach (tavlare tavlare in allaTavlare)
+            //{
+            //    if (tavlare.TävlareGolf_ID == golfID)
+            //    {
+            //        MinaAnmalningar.Add(tavlare);
+            //    }
+            //}
+
+            //foreach (tavling tavling in allatavlingar)
+            //{
+            //    if ()
+            
+
+
+            
+
+            return RedirectToAction("Index");
+        }
 
         public ActionResult LaggTillTavlare(int id)
         {
