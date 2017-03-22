@@ -1,6 +1,7 @@
 ﻿@model Golf_3_MVC.Models.tavling
 
 
+
 <table class="table">
     <tr>
         <b>Tävlingsnamn: </b>
@@ -31,6 +32,7 @@
 
 <br />
 
+
 @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
 {
     <input class="center-block success" type="submit" value="Se anmälda" />
@@ -39,7 +41,6 @@
 
 @if (User.IsInRole("User"))
 {
-    <input class="center-block success" type="submit" value="Skicka anmälan"/>
+    <input class="center-block success" type="submit" value="Skicka anmälan" name="skickaAnmalan"   onclick="location.href='@Url.Action("LaggTillTavlare", "tavlings")?id=' + @Model.Id" />
+    @Html.Raw(TempData["msg"])
 }
-
- 

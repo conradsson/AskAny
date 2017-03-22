@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Golf_3_MVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Golf_3_MVC.Controllers
 {
@@ -15,6 +16,32 @@ namespace Golf_3_MVC.Controllers
         private dsu3Entities db = new dsu3Entities();
         private static Random random;
 
+
+        public ActionResult LaggTillTavlare(int id)
+        {
+            string golfID = User.Identity.GetUserName();
+            tavlare nyTavlare = new tavlare();
+            List<tavlare> allaTavlare = db.tavlares.ToList();
+
+            foreach (tavlare tavlare in allaTavlare)
+            {
+                if (tavlare.TävlareGolf_ID == golfID && tavlare.TävlingsId == id)
+                {
+                    TempData["msg"] = "<script>alert('Du är redan anmäld till denna tävling');</script>";
+                    goto Foo;
+                }
+            }
+
+            nyTavlare.TävlingsId = id;
+            nyTavlare.TävlareGolf_ID = golfID; 
+            db.tavlares.Add(nyTavlare);
+            db.SaveChanges();
+
+            TempData["msg"] = "<script>alert('Du är nu anmäld till tävlingen');</script>";
+
+            Foo:
+            return RedirectToAction("Index");
+        }
 
         public PartialViewResult Aktuelltavling(string id)
         {
@@ -55,7 +82,7 @@ namespace Golf_3_MVC.Controllers
         }
 
         // POST: tavlings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -87,7 +114,7 @@ namespace Golf_3_MVC.Controllers
         }
 
         // POST: tavlings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

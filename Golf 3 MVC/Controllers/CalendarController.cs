@@ -597,7 +597,7 @@ namespace Golf_3_MVC.Controllers
                 List<bokning> aktuellaBokningar = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
-
+                
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
                 allaBokningar = ds.boknings.ToList();
