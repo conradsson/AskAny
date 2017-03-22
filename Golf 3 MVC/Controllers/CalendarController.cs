@@ -17,7 +17,6 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 
-
 namespace Golf_3_MVC.Controllers
 {
     public class CalendarController : Controller
@@ -1065,7 +1064,6 @@ namespace Golf_3_MVC.Controllers
             }
 
             Boo:
-
             return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
         }
         /// <summary>
@@ -1093,21 +1091,6 @@ namespace Golf_3_MVC.Controllers
 
             }
         }
-        //public ActionResult MedbokareDelete(string golfid, int bokningsid)
-        //{
-
-        //    foreach (var i in ds.medbokares)
-        //    {
-        //        if (i.BokningsId == bokningsid && i.Medbokare1 == golfid)
-        //        {
-        //            ds.medbokares.Remove(i);
-        //        }
-        //    }
-        //    ds.SaveChanges();
-
-        //    return RedirectToAction("index");
-        //}
-
         /// <summary>
         /// Metod för att skicka email, tar inparametrar som epost, subject och själva bodyn.
         /// </summary>
