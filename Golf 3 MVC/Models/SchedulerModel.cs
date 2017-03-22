@@ -9,9 +9,5 @@ namespace Golf_3_MVC.Models
         public string text { get; set; }
         public DateTime start_date { get; set; }
         public DateTime end_date { get; set; }
-
-        public string golf_id { get; set; }
-
     }
- 
 }

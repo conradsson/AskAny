@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     //Layout = null;
     ViewBag.Title = "Bokningsschema";
     @model Golf_3_MVC.Models.CalendarBookings
@@ -19,10 +18,8 @@
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="medlemmar.js"></script>
     <style>
-        body
-        {
-            background-color:#eee;
-
+        body {
+            background-color: #eee;
         }
     </style>
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
@@ -111,28 +108,28 @@
 
             @if (User.IsInRole("Personal") || User.IsInRole("Admin"))  // ENDAST FÖR PERSONAL OCH ADMIN
             {
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Säsong <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Säsong <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
 
-                    @using (Html.BeginForm("Seasontoggle", "Calendar"))
-                    {
-                        <p>
-                            Öppna/Stäng: <input id="responsable" name="checkResp" value="true" type="checkbox" />
-                            <br />
-                            <input id="seasontogglebtn" type="submit" value="Bekräfta" />
-                        </p>
-                    }
-                </ul>
-            </li>
+                        @using (Html.BeginForm("Seasontoggle", "Calendar"))
+                        {
+                            <p>
+                                Öppna/Stäng: <input id="responsable" name="checkResp" value="true" type="checkbox" />
+                                <br />
+                                <input id="seasontogglebtn" type="submit" value="Bekräfta" />
+                            </p>
+                        }
+                    </ul>
+                </li>
                 /////////////////////////////////////////
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Blockera tider <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Blockera tider <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
 
                         <p>
                             För att blockera tider boka en golftid som vanligt och välj hur länge tiden ska vara blockerad.
@@ -140,29 +137,29 @@
                         </p>
 
 
-                </ul>
-            </li>
+                    </ul>
+                </li>
                 /////////////////////////////////////////
 
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Ta bort blocktider <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    @using (Html.BeginForm("DeleteBlocktime", "Calendar"))
-                    {
-                        <p>
-                            Välj bokning: @Html.DropDownList("BlocktimeBokningar", new SelectList(Model.allaBlocktimeBokningar, "id", "start_date"))
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Ta bort blocktider <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @using (Html.BeginForm("DeleteBlocktime", "Calendar"))
+                        {
+                            <p>
+                                Välj bokning: @Html.DropDownList("BlocktimeBokningar", new SelectList(Model.allaBlocktimeBokningar, "id", "start_date"))
 
-                            <input type="submit" name="tabort" value="Ta bort" />
+                                <input type="submit" name="tabort" value="Ta bort" />
 
-                            @Html.Raw(TempData["msg"])
-                        </p>
-                    }
+                                @Html.Raw(TempData["msg"])
+                            </p>
+                        }
 
-                </ul>
+                    </ul>
 
-            </li>
+                </li>
                 /////////////////////////////////////////
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
@@ -187,8 +184,8 @@
 
                 /////////////////////////////////////////
 
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                         Lägg till/ta bort gäst <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -206,51 +203,51 @@
                     </ul>
                 </li>
                 /////////////////////////////////////////
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Incheckning <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    @using (Html.BeginForm("Incheckning", "Calendar"))
-                    {
-                        <p>
-                            &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"), new
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Incheckning <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @using (Html.BeginForm("Incheckning", "Calendar"))
+                        {
+                            <p>
+                                &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"), new
                                                  {
 
                                                      onchange = @"Javascript:GetBokare();"
 
-                                                })
-
-                            
+                                                 })
 
 
-                            &emsp;
-                            <hr /><label id="0">&emsp;<br />&emsp;</label><br /> 
-                            <label style="display:none" id="10"><input type="checkbox" name="Check in?0" id="20" value="0" style="display:none"/> Checka in?</label>
-                            <br /><label style="display:none" id="30"><input type="checkbox" name="SkrivUt" id="40" value="0" style="display:none"/> Skriv ut scorekort?</label>
-                            <hr />
-                            <label id="1">&emsp;<br />&emsp;</label><br />
-                            <label style="display:none" id="11"><input type="checkbox" name="Check in?1" id="21" value="0" style="display:none"/> Checka in?</label>
-                            <br /><label style="display:none" id="31"><input type="checkbox" name="SkrivUt" id="41" value="0" style="display:none" /> Skriv ut scorekort?</label>
-                            <hr />
-                            <label id="2">&emsp;<br />&emsp;</label><br />
-                            <label style="display:none" id="12"><input type="checkbox" name="Check in?2" id="22" value="0" style="display:none"/> Checka in?</label>
-                            <br /><label style="display:none" id="32"><input type="checkbox" name="SkrivUt" id="42" value="0" style="display:none" /> Skriv ut scorekort?</label>
-                            <hr />
-                            <label id="3">&emsp;<br />&emsp;</label><br />
-                            <label style="display:none" id="13"><input type="checkbox" name="Check in?3" id="23" value="0" style="display:none" /> Checka in?</label>
-                            <br /><label style="display:none" id="33"><input type="checkbox" name="SkrivUt" id="43" value="0" style="display:none" /> Skriv ut scorekort?</label>
-                            <hr />
 
-                            &emsp;<input type="submit" name="checkainBtn" value="Checka in" onclick="Javascript:SeCheck();"/>
 
-                            @Html.Raw(TempData["msg"])
-                        </p>
-                    }
+                                &emsp;
+                                <hr /><label id="0">&emsp;<br />&emsp;</label><br />
+                                <label style="display:none" id="10"><input type="checkbox" name="Check in?0" id="20" value="0" style="display:none" /> Checka in?</label>
+                                <br /><label style="display:none" id="30"><input type="checkbox" name="SkrivUt" id="40" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                                <hr />
+                                <label id="1">&emsp;<br />&emsp;</label><br />
+                                <label style="display:none" id="11"><input type="checkbox" name="Check in?1" id="21" value="0" style="display:none" /> Checka in?</label>
+                                <br /><label style="display:none" id="31"><input type="checkbox" name="SkrivUt" id="41" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                                <hr />
+                                <label id="2">&emsp;<br />&emsp;</label><br />
+                                <label style="display:none" id="12"><input type="checkbox" name="Check in?2" id="22" value="0" style="display:none" /> Checka in?</label>
+                                <br /><label style="display:none" id="32"><input type="checkbox" name="SkrivUt" id="42" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                                <hr />
+                                <label id="3">&emsp;<br />&emsp;</label><br />
+                                <label style="display:none" id="13"><input type="checkbox" name="Check in?3" id="23" value="0" style="display:none" /> Checka in?</label>
+                                <br /><label style="display:none" id="33"><input type="checkbox" name="SkrivUt" id="43" value="0" style="display:none" /> Skriv ut scorekort?</label>
+                                <hr />
 
-                </ul>
+                                &emsp;<input type="submit" name="checkainBtn" value="Checka in" onclick="Javascript:SeCheck();" />
 
-            </li>
+                                @Html.Raw(TempData["msg"])
+                            </p>
+                        }
+
+                    </ul>
+
+                </li>
 
 
             }
@@ -269,7 +266,7 @@
                                 Välj bokning:<br /> @Html.DropDownList("Bokningar", new SelectList(Model.minaBokningar, "id", "start_date"))
                             </p>
                             <p>
-                                Skriv in golfID/gästnamn: @Html.TextBox("golfidstring")<br/><br />
+                                Skriv in golfID/gästnamn: @Html.TextBox("golfidstring")<br /><br />
                                 Är personen en gäst? @Html.CheckBox("checkbox", "false")<br /><br />
                                 <input type="submit" name="laggtill" value="Lägg till" />
                                 <input type="submit" name="tabort" value="Ta bort" />
@@ -296,7 +293,7 @@
         </div>
     </div>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
             function GetBokare()
             {
                 var e = document.getElementById("Bokningar");
@@ -330,7 +327,7 @@
                                 document.getElementById(räknare5).value = json1[i].Medbokare1; //checkbox skriv ut
                                 document.getElementById(räknare2).style = "display:normal";
                                 document.getElementById(räknare3).style = "display:normal";
-                                document.getElementById(räknare4).style = "display:normal";                       
+                                document.getElementById(räknare4).style = "display:normal";
                                 document.getElementById(räknare5).style = "display:normal";
 
                                 if (json1[i].incheckad == true)
@@ -343,47 +340,47 @@
                                 räknare3++;
                                 räknare4++;
                                 räknare5++;
-                            } 
+                            }
                         }
                     }
                 }
                 räknare =0;
             }
-         </script>
+    </script>
 
     <script type="text/javascript">
             function SeCheck()
             {
-                if (document.getElementById("20").checked) 
+                if (document.getElementById("20").checked)
                 {
                     document.getElementById("20").name = "Checked1";
                 }
-                if (document.getElementById("21").checked) 
+                if (document.getElementById("21").checked)
                 {
                     document.getElementById("21").name = "Checked2";
                 }
-                if (document.getElementById("22").checked) 
+                if (document.getElementById("22").checked)
                 {
                     document.getElementById("22").name = "Checked3";
                 }
-                if (document.getElementById("23").checked) 
+                if (document.getElementById("23").checked)
                 {
                     document.getElementById("23").name = "Checked4";
                 }
 
-                if (document.getElementById("40").checked) 
+                if (document.getElementById("40").checked)
                 {
                     document.getElementById("40").name = "C1";
                 }
-                if (document.getElementById("41").checked) 
+                if (document.getElementById("41").checked)
                 {
                     document.getElementById("41").name = "C2";
                 }
-                if (document.getElementById("42").checked) 
+                if (document.getElementById("42").checked)
                 {
                     document.getElementById("42").name = "C3";
                 }
-                if (document.getElementById("43").checked) 
+                if (document.getElementById("43").checked)
                 {
                     document.getElementById("43").name = "C4";
                 }
