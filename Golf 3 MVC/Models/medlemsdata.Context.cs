@@ -35,5 +35,6 @@ namespace Golf_3_MVC.Models
         public virtual DbSet<medbokare> medbokares { get; set; }
         public virtual DbSet<tavling> tavlings { get; set; }
         public virtual DbSet<tavlare> tavlares { get; set; }
+        public virtual DbSet<resultat> resultats { get; set; }
     }
 }

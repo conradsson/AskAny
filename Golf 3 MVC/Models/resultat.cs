@@ -12,10 +12,10 @@ namespace Golf_3_MVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class starttid
+    public partial class resultat
     {
-        public System.DateTime starttid1 { get; set; }
         public int Id { get; set; }
+        public int resultat1 { get; set; }
         public string tavlande { get; set; }
         public int tavlingsId { get; set; }
     }
