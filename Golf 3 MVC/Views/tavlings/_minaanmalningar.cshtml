@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Golf_3_MVC.Models.tavling>
 
-<p>hej</p>
-
 <table class="table">
     <tr>
         <th>
@@ -45,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.tavlingsForm)
             </td>
             <td>
-                @Html.ActionLink("Avanmäl", "Edit", new { id = item.Id })
+                @Html.ActionLink("Avanmäl", "Avanmalan", new { id = item.Id })
 
             </td>
         </tr>

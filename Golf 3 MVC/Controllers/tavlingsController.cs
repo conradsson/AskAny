@@ -45,7 +45,7 @@ namespace Golf_3_MVC.Controllers
         /// Aktuell användares tävlingar!
         /// </summary>
         /// <returns></returns>
-        public ActionResult MinaTavlingar()
+        public PartialViewResult MinaTavlingar()
         {
             string golfID = User.Identity.GetUserName();
             tavlare nyTavlare = new tavlare();
@@ -62,7 +62,33 @@ namespace Golf_3_MVC.Controllers
                 }
             }
             //return RedirectToAction("Index");
-            return View(minaTavlingar);
+            return PartialView("_minaanmalningar",minaTavlingar);
+        }
+
+        public ActionResult Avanmalan(int? id)
+        {
+            int? aktuelltavling = id;
+            string golfID = User.Identity.GetUserName();
+
+            if (aktuelltavling == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            tavlare anmalningen = db.tavlares.Where(x => x.TävlingsId == aktuelltavling && x.TävlareGolf_ID == golfID).FirstOrDefault();
+            if (anmalningen == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            db.tavlares.Remove(anmalningen);
+            db.SaveChanges();
+
+            TempData["msg"] = "<script>alert('Avanmälningen lyckades');</script>";
+
+            return RedirectToAction("Index");
         }
 
         public PartialViewResult Aktuelltavling(string id)
@@ -72,6 +98,33 @@ namespace Golf_3_MVC.Controllers
 
 
             return PartialView("_aktuelltavling", tavling);
+        }
+
+        public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem, int id)
+        {
+            string golfID = sokmedlem.Split(' ').Last();
+
+           
+            //List<tavlare> allaTavlare = db.tavlares.ToList();
+
+            //foreach (tavlare tavlare in allaTavlare)
+            //{
+            //    if (tavlare.TävlareGolf_ID == golfID && tavlare.TävlingsId == id)
+            //    {
+            //        TempData["msg"] = "<script>alert('Du är redan anmäld till denna tävling');</script>";
+            //        goto Foo;
+            //    }
+            //}
+
+            //nyTavlare.TävlingsId = id;
+            //nyTavlare.TävlareGolf_ID = golfID;
+            //db.tavlares.Add(nyTavlare);
+            //db.SaveChanges();
+
+
+            TempData["msg"] = "<script>alert('Medlemmen är nu tillagd i tävlingen');</script>";
+
+            return RedirectToAction("Index");
         }
 
         // GET: tavlings
