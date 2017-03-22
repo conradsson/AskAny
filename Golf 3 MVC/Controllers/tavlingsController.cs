@@ -50,14 +50,19 @@ namespace Golf_3_MVC.Controllers
             string golfID = User.Identity.GetUserName();
             tavlare nyTavlare = new tavlare();
             List<tavlare> allaTavlare = db.tavlares.ToList();
+            List<tavling> allaTavlingar = db.tavlings.ToList();
+            List<tavling> minaTavlingar = new List<tavling>();
 
             foreach (tavlare tavlare in allaTavlare)
             {
-
+                if (tavlare.TävlareGolf_ID == golfID)
+                {
+                    tavling nyTavling = allaTavlingar.Where(x => x.Id == tavlare.TävlingsId).FirstOrDefault();
+                    minaTavlingar.Add(nyTavling);
+                }
             }
-
-            return RedirectToAction("Index");
-
+            //return RedirectToAction("Index");
+            return View(minaTavlingar);
         }
 
         public PartialViewResult Aktuelltavling(string id)
