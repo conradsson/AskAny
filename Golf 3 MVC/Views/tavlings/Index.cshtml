@@ -20,7 +20,7 @@
                 <li class="dropdown-header">Alla tävlingar</li>
                 @foreach (var item in Model)
                 {
-                   <li class="litavling text-center" value="Assign" onclick="aktuelltavling(this)" 
+                   <li class="litavling text-center" value="Assign" onclick="aktuelltavling(this)"
                     data-assigned-id="@item.Id"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
                 }
 
@@ -28,7 +28,7 @@
                 {
                     <li class="divider"></li>
                     <li class="dropdown-header">För användare: @User.Identity.GetUserName();</li>
-                    <li class="minaanmalningar text-center"><a>Mina anmälningar</a></li>
+                    <li class="minaanmalningar text-center" onclick="minaAnmalningar"><a>Mina anmälningar</a></li>
                 }
 
             </ul>
@@ -65,8 +65,6 @@
     <div class="panel panel-default panel-minaanmalningar">
         <div class="panel-heading">Mina anmälningar</div>
         <div class="panel-body">
-
-            @Html.Partial("_minaanmalningar")
 
         </div>
     </div>

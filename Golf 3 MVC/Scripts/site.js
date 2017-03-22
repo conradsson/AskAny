@@ -149,6 +149,7 @@ $(".pill-admintavling").click(function (e) {
 
 $("li.minaanmalningar").click(function (e) {
     e.preventDefault()
+    minaAnmalningar();
     $(".panel-tavling").hide();
     $(".panel-admintavling").hide();
     $(".panel-minaanmalningar").show();
@@ -163,7 +164,20 @@ $(".kalender").ready(function (e) {
     $(".dhx_cal_tab_first").trigger('click');
 });
 
+// HÄMTAR MINA ANMÄLDA TÄVLINGAR
+function minaAnmalningar() {
+    $.ajax({
+            url: '/tavlings/MinaTavlingar',
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            dataType: 'html',
+            success: function (result) {
+                $('.panel-minaanmalningar').html(result);
+            }
+        })
+    }
 
+// HÄMTAR AKTUELL TÄVLING UTIFRÅN TRYCK I DROPDOWN MENYN
 function aktuelltavling(elem) {
 
     $(".panel-admintavling").hide();
