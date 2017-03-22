@@ -14,16 +14,18 @@
                 Anmälan <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
-                {
-                    <li><a>Se anmälningar</a></li>
-                }
-
 
                 @foreach (var item in Model)
                 {
-                   <li class="litavling"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn, "id")</a></li>
+                   <li class="litavling center" value="Assign" onclick="aktuelltavling(this)" 
+                    data-assigned-id="@item.Id"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
                 }
+
+                @if (User.IsInRole("User"))
+                {
+                    <li class="center"><a>Mina anmälningar</a></li>
+                }
+
             </ul>
         </li>
         <!--////////////////////////////////////////////////////-->
@@ -40,17 +42,19 @@
     </ul>
 
     <div class="panel panel-default panel-tavling">
-        @*<div class="panel-heading">Administrera tävlingar</div>
+        <div class="panel-heading">Aktuell tävling</div>
+        <div class="panel-body panel-aktuelltavling">
+
+        </div>
+    </div>
+
+    <div class="panel panel-default panel-admintavling">
+        <div class="panel-heading">Administrera tävling</div>
         <div class="panel-body">
 
-           @@Html.Partial("_admintavling")
+            @Html.Partial("_admintavling")
 
-            @foreach (var item in Model)
-            {
-                @Html.Partial("_aktuelltavling", item);
-            }
-
-        </div>*@
+        </div>
     </div>
 
 

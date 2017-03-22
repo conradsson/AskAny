@@ -3,14 +3,43 @@
 
 <table class="table">
     <tr>
+        <b>Tävlingsnamn: </b>
+        @Model.tavlingsNamn
         <td>
-            <b>Tävlingsnamn</b>
-            @*@Model.tavlingsNamn*@
-
-            AKTUELLTÄVLING
-
-
+            <b>Form:</b>
+            <br />
+            @Model.tavlingsForm
+        </td>
+        <td>
+            <b>Datum:</b>
+            <br />
+            @Model.tavlingsDatum
+        </td>
+        <td>
+            <b>Sista anmälningsdatum:</b>
+            <br />
+            @Model.sistaAnmalning
+        </td>
+        <td>
+            <b>Starttid:</b>
+            <br />
+            @Model.forstaStarttid
         </td>
     </tr>
 
 </table>
+
+<br />
+
+@if (User.IsInRole("Personal") || User.IsInRole("Admin"))
+{
+    <input class="center-block success" type="submit" value="Se anmälda" />
+}
+
+
+@if (User.IsInRole("User"))
+{
+    <input class="center-block success" type="submit" value="Skicka anmälan"/>
+}
+
+ 

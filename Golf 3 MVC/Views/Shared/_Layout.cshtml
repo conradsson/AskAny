@@ -37,7 +37,7 @@
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
                                 <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
                                 <li class="medlembtn">@Html.ActionLink("Hantera medlemar", "Medlem", "medlemmars/index")</li>
-                                <li class="banornabtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
+                                <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
                             </ul>
                         }
@@ -47,7 +47,7 @@
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
                                 <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
                                 <li class="medlembtn">@Html.ActionLink("Hantera medlemar", "Medlem", "medlemmars/index")</li>
-                                <li class="banornabtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
+                                <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
                             </ul>
                         }
@@ -55,16 +55,26 @@
                         {
                             <ul class="nav navbar-nav">
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
-                                <li class="kalenderbtn">@Html.ActionLink("Boka bantid", "Index", "Calendar")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
                                 @*<li class="medlembtn">@Html.ActionLink("Banstatus", "Medlem", "medlemmars/index")</li>*@
-                                <li class="banornabtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
+                                <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
                             </ul>
 
                         }  // ALLA INLOGGADE
+
+                        var golfid = User.Identity.GetUserName();
+                        //var rollen = await UserManager.GetRolesAsync(user.Id);
+                        //foreach (var n in rollen)
+                        //{
+                        //    string rollen;
+                        //    rollen = n;
+                        //}
+                        string inloggadsom = "(MEDLEMSTYPEN)";
+
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    @Html.ActionLink("Golf-ID: " + User.Identity.GetUserName() +" "+ "Inloggad som: " + "(MEDLEMSTYPEN)", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                    @Html.ActionLink("Golf-ID: " + golfid +" "+ "Inloggad som: " + inloggadsom, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                                 </li>
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a></li>
                             </ul>

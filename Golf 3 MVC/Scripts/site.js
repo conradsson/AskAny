@@ -123,6 +123,7 @@ $(".pill-kontaktuppgifter").click(function (e) {
 $(".tavlingbtn").ready(function (e) {
 
     $(".panel-tavling").show();
+    $(".litavling").trigger('click');
     
 });
 
@@ -132,9 +133,11 @@ $(".pill-tavling").click(function (e) {
     $(".pill-tavling").addClass("active")
 });
 
-$("li.litavling").click(function () {
+$(".pill-admintavling").click(function () {
     
-    aktuelltavling();
+    $(".panel-tavling").hide();
+    $(".panel-admintavling").show();
+    
 
 });
 
@@ -145,34 +148,29 @@ $(".kalender").ready(function (e) {
 });
 
 
-function aktuelltavling() {
+function aktuelltavling(elem) {
 
+    $(".panel-admintavling").hide();
+    $(".panel-tavling").show();
     
-    //var id = document.getElementById('.litavling').value;
-    var id = 1;
+    var id = $(elem).data('assigned-id');
+
 
     if (id != "") {
-        alert("Skickat Ajax")
+
         $.ajax({
             url: '/tavlings/Aktuelltavling',
             contentType: 'application/html; charset=utf-8',
             data: { id },
             type: 'GET',
             dataType: 'html',
-            success: function () { 
-                $('.panel-tavling').html(result);
+            success: function (result) {
+                $('.panel-aktuelltavling').html(result);
             }
         })
-
-        //.success(function (result) {
-        //    alert('HEJ!'),
-        //    $('.panel-tavling').html(result);
-        //})
-        //.error(function (xhr, status) {ok
-        //    alert(status);
-        //})
     }
 }
+
 
 
 // START | Tonnys grejs | 10 minuters interval
