@@ -118,24 +118,43 @@ $(".pill-kontaktuppgifter").click(function (e) {
 
 //  TÄVLING FLIKEN-EFFEKTER
 $(".tavlingbtn").ready(function (e) {
-
+    $(".panel-admintavling").hide();
+    $(".panel-minaanmalningar").hide();
     $(".panel-tavling").show();
     $(".litavling").trigger('click');
-    
+    $(".pill-anmalan").addClass("active")
+    $(".pill-admintavling").removeClass("active")
+    $(".minaanmalningar").removeClass("active")
 });
 
-$(".pill-tavling").click(function (e) {
+$("li.litavling").click(function (e) {
     e.preventDefault()
     $(".panel-tavling").show();
-    $(".pill-tavling").addClass("active")
+    $(".panel-minaanmalningar").hide();
+    $(".panel-admintavling").hide();
+    $(".pill-anmalan").addClass("active")
+    $(".pill-admintavling").removeClass("active")
+    $(".minaanmalningar").removeClass("active")
 });
 
-$(".pill-admintavling").click(function () {
-    
+$(".pill-admintavling").click(function (e) {
+    e.preventDefault()
     $(".panel-tavling").hide();
+    $(".panel-minaanmalningar").hide();
     $(".panel-admintavling").show();
-    
+    $(".pill-admintavling").addClass("active")
+    $(".pill-anmalan").removeClass("active")
+    $(".minaanmalningar").removeClass("active")
+});
 
+$("li.minaanmalningar").click(function (e) {
+    e.preventDefault()
+    $(".panel-tavling").hide();
+    $(".panel-admintavling").hide();
+    $(".panel-minaanmalningar").show();
+    $(".pill-anmalan").addClass("active")
+    $(".pill-admintavling").removeClass("active")
+    $(".minaanmalningar").addClass("active")
 });
 
 //  BOKNINGSKALENDER FLIKEN-EFFEKTER

@@ -17,5 +17,6 @@ namespace Golf_3_MVC.Models
         public int Id { get; set; }
         public string TävlareGolf_ID { get; set; }
         public int TävlingsId { get; set; }
+        public List<tavling> minaAnmalningar { get; set; }
     }
 }
