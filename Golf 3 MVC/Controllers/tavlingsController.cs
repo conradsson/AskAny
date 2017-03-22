@@ -53,10 +53,7 @@ namespace Golf_3_MVC.Controllers
 
             foreach (tavlare tavlare in allaTavlare)
             {
-                if (tavlare.TävlareGolf_ID == golfID && tavlare.TävlingsId == id)
-                {
 
-                }
             }
 
             return RedirectToAction("Index");
