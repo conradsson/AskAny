@@ -100,7 +100,7 @@ namespace Golf_3_MVC.Controllers
             return PartialView("_aktuelltavling", tavling);
         }
 
-        public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem)
+        public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem, int id)
         {
             string golfID = sokmedlem.Split(' ').Last();
 

@@ -8,30 +8,7 @@
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $("#sokmedlem").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "/Calendar/GetAutoCompleteData",
-                    type: "POST",
-                    dataType: "json",
-                    data: { term: request.term },
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.fornamn, value: item.efternamn, value: item.golf_id
-                            }
-                        }))
-                    },
-                    messages: {
-                        noResults: "", results: ""
-                    }
-                });
-            }
-        });
-    });
-</script>
+
 
 <table class="table">
     <tr>
@@ -69,10 +46,34 @@
 
     using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
     {
+        <script>
+            $(document).ready(function () {
+                $("#sokmedlem").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Calendar/GetAutoCompleteData",
+                            type: "POST",
+                            dataType: "json",
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.fornamn, value: item.efternamn, value: item.golf_id
+                                    }
+                                }))
+                            },
+                            messages: {
+                                noResults: "", results: ""
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
         <p class="pull-left col-lg-6">
             <br />
             Sök medlem: <br />
-            @Html.TextBox("sokmedlem") <input class="" name="laggtillmedlem" type="submit" value="Lägg till medlem" />
+            @Html.TextBox("sokmedlem") <input class="" @*id="@Model.Id"*@ type="submit" value="Lägg till medlem" />
         </p>
     }
 
