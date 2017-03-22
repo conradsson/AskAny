@@ -16,10 +16,10 @@ namespace Golf_3_MVC.Controllers
         private static Random random;
 
 
-        public PartialViewResult Aktuelltavling(int id)
+        public PartialViewResult Aktuelltavling(string id)
         {
 
-            tavling tavling = db.tavlings.Find(id);
+            tavling tavling = db.tavlings.Find(Convert.ToInt32(id));
 
 
             return PartialView("_aktuelltavling", tavling);

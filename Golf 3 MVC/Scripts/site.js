@@ -144,33 +144,33 @@ $(".kalender").ready(function (e) {
     $(".dhx_cal_tab_first").trigger('click');
 });
 
-//$(".dhx_btn_set .dhx_left_btn_set .dhx_save_btn_set").click(function () {
-//    alert('HEJ');
-//    location.reload();
-//});
 
 function aktuelltavling() {
 
-    debugger
-    var id = 1;
+    
     //var id = document.getElementById('.litavling').value;
+    var id = 1;
 
     if (id != "") {
+        alert("Skickat Ajax")
         $.ajax({
             url: '/tavlings/Aktuelltavling',
             contentType: 'application/html; charset=utf-8',
             data: { id },
             type: 'GET',
-            dataType: 'html'
+            dataType: 'html',
+            success: function () { 
+                $('.panel-tavling').html(result);
+            }
         })
 
-        .success(function (result) {
-            $('.panel-body').html(result);
-        })
-        .error(function (xhr, status) {
-            ok
-            alert(status);
-        })
+        //.success(function (result) {
+        //    alert('HEJ!'),
+        //    $('.panel-tavling').html(result);
+        //})
+        //.error(function (xhr, status) {ok
+        //    alert(status);
+        //})
     }
 }
 
