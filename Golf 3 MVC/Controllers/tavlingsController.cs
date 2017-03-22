@@ -33,7 +33,7 @@ namespace Golf_3_MVC.Controllers
             }
 
             nyTavlare.TävlingsId = id;
-            nyTavlare.TävlareGolf_ID = golfID;
+            nyTavlare.TävlareGolf_ID = golfID; 
             db.tavlares.Add(nyTavlare);
             db.SaveChanges();
 
