@@ -5,9 +5,6 @@
     $(".carousel").delay(450).fadeIn(1000)
 });
 
-
-
-
 //  START FLIKEN-EFFEKTER
 $(".startbtn").ready(function (e) {
     $(".panel-nyheter").show();
@@ -172,7 +169,6 @@ function aktuelltavling(elem) {
 }
 
 
-
 // START | Tonnys grejs | 10 minuters interval
 var step = 10;
 var format = scheduler.date.date_to_str("%H:%i");
@@ -188,8 +184,6 @@ scheduler.templates.hour_scale = function(date){
 }
 
 // SLUT | Tonnys grejs | 10 minuters interval
-
-
 /////
 
 var format = scheduler.date.date_to_str("%H:%i")

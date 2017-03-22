@@ -35,7 +35,6 @@ namespace Golf_3_MVC.Controllers
         /// <returns></returns>
         public ActionResult GetAutoCompleteData(string term)
         {
-
             var result = ds.medlemmars.Where(x => x.fornamn.Contains(term))
                 .Select(s => new GolfareAutoComplete { value = s.fornamn, fornamn = s.fornamn + " " + s.efternamn + " " + s.golf_id })
                 .Union(ds.medlemmars.Where(x => x.efternamn.Contains(term))

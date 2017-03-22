@@ -16,7 +16,6 @@ namespace Golf_3_MVC.Controllers
         private dsu3Entities db = new dsu3Entities();
         private static Random random;
 
-
         public ActionResult LaggTillTavlare(int id)
         {
             string golfID = User.Identity.GetUserName();
@@ -42,6 +41,27 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("Index");
         }
+        /// <summary>
+        /// Aktuell användares tävlingar!
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MinaTavlingar()
+        {
+            string golfID = User.Identity.GetUserName();
+            tavlare nyTavlare = new tavlare();
+            List<tavlare> allaTavlare = db.tavlares.ToList();
+
+            foreach (tavlare tavlare in allaTavlare)
+            {
+                if (tavlare.TävlareGolf_ID == golfID && tavlare.TävlingsId == id)
+                {
+
+                }
+            }
+
+            return RedirectToAction("Index");
+
+        }
 
         public PartialViewResult Aktuelltavling(string id)
         {
@@ -51,8 +71,6 @@ namespace Golf_3_MVC.Controllers
 
             return PartialView("_aktuelltavling", tavling);
         }
-
-
 
         // GET: tavlings
         public ActionResult Index()
@@ -171,7 +189,6 @@ namespace Golf_3_MVC.Controllers
 
 
             }
-
 
             return RedirectToAction("Index");
         }
