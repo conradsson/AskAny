@@ -48,8 +48,8 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DHTMLX, Version=3.3.6284.28526, Culture=neutral, PublicKeyToken=53f24791214eb8ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\DHTMLX.Scheduler.NET.3.3.24.1\lib\DHTMLX.dll</HintPath>
+    <Reference Include="DHTMLX, Version=3.3.6250.28766, Culture=neutral, PublicKeyToken=53f24791214eb8ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\DHTMLX.Scheduler.NET.3.3.24.0\lib\DHTMLX.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -424,7 +424,6 @@
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_recurring.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_serialize.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_timeline.js" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_tooltip.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_treetimeline.js" />
     <Content Include="Scripts\dhtmlxScheduler\ext\dhtmlxscheduler_units.js" />
@@ -566,6 +565,7 @@
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ro.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_ru.html" />
     <Content Include="Scripts\dhtmlxScheduler\locale\recurring\repeat_template_sk.html" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
