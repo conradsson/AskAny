@@ -90,6 +90,14 @@
           </Key>
           <Property Name="starttid" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="tavlare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TävlareGolf-ID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TävlingsId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tavling">
           <Key>
             <PropertyRef Name="Id" />
@@ -126,6 +134,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="season" EntityType="Self.season" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slope" EntityType="Self.slope" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="starttid" EntityType="Self.starttid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tavlare" EntityType="Self.tavlare" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tavling" EntityType="Self.tavling" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_medlemmar_kategori" Association="Self.FK_medlemmar_kategori">
             <End Role="medlemskategori" EntitySet="medlemskategori" />
@@ -165,6 +174,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="slopes" EntityType="dsu3Model.slope" />
           <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="tavlings" EntityType="dsu3Model.tavling" />
+          <EntitySet Name="tavlares" EntityType="dsu3Model.tavlare" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -261,6 +271,14 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="BokningsId" Type="Int32" Nullable="false" />
           <Property Name="gast" Type="Boolean" />
           <Property Name="incheckad" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tavlare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TävlareGolf_ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TävlingsId" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -370,6 +388,15 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
                 <ScalarProperty Name="forstaStarttid" ColumnName="forstaStarttid" />
                 <ScalarProperty Name="tavlingsDatum" ColumnName="tavlingsDatum" />
                 <ScalarProperty Name="tavlingsNamn" ColumnName="tavlingsNamn" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tavlares">
+            <EntityTypeMapping TypeName="dsu3Model.tavlare">
+              <MappingFragment StoreEntitySet="tavlare">
+                <ScalarProperty Name="TävlingsId" ColumnName="TävlingsId" />
+                <ScalarProperty Name="TävlareGolf_ID" ColumnName="TävlareGolf-ID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

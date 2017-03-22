@@ -278,6 +278,9 @@
     <Compile Include="Models\starttid.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tavlare.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tavling.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>

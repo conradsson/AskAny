@@ -12,14 +12,10 @@ namespace Golf_3_MVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tavling
+    public partial class tavlare
     {
         public int Id { get; set; }
-        public string tavlingsNamn { get; set; }
-        public Nullable<System.DateTime> tavlingsDatum { get; set; }
-        public Nullable<System.TimeSpan> forstaStarttid { get; set; }
-        public Nullable<System.DateTime> sistaAnmalning { get; set; }
-        public string tavlingsForm { get; set; }
-        public Nullable<bool> publicerad { get; set; }
+        public string TävlareGolf_ID { get; set; }
+        public int TävlingsId { get; set; }
     }
 }
