@@ -115,7 +115,7 @@
                         string HCP2 = "";
                         string HCP3 = "";
                         string HCP4 = "";
-                        decimal ESlag;
+                        decimal ESlag =0;
                         string starttid = "";
                         string datum = "";
                         int bokningsID = Model.bokningsID;
@@ -127,13 +127,8 @@
                         {
                             if (x.BokningsId == bokningsID)
                             {
-                                if (Char.IsLetter(x.Medbokare1[0]))
-                                {
-                                    golfid4 = x.Medbokare1;
 
-                                }
-
-                                else if (golfid2 == "" && x.Medbokare1 != golfid)
+                                if (golfid2 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid2 = x.Medbokare1;
                                 }
@@ -145,6 +140,26 @@
                                 else if (golfid4 == "" && x.Medbokare1 != golfid)
                                 {
                                     golfid4 = x.Medbokare1;
+                                }
+                                else if (Char.IsLetter(x.Medbokare1[0]))
+                                {
+                                    golfid = x.Medbokare1;
+
+                                }
+                                else if (Char.IsLetter(x.Medbokare1[0]) && golfid2 == "")
+                                {
+                                    golfid2 = x.Medbokare1;
+
+                                }
+                                else if (Char.IsLetter(x.Medbokare1[0]) && golfid3 == "")
+                                {
+                                    golfid3 = x.Medbokare1;
+
+                                }
+                                else if (Char.IsLetter(x.Medbokare1[0]) && golfid4 == "")
+                                {
+                                    golfid4 = x.Medbokare1;
+
                                 }
                             }
                         }
@@ -186,140 +201,159 @@
                                 spelare4 = i.fornamn + " " + i.efternamn;
                                 HCP4 = i.hcp.ToString();
                             }
-                            try
-                            {
-                               if (golfid4 != null && Char.IsLetter(golfid4[0]))
-                                {
-                                    spelare4 = golfid4;
-                                }
-                            }
-                            catch 
-                            {
-                            }
-
                         }
 
-
-
-                        decimal hcpRäkna = Convert.ToDecimal(HCP);
-                        if (kön =="Male")
+                        try
                         {
-                            slope = 128;
-                            CR = Convert.ToDecimal(71.4);
+                            if (golfid != null && Char.IsLetter(golfid[0]))
+                            {
+                                spelare1 = golfid;
+                            }
+                            if (golfid2 != null && Char.IsLetter(golfid2[0]))
+                            {
+                                spelare2 = golfid2;
+                            }
+                            if (golfid3 != null && Char.IsLetter(golfid3[0]))
+                            {
+                                spelare3 = golfid3;
+                            }
+                            if (golfid4 != null && Char.IsLetter(golfid4[0]))
+                            {
+                                spelare4 = golfid4;
+                            }
                         }
-                        if (kön == "Female")
+                        catch
                         {
-                            slope = 124;
-                            CR = 73;
                         }
 
-                        ESlag = (hcpRäkna * (slope / 113)) + (CR - 72); //Räknar ut erhållna slag
+
+
+                        if (!Char.IsLetter(golfid[0]))
+                        {
+
+                            decimal hcpRäkna = Convert.ToDecimal(HCP);
+                            if (kön == "Male")
+                            {
+                                slope = 128;
+                                CR = Convert.ToDecimal(71.4);
+                            }
+                            if (kön == "Female")
+                            {
+                                slope = 124;
+                                CR = 73;
+                            }
+
+                            ESlag = (hcpRäkna * (slope / 113)) + (CR - 72); //Räknar ut erhållna slag
+                        }
 
                         ESlag = Math.Round(ESlag);
                         decimal totESlag = ESlag;
                         int räknare = 1;
-                        int index1=0, index2 = 0, index3 = 0, index4 = 0, index5 = 0, index6 = 0, index7 = 0, index8 = 0, index9 = 0, index10 = 0, index11 = 0, index12 = 0, index13 = 0, index14 = 0, index15 = 0, index16 = 0, index17 = 0, index18 = 0;
+                        int index1 = 0, index2 = 0, index3 = 0, index4 = 0, index5 = 0, index6 = 0, index7 = 0, index8 = 0, index9 = 0, index10 = 0, index11 = 0, index12 = 0, index13 = 0, index14 = 0, index15 = 0, index16 = 0, index17 = 0, index18 = 0;
 
-                        int idexrätt =0;
-
-                        while (ESlag > 0)
+                        int idexrätt = 0;
+                        if (!Char.IsLetter(golfid[0]))
                         {
-                            if (räknare ==1)
+                            while (ESlag > 0)
                             {
-                                index1++;
-                                goto Start;
-                            }
-                            if (räknare == 2)
-                            {
-                                index2++;
-                                goto Start;
-                            }
-                            if (räknare == 3)
-                            {
-                                index3++;
-                                goto Start;
-                            }
-                            if (räknare == 4)
-                            {
-                                index4++;
-                                goto Start;
-                            }
-                            if (räknare == 5)
-                            {
-                                index5++;
-                                goto Start;
-                            }
-                            if (räknare == 6)
-                            {
-                                index6++;
-                                goto Start;
-                            }
-                            if (räknare == 7)
-                            {
-                                index7++;
-                                goto Start;
-                            }
-                            if (räknare == 8)
-                            {
-                                index8++;
-                                goto Start;
-                            }
-                            if (räknare == 9)
-                            {
-                                index9++;
-                                goto Start;
-                            }
-                            if (räknare == 10)
-                            {
-                                index10++;
-                                goto Start;
-                            }
-                            if (räknare == 11)
-                            {
-                                index11++;
-                                goto Start;
-                            }
-                            if (räknare == 12)
-                            {
-                                index12++;
-                                goto Start;
-                            }
-                            if (räknare == 13)
-                            {
-                                index13++;
-                                goto Start;
-                            }
-                            if (räknare == 14)
-                            {
-                                index14++;
-                                goto Start;
-                            }
-                            if (räknare == 15)
-                            {
-                                index15++;
-                                goto Start;
-                            }
-                            if (räknare == 16)
-                            {
-                                index16++;
-                                goto Start;
-                            }
-                            if (räknare == 17)
-                            {
-                                index17++;
-                                goto Start;
-                            }
-                            if (räknare == 18)
-                            {
-                                index18++;
-                                räknare = 0;
-                                goto Start;
-                            }
+                                if (räknare == 1)
+                                {
+                                    index1++;
+                                    goto Start;
+                                }
+                                if (räknare == 2)
+                                {
+                                    index2++;
+                                    goto Start;
+                                }
+                                if (räknare == 3)
+                                {
+                                    index3++;
+                                    goto Start;
+                                }
+                                if (räknare == 4)
+                                {
+                                    index4++;
+                                    goto Start;
+                                }
+                                if (räknare == 5)
+                                {
+                                    index5++;
+                                    goto Start;
+                                }
+                                if (räknare == 6)
+                                {
+                                    index6++;
+                                    goto Start;
+                                }
+                                if (räknare == 7)
+                                {
+                                    index7++;
+                                    goto Start;
+                                }
+                                if (räknare == 8)
+                                {
+                                    index8++;
+                                    goto Start;
+                                }
+                                if (räknare == 9)
+                                {
+                                    index9++;
+                                    goto Start;
+                                }
+                                if (räknare == 10)
+                                {
+                                    index10++;
+                                    goto Start;
+                                }
+                                if (räknare == 11)
+                                {
+                                    index11++;
+                                    goto Start;
+                                }
+                                if (räknare == 12)
+                                {
+                                    index12++;
+                                    goto Start;
+                                }
+                                if (räknare == 13)
+                                {
+                                    index13++;
+                                    goto Start;
+                                }
+                                if (räknare == 14)
+                                {
+                                    index14++;
+                                    goto Start;
+                                }
+                                if (räknare == 15)
+                                {
+                                    index15++;
+                                    goto Start;
+                                }
+                                if (räknare == 16)
+                                {
+                                    index16++;
+                                    goto Start;
+                                }
+                                if (räknare == 17)
+                                {
+                                    index17++;
+                                    goto Start;
+                                }
+                                if (räknare == 18)
+                                {
+                                    index18++;
+                                    räknare = 0;
+                                    goto Start;
+                                }
                             Start:
-                            ESlag--;
-                            räknare++;
+                                ESlag--;
+                                räknare++;
 
+                            }
                         }
+
 
                         <tr>
                             <th class="tg-dx8v" colspan="7" rowspan="2">Spelare:<br> @spelare1</th>
