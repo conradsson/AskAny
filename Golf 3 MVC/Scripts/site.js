@@ -131,12 +131,14 @@ $(".pill-kontaktuppgifter").click(function (e) {
 
 //  TÄVLING FLIKEN-EFFEKTER
 $(".tavlingbtn").ready(function (e) {
+
+    $('.pill-resultat').hide();// RESULTAT INTE KLART- DÄRAV DENNA RAD
+
+    $(".minaanmalningar").trigger('click');
     $(".panel-admintavling").hide();
-    $(".panel-minaanmalningar").hide();
     $(".panel-visaresultat").hide();
     $(".panel-registreraresultat").hide();
     $(".panel-tavling").show();
-    $(".litavling").trigger('click');
     $(".pill-anmalan").addClass("active")
     $(".pill-admintavling").removeClass("active")
     $(".minaanmalningar").removeClass("active")
