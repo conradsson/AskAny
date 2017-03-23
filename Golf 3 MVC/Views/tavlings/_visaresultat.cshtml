@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Golf_3_MVC.Models.resultat>
+
+<p>VISA ALLA RESULTAT</p>
+
+       
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Tävlingsnamn")
+        </th>
+        <th>
+            @Html.DisplayName("Tävlare")
+        </th>
+        <th>
+            @Html.DisplayName("Resultat")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tavlingsnamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tavlande)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resultat1)
+            </td>
+        </tr>
+    }
+
+</table>
+
+

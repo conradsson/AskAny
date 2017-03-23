@@ -133,21 +133,27 @@ $(".pill-kontaktuppgifter").click(function (e) {
 $(".tavlingbtn").ready(function (e) {
     $(".panel-admintavling").hide();
     $(".panel-minaanmalningar").hide();
+    $(".panel-visaresultat").hide();
+    $(".panel-registreraresultat").hide();
     $(".panel-tavling").show();
     $(".litavling").trigger('click');
     $(".pill-anmalan").addClass("active")
     $(".pill-admintavling").removeClass("active")
     $(".minaanmalningar").removeClass("active")
+    $(".pill-resultat").removeClass("active")
 });
 
 $("li.litavling").click(function (e) {
     e.preventDefault()
     $(".panel-tavling").show();
     $(".panel-minaanmalningar").hide();
+    $(".panel-visaresultat").hide();
+    $(".panel-registreraresultat").hide();
     $(".panel-admintavling").hide();
     $(".pill-anmalan").addClass("active")
     $(".pill-admintavling").removeClass("active")
     $(".minaanmalningar").removeClass("active")
+    $(".pill-resultat").removeClass("active")
 });
 
 $(".pill-admintavling").click(function (e) {
@@ -158,7 +164,46 @@ $(".pill-admintavling").click(function (e) {
     $(".pill-admintavling").addClass("active")
     $(".pill-anmalan").removeClass("active")
     $(".minaanmalningar").removeClass("active")
+    $(".pill-resultat").removeClass("active")
 });
+
+$(".pill-resultat").click(function (e) {
+    e.preventDefault()
+    $(".pill-resultat").addClass("active")
+    $(".pill-anmalan").removeClass("active")
+    $(".minaanmalningar").removeClass("active")
+    $(".pill-admintavling").removeClass("active")
+});
+
+$("li.registreraresultat").click(function (e) {
+    e.preventDefault()
+    $(".panel-tavling").hide();
+    $(".panel-minaanmalningar").hide();
+    $(".panel-visaresultat").hide();
+    $(".panel-registreraresultat").show();
+    $(".panel-admintavling").hide();
+    $(".pill-resultat").addClass("active")
+    $(".registreraresultat").addClass("active")
+    $(".visaresultat").removeClass("active")
+    $(".pill-admintavling").removeClass("active")
+    $(".minaanmalningar").removeClass("active")
+    $(".pill-anmalan").removeClass("active")
+});
+
+$("li.visaresultat").click(function (e) {
+    e.preventDefault()
+    $(".panel-tavling").hide();
+    $(".panel-minaanmalningar").hide();
+    $(".panel-registreraresultat").hide();
+    $(".panel-visaresultat").show();
+    $(".panel-admintavling").hide();
+    $(".pill-resultat").addClass("active")
+    $(".visaresultat").addClass("active")
+    $(".registreraresultat").removeClass("active")
+    $(".pill-admintavling").removeClass("active")
+    $(".minaanmalningar").removeClass("active")
+    $(".pill-anmalan").removeClass("active")
+    });
 
 $("li.minaanmalningar").click(function (e) {
     e.preventDefault()
@@ -169,6 +214,7 @@ $("li.minaanmalningar").click(function (e) {
     $(".pill-anmalan").addClass("active")
     $(".pill-admintavling").removeClass("active")
     $(".minaanmalningar").addClass("active")
+    $(".pill-resultat").removeClass("active")
 });
 
 //  BOKNINGSKALENDER FLIKEN-EFFEKTER
@@ -217,7 +263,6 @@ function aktuelltavling(elem) {
 // HÄMTAR ALLA TÄVLANDE I AKTUELL TÄVLING
 function allaTävlandeIAktuellTävling(elem) {
 
-    debugger
     var id = $(elem).data('assigned-id');
 
 
@@ -236,8 +281,39 @@ function allaTävlandeIAktuellTävling(elem) {
     }
 }
 
+// HÄMTAR PARTIALVIEW-SIDA FÖR "REGISTRERA RESULTAT"
+function registreraResultat() {
+    alert('REGISTRERA RESULTAT');
+    $.ajax({
+        url: '/tavlings/RegistreraResultatPartialView',
+        contentType: 'application/html; charset=utf-8',
+        type: 'GET',
+        dataType: 'html',
+        success: function (result) {
+            $('.panel-registreraresultatInner').html(result);
+        }
+    })
+}
 
-// START | Tonnys grejs | 10 minuters interval
+// HÄMTAR PARTIALVIEW-SIDA FÖR "VISA RESULTAT"
+function visaResultat() {
+    alert('VISA RESULTAT');
+    $.ajax({
+    url: '/tavlings/VisaResultatPartialView',
+    contentType : 'application/html; charset=utf-8',
+        type: 'GET',
+        dataType: 'html',
+            success: function (result) {
+                $('.panel-visaresultatInner').html(result);
+        }
+    })
+}
+
+function visaHorResultatet() {
+    alert('test din idiot!')
+}
+
+// START SCHEMA SCRIPT
 var step = 10;
 var format = scheduler.date.date_to_str("%H:%i");
 
@@ -251,7 +327,6 @@ scheduler.templates.hour_scale = function(date){
     return html;
 }
 
-// SLUT | Tonnys grejs | 10 minuters interval
 /////
 
 var format = scheduler.date.date_to_str("%H:%i")

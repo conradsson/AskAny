@@ -15,8 +15,8 @@
         <EntityTypeShape EntityType="dsu3Model.medbokare" Width="1.5" PointX="7.625" PointY="2" />
         <EntityTypeShape EntityType="dsu3Model.tavling" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="dsu3Model.tavlare" Width="1.5" PointX="2.875" PointY="6.875" />
-        <EntityTypeShape EntityType="dsu3Model.resultat" Width="1.5" PointX="5.375" PointY="8.75" />
         <EntityTypeShape EntityType="dsu3Model.starttid" Width="1.5" PointX="8.375" PointY="7.75" />
+        <EntityTypeShape EntityType="dsu3Model.resultat" Width="1.5" PointX="5.125" PointY="8.125" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

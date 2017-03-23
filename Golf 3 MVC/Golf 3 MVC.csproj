@@ -240,10 +240,10 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Models\medlemsdata.Designer.cs">
+    <Compile Include="Models\Main.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>medlemsdata.edmx</DependentUpon>
+      <DependentUpon>Main.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\medlemskategori.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
@@ -327,11 +327,11 @@
     </Content>
     <Content Include="Models\medlemsdata.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>medlemsdata.edmx</DependentUpon>
+      <DependentUpon>Main.edmx</DependentUpon>
       <LastGenOutput>medlemsdata.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\medlemsdata.tt">
-      <DependentUpon>medlemsdata.edmx</DependentUpon>
+      <DependentUpon>Main.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>medlemsdata.cs</LastGenOutput>
     </Content>
@@ -347,12 +347,12 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\medlemsdata.edmx">
+    <EntityDeploy Include="Models\Main.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>medlemsdata.Designer.cs</LastGenOutput>
+      <LastGenOutput>Main.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\medlemsdata.edmx.diagram">
-      <DependentUpon>medlemsdata.edmx</DependentUpon>
+    <Content Include="Models\Main.edmx.diagram">
+      <DependentUpon>Main.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -669,6 +669,8 @@
     <Content Include="Views\tavlings\_aktuelltavling.cshtml" />
     <Content Include="Views\tavlings\_minaanmalningar.cshtml" />
     <Content Include="Views\tavlings\_allaanmalda.cshtml" />
+    <Content Include="Views\tavlings\_registreraresultat.cshtml" />
+    <Content Include="Views\tavlings\_visaresultat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

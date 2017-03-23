@@ -18,5 +18,6 @@ namespace Golf_3_MVC.Models
         public int resultat1 { get; set; }
         public string tavlande { get; set; }
         public int tavlingsId { get; set; }
+        public string tavlingsnamn { get; set; }
     }
 }
