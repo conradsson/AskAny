@@ -212,7 +212,7 @@
                         @using (Html.BeginForm("Incheckning", "Calendar"))
                         {
                             <p>
-                                &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar, "id", "start_date"), new
+                                &emsp;Välj bokning: &emsp;@Html.DropDownList("Bokningar", new SelectList(Model.allaBokningar.Where(x => x.start_date == DateTime.Today ), "id", "start_date"), new
                                                  {
 
                                                      onchange = @"Javascript:GetBokare();"
