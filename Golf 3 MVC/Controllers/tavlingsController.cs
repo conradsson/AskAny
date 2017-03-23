@@ -15,6 +15,7 @@ namespace Golf_3_MVC.Controllers
     {
         private dsu3Entities db = new dsu3Entities();
         private static Random random;
+        private string aktuellTavling;
 
         public ActionResult LaggTillTavlare(int id)
         {
@@ -93,34 +94,23 @@ namespace Golf_3_MVC.Controllers
 
         public PartialViewResult Aktuelltavling(string id)
         {
-
             tavling tavling = db.tavlings.Find(Convert.ToInt32(id));
-
+            this.aktuellTavling = id;
 
             return PartialView("_aktuelltavling", tavling);
         }
 
-        public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem, int id)
+        public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem)
         {
             string golfID = sokmedlem.Split(' ').Last();
+            tavlare nyTavalre = new tavlare();
 
-           
-            //List<tavlare> allaTavlare = db.tavlares.ToList();
 
-            //foreach (tavlare tavlare in allaTavlare)
-            //{
-            //    if (tavlare.TävlareGolf_ID == golfID && tavlare.TävlingsId == id)
-            //    {
-            //        TempData["msg"] = "<script>alert('Du är redan anmäld till denna tävling');</script>";
-            //        goto Foo;
-            //    }
-            //}
-
-            //nyTavlare.TävlingsId = id;
-            //nyTavlare.TävlareGolf_ID = golfID;
-            //db.tavlares.Add(nyTavlare);
-            //db.SaveChanges();
-
+            nyTavalre.TävlareGolf_ID = golfID;
+            nyTavalre.TävlingsId = Convert.ToInt32(this.aktuellTavling);
+            db.tavlares.Add(nyTavalre);
+            db.SaveChanges();
+            
 
             TempData["msg"] = "<script>alert('Medlemmen är nu tillagd i tävlingen');</script>";
 
