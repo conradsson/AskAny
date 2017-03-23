@@ -237,7 +237,7 @@
                                 <br /><label style="display:none" id="33"><input type="checkbox" name="SkrivUt" id="43" value="0" style="display:none" /> Skriv ut scorekort?</label>
                                 <hr />
 
-                                &emsp;<input type="submit" name="checkainBtn" value="Checka in" onclick="Javascript:SeCheck();" />
+                                &emsp;<input id="knappen" type="submit" name="checkainBtn" value="Checka in" onclick="SeCheck()"/>
 
                                 @Html.Raw(TempData["msg"])
                             </p>
@@ -366,24 +366,27 @@
                 {
                     document.getElementById("23").name = "Checked4";
                 }
-
                 if (document.getElementById("40").checked)
                 {
                     document.getElementById("40").name = "C1";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("40").value)
                 }
                 if (document.getElementById("41").checked)
                 {
                     document.getElementById("41").name = "C2";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("41").value)
                 }
                 if (document.getElementById("42").checked)
                 {
                     document.getElementById("42").name = "C3";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("42").value)
                 }
                 if (document.getElementById("43").checked)
                 {
-                    document.getElementById("43").name = "C4";
+                    document.getElementById("43").name = "C4";  
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("43").value)
                 }
             }
-    </script>
+    </script>    
 </body>
 </html>
