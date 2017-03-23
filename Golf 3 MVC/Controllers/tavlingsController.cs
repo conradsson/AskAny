@@ -100,6 +100,20 @@ namespace Golf_3_MVC.Controllers
             return PartialView("_aktuelltavling", tavling);
         }
 
+        public PartialViewResult RegistreraResultatPartialView()
+        {
+           
+            return PartialView("_registreraresultat");
+        }
+
+        public PartialViewResult VisaResultatPartialView()
+        {
+            List<resultat> allaresultat = db.resultats.ToList();
+ 
+
+            return PartialView("_visaresultat", allaresultat);
+        }
+
         public PartialViewResult SeAllaAnmälda(string id)
         {
             List<medlemmar> samtligaMedlemmar = db.medlemmars.ToList();

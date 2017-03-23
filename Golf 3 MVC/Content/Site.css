@@ -241,6 +241,9 @@ footer .row{
     width: 100%;
 }
 
+.dropdown-menu > li{
+    cursor: pointer;
+}
 
 /*    FOOTER     */
 

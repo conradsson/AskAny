@@ -61,6 +61,7 @@
           <Property Name="resultat" Type="int" Nullable="false" />
           <Property Name="tavlande" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="tavlingsId" Type="int" Nullable="false" />
+          <Property Name="tavlingsnamn" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="scorekort">
           <Key>
@@ -116,9 +117,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tavlingsNamn" Type="nvarchar(max)" />
-          <Property Name="tavlingsDatum" Type="date" />
-          <Property Name="forstaStarttid" Type="time" Precision="7" />
-          <Property Name="sistaAnmalning" Type="date" />
+          <Property Name="tavlingsDatum" Type="date" Nullable="false" />
+          <Property Name="forstaStarttid" Type="time" Precision="7" Nullable="false" />
+          <Property Name="sistaAnmalning" Type="date" Nullable="false" />
           <Property Name="tavlingsForm" Type="nvarchar" MaxLength="50" />
           <Property Name="publicerad" Type="bit" />
         </EntityType>
@@ -181,8 +182,8 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="tavlings" EntityType="dsu3Model.tavling" />
           <EntitySet Name="tavlares" EntityType="dsu3Model.tavlare" />
-          <EntitySet Name="resultats" EntityType="dsu3Model.resultat" />
           <EntitySet Name="starttids" EntityType="dsu3Model.starttid" />
+          <EntitySet Name="resultats" EntityType="dsu3Model.resultat" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -264,9 +265,9 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tavlingsNamn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tavlingsDatum" Type="DateTime" Precision="0" />
-          <Property Name="forstaStarttid" Type="Time" Precision="7" />
-          <Property Name="sistaAnmalning" Type="DateTime" Precision="0" />
+          <Property Name="tavlingsDatum" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="forstaStarttid" Type="Time" Precision="7" Nullable="false" />
+          <Property Name="sistaAnmalning" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="tavlingsForm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="publicerad" Type="Boolean" />
         </EntityType>
@@ -288,15 +289,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="TävlareGolf_ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TävlingsId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="resultat">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="resultat1" Type="Int32" Nullable="false" />
-          <Property Name="tavlande" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="tavlingsId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="starttid">
           <Key>
             <PropertyRef Name="Id" />
@@ -305,6 +297,16 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="starttid1" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tavlande" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="tavlingsId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="resultat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resultat1" Type="Int32" Nullable="false" />
+          <Property Name="tavlande" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tavlingsId" Type="Int32" Nullable="false" />
+          <Property Name="tavlingsnamn" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -420,22 +422,23 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="resultats">
-            <EntityTypeMapping TypeName="dsu3Model.resultat">
-              <MappingFragment StoreEntitySet="resultat">
-                <ScalarProperty Name="tavlingsId" ColumnName="tavlingsId" />
-                <ScalarProperty Name="tavlande" ColumnName="tavlande" />
-                <ScalarProperty Name="resultat1" ColumnName="resultat" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="starttids">
             <EntityTypeMapping TypeName="dsu3Model.starttid">
               <MappingFragment StoreEntitySet="starttid">
                 <ScalarProperty Name="tavlingsId" ColumnName="tavlingsId" />
                 <ScalarProperty Name="tavlande" ColumnName="tavlande" />
                 <ScalarProperty Name="starttid1" ColumnName="starttid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resultats">
+            <EntityTypeMapping TypeName="dsu3Model.resultat">
+              <MappingFragment StoreEntitySet="resultat">
+                <ScalarProperty Name="tavlingsnamn" ColumnName="tavlingsnamn" />
+                <ScalarProperty Name="tavlingsId" ColumnName="tavlingsId" />
+                <ScalarProperty Name="tavlande" ColumnName="tavlande" />
+                <ScalarProperty Name="resultat1" ColumnName="resultat" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
