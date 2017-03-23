@@ -35,17 +35,16 @@
                         {
                             <ul class="nav navbar-nav">
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
-                                <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Bokning", "Index", "Calendar")</li>
                                 <li class="medlembtn">@Html.ActionLink("Hantera medlemmar", "Medlem", "medlemmars/index")</li>
                                 <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
-                                @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
                             </ul>
                         }
                         else if (User.IsInRole("Admin"))  // ADMIN
                         {
                             <ul class="nav navbar-nav">
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
-                                <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Bokning", "Index", "Calendar")</li>
                                 <li class="medlembtn">@Html.ActionLink("Hantera medlemmar", "Medlem", "medlemmars/index")</li>
                                 <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 <li class="kontaktbtn">@Html.ActionLink("Banan", "Index", "scorekorts")</li>
@@ -55,7 +54,7 @@
                         {
                             <ul class="nav navbar-nav">
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
-                                <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
+                                <li class="kalenderbtn">@Html.ActionLink("Bokning", "Index", "Calendar")</li>
                                 @*<li class="medlembtn">@Html.ActionLink("Banstatus", "Medlem", "medlemmars/index")</li>*@
                                 <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 <li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>
@@ -64,12 +63,7 @@
                         }  // ALLA INLOGGADE
 
                         var golfid = User.Identity.GetUserName();
-                        //var rollen = await UserManager.GetRolesAsync(user.Id);
-                        //foreach (var n in rollen)
-                        //{
-                        //    string rollen;
-                        //    rollen = n;
-                        //}
+                        
                         string inloggadsom = "";
                         if (User.IsInRole("Admin"))
                         {
@@ -133,12 +127,7 @@
                         </div>
 
                         <div class="col-xs-6 col-md-4">
-                            @*<ul class="social-network social-circle">
-                                <li><a href="mailto:index@halslagetgk.se" class="icoMail" title="E-mail"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            </ul>*@
+                            
                         </div>
                         <div class="col-xs-6 col-md-4">
                             @*<h4> Registrera nyhetsbrev </h4>
