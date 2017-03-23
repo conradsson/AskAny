@@ -100,13 +100,25 @@ namespace Golf_3_MVC.Controllers
             return PartialView("_aktuelltavling", tavling);
         }
 
-        public PartialViewResult SeAllaAnmälda(string tavlingsid)
+        public PartialViewResult SeAllaAnmälda(string id)
         {
+            List<medlemmar> samtligaMedlemmar = db.medlemmars.ToList();
+            List<tavlare> samtligaTavlare = db.tavlares.ToList();
+            List<tavlare> Tavlare = samtligaTavlare.Where(x => x.TävlingsId.ToString() == id).ToList();
+            List<medlemmar> anmaldaTavlare = new List<medlemmar>();
 
-            
+            foreach (tavlare tav in Tavlare)
+            {
+                foreach (medlemmar med in samtligaMedlemmar)
+                {
+                    if (tav.TävlareGolf_ID == med.golf_id)
+                    {
+                        anmaldaTavlare.Add(med);
+                    }
+                }
+            }
 
-
-            return PartialView("_minaanmalningar", SeAllaAnmälda);
+            return PartialView("_allaanmalda", anmaldaTavlare);
         }
 
 
