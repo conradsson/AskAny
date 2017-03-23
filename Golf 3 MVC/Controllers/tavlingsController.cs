@@ -62,7 +62,7 @@ namespace Golf_3_MVC.Controllers
                 }
             }
             //return RedirectToAction("Index");
-            return View(minaTavlingar);
+            return PartialView(minaTavlingar);
         }
 
         public PartialViewResult Aktuelltavling(string id)
