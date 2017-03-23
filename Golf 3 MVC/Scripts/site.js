@@ -214,6 +214,27 @@ function aktuelltavling(elem) {
     }
 }
 
+// HÄMTAR ALLA TÄVLANDE I AKTUELL TÄVLING
+function allaTävlandeIAktuellTävling(elem) {
+
+    var id = $(elem).data('assigned-id');
+
+
+    if (id != "") {
+
+        $.ajax({
+            url: '/tavlings/SeAllaAnmälda',
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            data: { id },
+            dataType: 'html',
+            success: function (result) {
+                $('.allaanmalda').html(result);
+            }
+        })
+    }
+}
+
 
 // START | Tonnys grejs | 10 minuters interval
 var step = 10;

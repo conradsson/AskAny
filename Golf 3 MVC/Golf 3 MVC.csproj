@@ -668,6 +668,7 @@
     <Content Include="Views\tavlings\_admintavling.cshtml" />
     <Content Include="Views\tavlings\_aktuelltavling.cshtml" />
     <Content Include="Views\tavlings\_minaanmalningar.cshtml" />
+    <Content Include="Views\tavlings\_allaanmalda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

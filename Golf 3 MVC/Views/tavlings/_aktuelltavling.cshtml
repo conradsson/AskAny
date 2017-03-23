@@ -43,6 +43,10 @@
 
 @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
 {
+    <div class="allaanmalda" style="background-color:aqua; margin: 0 auto; color: yellow;">
+
+    </div>
+
 
     using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
     {
@@ -77,8 +81,10 @@
     {
         <p class="pull-right col-lg-6">
             <br />
+
             <br />
-            <input class="center-block success" type="submit" value="Se anmälda" />
+            <input class="center-block success" type="submit" onclick="allaTävlandeIAktuellTävling(this)"
+                    data-assigned-id="@Model.Id" value="Se anmälda" />
         </p>
     }
 

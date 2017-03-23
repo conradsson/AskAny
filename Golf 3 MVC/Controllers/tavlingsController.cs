@@ -100,6 +100,16 @@ namespace Golf_3_MVC.Controllers
             return PartialView("_aktuelltavling", tavling);
         }
 
+        public PartialViewResult SeAllaAnmälda(string tavlingsid)
+        {
+
+            
+
+
+            return PartialView("_minaanmalningar", SeAllaAnmälda);
+        }
+
+
 
         public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem)
         {
@@ -127,6 +137,7 @@ namespace Golf_3_MVC.Controllers
             Foo:
             return RedirectToAction("Index");
         }
+
 
         // GET: tavlings
         public ActionResult Index()
