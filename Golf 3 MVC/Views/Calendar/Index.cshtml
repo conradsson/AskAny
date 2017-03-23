@@ -237,7 +237,7 @@
                                 <br /><label style="display:none" id="33"><input type="checkbox" name="SkrivUt" id="43" value="0" style="display:none" /> Skriv ut scorekort?</label>
                                 <hr />
 
-                                &emsp;<input id="knappen" type="submit" name="checkainBtn" value="Checka in" onclick="SeCheck()"/>
+                                &emsp;<input type="submit" name="checkainBtn" value="Checka in" onclick="Javascript:SeCheck();" />
 
                                 @*@Html.Raw(TempData["msg"])*@
                             </p>
@@ -311,6 +311,7 @@
             var räknare3 = 20;
             var räknare4 = 30;
             var räknare5 = 40;
+            
 
             for (var i = 0; i < Object.keys(json1).length; i++)
             {
@@ -334,12 +335,36 @@
                                 document.getElementById(räknare3).disabled = "disabled";
 
                             }
+                            
                             räknare++;
                             räknare2++;
                             räknare3++;
                             räknare4++;
                             räknare5++;
                         }
+                    }
+                    if (json1[i].gast == true) 
+                    {
+                        
+                        document.getElementById(räknare).innerText ="Spelare: " + json1[i].Medbokare1;
+                        document.getElementById(räknare3).value = json1[i].Medbokare1; //Checkbox checka in
+                        document.getElementById(räknare5).value = json1[i].Medbokare1; //checkbox skriv ut
+                        document.getElementById(räknare2).style = "display:normal";
+                        document.getElementById(räknare3).style = "display:normal";
+                        document.getElementById(räknare4).style = "display:normal";
+                        document.getElementById(räknare5).style = "display:normal";  
+
+                        if (json1[i].incheckad == true)
+                        {
+                            document.getElementById(räknare3).checked = "checked";
+                            document.getElementById(räknare3).disabled = "disabled";
+
+                        }
+                        räknare++;
+                        räknare2++;
+                        räknare3++;
+                        räknare4++;
+                        räknare5++;
                     }
                 }
             }
@@ -366,31 +391,28 @@
                 {
                     document.getElementById("23").name = "Checked4";
                 }
+
                 if (document.getElementById("40").checked)
                 {
                     document.getElementById("40").name = "C1";
-                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("40").value)
                 }
                 if (document.getElementById("41").checked)
                 {
                     document.getElementById("41").name = "C2";
-                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("41").value)
                 }
                 if (document.getElementById("42").checked)
                 {
                     document.getElementById("42").name = "C3";
-                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("42").value)
                 }
                 if (document.getElementById("43").checked)
                 {
-                    document.getElementById("43").name = "C4";  
-                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("43").value)
+                    document.getElementById("43").name = "C4";
                 }
                 if(document.getElementById("20").checked || document.getElementById("21").checked || document.getElementById("22").checked || document.getElementById("23").checked)
                 {
                     alert("Incheckningen lyckades");
                 }
             }
-    </script>    
+    </script>
 </body>
 </html>

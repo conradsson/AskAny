@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Golf_3_MVC.Models.medlemmar>
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tavlingsNamn)*@
+            @Html.DisplayName("Förnamn")
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tavlingsDatum)*@
+            @Html.DisplayName("Efternamn")
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.forstaStarttid)*@
+            @Html.DisplayName("Golf-ID")
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.sistaAnmalning)*@
+            @Html.DisplayName("Handicap")
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tavlingsForm)*@
+            @Html.DisplayName("Kön")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fornamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.efternamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.golf_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hcp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kon)
+            </td>
+        </tr>
+    }
+
+</table>

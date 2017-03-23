@@ -5,6 +5,19 @@
     $(".carousel").delay(450).fadeIn(1000)
 });
 
+$('li.dropdown').on('click', function (event) {
+    $(this).parent().toggleClass('open');
+});
+
+$('body').on('click', function (e) {
+    if (!$('li.dropdown').is(e.target)
+        && $('li.dropdown').has(e.target).length === 0
+        && $('.open').has(e.target).length === 0
+    ) {
+        $('li.dropdown').removeClass('open');
+    }
+});
+
 //  START FLIKEN-EFFEKTER
 $(".startbtn").ready(function (e) {
     $(".panel-nyheter").show();
@@ -182,7 +195,7 @@ function aktuelltavling(elem) {
 
     $(".panel-admintavling").hide();
     $(".panel-tavling").show();
-    
+
     var id = $(elem).data('assigned-id');
 
 
@@ -196,6 +209,28 @@ function aktuelltavling(elem) {
             dataType: 'html',
             success: function (result) {
                 $('.panel-aktuelltavling').html(result);
+            }
+        })
+    }
+}
+
+// HÄMTAR ALLA TÄVLANDE I AKTUELL TÄVLING
+function allaTävlandeIAktuellTävling(elem) {
+
+    debugger
+    var id = $(elem).data('assigned-id');
+
+
+    if (id != "") {
+
+        $.ajax({
+            url: '/tavlings/SeAllaAnmälda',
+            contentType: 'application/html; charset=utf-8',
+            type: 'GET',
+            data: { id },
+            dataType: 'html',
+            success: function (result) {
+                $('.allaanmalda').html(result);
             }
         })
     }
