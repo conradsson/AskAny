@@ -33,7 +33,7 @@ namespace Golf_3_MVC.Controllers
             }
 
             nyTavlare.TävlingsId = id;
-            nyTavlare.TävlareGolf_ID = golfID; 
+            nyTavlare.TävlareGolf_ID = golfID;
             db.tavlares.Add(nyTavlare);
             db.SaveChanges();
 
@@ -105,13 +105,19 @@ namespace Golf_3_MVC.Controllers
         {
             string golfID = sokmedlem.Split(' ').Last();
             tavlare nyTavalre = new tavlare();
+            string id = actionValues["Tavlingar"];
 
+
+            if (true) // KONTROLL OM MEDLEMMEN REDAN ÄR MED I TÄVLINGEN
+            {
+
+            }
 
             nyTavalre.TävlareGolf_ID = golfID;
-            nyTavalre.TävlingsId = Convert.ToInt32(this.aktuellTavling);
+            nyTavalre.TävlingsId = Convert.ToInt32(id);
             db.tavlares.Add(nyTavalre);
             db.SaveChanges();
-            
+
 
             TempData["msg"] = "<script>alert('Medlemmen är nu tillagd i tävlingen');</script>";
 
@@ -121,6 +127,9 @@ namespace Golf_3_MVC.Controllers
         // GET: tavlings
         public ActionResult Index()
         {
+
+
+
             return View(db.tavlings.ToList());
         }
 

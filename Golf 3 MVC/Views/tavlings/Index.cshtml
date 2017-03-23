@@ -2,7 +2,6 @@
 @model IEnumerable<Golf_3_MVC.Models.tavling>
 
 
-
 @{
     ViewBag.Title = "Tävling";
 }
@@ -48,7 +47,7 @@
                     data-assigned-id="@item.Id"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
                 }
 
-                
+
 
                 @if (User.IsInRole("User"))
                 {
@@ -75,26 +74,22 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-header">Tävlingar:</li>
-                        <li class="dropdown">
-                            <ul class="dropdown-menu">
-                                @foreach (var item in Model)
-                                {
-                                    <li class="litavling text-center" value="Assign" onclick="aktuelltavling(this)"
-                                        data-assigned-id="@item.Id"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
-                                }
-                            </ul>
-                        </li>
+                        @using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
+                        {
+                            <p>
+                                Välj tävling: <br />
+                        @Html.DropDownList("Tavlingar", new SelectList(Model, "Id", "tavlingsNamn"))
+                            </p>
+                        
                     <li class="dropdown-header"></li>
-                    <li class="divider"></li>
+                        <li class="divider"></li>
 
-                    @using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
-                    {
-                        <p class="pull-left col-lg-6">
-                            <br />
-                            Sök medlem: <br />
-                            @Html.TextBox("sokmedlem") <input class="" @*id="@Model.Id"*@ type="submit" value="Lägg till medlem" />
-                        </p>
-                    }
+                            <p class="pull-left col-lg-6">
+                                <br />
+                                Sök medlem: <br />
+                                @Html.TextBox("sokmedlem") <input class="" type="submit" value="Lägg till medlem" />
+                            </p>
+                        }
                 </ul>
             </li>
         }
