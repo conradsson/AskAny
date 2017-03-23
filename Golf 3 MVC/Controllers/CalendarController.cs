@@ -914,13 +914,11 @@ namespace Golf_3_MVC.Controllers
                         ds.SaveChanges();
                         break;
                 }
-
             }
             catch
             {
                 action.Type = DataActionTypes.Error;
             }
-
             return (ContentResult)new AjaxSaveResponse(action);
         }
         /// <summary>
@@ -932,7 +930,6 @@ namespace Golf_3_MVC.Controllers
         public void BlocktimeDeleteBokning(int id, DateTime start, DateTime stop)
         {
             dsu3Entities ds3 = new dsu3Entities();
-
             bokning bok = new bokning();
 
             foreach (var i in ds.boknings)
@@ -940,7 +937,6 @@ namespace Golf_3_MVC.Controllers
                 if (i.start_date.TimeOfDay > start.TimeOfDay && i.end_date.TimeOfDay < stop.TimeOfDay && i.start_date.DayOfYear == start.DayOfYear)
                 {
                     bok = ds3.boknings.Where(x => x.id == i.id).FirstOrDefault();
-
                     ds3.boknings.Remove(bok);
                     ds3.SaveChanges();
                 }
@@ -972,16 +968,13 @@ namespace Golf_3_MVC.Controllers
                     ds3.boknings.Remove(bok);
                     ds3.SaveChanges();
                     TempData["msg"] = "<script>alert('Den blockerade tiden är nu borttagen.');</script>";
-
                 }
-
             }
-
             Boo:
             return RedirectToAction("index");
         }
         /// <summary>
-        /// Incheckning av bokning.
+        /// Incheckning av bokning. 
         /// </summary>
         /// <param name="actionValues"></param>
         /// <returns></returns>
@@ -990,16 +983,12 @@ namespace Golf_3_MVC.Controllers
             dsu3Entities ds3 = new dsu3Entities();
             bokning bok = new bokning();
             medbokare medbok = new medbokare();
+            CalendarBookings score = new CalendarBookings();
             string id = actionValues["Bokningar"];
-
             string mid = actionValues["Checked1"];
             string mid1 = actionValues["Checked2"];
             string mid2 = actionValues["Checked3"];
             string mid3 = actionValues["Checked4"];
-            string sc1 = actionValues["C1"];
-            string sc2 = actionValues["C2"];
-            string sc3 = actionValues["C3"];
-            string sc4 = actionValues["C4"];
 
             if (Request.Form["checkainBtn"] != null)
             {
@@ -1037,33 +1026,13 @@ namespace Golf_3_MVC.Controllers
                         medbok.incheckad = true;
                         ds3.SaveChanges();
                     }
-                    if (sc1 != null)
-                    {
-                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc1 });
-                    }
-                    if (sc2 != null)
-                    {
-                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc2 });
-                    }
-                    if (sc3 != null)
-                    {
-                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc3 });
-                    }
-                    if (sc4 != null)
-                    {
-                        return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = sc4 });
-                    }
-
                     bok.incheckad = true;
                     ds3.SaveChanges();
                     TempData["msg"] = "<script>alert('Incheckningen lyckades.');</script>";
-
                 }
-
             }
-
             Boo:
-            return RedirectToAction("scorekort", "scorekorts", new { bokningsID = bok.id, golfID = bok.golf_id });
+            return RedirectToAction("index");
         }
         /// <summary>
         /// Tar bort bokningnar som inte är incheckade tio minuter innan dessa skall påbörjas.

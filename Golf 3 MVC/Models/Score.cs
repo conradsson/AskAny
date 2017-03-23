@@ -14,6 +14,11 @@ namespace Golf_3_MVC.Models
         public List<medbokare> medbokare { get; set; }
         public int bokningsID { get; set; }
         public string golfID { get; set; }
+        public string golfID2 { get; set; }
+        public string golfID3 { get; set; }
+        public string golfID4 { get; set; }
+
+
 
     }
 }
