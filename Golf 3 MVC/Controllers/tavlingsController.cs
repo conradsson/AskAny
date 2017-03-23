@@ -15,6 +15,7 @@ namespace Golf_3_MVC.Controllers
     {
         private dsu3Entities db = new dsu3Entities();
         private static Random random;
+        private string aktuellTavling;
 
         public ActionResult LaggTillTavlare(int id)
         {
@@ -45,7 +46,7 @@ namespace Golf_3_MVC.Controllers
         /// Aktuell användares tävlingar!
         /// </summary>
         /// <returns></returns>
-        public ActionResult MinaTavlingar()
+        public PartialViewResult MinaTavlingar()
         {
             string golfID = User.Identity.GetUserName();
             tavlare nyTavlare = new tavlare();
@@ -62,16 +63,58 @@ namespace Golf_3_MVC.Controllers
                 }
             }
             //return RedirectToAction("Index");
-            return View(minaTavlingar);
+            return PartialView("_minaanmalningar",minaTavlingar);
+        }
+
+        public ActionResult Avanmalan(int? id)
+        {
+            int? aktuelltavling = id;
+            string golfID = User.Identity.GetUserName();
+
+            if (aktuelltavling == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            tavlare anmalningen = db.tavlares.Where(x => x.TävlingsId == aktuelltavling && x.TävlareGolf_ID == golfID).FirstOrDefault();
+            if (anmalningen == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            db.tavlares.Remove(anmalningen);
+            db.SaveChanges();
+
+            TempData["msg"] = "<script>alert('Avanmälningen lyckades');</script>";
+
+            return RedirectToAction("Index");
         }
 
         public PartialViewResult Aktuelltavling(string id)
         {
-
             tavling tavling = db.tavlings.Find(Convert.ToInt32(id));
-
+            this.aktuellTavling = id;
 
             return PartialView("_aktuelltavling", tavling);
+        }
+
+        public ActionResult LäggTillMedlemPersonal(FormCollection actionValues, string sokmedlem)
+        {
+            string golfID = sokmedlem.Split(' ').Last();
+            tavlare nyTavalre = new tavlare();
+
+
+            nyTavalre.TävlareGolf_ID = golfID;
+            nyTavalre.TävlingsId = Convert.ToInt32(this.aktuellTavling);
+            db.tavlares.Add(nyTavalre);
+            db.SaveChanges();
+            
+
+            TempData["msg"] = "<script>alert('Medlemmen är nu tillagd i tävlingen');</script>";
+
+            return RedirectToAction("Index");
         }
 
         // GET: tavlings
