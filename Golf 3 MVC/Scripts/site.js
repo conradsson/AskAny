@@ -172,7 +172,7 @@ function minaAnmalningar() {
             type: 'GET',
             dataType: 'html',
             success: function (result) {
-                $('.panel-minaanmalningar').html(result);
+                $('.panel-minaanmalningarInner').html(result);
             }
         })
     }

@@ -248,6 +248,9 @@
     <Compile Include="Models\medlemskategori.cs">
       <DependentUpon>medlemsdata.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\resultat.cs">
+      <DependentUpon>medlemsdata.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SchedulerModel.cs" />
     <Compile Include="Models\aktuelltavling.cs" />
     <Compile Include="Models\Score.cs" />

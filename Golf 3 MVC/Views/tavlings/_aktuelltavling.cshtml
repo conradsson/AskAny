@@ -1,5 +1,13 @@
 ﻿@model Golf_3_MVC.Models.tavling
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 
 <table class="table">
@@ -35,12 +43,58 @@
 
 @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
 {
-    <input class="center-block success" type="submit" value="Se anmälda" />
+
+    using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
+    {
+        <script>
+            $(document).ready(function () {
+                $("#sokmedlem").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Calendar/GetAutoCompleteData",
+                            type: "POST",
+                            dataType: "json",
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.fornamn, value: item.efternamn, value: item.golf_id
+                                    }
+                                }))
+                            },
+                            messages: {
+                                noResults: "", results: ""
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <p class="pull-left col-lg-6">
+            <br />
+            Sök medlem: <br />
+            @Html.TextBox("sokmedlem") <input class="" @*id="@Model.Id"*@ type="submit" value="Lägg till medlem" />
+        </p>
+    }
+
+    using (Html.BeginForm("SeAllaTävlareITävling", "tavlings"))
+    {
+        <p class="pull-right col-lg-6">
+            <br />
+            <br />
+            <input class="center-block success" type="submit" value="Se anmälda" />
+        </p>
+    }
+
+
+
+
+    
 }
 
 
 @if (User.IsInRole("User"))
 {
-    <input class="center-block success" type="submit" value="Skicka anmälan" name="skickaAnmalan"   onclick="location.href='@Url.Action("LaggTillTavlare", "tavlings")?id=' + @Model.Id" />
+    <input class="center-block success" type="submit" value="Skicka anmälan" name="skickaAnmalan" onclick="location.href='@Url.Action("LaggTillTavlare", "tavlings")?id=' + @Model.Id" />
     @Html.Raw(TempData["msg"])
 }

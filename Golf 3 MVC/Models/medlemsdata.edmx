@@ -53,6 +53,15 @@
           <Property Name="namn" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="kategori_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="resultat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resultat" Type="int" Nullable="false" />
+          <Property Name="tavlande" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="tavlingsId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="scorekort">
           <Key>
             <PropertyRef Name="Id" />
@@ -86,9 +95,12 @@
         </EntityType>
         <EntityType Name="starttid">
           <Key>
-            <PropertyRef Name="starttid" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="starttid" Type="datetime" Nullable="false" />
+          <Property Name="tavlande" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="tavlingsId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tavlare">
           <Key>
@@ -130,6 +142,7 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokare" EntityType="Self.medbokare" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemmar" EntityType="Self.medlemmar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="medlemskategori" EntityType="Self.medlemskategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="resultat" EntityType="Self.resultat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="scorekort" EntityType="Self.scorekort" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="season" EntityType="Self.season" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slope" EntityType="Self.slope" Schema="dbo" store:Type="Tables" />
@@ -154,15 +167,8 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="kategori_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="medlemmars" Relationship="dsu3Model.FK_medlemmar_kategori" FromRole="medlemskategori" ToRole="medlemmar" />
         </EntityType>
-        <EntityType Name="starttid">
-          <Key>
-            <PropertyRef Name="starttid1" />
-          </Key>
-          <Property Name="starttid1" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityContainer Name="dsu3Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="medlemskategoris" EntityType="Self.medlemskategori" />
-          <EntitySet Name="starttids" EntityType="Self.starttid" />
           <EntitySet Name="medlemmars" EntityType="dsu3Model.medlemmar" />
           <AssociationSet Name="FK_medlemmar_kategori" Association="dsu3Model.FK_medlemmar_kategori">
             <End Role="medlemskategori" EntitySet="medlemskategoris" />
@@ -175,6 +181,8 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <EntitySet Name="medbokares" EntityType="dsu3Model.medbokare" />
           <EntitySet Name="tavlings" EntityType="dsu3Model.tavling" />
           <EntitySet Name="tavlares" EntityType="dsu3Model.tavlare" />
+          <EntitySet Name="resultats" EntityType="dsu3Model.resultat" />
+          <EntitySet Name="starttids" EntityType="dsu3Model.starttid" />
           </EntityContainer>
         <EntityType Name="medlemmar">
           <Key>
@@ -280,6 +288,24 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
           <Property Name="TävlareGolf_ID" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TävlingsId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="resultat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resultat1" Type="Int32" Nullable="false" />
+          <Property Name="tavlande" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tavlingsId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="starttid">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="starttid1" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tavlande" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tavlingsId" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -292,13 +318,6 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
                 <ScalarProperty Name="avgift" ColumnName="avgift" />
                 <ScalarProperty Name="namn" ColumnName="namn" />
                 <ScalarProperty Name="kategori_id" ColumnName="kategori_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="starttids">
-            <EntityTypeMapping TypeName="dsu3Model.starttid">
-              <MappingFragment StoreEntitySet="starttid">
-                <ScalarProperty Name="starttid1" ColumnName="starttid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -397,6 +416,26 @@ warning 6035: The relationship 'FK_bokning_ToTable' has columns that are not par
               <MappingFragment StoreEntitySet="tavlare">
                 <ScalarProperty Name="TävlingsId" ColumnName="TävlingsId" />
                 <ScalarProperty Name="TävlareGolf_ID" ColumnName="TävlareGolf-ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resultats">
+            <EntityTypeMapping TypeName="dsu3Model.resultat">
+              <MappingFragment StoreEntitySet="resultat">
+                <ScalarProperty Name="tavlingsId" ColumnName="tavlingsId" />
+                <ScalarProperty Name="tavlande" ColumnName="tavlande" />
+                <ScalarProperty Name="resultat1" ColumnName="resultat" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="starttids">
+            <EntityTypeMapping TypeName="dsu3Model.starttid">
+              <MappingFragment StoreEntitySet="starttid">
+                <ScalarProperty Name="tavlingsId" ColumnName="tavlingsId" />
+                <ScalarProperty Name="tavlande" ColumnName="tavlande" />
+                <ScalarProperty Name="starttid1" ColumnName="starttid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
