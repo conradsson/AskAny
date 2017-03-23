@@ -84,23 +84,23 @@ $(".pill-bana1").click(function (e) {
     $(".pill-bana2").removeClass("active")
     $(".pill-bana3").removeClass("active")
 });
-$(".pill-bana2").click(function (e) {
+$(".pill-bana2").click(function (e) {   // BORTTAGNA INFÖR REDOVISNING
     e.preventDefault()
-    $(".panel-bana2").show();
-    $(".panel-bana1").hide();
-    $(".panel-bana3").hide();
-    $(".pill-bana2").addClass("active")
-    $(".pill-bana1").removeClass("active")
-    $(".pill-bana3").removeClass("active")
+//    $(".panel-bana2").show();
+//    $(".panel-bana1").hide();
+//    $(".panel-bana3").hide();
+//    $(".pill-bana2").addClass("active")
+//    $(".pill-bana1").removeClass("active")
+//    $(".pill-bana3").removeClass("active")
 });
 $(".pill-bana3").click(function (e) {
     e.preventDefault()
-    $(".panel-bana3").show();
-    $(".panel-bana1").hide();
-    $(".panel-bana2").hide();
-    $(".pill-bana3").addClass("active")
-    $(".pill-bana1").removeClass("active")
-    $(".pill-bana2").removeClass("active")
+//    $(".panel-bana3").show();
+//    $(".panel-bana1").hide();
+//    $(".panel-bana2").hide();
+//    $(".pill-bana3").addClass("active")
+//    $(".pill-bana1").removeClass("active")
+//    $(".pill-bana2").removeClass("active")
 });
 
 //  KLUBBEN FLIKEN-EFFEKTER
@@ -133,8 +133,7 @@ $(".pill-kontaktuppgifter").click(function (e) {
 $(".tavlingbtn").ready(function (e) {
 
     $('.pill-resultat').hide();// RESULTAT INTE KLART- DÄRAV DENNA RAD
-
-    $(".minaanmalningar").trigger('click');
+    $("li.litavling").trigger('click');
     $(".panel-admintavling").hide();
     $(".panel-visaresultat").hide();
     $(".panel-registreraresultat").hide();

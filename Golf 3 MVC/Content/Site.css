@@ -218,6 +218,7 @@ footer .row{
     width:auto;
     margin:0 auto;
     background-color: #bebebe;
+    opacity: 0,9;
 }
 
 .offseason p{
@@ -247,6 +248,13 @@ footer .row{
 
 .dropdown-menu > li{
     cursor: pointer;
+}
+.dropdown-header:hover{
+    cursor:context-menu;
+}
+
+.dropdown-header {
+    color:#bda680;
 }
 
 /*    FOOTER     */
