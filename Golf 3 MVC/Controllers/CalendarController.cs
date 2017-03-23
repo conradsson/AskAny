@@ -1028,7 +1028,7 @@ namespace Golf_3_MVC.Controllers
                     }
                     bok.incheckad = true;
                     ds3.SaveChanges();
-                    TempData["msg"] = "<script>alert('Incheckningen lyckades.');</script>";
+                    TempData["msg"] = "Incheckningen lyckades.";
                 }
             }
             Boo:
