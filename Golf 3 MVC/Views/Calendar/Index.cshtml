@@ -311,6 +311,7 @@
             var räknare3 = 20;
             var räknare4 = 30;
             var räknare5 = 40;
+            
 
             for (var i = 0; i < Object.keys(json1).length; i++)
             {
@@ -334,12 +335,36 @@
                                 document.getElementById(räknare3).disabled = "disabled";
 
                             }
+                            
                             räknare++;
                             räknare2++;
                             räknare3++;
                             räknare4++;
                             räknare5++;
                         }
+                    }
+                    if (json1[i].gast == true) 
+                    {
+                        
+                        document.getElementById(räknare).innerText ="Spelare: " + json1[i].Medbokare1;
+                        document.getElementById(räknare3).value = json1[i].Medbokare1; //Checkbox checka in
+                        document.getElementById(räknare5).value = json1[i].Medbokare1; //checkbox skriv ut
+                        document.getElementById(räknare2).style = "display:normal";
+                        document.getElementById(räknare3).style = "display:normal";
+                        document.getElementById(räknare4).style = "display:normal";
+                        document.getElementById(räknare5).style = "display:normal";  
+
+                        if (json1[i].incheckad == true)
+                        {
+                            document.getElementById(räknare3).checked = "checked";
+                            document.getElementById(räknare3).disabled = "disabled";
+
+                        }
+                        räknare++;
+                        räknare2++;
+                        räknare3++;
+                        räknare4++;
+                        räknare5++;
                     }
                 }
             }

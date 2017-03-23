@@ -225,11 +225,15 @@ namespace Golf_3_MVC.Controllers
                 }
                 foreach (medbokare mb in aktuellaMedbokare)
                 {
-                    if (mb.gast == true)
+                    if (User.IsInRole("User"))
                     {
-                        TempData["msg"] = "<script>alert('Det finns redan en gäst i denna bokning');</script>";
-                        goto Foo;
+                        if (mb.gast == true)
+                        {
+                            TempData["msg"] = "<script>alert('Det finns redan en gäst i denna bokning');</script>";
+                            goto Foo;
+                        }
                     }
+
                 }
                 try
                 {
@@ -325,18 +329,6 @@ namespace Golf_3_MVC.Controllers
             }
             Foo:
             return RedirectToAction("index");
-        }
-        /// <summary>
-        /// Utskrift av scorekort.
-        /// </summary>
-        /// <param name="medlemsId"></param>
-        /// <param name="sokBokning"></param>
-        /// <returns></returns>
-        public ActionResult SkrivUtScoreKort(string medlemsId, string sokBokning)
-        {
-            string bokningsID = sokBokning.Split(' ').Last();
-            string golfID = medlemsId.Split(' ').Last();
-            return RedirectToAction("scorekort", "scorekortsController", new { bokningsID, golfID });
         }
         /// <summary>
         /// Medlem lägger till medbokare (person till bokning)
