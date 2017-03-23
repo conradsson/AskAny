@@ -11,13 +11,17 @@ namespace Golf_3_MVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tavling
     {
         public int Id { get; set; }
         public string tavlingsNamn { get; set; }
+      
         public Nullable<System.DateTime> tavlingsDatum { get; set; }
+      
         public Nullable<System.TimeSpan> forstaStarttid { get; set; }
+        
         public Nullable<System.DateTime> sistaAnmalning { get; set; }
         public string tavlingsForm { get; set; }
         public Nullable<bool> publicerad { get; set; }

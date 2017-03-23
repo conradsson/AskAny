@@ -22,12 +22,12 @@
         <td>
             <b>Datum:</b>
             <br />
-            @Model.tavlingsDatum
+            @Model.tavlingsDatum.Value.ToShortDateString()
         </td>
         <td>
             <b>Sista anmälningsdatum:</b>
             <br />
-            @Model.sistaAnmalning
+            @Model.sistaAnmalning.Value.ToShortDateString()
         </td>
         <td>
             <b>Starttid:</b>
@@ -43,7 +43,7 @@
 
 @if (User.IsInRole("Personal") || User.IsInRole("Admin"))
 {
-    <div class="allaanmalda" style="background-color:aqua; margin: 0 auto; color: yellow;">
+    <div class="allaanmalda" style="background-color:#dfe1e1; margin: 0 auto; color: #000000;">
 
     </div>
 
@@ -77,21 +77,14 @@
 
     }
 
-    using (Html.BeginForm("SeAllaTävlareITävling", "tavlings"))
-    {
+
         <p class="pull-right col-lg-6">
             <br />
 
             <br />
             <input class="center-block success" type="submit" onclick="allaTävlandeIAktuellTävling(this)"
-                    data-assigned-id="@Model.Id" value="Se anmälda" />
+                   data-assigned-id="@Model.Id" value="Se anmälda" />
         </p>
-    }
-
-
-
-
-
 }
 
 

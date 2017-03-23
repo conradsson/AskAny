@@ -217,6 +217,7 @@ function aktuelltavling(elem) {
 // HÄMTAR ALLA TÄVLANDE I AKTUELL TÄVLING
 function allaTävlandeIAktuellTävling(elem) {
 
+    debugger
     var id = $(elem).data('assigned-id');
 
 
