@@ -12,9 +12,6 @@ using DHTMLX.Scheduler.Data;
 using DHTMLX.Scheduler.Controls;
 using Golf_3_MVC.Models;
 using Microsoft.AspNet.Identity;
-using System.Net;
-using System.Data;
-using System.Data.Entity;
 
 namespace Golf_3_MVC.Controllers
 {

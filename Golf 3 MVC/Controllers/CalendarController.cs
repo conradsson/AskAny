@@ -75,6 +75,7 @@ namespace Golf_3_MVC.Controllers
 
             string id = actionValues["Bokningar"];
             model.aktuellaMedbokare = aktuellaMedbokare;
+
             allaMedlemmar = ds.medlemmars.ToList();
 
             if (Request.Form["laggtill"] != null)
