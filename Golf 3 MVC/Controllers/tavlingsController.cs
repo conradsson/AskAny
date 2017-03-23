@@ -106,11 +106,14 @@ namespace Golf_3_MVC.Controllers
             string golfID = sokmedlem.Split(' ').Last();
             tavlare nyTavalre = new tavlare();
             string id = actionValues["Tavlingar"];
-
-
-            if (true) // KONTROLL OM MEDLEMMEN REDAN ÄR MED I TÄVLINGEN
+            List<tavlare> allaTavlare = db.tavlares.ToList();
+            foreach (tavlare tavlare in allaTavlare)
             {
-
+                if (tavlare.TävlareGolf_ID == golfID && tavlare.TävlingsId.ToString() == id) // KONTROLL OM MEDLEMMEN REDAN ÄR MED I TÄVLINGEN
+                {
+                    TempData["msg"] = "<script>alert('Medlemmen är redan med i tävlingen');</script>";
+                    goto Foo;
+                }
             }
 
             nyTavalre.TävlareGolf_ID = golfID;
@@ -121,15 +124,13 @@ namespace Golf_3_MVC.Controllers
 
             TempData["msg"] = "<script>alert('Medlemmen är nu tillagd i tävlingen');</script>";
 
+            Foo:
             return RedirectToAction("Index");
         }
 
         // GET: tavlings
         public ActionResult Index()
         {
-
-
-
             return View(db.tavlings.ToList());
         }
 

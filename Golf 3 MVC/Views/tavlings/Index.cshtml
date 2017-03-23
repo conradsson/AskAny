@@ -76,19 +76,18 @@
                     <li class="dropdown-header">Tävlingar:</li>
                         @using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
                         {
-                            <p>
+                            <p class="center-block">
                                 Välj tävling: <br />
                         @Html.DropDownList("Tavlingar", new SelectList(Model, "Id", "tavlingsNamn"))
                             </p>
                         
                     <li class="dropdown-header"></li>
                         <li class="divider"></li>
-
-                            <p class="pull-left col-lg-6">
-                                <br />
+                            <p class="center-block">
                                 Sök medlem: <br />
                                 @Html.TextBox("sokmedlem") <input class="" type="submit" value="Lägg till medlem" />
                             </p>
+                            @Html.Raw(TempData["msg"])
                         }
                 </ul>
             </li>
