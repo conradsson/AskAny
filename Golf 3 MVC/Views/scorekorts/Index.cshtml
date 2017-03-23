@@ -7,9 +7,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -23,10 +20,10 @@
             @Html.DisplayName("Längd gul tee")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Lenght_Tee_White)
+            @Html.DisplayName("Längd vit tee")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Lenght_Tee_Blue)
+            @Html.DisplayName("Längd blå tee")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Par)
@@ -63,9 +60,7 @@
         </td>
         
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Ändra", "Edit", new { id=item.Id })
         </td>
     </tr>
 }

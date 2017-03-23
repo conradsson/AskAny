@@ -100,6 +100,30 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $("#sokBokningM").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Calendar/GetAutoCompleteDataBokning",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.text
+                                }
+                            }))
+                        },
+                        messages: {
+                            noResults: "", results: ""
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -252,7 +276,22 @@
 
             else
             {
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                        Boka in dig själv<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @using (Html.BeginForm("CreateMedlem", "Calendar"))
+                        {
+                            <p>
+                                Sök efter bokning: @Html.TextBox("sokBokningM")
+                            </p>                      
+                                <input type="submit" name="bokaInDig" value="Boka in dig" />
 
+                                @Html.Raw(TempData["msg"])
+                        }
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
                         Lägg till/Ta bort person <span class="caret"></span>

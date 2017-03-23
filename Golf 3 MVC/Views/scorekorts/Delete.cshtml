@@ -13,7 +13,8 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Hole_nr)
+            @*@Html.DisplayNameFor(model => model.Hole_nr)*@
+            @Html.DisplayName("Hål nummer ")
         </dt>
 
         <dd>
@@ -21,21 +22,39 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Lenght_Tee1)
+            @*@Html.DisplayNameFor(model => model.Lenght_Tee_Yellow)*@
+            @Html.DisplayName("Gul tee ")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Lenght_Tee1)
+            @Html.DisplayFor(model => model.Lenght_Tee_Yellow)
+            
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Lenght_Tee2)
+            @*@Html.DisplayNameFor(model => model.Lenght_Tee_Red)*@
+            @Html.DisplayName("Röd tee ")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Lenght_Tee2)
+            @Html.DisplayFor(model => model.Lenght_Tee_Red)
         </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Lenght_Tee_White)*@
+            @Html.DisplayName("Vit tee ")
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Lenght_Tee_White)
+        </dd>
+        <dt>
+            @Html.DisplayName("Blå tee ")
+            @*@Html.DisplayNameFor(model => model.Lenght_Tee_Blue)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lenght_Tee_Blue)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Par)
         </dt>
