@@ -186,10 +186,17 @@
                                 spelare4 = i.fornamn + " " + i.efternamn;
                                 HCP4 = i.hcp.ToString();
                             }
-                            else if (Char.IsLetter(golfid4[0]))
+                            try
                             {
-                                spelare4 = golfid4;
+                               if (golfid4 != null && Char.IsLetter(golfid4[0]))
+                                {
+                                    spelare4 = golfid4;
+                                }
                             }
+                            catch 
+                            {
+                            }
+
                         }
 
 
@@ -308,7 +315,7 @@
                                 räknare = 0;
                                 goto Start;
                             }
-                        Start:
+                            Start:
                             ESlag--;
                             räknare++;
 
