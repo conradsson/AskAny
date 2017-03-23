@@ -176,7 +176,7 @@ $(".pill-resultat").click(function (e) {
 });
 
 $("li.registreraresultat").click(function (e) {
-    e.preventDefault()
+    e.preventDefault();
     $(".panel-tavling").hide();
     $(".panel-minaanmalningar").hide();
     $(".panel-visaresultat").hide();
@@ -191,7 +191,7 @@ $("li.registreraresultat").click(function (e) {
 });
 
 $("li.visaresultat").click(function (e) {
-    e.preventDefault()
+    e.preventDefault();
     $(".panel-tavling").hide();
     $(".panel-minaanmalningar").hide();
     $(".panel-registreraresultat").hide();
@@ -207,7 +207,6 @@ $("li.visaresultat").click(function (e) {
 
 $("li.minaanmalningar").click(function (e) {
     e.preventDefault()
-    minaAnmalningar();
     $(".panel-tavling").hide();
     $(".panel-admintavling").hide();
     $(".panel-minaanmalningar").show();
@@ -283,7 +282,6 @@ function allaTävlandeIAktuellTävling(elem) {
 
 // HÄMTAR PARTIALVIEW-SIDA FÖR "REGISTRERA RESULTAT"
 function registreraResultat() {
-    alert('REGISTRERA RESULTAT');
     $.ajax({
         url: '/tavlings/RegistreraResultatPartialView',
         contentType: 'application/html; charset=utf-8',
@@ -297,7 +295,6 @@ function registreraResultat() {
 
 // HÄMTAR PARTIALVIEW-SIDA FÖR "VISA RESULTAT"
 function visaResultat() {
-    alert('VISA RESULTAT');
     $.ajax({
     url: '/tavlings/VisaResultatPartialView',
     contentType : 'application/html; charset=utf-8',
@@ -309,9 +306,6 @@ function visaResultat() {
     })
 }
 
-function visaHorResultatet() {
-    alert('test din idiot!')
-}
 
 // START SCHEMA SCRIPT
 var step = 10;

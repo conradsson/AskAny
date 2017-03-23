@@ -351,6 +351,26 @@
             var räknare4 = 30;
             var räknare5 = 40;
 
+            for (var i = 0; i < 3; i++) {
+                document.getElementById(räknare).innerText ="";
+                document.getElementById(räknare2).style = "display:none";
+                document.getElementById(räknare3).style = "display:none";
+                document.getElementById(räknare4).style = "display:none";
+                document.getElementById(räknare5).style = "display:none";
+                räknare++;
+                räknare2++;
+                räknare3++;
+                räknare4++;
+                räknare5++;
+            }
+
+             räknare = 0;
+             räknare2 = 10;
+             räknare3 = 20;
+             räknare4 = 30;
+             räknare5 = 40;
+    
+
 
             for (var i = 0; i < Object.keys(json1).length; i++)
             {
@@ -404,8 +424,10 @@
                         räknare3++;
                         räknare4++;
                         räknare5++;
+                        
                     }
                 }
+
             }
             räknare =0;
         }
@@ -434,18 +456,22 @@
                 if (document.getElementById("40").checked)
                 {
                     document.getElementById("40").name = "C1";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("40").value)
                 }
                 if (document.getElementById("41").checked)
                 {
                     document.getElementById("41").name = "C2";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("41").value)
                 }
                 if (document.getElementById("42").checked)
                 {
                     document.getElementById("42").name = "C3";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("42").value)
                 }
                 if (document.getElementById("43").checked)
                 {
                     document.getElementById("43").name = "C4";
+                    window.open("scorekorts/scorekort?bokningsID="+ document.getElementById("Bokningar").value +"&golfID=" + document.getElementById("43").value)
                 }
                 if(document.getElementById("20").checked || document.getElementById("21").checked || document.getElementById("22").checked || document.getElementById("23").checked)
                 {
