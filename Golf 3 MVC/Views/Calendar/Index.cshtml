@@ -312,6 +312,26 @@
             var räknare4 = 30;
             var räknare5 = 40;
 
+            for (var i = 0; i < 3; i++) {
+                document.getElementById(räknare).innerText ="";
+                document.getElementById(räknare2).style = "display:none";
+                document.getElementById(räknare3).style = "display:none";
+                document.getElementById(räknare4).style = "display:none";
+                document.getElementById(räknare5).style = "display:none";
+                räknare++;
+                räknare2++;
+                räknare3++;
+                räknare4++;
+                räknare5++;
+            }
+
+             räknare = 0;
+             räknare2 = 10;
+             räknare3 = 20;
+             räknare4 = 30;
+             räknare5 = 40;
+    
+
 
             for (var i = 0; i < Object.keys(json1).length; i++)
             {
@@ -365,8 +385,10 @@
                         räknare3++;
                         räknare4++;
                         räknare5++;
+                        
                     }
                 }
+
             }
             räknare =0;
         }
