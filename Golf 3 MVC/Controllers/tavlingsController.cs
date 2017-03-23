@@ -103,6 +103,7 @@ namespace Golf_3_MVC.Controllers
         public PartialViewResult RegistreraResultatPartialView()
         {
            
+
             return PartialView("_registreraresultat");
         }
 
