@@ -51,10 +51,8 @@ namespace Golf_3_MVC.Controllers
         /// <returns></returns>
         public ActionResult GetAutoCompleteDataBokning(string term)
         {
-            var result = ds.boknings.Where(x => x.text.Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.text, text = s.start_date + " " + s.text + " ID: " + s.id })
-                .Union(ds.boknings.Where(x => x.id.ToString().Contains(term))
-                .Select(s => new BokningarAutoComplete { value = s.id.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id })).ToList();
+            var result = ds.boknings.Where(x => x.start_date.ToString().Contains(term))
+                .Select(s => new BokningarAutoComplete { value = s.start_date.ToString(), text = s.start_date + " " + s.text + " ID: " + s.id }).ToList();
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -588,7 +586,7 @@ namespace Golf_3_MVC.Controllers
                 List<bokning> aktuellaBokningar = new List<bokning>();
 
                 CalendarBookings model = new CalendarBookings();
-                
+
                 allaMedlemmar = ds.medlemmars.ToList();
                 aktuellMedlem = allaMedlemmar.Where(x => x.golf_id == User.Identity.GetUserName()).FirstOrDefault();
                 allaBokningar = ds.boknings.ToList();
@@ -966,7 +964,7 @@ namespace Golf_3_MVC.Controllers
             return RedirectToAction("index");
         }
         /// <summary>
-        /// Incheckning av bokning. 
+        /// Incheckning av bokning.
         /// </summary>
         /// <param name="actionValues"></param>
         /// <returns></returns>
