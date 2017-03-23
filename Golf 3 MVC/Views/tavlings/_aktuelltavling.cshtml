@@ -22,12 +22,12 @@
         <td>
             <b>Datum:</b>
             <br />
-            @Model.tavlingsDatum
+            @Model.tavlingsDatum.Value.ToShortDateString()
         </td>
         <td>
             <b>Sista anmälningsdatum:</b>
             <br />
-            @Model.sistaAnmalning
+            @Model.sistaAnmalning.Value.ToShortDateString()
         </td>
         <td>
             <b>Starttid:</b>

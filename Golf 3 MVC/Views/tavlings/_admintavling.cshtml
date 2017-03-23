@@ -39,13 +39,16 @@
                 @Html.DisplayFor(modelItem => item.tavlingsNamn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.tavlingsDatum)
+                @*@Html.DisplayFor(modelItem => item.tavlingsDatum)*@
+                @item.tavlingsDatum.Value.ToShortDateString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.forstaStarttid)
+                
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.sistaAnmalning)
+                @*@Html.DisplayFor(modelItem => item.sistaAnmalning)*@
+                @item.sistaAnmalning.Value.ToShortDateString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.tavlingsForm)
