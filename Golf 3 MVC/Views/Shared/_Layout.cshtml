@@ -36,7 +36,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
                                 <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
-                                <li class="medlembtn">@Html.ActionLink("Hantera medlemar", "Medlem", "medlemmars/index")</li>
+                                <li class="medlembtn">@Html.ActionLink("Hantera medlemmar", "Medlem", "medlemmars/index")</li>
                                 <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
                             </ul>
@@ -46,7 +46,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="startbtn">@Html.ActionLink("Start", "Index", "Home")</li>
                                 <li class="kalenderbtn">@Html.ActionLink("Bokningsschema", "Index", "Calendar")</li>
-                                <li class="medlembtn">@Html.ActionLink("Hantera medlemar", "Medlem", "medlemmars/index")</li>
+                                <li class="medlembtn">@Html.ActionLink("Hantera medlemmar", "Medlem", "medlemmars/index")</li>
                                 <li class="tavlingbtn">@Html.ActionLink("Tävling", "Index", "tavlings")</li>
                                 @*<li class="kontaktbtn">@Html.ActionLink("Kontakt", "Kontakt", "Home")</li>*@
                             </ul>
@@ -70,7 +70,19 @@
                         //    string rollen;
                         //    rollen = n;
                         //}
-                        string inloggadsom = "(MEDLEMSTYPEN)";
+                        string inloggadsom = "";
+                        if (User.IsInRole("Admin"))
+                        {
+                            inloggadsom = "Admin";
+                        }
+                        else if (User.IsInRole("Personal"))
+                        {
+                            inloggadsom = "Personal";
+                        }
+                        else
+                        {
+                            inloggadsom = "Medlem";
+                        }
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
