@@ -31,8 +31,6 @@
             });
 </script>
 
-@{var aktuelltID = 0; }
-
 <div class="row">
 
     <ul class="nav nav-pills nav-stacked">
@@ -48,8 +46,6 @@
                 {
                    <li class="litavling text-center" value="Assign" onclick="aktuelltavling(this)"
                     data-assigned-id="@item.Id"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
-
-                    aktuelltID = item.Id;
                 }
 
                 
@@ -75,11 +71,20 @@
             <li class="dropdown pill-anmalanPersonal">
 
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
-                    Anmälan till aktuell tävling<span class="caret"></span>
+                    Anmäla till tävling<span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-header">Aktuell tävling:</li>
-                    <li class="dropdown-header">namnet på aktuella tävlingen</li>
+                    <li class="dropdown-header">Tävlingar:</li>
+                        <li class="dropdown">
+                            <ul class="dropdown-menu">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="litavling text-center" value="Assign" onclick="aktuelltavling(this)"
+                                        data-assigned-id="@item.Id"><a>@Html.DisplayFor(modelItem => item.tavlingsNamn)</a></li>
+                                }
+                            </ul>
+                        </li>
+                    <li class="dropdown-header"></li>
                     <li class="divider"></li>
 
                     @using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
