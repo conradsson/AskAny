@@ -6,7 +6,30 @@
 @{
     ViewBag.Title = "Tävling";
 }
-
+<script>
+            $(document).ready(function () {
+                $("#sokmedlem").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Calendar/GetAutoCompleteData",
+                            type: "POST",
+                            dataType: "json",
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.fornamn, value: item.efternamn, value: item.golf_id
+                                    }
+                                }))
+                            },
+                            messages: {
+                                noResults: "", results: ""
+                            }
+                        });
+                    }
+                });
+            });
+</script>
 
 
 <div class="row">
@@ -43,7 +66,26 @@
                 <a href="#" aria-expanded="true">
                     Administrera tävlingar
                 </a>
+            </li>
+            <li class="dropdown pill-anmalanPersonal">
 
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    Anmälan till aktuell tävling<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Aktuell tävling:</li>
+                    <li class="dropdown-header">namnet på aktuella tävlingen</li>
+                    <li class="divider"></li>
+
+                    @using (Html.BeginForm("LäggTillMedlemPersonal", "tavlings"))
+                    {
+                        <p class="pull-left col-lg-6">
+                            <br />
+                            Sök medlem: <br />
+                            @Html.TextBox("sokmedlem") <input class="" @*id="@Model.Id"*@ type="submit" value="Lägg till medlem" />
+                        </p>
+                    }
+                </ul>
             </li>
         }
     </ul>
